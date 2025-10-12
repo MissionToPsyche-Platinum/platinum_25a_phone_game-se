@@ -1,10 +1,10 @@
 **Project Psyche: Build**   
-**What's the Game About?**
 
+**What's the Game About?**
 Build a working Psyche spacecraft by putting all the pieces in the right spots. Use logic and the part descriptions to figure out where everything goes. Get it right and launch successfully. Get it wrong and... well, things get messy.
 
-How You Play
 
+How You Play
 1. **Browse Parts** \- Look through all the spacecraft parts in the catalog. Click any part to see what it does.  
 2. **Place Parts** \- Drag parts onto the spacecraft. Rotate and zoom to find where they belong.  
 3. **Get Feedback**  
@@ -47,6 +47,7 @@ Click the info button to learn what each part does.
 ---
 
 How a Game Might Go
+**Story Board**
 
 **Starting Out** You see the empty spacecraft frame. All the parts are listed on the left. Readiness is at 0%. No instructions telling you what to do first \- just figure it out.
 
@@ -58,5 +59,5 @@ How a Game Might Go
 
 **Success** Hit launch. Countdown starts. 3... 2... 1... Rocket blasts off\! The spacecraft separates, solar panels unfold, and it cruises into space. "Mission Success\!" Triumphant music plays.
 
-**Failure** Launched at 70% ready? The rocket sputters and fails. Or it lifts off but explodes. Or it makes it to space but spins out of control. Screen says what went wrong: "Missing communication system" or "Bad weight balance." Back to the workshop to fix it. Try again\!
-
+**Failure** 
+Launched at 70% ready? The rocket sputters and fails. Or it lifts off but explodes. Or it makes it to space but spins out of control. Screen says what went wrong: "Missing communication system" or "Bad weight balance." Back to the workshop to fix it. Try again\!
