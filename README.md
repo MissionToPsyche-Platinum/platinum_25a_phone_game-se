@@ -1,30 +1,15 @@
-# DragDropGame
+# Psyche Mobile Game Project, Platinum 25a / Group 34
 
-A Unity drag and drop game project with color matching mechanics.
+## Authors
 
-## Creator
-**Kiran Shrestha**
+- Salem Bitney
+- Brianna Browning
+- James Brown
+- Kiran Shrestha
+- Bhupinder Singh
 
-## About
-This project serves as a base implementation for drag and drop mechanics in Unity mini-games. The game demonstrates fundamental concepts of:
+## Description
 
-- Interactive UI elements with drag and drop functionality
-- Color-based matching mechanics
-- Dynamic UI generation and layout management
-- Event system integration for user interactions
+This will be a web-based game optimized for mobile. It is currently in early development, and as such, there is not yet a playable demo. Once a playable demo is created, it will be hosted in the build branch, and playable at [link](https://github.com/MissionToPsyche-Platinum/platinum_25a_phone_game-se).
 
-This foundation can be extended to create more complex mini-games with similar interaction patterns.
-
-## Features
-- Drag and drop colored items
-- Color matching drop zones
-- Responsive UI layout
-- Unity Input System integration
-- Dynamic UI generation at runtime
-
-## Setup
-1. Open project in Unity 2023.3 or newer
-2. Ensure Universal Render Pipeline is configured
-3. Play the scene to test the drag and drop functionality
-
-![Game Screenshot](image.png)
+Thank you for your patience!
