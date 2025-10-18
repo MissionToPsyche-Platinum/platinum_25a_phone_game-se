@@ -6,52 +6,97 @@ public class SpawnBubble : MonoBehaviour
 {
 
     [SerializeField] private GameObject redCirc;
-    private int max = 10;
+    [SerializeField] private GameObject blueCirc;
+    private int max = 50;
     private int spawns = 0;
-    float x = 5f;
-    float y = 5f;
+    private int spawnTimer = 20;
+    
+    Boolean spawned = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
     }
+        
+    
 
     // Update is called once per frame
     void FixedUpdate()
-    {    
+    {
+        
         if (spawns >= max)
         {
             Debug.Log("Nice Try Buckaroo!");
         }
+        else if (spawned)
+        {
+            if (spawnTimer > 0)
+            {
+                spawnTimer--;
+            }else
+            {
+                spawnTimer = 20;
+                spawned = false;
+            }            
+        }
         else
-        {            
-            float x = UnityEngine.Random.Range(0f, 3f);
-            float y = UnityEngine.Random.Range(0f, 3f);
+        {
+            float x = UnityEngine.Random.Range(-2f, 2f);
+            float y = UnityEngine.Random.Range(-2f, 2f);
+            float z = Mathf.Sqrt(25f - (x * x) - (y * y));
+            Debug.Log("X = " + x + "Y = " + y + "Z = " + z);
 
-            Vector2 vector = new Vector2(x - 1f, y - 1f);
-            spawnObject(vector);
-        }      
-        
-       
+            Vector3 vector = new Vector3(x, y, z);
+            spawnObj(vector);
+
+            spawned = true;
+;
+        }
+
     }
-      
 
-    // Spawns a bubble on the sphere object
-    public void spawnObject(Vector2 pos)
+    
+
+         
+
+    // Spawns a red bubble on the sphere object
+    public void spawnObj(Vector3 pos)
     {
-        StartCoroutine(spawnWaiter());
+        int x = UnityEngine.Random.Range(0, 2);        
+        GameObject circ = new GameObject();
+        
 
-        GameObject circ = Instantiate(redCirc, pos, transform.rotation);
-        circ.transform.parent = this.transform;
-        spawns++;        
-        Debug.Log(spawns);        
+        if(x == 0)
+        {
+            circ = Instantiate(redCirc, pos, this.transform.rotation);
+
+        }
+        else if (x == 1)
+        {
+            circ = Instantiate(blueCirc, pos, transform.rotation);
+
+        }
+
+            
+        circ.transform.parent = this.transform;        
+        spawns++;
+        spawned = true;
+        
+        Debug.Log("Spawned Red " + spawns);        
     }
+
+   
 
     // Makes spawn wait 
-    public IEnumerator spawnWaiter()
+    public void spawnWaiter()
     {
-        yield return new WaitForSecondsRealtime(2);
+        int x = 100;
+        while (x > 0)
+        {
+            x--;
+        }
+        spawned = false;
     }
     
 
