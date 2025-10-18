@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class SpawnBubble : MonoBehaviour    
 {
-
     [SerializeField] private GameObject redCirc;
     [SerializeField] private GameObject blueCirc;
+    [SerializeField] private GameObject greenCirc;    
     private int max = 50;
     private int spawns = 0;
-    private int spawnTimer = 20;
+    private int spawnTimer = 50;
     
     Boolean spawned = false;
 
@@ -24,10 +24,9 @@ public class SpawnBubble : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        
         if (spawns >= max)
         {
-            Debug.Log("Nice Try Buckaroo!");
+            
         }
         else if (spawned)
         {
@@ -45,7 +44,7 @@ public class SpawnBubble : MonoBehaviour
             float x = UnityEngine.Random.Range(-2f, 2f);
             float y = UnityEngine.Random.Range(-2f, 2f);
             float z = Mathf.Sqrt(25f - (x * x) - (y * y));
-            Debug.Log("X = " + x + "Y = " + y + "Z = " + z);
+           
 
             Vector3 vector = new Vector3(x, y, z);
             spawnObj(vector);
@@ -63,13 +62,12 @@ public class SpawnBubble : MonoBehaviour
     // Spawns a red bubble on the sphere object
     public void spawnObj(Vector3 pos)
     {
-        int x = UnityEngine.Random.Range(0, 2);        
-        GameObject circ = new GameObject();
-        
+        int x = UnityEngine.Random.Range(0, 3);        
+        GameObject circ = new GameObject();     
 
-        if(x == 0)
+        if (x == 0)
         {
-            circ = Instantiate(redCirc, pos, this.transform.rotation);
+            circ = Instantiate(redCirc, pos, transform.rotation);
 
         }
         else if (x == 1)
@@ -77,30 +75,18 @@ public class SpawnBubble : MonoBehaviour
             circ = Instantiate(blueCirc, pos, transform.rotation);
 
         }
+        else if (x == 2)
+        {
+            circ = Instantiate(greenCirc, pos, transform.rotation);
+        }
 
-            
+
         circ.transform.parent = this.transform;        
         spawns++;
         spawned = true;
         
-        Debug.Log("Spawned Red " + spawns);        
-    }
-
-   
-
-    // Makes spawn wait 
-    public void spawnWaiter()
-    {
-        int x = 100;
-        while (x > 0)
-        {
-            x--;
-        }
-        spawned = false;
-    }
-    
-
-    
+                
+    }  
     
 
     
