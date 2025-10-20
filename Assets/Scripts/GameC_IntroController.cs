@@ -21,6 +21,11 @@ public class GameC_IntroController : MonoBehaviour
     [Header("Text Elements")]
     public TextMeshProUGUI missionText;
     public TextMeshProUGUI phaseCText;
+
+    private Vector3 logoRestPosition;
+    private Vector3 floatingPapersRestPosition;
+    private Quaternion floatingPapersRestRotation;
+    private Vector3 asteroidRestScale;
     
     private void Start()
     {
@@ -35,6 +40,7 @@ public class GameC_IntroController : MonoBehaviour
         // Setup mobile-optimized layout
         SetupMobileTextSizes();
         SetupBackgroundContrast();
+        StyleTextElements();
     }
     
     private void SetupMobileTextSizes()
@@ -42,13 +48,46 @@ public class GameC_IntroController : MonoBehaviour
         // Mobile-optimized text sizes
         if (missionText != null)
         {
-            missionText.fontSize = 18f; // Mobile-friendly size
+            missionText.fontSize = 22f; // Mobile-friendly size
             missionText.lineSpacing = 1.2f;
         }
-        
+
         if (phaseCText != null)
         {
-            phaseCText.fontSize = 26f; // Mobile-friendly size
+            phaseCText.fontSize = 32f; // Mobile-friendly size
+        }
+    }
+
+    private void StyleTextElements()
+    {
+        if (missionText != null)
+        {
+            missionText.fontStyle = FontStyles.UpperCase | FontStyles.Bold;
+            missionText.outlineWidth = 0.12f;
+            missionText.outlineColor = new Color(0f, 0f, 0f, 0.45f);
+            missionText.enableVertexGradient = true;
+            missionText.characterSpacing = 4f;
+            missionText.colorGradient = new VertexGradient(
+                new Color(0.86f, 0.95f, 1f),
+                new Color(0.72f, 0.88f, 1f),
+                new Color(0.56f, 0.74f, 0.98f),
+                new Color(0.72f, 0.88f, 1f));
+            ApplySoftShadow(missionText, new Vector2(2.2f, -2.2f), 0.55f);
+        }
+
+        if (phaseCText != null)
+        {
+            phaseCText.fontStyle = FontStyles.SmallCaps | FontStyles.Bold;
+            phaseCText.outlineWidth = 0.08f;
+            phaseCText.outlineColor = new Color(0f, 0f, 0f, 0.4f);
+            phaseCText.enableVertexGradient = true;
+            phaseCText.characterSpacing = 6f;
+            phaseCText.colorGradient = new VertexGradient(
+                new Color(1f, 0.78f, 0.36f),
+                new Color(0.98f, 0.66f, 0.24f),
+                new Color(0.9f, 0.54f, 0.18f),
+                new Color(0.98f, 0.66f, 0.24f));
+            ApplySoftShadow(phaseCText, new Vector2(1.8f, -1.8f), 0.45f);
         }
     }
     
@@ -64,6 +103,19 @@ public class GameC_IntroController : MonoBehaviour
             }
         }
     }
+
+    private void ApplySoftShadow(TextMeshProUGUI text, Vector2 offset, float alpha)
+    {
+        Shadow shadow = text.GetComponent<Shadow>();
+        if (shadow == null)
+        {
+            shadow = text.gameObject.AddComponent<Shadow>();
+        }
+
+        shadow.effectColor = new Color(0f, 0f, 0f, alpha);
+        shadow.effectDistance = offset;
+        shadow.useGraphicAlpha = true;
+    }
     
     // Removed SetupButtons method - no buttons needed for automatic transition
     
@@ -71,16 +123,20 @@ public class GameC_IntroController : MonoBehaviour
     {
         if (psycheLogo != null)
         {
+            logoRestPosition = psycheLogo.transform.position;
             StartCoroutine(AnimateLogo());
         }
 
         if (floatingPapers != null)
         {
+            floatingPapersRestPosition = floatingPapers.transform.position;
+            floatingPapersRestRotation = floatingPapers.transform.rotation;
             StartCoroutine(AnimateFloatingPapers());
         }
 
         if (psycheAsteroidSilhouette != null)
         {
+            asteroidRestScale = psycheAsteroidSilhouette.transform.localScale;
             StartCoroutine(AnimateAsteroid());
         }
     }
@@ -224,31 +280,64 @@ public class GameC_IntroController : MonoBehaviour
     
     private System.Collections.IEnumerator AnimateLogo()
     {
+        float amplitude = 10f;
+        float speed = 0.75f;
         while (true)
         {
-            Vector3 originalPos = psycheLogo.transform.position;
-            float time = Time.time;
-            Vector3 newPos = originalPos + new Vector3(0, Mathf.Sin(time * 0.5f) * 10f, 0);
-            psycheLogo.transform.position = newPos;
+            float offset = Mathf.Sin(Time.time * speed) * amplitude;
+            psycheLogo.transform.position = logoRestPosition + new Vector3(0f, offset, 0f);
             yield return null;
         }
     }
-    
+
     private System.Collections.IEnumerator AnimateFloatingPapers()
     {
+        float bobAmplitude = 4f;
+        float bobSpeed = 1.4f;
+        float swayAmplitude = 12f;
+        float swaySpeed = 0.7f;
         while (true)
         {
-            floatingPapers.transform.Rotate(0, 0, 10f * Time.deltaTime);
+            float bobOffset = Mathf.Sin(Time.time * bobSpeed) * bobAmplitude;
+            floatingPapers.transform.position = floatingPapersRestPosition + new Vector3(0f, bobOffset, 0f);
+
+            float swayAngle = Mathf.Sin(Time.time * swaySpeed) * swayAmplitude;
+            floatingPapers.transform.rotation = floatingPapersRestRotation * Quaternion.Euler(0f, 0f, swayAngle);
             yield return null;
         }
     }
-    
+
     private System.Collections.IEnumerator AnimateAsteroid()
     {
+        float pulseSpeed = 1.8f;
+        float pulseAmplitude = 0.05f;
         while (true)
         {
             // Glowing effect for asteroid silhouette
             float glow = (Mathf.Sin(Time.time * 2f) + 1f) * 0.5f;
+            if (psycheAsteroidSilhouette != null)
+            {
+                SpriteRenderer spriteRenderer = psycheAsteroidSilhouette.GetComponent<SpriteRenderer>();
+                if (spriteRenderer != null)
+                {
+                    Color spriteColor = spriteRenderer.color;
+                    spriteColor.a = Mathf.Lerp(0.45f, 0.75f, glow);
+                    spriteRenderer.color = spriteColor;
+                }
+                else
+                {
+                    Image image = psycheAsteroidSilhouette.GetComponent<Image>();
+                    if (image != null)
+                    {
+                        Color imageColor = image.color;
+                        imageColor.a = Mathf.Lerp(0.45f, 0.75f, glow);
+                        image.color = imageColor;
+                    }
+                }
+
+                float scaleOffset = 1f + (Mathf.Sin(Time.time * pulseSpeed) * pulseAmplitude);
+                psycheAsteroidSilhouette.transform.localScale = asteroidRestScale * scaleOffset;
+            }
             yield return null;
         }
     }
