@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b685d66236ff30c4aa784286f5444fad
+guid: ad266032d2a05be439dd705de540c074
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3174809275885866190
-    second: setting icon_0
+      213: -2599810892491455987
+    second: Rocket - Free transp_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: setting icon_0
+      name: Rocket - Free transp_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1024
-        height: 1024
+        x: 24
+        y: 25
+        width: 464
+        height: 462
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2333531d8cfc0f3d0800000000000000
-      internalID: -3174809275885866190
+      spriteID: d020bd584cd9bebd0800000000000000
+      internalID: -2599810892491455987
       vertices: []
       indices: 
       edges: []
@@ -140,8 +140,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      setting icon_0: -3174809275885866190
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
