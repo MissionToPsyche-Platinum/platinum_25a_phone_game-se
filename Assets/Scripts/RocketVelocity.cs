@@ -42,4 +42,20 @@ public class RocketVelocity : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("BoostRing"))
+        {
+            boostVelocity();
+
+            other.gameObject.SetActive(false);
+        }
+    }
+
+    // triggers when interacting with boost ring
+    public void boostVelocity()
+    {
+        currentVelocity = initialVelocity;
+    }
 }
