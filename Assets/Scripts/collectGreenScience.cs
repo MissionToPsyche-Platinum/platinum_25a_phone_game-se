@@ -18,6 +18,9 @@ public class collectGreenScience : MonoBehaviour
         
     }
 
+
+    //checks for a double click action to collect red science and addes two points
+    //works with mouse and touch screen
     private void OnMouseDown()
     {
         if(Time.time - lastClickTime <= threshold)

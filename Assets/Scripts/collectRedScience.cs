@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class collectPoints : MonoBehaviour
 {
-    public float points = 0f;
+    public float pointsAdded = 0f;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,12 +17,15 @@ public class collectPoints : MonoBehaviour
      
     }
 
+
+    //detects click of a mouse or touchscreen input and collects the science of the redbubble and adds 1 point
+    //works with mouse and touch screen
     public void OnMouseDown()
     {
         Destroy(gameObject);
-        points++;
-        Debug.Log("Points added: " + points);
-    }
+        pointsAdded = 1;
+        Debug.Log("Points added: " + pointsAdded);
+    }    
 
     
 }

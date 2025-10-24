@@ -20,6 +20,9 @@ public class collectBlueScience : MonoBehaviour
         
     }
 
+
+    //starts tracking when object intially held down
+    //works with mouse and touch screen
     private void OnMouseDown()
     {
         firstCLicktime = Time.time;
@@ -27,6 +30,9 @@ public class collectBlueScience : MonoBehaviour
        
     }
 
+    //detects when mouse is up to stop click and hold
+    //collects blue science and addes points based on how long it was held down
+    //works with mouse and touch screen
     private void OnMouseUp()
     {
 

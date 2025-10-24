@@ -7,9 +7,9 @@ public class SpawnBubble : MonoBehaviour
     [SerializeField] private GameObject redCirc;
     [SerializeField] private GameObject blueCirc;
     [SerializeField] private GameObject greenCirc;    
-    private int max = 50;
+    private int max = 500000;
     private int spawns = 0;
-    private int spawnTimer = 50;
+    private int spawnTimer = 100;
     
     Boolean spawned = false;
 
@@ -22,7 +22,8 @@ public class SpawnBubble : MonoBehaviour
     
 
     // Update is called once per frame
-    void FixedUpdate()
+    // Spawns bubbles at a predetermined rate and at a random possition on a rotating sphere
+    void Update()
     {
         if (spawns >= max)
         {
@@ -59,7 +60,10 @@ public class SpawnBubble : MonoBehaviour
 
          
 
-    // Spawns a red bubble on the sphere object
+    // Based off of a random number
+    // Spawns a red bubble on the sphere object if its 0
+    // Spawns a blue bubble if its 1
+    // Spawns a green bubble if its 2
     public void spawnObj(Vector3 pos)
     {
         int x = UnityEngine.Random.Range(0, 3);        
