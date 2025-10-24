@@ -51,11 +51,24 @@ public class RocketVelocity : MonoBehaviour
 
             other.gameObject.SetActive(false);
         }
+        else if (other.CompareTag("PenaltyRing"))
+        {
+            decreaseVelocity();
+
+            other.gameObject.SetActive(false);
+        }
     }
 
     // triggers when interacting with boost ring
     public void boostVelocity()
     {
         currentVelocity = initialVelocity;
+    }
+
+    // triggers when interacting with penalty ring
+    public void decreaseVelocity()
+    {
+        // decrease by 25%
+        currentVelocity = currentVelocity * (float)0.75;
     }
 }
