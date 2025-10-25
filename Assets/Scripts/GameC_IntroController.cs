@@ -6,7 +6,7 @@ using TMPro;
 public class GameC_IntroController : MonoBehaviour
 {
     [Header("UI Elements")]
-    // No buttons needed - automatic transition to game
+    // No buttons needed - automatic transition to GameC_MainScene
     
     [Header("Visual Elements")]
     public GameObject psycheLogo;
@@ -344,7 +344,7 @@ public class GameC_IntroController : MonoBehaviour
     
     public void BeginMinigameC()
     {
-        // Automatically load GameC_Main after intro sequence
-        SceneManager.LoadScene("GameC_Main");
+        // Load GameC_MainScene after intro sequence completes
+        SceneManager.LoadScene("GameC_MainScene");
     }
 }
