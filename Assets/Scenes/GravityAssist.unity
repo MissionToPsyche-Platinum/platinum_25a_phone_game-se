@@ -1121,6 +1121,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5978145600800788367, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
   m_PrefabInstance: {fileID: 8765019072079242959}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &732825115 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 6029735955564410602, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
+  m_PrefabInstance: {fileID: 8765019072079242959}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1076929022
 GameObject:
   m_ObjectHideFlags: 0
@@ -1130,6 +1135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1076929023}
+  - component: {fileID: 1076929024}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -1152,6 +1158,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 138289493}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1076929024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076929022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e477c2e5638104d93ee026e43a803b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCam: {fileID: 523294753}
+  spacecraftRb: {fileID: 732825115}
+  preview: {fileID: 2144489005}
+  forceToVelocity: 6
 --- !u!1 &1101958261
 GameObject:
   m_ObjectHideFlags: 0
@@ -2398,6 +2420,27 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &2144489004 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3310574565823550742, guid: e2b8f73c1c0f17b488335a0f1d91af70, type: 3}
+  m_PrefabInstance: {fileID: 1812776312145539194}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2144489005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144489004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d557a7734a44bc4cb676e4f04e9a223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spacecraftRb: {fileID: 732825115}
+  segmentCount: 30
+  timeStep: 0.05
+  fakeGravity: -9.8
 --- !u!1001 &1812776312145539194
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2453,7 +2496,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3310574565823550742, guid: e2b8f73c1c0f17b488335a0f1d91af70, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2144489005}
   m_SourcePrefab: {fileID: 100100000, guid: e2b8f73c1c0f17b488335a0f1d91af70, type: 3}
 --- !u!1001 &1886922487304511583
 PrefabInstance:
@@ -2617,6 +2663,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1845658616}
     m_Modifications:
+    - target: {fileID: 1539947096651949091, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
+      propertyPath: m_PreviewTimeScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4559439904716824478, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
       propertyPath: m_Name
       value: Spacecraft
