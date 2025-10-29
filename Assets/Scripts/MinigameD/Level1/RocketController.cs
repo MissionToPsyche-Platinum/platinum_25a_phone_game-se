@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class RocketController : MonoBehaviour
 {
-    public float moveSpeed = 10f;
-    public float maxDragDistance = 200f; // drag sensitivity 
+    public float moveSpeed = 7.5f;
+    public float maxDragDistance = 250f; // drag sensitivity 
     public float smoothingSpeed = 10f; // higher = snappier, lower = smoother
 
     private int touchId = -1; // to track active touch
