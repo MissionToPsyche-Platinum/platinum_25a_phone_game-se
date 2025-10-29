@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      a realistic round im_0: 9030691482318822143
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
