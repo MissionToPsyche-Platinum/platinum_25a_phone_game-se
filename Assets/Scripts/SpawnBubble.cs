@@ -6,10 +6,12 @@ public class SpawnBubble : MonoBehaviour
 {
     [SerializeField] private GameObject redCirc;
     [SerializeField] private GameObject blueCirc;
-    [SerializeField] private GameObject greenCirc;    
+    [SerializeField] private GameObject greenCirc;
+    [SerializeField] private LayerMask scienceLayer;
+
     private int max = 500000;
     private int spawns = 0;
-    private int spawnTimer = 100;
+    private int spawnTimer = 10;
     
     bool spawned = false;
 
@@ -36,20 +38,16 @@ public class SpawnBubble : MonoBehaviour
                 spawnTimer--;
             }else
             {
-                spawnTimer = 20;
+                spawnTimer = 1000;
                 spawned = false;
             }            
         }
         else
         {
-            float x = UnityEngine.Random.Range(-2f, 2f);
-            float y = UnityEngine.Random.Range(-2f, 2f);
-            float z = Mathf.Sqrt(25f - (x * x) - (y * y));
+
+            Vector3 vector = generateSpawn();
            
-
-            Vector3 vector = new Vector3(x, y, z);
             spawnObj(vector);
-
             spawned = true;
 ;
         }
@@ -90,7 +88,33 @@ public class SpawnBubble : MonoBehaviour
         spawned = true;
         
                 
-    }  
+    } 
+    
+    public bool checkSpawnFull(Vector3 pos)
+    {
+        bool full = false;        
+        
+                
+        return full;
+    }
+
+    public Vector3 generateSpawn()    {
+        
+        float y = UnityEngine.Random.Range(-2f, 2f);
+        float z = Mathf.Sqrt((2.5f * 2.5f) - (y * y));
+
+        Vector3 vector = new Vector3(0, y, z);
+
+        
+
+        if (checkSpawnFull(vector))
+        {
+            generateSpawn();
+        }
+
+
+        return new Vector3(0, y, z);
+    }
     
 
     

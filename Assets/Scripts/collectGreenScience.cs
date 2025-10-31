@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class collectGreenScience : MonoBehaviour
-{
+{   
+    
+
     private float lastClickTime = 0f;
     private float threshold = 0.5f;
     private float pointsAdded = 2f;
@@ -11,6 +13,7 @@ public class collectGreenScience : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        
         
     }
 
