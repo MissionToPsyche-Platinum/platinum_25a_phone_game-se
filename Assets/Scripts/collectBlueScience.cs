@@ -1,4 +1,6 @@
 using System.Runtime.CompilerServices;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class collectBlueScience : MonoBehaviour

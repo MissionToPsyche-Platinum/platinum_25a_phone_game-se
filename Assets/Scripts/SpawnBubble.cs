@@ -1,5 +1,5 @@
-using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnBubble : MonoBehaviour    
@@ -11,7 +11,7 @@ public class SpawnBubble : MonoBehaviour
     private int spawns = 0;
     private int spawnTimer = 100;
     
-    Boolean spawned = false;
+    bool spawned = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
