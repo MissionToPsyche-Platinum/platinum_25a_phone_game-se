@@ -7,7 +7,7 @@ public class RocketController : MonoBehaviour
     public Transform background;
 
     public float moveSpeed = 7.5f;
-    public float maxDragDistance = 250f; // drag sensitivity 
+    public float maxDragDistance = 200f; // drag sensitivity 
     public float smoothingSpeed = 10f; // higher = snappier, lower = smoother
 
     private int touchId = -1; // to track active touch
