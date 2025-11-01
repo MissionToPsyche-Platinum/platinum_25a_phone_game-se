@@ -910,6 +910,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6745214047317148953, guid: e2b8f73c1c0f17b488335a0f1d91af70, type: 3}
   m_PrefabInstance: {fileID: 1812776312145539194}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &563946623 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7888262820159713185, guid: fcf96734b1ed107488cca4b795d9a528, type: 3}
+  m_PrefabInstance: {fileID: 4901667903696586216}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &628345419
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1136,6 +1147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1076929023}
   - component: {fileID: 1076929024}
+  - component: {fileID: 1076929025}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -1165,7 +1177,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1076929022}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5e477c2e5638104d93ee026e43a803b, type: 3}
   m_Name: 
@@ -1174,6 +1186,25 @@ MonoBehaviour:
   spacecraftRb: {fileID: 732825115}
   preview: {fileID: 2144489005}
   forceToVelocity: 6
+--- !u!114 &1076929025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076929022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4da41ae473f73d24b9677f872e674256, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCam: {fileID: 523294753}
+  spacecraftRb: {fileID: 732825115}
+  preview: {fileID: 2144489005}
+  powerBarFill: {fileID: 563946623}
+  maxDragDistance: 4
+  dragToSpeed: 6
+  clickRadius: 1.5
 --- !u!1 &1101958261
 GameObject:
   m_ObjectHideFlags: 0
@@ -2646,9 +2677,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6475968803996410457, guid: fcf96734b1ed107488cca4b795d9a528, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475968803996410457, guid: fcf96734b1ed107488cca4b795d9a528, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 24
+      objectReference: {fileID: 0}
     - target: {fileID: 7350273677183756936, guid: fcf96734b1ed107488cca4b795d9a528, type: 3}
       propertyPath: m_Name
       value: PowerBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 7888262820159713185, guid: fcf96734b1ed107488cca4b795d9a528, type: 3}
+      propertyPath: m_Color.b
+      value: 0.11162788
+      objectReference: {fileID: 0}
+    - target: {fileID: 7888262820159713185, guid: fcf96734b1ed107488cca4b795d9a528, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7176471
+      objectReference: {fileID: 0}
+    - target: {fileID: 7888262820159713185, guid: fcf96734b1ed107488cca4b795d9a528, type: 3}
+      propertyPath: m_Color.r
+      value: 0.05098039
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
