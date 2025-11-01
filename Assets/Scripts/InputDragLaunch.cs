@@ -29,6 +29,11 @@ public class InputDragLaunch : MonoBehaviour
         if (spacecraftRb) spacecraftRb.freezeRotation = true;
     }
 
+    public void EnableInput()
+    {
+        this.enabled = true;
+    }
+
 
     void Update()
     {
@@ -69,7 +74,7 @@ public class InputDragLaunch : MonoBehaviour
             var t = Input.GetTouch(0);
             Vector2 world = mainCam.ScreenToWorldPoint(t.position);
 
-            if (t.phase == TouchPhase.Began)
+            if (t.phase ==TouchPhase.Began)
             {
                 if (Vector2.Distance(world, spacecraftRb.position) <= clickRadius)
                 {
@@ -107,15 +112,22 @@ public class InputDragLaunch : MonoBehaviour
         Vector2 dragVec = dragStart - world;  // pull-back vector
         float dist = Mathf.Clamp(dragVec.magnitude, 0f, maxDragDistance);
 
-        // final launch velocity
-        Vector2 launchVelocity = dragVec.normalized * (dist * dragToSpeed);
+        // calculate force
+        Vector2 launchForce = dragVec.normalized * (dist * dragToSpeed);
 
-        // reset power bar
+        // reset UI and preview
         preview.Clear();
         if (powerBarFill) powerBarFill.fillAmount = 0f;
 
-        // apply velocity to rigidbody
-        spacecraftRb.velocity = launchVelocity;
+        // clear previous motion
+        spacecraftRb.velocity = Vector2.zero;
+        spacecraftRb.angularVelocity = 0f;
+
+        // launch with physics
+        spacecraftRb.AddForce(launchForce, ForceMode2D.Impulse);
+
+        // disable launch while moving
+        this.enabled = false;
     }
 
 }
