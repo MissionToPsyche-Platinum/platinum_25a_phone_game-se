@@ -126,6 +126,13 @@ public class InputDragLaunch : MonoBehaviour
         // launch with physics
         spacecraftRb.AddForce(launchForce, ForceMode2D.Impulse);
 
+        //Enable gravity after launch
+        GravityPull gravity = FindAnyObjectByType<GravityPull>();
+        if (gravity != null)
+        {
+            gravity.SetTarget(spacecraftRb);
+        }
+
         // disable launch while moving
         this.enabled = false;
     }
