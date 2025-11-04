@@ -5,6 +5,7 @@ using UnityEngine;
 public class RingGenerator : MonoBehaviour
 {
     public GameObject boostPrefab; 
+    public GameObject penaltyPrefab;
     public GameObject tilePrefab; 
     public int numberOfTiles = 5; 
 
@@ -29,7 +30,24 @@ public class RingGenerator : MonoBehaviour
         {
             Vector3 tilePosition = transform.position + new Vector3(0, i * tileHeight, 0);
 
-            for (int j = 0; j < 2; j++) // spawn 2 objects per tile
+            if (i % 3 == 0) // spawn 1 penalty ring every 3 tiles
+            {
+                // random x position
+                float minX = tilePosition.x - tileWidth / 2f;
+                float maxX = tilePosition.x + tileWidth / 2f;
+                float randX = Random.Range(minX, maxX);
+
+                // random y position
+                float minY = tilePosition.y - tileHeight / 2f;
+                float maxY = tilePosition.y + tileHeight / 2f;
+                float randY = Random.Range(minY, maxY);
+
+                Vector3 spawnPos = new Vector3(randX, randY, tilePosition.z);
+
+                Instantiate(penaltyPrefab, spawnPos, Quaternion.identity, this.transform);
+            }
+
+            for (int j = 0; j < 2; j++) // spawn 2 boost rings per tile
             {
                 // random x position
                 float minX = tilePosition.x - tileWidth / 2f;
