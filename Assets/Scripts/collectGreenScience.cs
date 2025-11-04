@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class collectGreenScience : MonoBehaviour
-{   
-    
+{
 
+    public ParticleSystem clickParticles;
     private float lastClickTime = 0f;
     private float threshold = 0.5f;
     private float pointsAdded = 2f;
@@ -30,6 +30,13 @@ public class collectGreenScience : MonoBehaviour
     {
         if(Time.time - lastClickTime <= threshold)
         {
+            if (clickParticles != null)
+            {
+                clickParticles.transform.position = transform.position;
+                clickParticles.Play();
+            }
+
+
             Destroy(gameObject);
             
             Debug.Log("Destroyed Green Points added: " + pointsAdded);

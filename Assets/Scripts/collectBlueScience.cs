@@ -9,6 +9,8 @@ public class collectBlueScience : MonoBehaviour
     float firstCLicktime = 0f;
     float releaseClick = 0f;
 
+    public ParticleSystem clickParticles;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -39,6 +41,14 @@ public class collectBlueScience : MonoBehaviour
     {
 
         releaseClick = Time.time;
+
+        if (clickParticles != null)
+        {
+            clickParticles.transform.position = transform.position;
+            clickParticles.Play();
+        }
+
+
         Destroy(gameObject);
 
         if ((releaseClick - firstCLicktime) > 5)

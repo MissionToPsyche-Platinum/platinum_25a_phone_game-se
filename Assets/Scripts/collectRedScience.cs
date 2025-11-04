@@ -5,6 +5,7 @@ using UnityEngine;
 public class collectPoints : MonoBehaviour
 {
     public float pointsAdded = 0f;
+    public ParticleSystem clickParticles;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,9 +25,20 @@ public class collectPoints : MonoBehaviour
     //works with mouse and touch screen
     public void OnMouseDown()
     {
-        Destroy(gameObject);
+        
         pointsAdded = 1;
         Debug.Log("Points added: " + pointsAdded);
+
+        if(clickParticles != null)
+        {
+            clickParticles.transform.position = transform.position;
+            clickParticles.Play();
+        }
+        
+                
+
+        Destroy(gameObject);
+
     }    
 
     
