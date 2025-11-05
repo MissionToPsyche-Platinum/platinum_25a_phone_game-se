@@ -7,6 +7,7 @@ public class InputDragLaunch : MonoBehaviour
     [SerializeField] private Camera mainCam;
     [SerializeField] private Rigidbody2D spacecraftRb;
     [SerializeField] private TrajectoryPreview preview;
+    [SerializeField] private GameObject powerBarRoot;
     [SerializeField] private Image powerBarFill;
 
     [Header("Tuning")]
@@ -27,15 +28,26 @@ public class InputDragLaunch : MonoBehaviour
         if (!mainCam) mainCam = Camera.main;
         // freeze rotation for clean slingshot feel 
         if (spacecraftRb) spacecraftRb.freezeRotation = true;
+
+        // Hide UI at start
+        if (powerBarRoot) powerBarRoot.SetActive(false);
+        if(powerBarFill) powerBarFill.fillAmount = 0f;
     }
 
     public void EnableInput()
     {
         this.enabled = true;
+
+
+    }
+    void Update()
+    {
+        HandleMouseInput();
+        HandleTouchInput();
     }
 
 
-    void Update()
+    private void HandleMouseInput()
     {
         // Mouse (also works on dexktop). Touch support is below.
         if (Input.GetMouseButtonDown(0))
@@ -45,6 +57,9 @@ public class InputDragLaunch : MonoBehaviour
             {
                 dragging = true;
                 dragStart = world;
+
+                // Show power UI when dragging starts
+                if (powerBarRoot) powerBarRoot.SetActive(true);
             }
         }
 
@@ -67,7 +82,10 @@ public class InputDragLaunch : MonoBehaviour
         {
             LaunchFromPointer(Input.mousePosition);
         }
+    }
 
+    private void HandleTouchInput()
+    {
         // simple touch support
         if (Input.touchCount > 0)
         {
@@ -80,6 +98,9 @@ public class InputDragLaunch : MonoBehaviour
                 {
                     dragging = true;
                     dragStart = world;
+
+                    // show power UI when dragging starts
+                    if (powerBarRoot) powerBarRoot.SetActive(true);
                 }
             }
 
@@ -118,6 +139,7 @@ public class InputDragLaunch : MonoBehaviour
         // reset UI and preview
         preview.Clear();
         if (powerBarFill) powerBarFill.fillAmount = 0f;
+        if (powerBarRoot) powerBarRoot.SetActive(false);
 
         // clear previous motion
         spacecraftRb.velocity = Vector2.zero;

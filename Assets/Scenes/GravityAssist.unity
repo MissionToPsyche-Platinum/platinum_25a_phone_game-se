@@ -1260,9 +1260,10 @@ MonoBehaviour:
   mainCam: {fileID: 523294753}
   spacecraftRb: {fileID: 732825115}
   preview: {fileID: 2144489005}
+  powerBarRoot: {fileID: 1804862829}
   powerBarFill: {fileID: 563946623}
   maxDragDistance: 4
-  dragToSpeed: 6
+  dragToSpeed: 2.5
   clickRadius: 1.5
 --- !u!1 &1101958261
 GameObject:
@@ -1861,7 +1862,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa9435dbad478b54d9d3b56384ae85cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityStrength: 100
+  gravityStrength: 120
 --- !u!114 &1674203351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1874,7 +1875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f7d0b078a2adc644a838e39b78247fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orbitDuration: 0.5
+  orbitDuration: 0.1
   spacecraftTag: Spacecraft
 --- !u!1 &1725702835
 GameObject:
@@ -2012,6 +2013,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1725702835}
   m_CullTransparentMesh: 1
+--- !u!1 &1804862829 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7350273677183756936, guid: fcf96734b1ed107488cca4b795d9a528, type: 3}
+  m_PrefabInstance: {fileID: 4901667903696586216}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1845658615
 GameObject:
   m_ObjectHideFlags: 0
@@ -2641,7 +2647,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3998669849115766664, guid: c1c848391f70dd54f9e2782f04d657fa, type: 3}
       propertyPath: m_Radius
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3998669849115766664, guid: c1c848391f70dd54f9e2782f04d657fa, type: 3}
       propertyPath: m_IsTrigger
@@ -2802,21 +2808,45 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 24
       objectReference: {fileID: 0}
+    - target: {fileID: 6894910950501464467, guid: fcf96734b1ed107488cca4b795d9a528, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6894910950501464467, guid: fcf96734b1ed107488cca4b795d9a528, type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6894910950501464467, guid: fcf96734b1ed107488cca4b795d9a528, type: 3}
+      propertyPath: m_FillMethod
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7350273677183756936, guid: fcf96734b1ed107488cca4b795d9a528, type: 3}
       propertyPath: m_Name
       value: PowerBar
       objectReference: {fileID: 0}
     - target: {fileID: 7888262820159713185, guid: fcf96734b1ed107488cca4b795d9a528, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7888262820159713185, guid: fcf96734b1ed107488cca4b795d9a528, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 7888262820159713185, guid: fcf96734b1ed107488cca4b795d9a528, type: 3}
       propertyPath: m_Color.b
-      value: 0.11162788
+      value: 0.20220716
       objectReference: {fileID: 0}
     - target: {fileID: 7888262820159713185, guid: fcf96734b1ed107488cca4b795d9a528, type: 3}
       propertyPath: m_Color.g
-      value: 0.7176471
+      value: 0.754717
       objectReference: {fileID: 0}
     - target: {fileID: 7888262820159713185, guid: fcf96734b1ed107488cca4b795d9a528, type: 3}
       propertyPath: m_Color.r
-      value: 0.05098039
+      value: 0.7334109
+      objectReference: {fileID: 0}
+    - target: {fileID: 7888262820159713185, guid: fcf96734b1ed107488cca4b795d9a528, type: 3}
+      propertyPath: m_FillMethod
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
