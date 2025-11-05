@@ -15,6 +15,8 @@ public class MinigameALogic : MonoBehaviour
 
     private int[] checks;
 
+    [SerializeField] private GameObject tutorial;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,5 +58,10 @@ public class MinigameALogic : MonoBehaviour
         {
             endScreen.SetActive(true);
         }
+    }
+
+    public void closeTutorial()
+    {
+        tutorial.SetActive(false);
     }
 }

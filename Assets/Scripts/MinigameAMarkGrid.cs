@@ -10,6 +10,9 @@ public class MinigameAMarkGrid : MonoBehaviour
     [SerializeField] private MinigameAToggle toggle;
     [SerializeField] private bool check;
 
+    [SerializeField] private GameObject currentTutorial;
+    [SerializeField] private GameObject nextTutorial;
+
     public void ShowMark()
     {
         if (!isMarked)
@@ -30,6 +33,15 @@ public class MinigameAMarkGrid : MonoBehaviour
             }
             mark.SetActive(true);
             //later, add points to player score
+
+            if (currentTutorial != null)
+            {
+                currentTutorial.SetActive(false);
+            }
+            if (nextTutorial != null)
+            {
+                nextTutorial.SetActive(true);
+            }
         }
     }
 }

@@ -7,10 +7,22 @@ public class MinigameATextCrossout : MonoBehaviour
 {
     private bool isCrossedOut = false;
 
+    [SerializeField] private GameObject currentTutorial;
+    [SerializeField] private GameObject nextTutorial;
+
     public void ToggleCrossout()
     {
         isCrossedOut = !isCrossedOut;
         UpdateTextAppearance();
+
+        if (currentTutorial != null)
+        {
+            currentTutorial.SetActive(false);
+        }
+        if (nextTutorial != null)
+        {
+            nextTutorial.SetActive(true);
+        }
     }
 
     private void UpdateTextAppearance()
