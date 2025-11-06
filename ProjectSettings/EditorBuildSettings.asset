@@ -8,5 +8,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MinigameD-Level1.unity
     guid: 8ba86c7c01b10044b9c41d3bcdce6e37
+  - enabled: 1
+    path: Assets/Scenes/CentralHub.unity
+    guid: 8f3253af094a2a44092c9116a3755814
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
