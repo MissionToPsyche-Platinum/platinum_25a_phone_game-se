@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: surface
+    uniqueID: 2202501007
+    locked: 0
+  - name: player
+    uniqueID: 1287307621
+    locked: 0
+  - name: npc
+    uniqueID: 4076950345
+    locked: 0
