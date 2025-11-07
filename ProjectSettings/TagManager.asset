@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Planet
+  - Boundary
+  - player
   layers:
   - Default
   - TransparentFX
@@ -13,6 +16,8 @@ TagManager:
   - UI
   - UI on top
   - 
+  - 
+  - World
   - 
   - 
   - 
@@ -40,4 +45,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1559017925
+    locked: 0
+  - name: World
+    uniqueID: 1160548495
+    locked: 0
+  - name: UI
+    uniqueID: 2514908935
     locked: 0
