@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class SpawnBubble : MonoBehaviour    
 {
@@ -8,6 +9,7 @@ public class SpawnBubble : MonoBehaviour
     [SerializeField] private GameObject blueCirc;
     [SerializeField] private GameObject greenCirc;
     [SerializeField] private LayerMask scienceLayer;
+    [SerializeField] private UIDocument ui;
 
     private int max = 500000;
     private int spawns = 0;
@@ -70,16 +72,18 @@ public class SpawnBubble : MonoBehaviour
         if (x == 0)
         {
             circ = Instantiate(redCirc, pos, transform.rotation);
-
+            
         }
         else if (x == 1)
         {
             circ = Instantiate(blueCirc, pos, transform.rotation);
+            
 
         }
         else if (x == 2)
         {
             circ = Instantiate(greenCirc, pos, transform.rotation);
+            
         }
 
 
@@ -92,8 +96,15 @@ public class SpawnBubble : MonoBehaviour
     
     public bool checkSpawnFull(Vector3 pos)
     {
-        bool full = false;        
-        
+        bool full = false;
+
+        Collider[] colliders = Physics.OverlapSphere(pos, 500, 8);
+
+        if(colliders.Length > 0)
+        {
+            full = true;
+            Debug.Log("HEEEEELP");
+        }
                 
         return full;
     }

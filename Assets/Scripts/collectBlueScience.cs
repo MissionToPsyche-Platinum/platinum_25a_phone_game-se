@@ -9,6 +9,8 @@ public class collectBlueScience : MonoBehaviour
     float firstCLicktime = 0f;
     float releaseClick = 0f;
 
+    [SerializeField] public PointTracker pt;
+
     public ParticleSystem clickParticles;
 
 
@@ -59,6 +61,8 @@ public class collectBlueScience : MonoBehaviour
         {
             pointsAdded = releaseClick - firstCLicktime;
         }
+
+        pt.addPoints(pointsAdded);
 
         Debug.Log("Destroyed Blue points added: " + pointsAdded);
 
