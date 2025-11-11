@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8b317f6222cfff14dba6227018b00ee1
+guid: 9e1db045b28abc14dbda939a7a55f6c4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8986802193464191479
-    second: Orange_Coin_0
+      213: -5161077052555790954
+    second: MinigameB_PowerBalance_Background_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Orange_Coin_0
+      name: MinigameB_PowerBalance_Background_0
       rect:
         serializedVersion: 2
-        x: 110
-        y: 110
-        width: 1419
-        height: 1419
+        x: 0
+        y: 0
+        width: 2360
+        height: 1640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9069dd7e407784380800000000000000
-      internalID: -8986802193464191479
+      spriteID: 695fdf7e3cb2068b0800000000000000
+      internalID: -5161077052555790954
       vertices: []
       indices: 
       edges: []
@@ -140,8 +140,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Orange_Coin_0: -8986802193464191479
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
