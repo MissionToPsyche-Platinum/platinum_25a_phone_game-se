@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Art/Backgrounds.meta
 guid: 1016e359a4766d44ea8a0909977b2b6a
 folderAsset: yes
+========
+guid: eb2e77f2622ca084ab3b07001ef3a8ae
+>>>>>>>> dev:Assets/Scenes/MinigameBMetalWeights.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
