@@ -22,6 +22,14 @@ public class InputDragLaunch : MonoBehaviour
     private bool dragging;
     private Vector2 dragStart;
 
+    // --------------------------------
+    // Task #156 - add link to gamemanager and track launch power
+    // --------------------------------
+
+    private GameManger gm;
+    private float lastLaunchPower = 0f;
+
+
 
     void Awake()
     {
@@ -124,7 +132,7 @@ public class InputDragLaunch : MonoBehaviour
         }
 
     }
-    
+
     private void LaunchFromPointer(Vector2 pointerPos)
     {
         dragging = false;
@@ -132,6 +140,9 @@ public class InputDragLaunch : MonoBehaviour
         Vector2 world = mainCam.ScreenToWorldPoint(pointerPos);
         Vector2 dragVec = dragStart - world;  // pull-back vector
         float dist = Mathf.Clamp(dragVec.magnitude, 0f, maxDragDistance);
+
+        // normalized power (0 to 1)
+        lastLaunchPower = dist / maxDragDistance;
 
         // calculate force
         Vector2 launchForce = dragVec.normalized * (dist * dragToSpeed);
@@ -157,6 +168,13 @@ public class InputDragLaunch : MonoBehaviour
 
         // disable launch while moving
         this.enabled = false;
+
+        Debug.Log($"[InputDragLaunch] Launched with power: {lastLaunchPower:F2}");
+    }
+    
+    public float GetLastLaunchPower()
+    {
+        return lastLaunchPower;
     }
 
 }

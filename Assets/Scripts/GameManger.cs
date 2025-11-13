@@ -12,12 +12,43 @@ public class GameManger : MonoBehaviour
 
     private bool gameEnded = false;
 
+
+    // --------------------------------
+    // SCORE SYSTEM VARIABLES
+    // --------------------------------
+    private float accuracyScore = 0f;
+    private float fuelScore = 0f;
+    private float totalScore = 0f;
+
+    [Header("Scoring Settings")]
+    [SerializeField] private float accuracyWeight = 0.7f;
+    [SerializeField] private float fuelWeight = 0.3f;
+    [SerializeField] private float maxOrbitError = 5f; // Maximum error distance for scoring
+    [SerializeField] private float maxLaunchPower = 10f; // max drag power used for normalization  
+
+    // --------------------------------
+    // Game Event Handlers
+    // --------------------------------
+
     public void OrbitSuccess()
     {
         if (gameEnded) return;
         gameEnded = true;
 
         ShowMessage("Orbit Achieved!");
+        DisableControl();
+    }
+
+
+    public void OrbitSuccess(float orbitError, float launchPower)
+    {
+        if (gameEnded) return;
+        gameEnded = true;
+
+        // Calculate score based on accuracy and fuel efficiency
+        CalculateScores(orbitError, launchPower);
+
+        ShowMessage($"Orbit Achieved!\n Score: {totalScore:F0}");
         DisableControl();
     }
 
@@ -29,10 +60,31 @@ public class GameManger : MonoBehaviour
         DisableControl();
     }
 
+    // --------------------------------
+    // Score Calculation
+    // --------------------------------
+    private void CalculateScores(float orbitError, float launchPower)
+    {
+        // Accuracy score decreases with orbit error
+        accuracyScore = Mathf.Clamp01(1f - (orbitError / maxOrbitError)) * 100f;
+
+        // Fuel score decreases with launch power used
+        fuelScore = Mathf.Clamp01(1f - (launchPower / maxLaunchPower)) * 100f;
+
+        // Weighted total score
+        totalScore = (accuracyScore * accuracyWeight) + (fuelScore * fuelWeight);
+
+        Debug.Log($"[Score System] Accuracy: {accuracyScore:F1}, Fuel: {fuelScore:F1}, Total: {totalScore:F1}");
+    }
+
+    // --------------------------------
+    // UI and Control Helpers  
+    // --------------------------------
+
     private void ShowMessage(string msg)
     {
         if (messageText != null)
-        { 
+        {
             messageText.text = msg;
             messageText.gameObject.SetActive(true);
         }
