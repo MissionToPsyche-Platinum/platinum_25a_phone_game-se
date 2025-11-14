@@ -4,6 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - BoostRing
+  - PenaltyRing
   - Planet
   - Boundary
   - player
