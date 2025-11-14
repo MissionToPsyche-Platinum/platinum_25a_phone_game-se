@@ -276,6 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickParticles: {fileID: 1378109342}
+  pt: {fileID: 1750789559}
 --- !u!1 &367890771
 GameObject:
   m_ObjectHideFlags: 0
@@ -794,6 +795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83d38f6afd8d90b43b0a3faa256db9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pt: {fileID: 1750789559}
   clickParticles: {fileID: 1378109342}
 --- !u!1 &1378109340
 GameObject:
