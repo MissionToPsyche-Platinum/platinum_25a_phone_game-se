@@ -48,7 +48,7 @@ public class TrajectoryPreview : MonoBehaviour
         {
             points.Add(pos);
             // basic kinematics with fake downward gravity (temp)
-            vel += new Vector2(0, fakeGravity) * timeStep; // v = v0 + at
+            vel += new Vector2(0f, fakeGravity) * timeStep; // v = v0 + at
             pos += vel * timeStep;                        // s = s0 + vt
         }
 
