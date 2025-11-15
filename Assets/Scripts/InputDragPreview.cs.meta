@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/reverseNormals.cs.meta
+guid: 6db228ccdc401dd4f9171eb77514a156
+========
 guid: f5e477c2e5638104d93ee026e43a803b
+>>>>>>>> dev:Assets/Scripts/InputDragPreview.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
