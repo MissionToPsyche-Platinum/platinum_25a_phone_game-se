@@ -5,6 +5,7 @@ using TMPro;
 public class GameManger : MonoBehaviour
 {
     [Header("UI References")]
+    [SerializeField] private PopupUI popupUI;
     [SerializeField] private TMP_Text messageText;
 
     [Header("Controls")]
@@ -48,7 +49,10 @@ public class GameManger : MonoBehaviour
         // Calculate score based on accuracy and fuel efficiency
         CalculateScores(orbitError, launchPower);
 
-        ShowMessage($"Orbit Achieved!\n Score: {totalScore:F0}");
+        popupUI.ShowPopup("Success!",
+                        $"Orbit Achieved!\nScore:{totalScore:F0}" );
+
+       // ShowMessage($"Orbit Achieved!\n Score: {totalScore:F0}");
         DisableControl();
     }
 
@@ -56,7 +60,10 @@ public class GameManger : MonoBehaviour
     {
         if (gameEnded) return;
         gameEnded = true;
-        ShowMessage("Missed Orbit! Try Again.");
+
+        popupUI.ShowPopup("Try Again!",
+                        "You missed the orbit.\n Adjust angle or power.");
+      //  ShowMessage("Missed Orbit! Try Again.");
         DisableControl();
     }
 
