@@ -24,10 +24,10 @@ public class RocketController : MonoBehaviour
             // get background bounds in world units
             float backgroundHalfWidth = background.GetComponent<SpriteRenderer>().bounds.extents.x;
             float backgroundCenterX = background.position.x;
-            float playerHalfWidth = GetComponent<SpriteRenderer>().bounds.extents.x;
+            float playerQuarterWidth = GetComponent<SpriteRenderer>().bounds.extents.x / 2;
 
-            minX = backgroundCenterX - backgroundHalfWidth + playerHalfWidth;
-            maxX = backgroundCenterX + backgroundHalfWidth - playerHalfWidth;
+            minX = backgroundCenterX - backgroundHalfWidth + playerQuarterWidth;
+            maxX = backgroundCenterX + backgroundHalfWidth - playerQuarterWidth;
         }
         else
         {
