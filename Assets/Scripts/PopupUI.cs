@@ -5,8 +5,10 @@ using NUnit.Framework.Interfaces;
 
 public class PopupUI : MonoBehaviour
 {
-    [Header("UI References")]
+    [Header("Root Panel")]
     [SerializeField] private GameObject popupPanel;
+
+    [Header("UI References")]
     [SerializeField] private TMP_Text popupTitle;
     [SerializeField] private TMP_Text popupMessage;
 
@@ -15,16 +17,42 @@ public class PopupUI : MonoBehaviour
        HidePopup(); 
     }
 
-    public void ShowPopup(string title, string message)
+    public void ShowSuccessPopup(float totalScore)
     {
-        if(popupPanel != null)
+       if(popupPanel != null)
+        {
             popupPanel.SetActive(true);
+        }
+
         if(popupTitle != null)
-            popupTitle.text = title;
+        {
+            popupTitle.text = "Orbit Achieved!";
+        }
+
         if(popupMessage != null)
-            popupMessage.text = message;
+        {
+            popupMessage.text = $"Score: {totalScore:F0}";
+
+        }
     }
 
+    public void ShowFailurePopup()
+    {
+        if (popupPanel != null)
+        {
+            popupPanel.SetActive(true);
+        }
+
+        if (popupTitle != null)
+        {
+            popupTitle.text = "Orbit Missed!";
+        }
+
+        if (popupMessage != null)
+        {
+            popupMessage.text ="Try another launch to achieve orbit.";
+        }
+    }
     public void HidePopup()
     {
         if(popupPanel != null)

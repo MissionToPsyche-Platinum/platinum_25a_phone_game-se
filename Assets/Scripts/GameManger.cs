@@ -49,10 +49,16 @@ public class GameManger : MonoBehaviour
         // Calculate score based on accuracy and fuel efficiency
         CalculateScores(orbitError, launchPower);
 
-        popupUI.ShowPopup("Success!",
-                        $"Orbit Achieved!\nScore:{totalScore:F0}" );
-
-       // ShowMessage($"Orbit Achieved!\n Score: {totalScore:F0}");
+        // prefer the popup UI if assigned
+       if(popupUI != null)
+        {
+            popupUI.ShowSuccessPopup(totalScore);
+        }
+        else
+        {
+            // Fallback: old HUD message
+            ShowMessage("Orbit Achieved!\n Score: " + totalScore.ToString("F0"));
+        }
         DisableControl();
     }
 
@@ -61,9 +67,16 @@ public class GameManger : MonoBehaviour
         if (gameEnded) return;
         gameEnded = true;
 
-        popupUI.ShowPopup("Try Again!",
-                        "You missed the orbit.\n Adjust angle or power.");
-      //  ShowMessage("Missed Orbit! Try Again.");
+        // prefer the popup UI if assigned
+        if (popupUI != null)
+        {
+            popupUI.ShowFailurePopup();
+        }
+        else
+        {
+            // Fallback: old HUD message
+            ShowMessage("Orbit Missed! Try Again.");
+        }
         DisableControl();
     }
 
