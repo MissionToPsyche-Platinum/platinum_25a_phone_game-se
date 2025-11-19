@@ -1113,7 +1113,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.018684983, y: 0.0124566555}
+  m_Offset: {x: -0.018684745, y: 0.012456894}
   m_SpriteTilingProperty:
     border: {x: 1.5, y: 0, z: 1.5, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1123,7 +1123,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.4788892, y: 5.1605477}
+  m_Size: {x: 5.9204893, y: 10.320156}
   m_EdgeRadius: 0
 --- !u!50 &2119888222
 Rigidbody2D:
@@ -1497,9 +1497,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1914028770534588979, guid: 875237940c8dac44faf141009e8229cc, type: 3}
+      propertyPath: m_Radius
+      value: 2.4252224
+      objectReference: {fileID: 0}
+    - target: {fileID: 1914028770534588979, guid: 875237940c8dac44faf141009e8229cc, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.009924571
+      objectReference: {fileID: 0}
     - target: {fileID: 3444789985633587967, guid: 875237940c8dac44faf141009e8229cc, type: 3}
       propertyPath: m_Name
       value: Boost Ring
+      objectReference: {fileID: 0}
+    - target: {fileID: 6747617663512992021, guid: 875237940c8dac44faf141009e8229cc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 6747617663512992021, guid: 875237940c8dac44faf141009e8229cc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.45
       objectReference: {fileID: 0}
     - target: {fileID: 6747617663512992021, guid: 875237940c8dac44faf141009e8229cc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1540,6 +1556,34 @@ PrefabInstance:
     - target: {fileID: 6747617663512992021, guid: 875237940c8dac44faf141009e8229cc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7247808715863146855, guid: 875237940c8dac44faf141009e8229cc, type: 3}
+      propertyPath: m_Size.x
+      value: 5.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7247808715863146855, guid: 875237940c8dac44faf141009e8229cc, type: 3}
+      propertyPath: m_Size.y
+      value: 5.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7247808715863146855, guid: 875237940c8dac44faf141009e8229cc, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1349d24c959a3d5409bcdfe20b7a551c, type: 3}
+    - target: {fileID: 7247808715863146855, guid: 875237940c8dac44faf141009e8229cc, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7247808715863146855, guid: 875237940c8dac44faf141009e8229cc, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7247808715863146855, guid: 875237940c8dac44faf141009e8229cc, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7247808715863146855, guid: 875237940c8dac44faf141009e8229cc, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
