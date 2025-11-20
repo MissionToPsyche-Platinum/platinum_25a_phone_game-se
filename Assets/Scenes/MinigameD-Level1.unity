@@ -1231,7 +1231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e20b6e15ddb824a946b7707355b82f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialVelocity: 17.5
+  initialVelocity: 15
   gravity: -2.5
 --- !u!114 &2119888226
 MonoBehaviour:
@@ -1331,6 +1331,50 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 227838578625935686, guid: 0d16bf99ac4400042a92aa63bd9e089f, type: 3}
+      propertyPath: m_Size.x
+      value: 5.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 227838578625935686, guid: 0d16bf99ac4400042a92aa63bd9e089f, type: 3}
+      propertyPath: m_Size.y
+      value: 5.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 227838578625935686, guid: 0d16bf99ac4400042a92aa63bd9e089f, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5dbeffb454a0bc44ba1d50301143ccbb, type: 3}
+    - target: {fileID: 227838578625935686, guid: 0d16bf99ac4400042a92aa63bd9e089f, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 227838578625935686, guid: 0d16bf99ac4400042a92aa63bd9e089f, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 227838578625935686, guid: 0d16bf99ac4400042a92aa63bd9e089f, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 227838578625935686, guid: 0d16bf99ac4400042a92aa63bd9e089f, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 414954088954361995, guid: 0d16bf99ac4400042a92aa63bd9e089f, type: 3}
+      propertyPath: m_Radius
+      value: 2.4609919
+      objectReference: {fileID: 0}
+    - target: {fileID: 414954088954361995, guid: 0d16bf99ac4400042a92aa63bd9e089f, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.011079312
+      objectReference: {fileID: 0}
+    - target: {fileID: 1706710556789806999, guid: 0d16bf99ac4400042a92aa63bd9e089f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 1706710556789806999, guid: 0d16bf99ac4400042a92aa63bd9e089f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.45
+      objectReference: {fileID: 0}
     - target: {fileID: 1706710556789806999, guid: 0d16bf99ac4400042a92aa63bd9e089f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.25
