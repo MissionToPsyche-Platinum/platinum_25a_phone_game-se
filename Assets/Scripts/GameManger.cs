@@ -32,23 +32,50 @@ public class GameManger : MonoBehaviour
     // Game Event Handlers
     // --------------------------------
 
+    // --------------------------------
+    // OLD EVENt (no score)
+    // --------------------------------
     public void OrbitSuccess()
     {
         if (gameEnded) return;
         gameEnded = true;
 
+        // Force stop any ongoing drag/thrust sounds
+        if(dragLaunch != null)
+        {
+            AudioManager.Instance.StopAllGameplaySounds();
+        }
+        // stop background sound if needed
+        AudioManager.Instance.StopBackground();
+        // audio
+        AudioManager.Instance.PlaySuccess();
+
         ShowMessage("Orbit Achieved!");
         DisableControl();
     }
 
+    // --------------------------------
+    // Main Success Event with Scoring
+    // --------------------------------
 
     public void OrbitSuccess(float orbitError, float launchPower)
     {
         if (gameEnded) return;
         gameEnded = true;
 
+        // Force stop any ongoing drag/thrust sounds
+        if(dragLaunch != null)
+        {
+            AudioManager.Instance.StopAllGameplaySounds();
+        }
+        // stop background sound if needed
+        AudioManager.Instance.StopBackground();
+
         // Calculate score based on accuracy and fuel efficiency
         CalculateScores(orbitError, launchPower);
+
+        // audio
+        AudioManager.Instance.PlaySuccess();
 
         // prefer the popup UI if assigned
        if(popupUI != null)
@@ -63,10 +90,24 @@ public class GameManger : MonoBehaviour
         DisableControl();
     }
 
+    // --------------------------------
+    // Failure Event
+    // --------------------------------
     public void MissedOrbit()
     {
         if (gameEnded) return;
         gameEnded = true;
+
+        // Force stop any ongoing drag/thrust sounds
+        if(dragLaunch != null)
+        {
+            AudioManager.Instance.StopAllGameplaySounds();
+        }
+        // stop background sound if needed
+        AudioManager.Instance.StopBackground();
+
+        // audio
+        AudioManager.Instance.PlayFail();
 
         // prefer the popup UI if assigned
         if (popupUI != null)
@@ -119,9 +160,27 @@ public class GameManger : MonoBehaviour
         }
     }
 
+    // --------------------------------
+    // Restart Game
+    // --------------------------------
     public void ResetGame()
     {
+        // button click sound should still play fully
+        AudioManager.Instance.PlayButtonClick();
+
+        // stop all lingering sounds
+        AudioManager.Instance.StopBackground();
+        if(dragLaunch != null)
+        {
+            AudioManager.Instance.StopAllGameplaySounds();
+        }
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private void Start()
+    {
+        // Start bbackground space ambience
+        AudioManager.Instance.PlayBackground();
     }
 
 

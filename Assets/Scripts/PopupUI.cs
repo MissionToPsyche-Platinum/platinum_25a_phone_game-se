@@ -23,6 +23,8 @@ public class PopupUI : MonoBehaviour
         {
             popupPanel.SetActive(true);
         }
+        AudioManager.Instance.StopAllGameplaySounds();
+        AudioManager.Instance.PlaySuccess();
 
         if(popupTitle != null)
         {
@@ -43,6 +45,9 @@ public class PopupUI : MonoBehaviour
             popupPanel.SetActive(true);
         }
 
+        AudioManager.Instance.StopAllGameplaySounds();
+        AudioManager.Instance.PlayFail();
+
         if (popupTitle != null)
         {
             popupTitle.text = "Orbit Missed!";
@@ -55,6 +60,7 @@ public class PopupUI : MonoBehaviour
     }
     public void HidePopup()
     {
+        AudioManager.Instance.PlayBackground();
         if(popupPanel != null)
             popupPanel.SetActive(false);
     }

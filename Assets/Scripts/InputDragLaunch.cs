@@ -68,6 +68,9 @@ public class InputDragLaunch : MonoBehaviour
 
                 // Show power UI when dragging starts
                 if (powerBarRoot) powerBarRoot.SetActive(true);
+
+                // Play Stretch Sound
+                AudioManager.Instance.PlayStretch();
             }
         }
 
@@ -92,6 +95,9 @@ public class InputDragLaunch : MonoBehaviour
         }
     }
 
+    //------------------------------
+    // Touch Input
+    //------------------------------
     private void HandleTouchInput()
     {
         // simple touch support
@@ -109,6 +115,9 @@ public class InputDragLaunch : MonoBehaviour
 
                     // show power UI when dragging starts
                     if (powerBarRoot) powerBarRoot.SetActive(true);
+
+                    // Play Stretch Sound
+                    AudioManager.Instance.PlayStretch();
                 }
             }
 
@@ -133,9 +142,20 @@ public class InputDragLaunch : MonoBehaviour
 
     }
 
+    // --------------------------------
+    // Launch Logic
+    // --------------------------------
+
     private void LaunchFromPointer(Vector2 pointerPos)
     {
         dragging = false;
+
+        // Stop stretch sound
+        AudioManager.Instance.StopStretch();
+
+        // Play thrust sound
+        AudioManager.Instance.StopAllGameplaySounds();
+        AudioManager.Instance.PlayThrust();
 
         Vector2 world = mainCam.ScreenToWorldPoint(pointerPos);
         Vector2 dragVec = dragStart - world;  // pull-back vector
@@ -176,5 +196,7 @@ public class InputDragLaunch : MonoBehaviour
     {
         return lastLaunchPower;
     }
+
+
 
 }

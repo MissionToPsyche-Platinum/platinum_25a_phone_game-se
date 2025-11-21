@@ -30,6 +30,16 @@ public class OrbitCheck : MonoBehaviour
 
             if (timer >= orbitDuration)
         {
+            // stop drag sounds if somehow still playing
+            AudioManager.Instance.StopStretch();
+
+            // stop thrust sound whn orbit is achieved
+            // (if thrust was still fading)
+            AudioManager.Instance.StopThrust();
+
+            // Play impact/achieve sound
+            AudioManager.Instance.PlayImpact();
+
             // Measure how close spacecraft is to center (for accuracy scoring)
             float orbitError = Vector2.Distance(other.transform.position, transform.position);
 
@@ -46,10 +56,10 @@ public class OrbitCheck : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.CompareTag(spacecraftTag))
+        if(other.CompareTag(spacecraftTag)) 
         {
-            timer = 0f; // reset timer
+            // reset timer if spacecraft exits orbit area
+            timer = 0f;
         }
-
     }
 }
