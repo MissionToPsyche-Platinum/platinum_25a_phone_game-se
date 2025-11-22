@@ -8,10 +8,10 @@ public class SpawnBubble : MonoBehaviour
     [SerializeField] private GameObject redCirc;
     [SerializeField] private GameObject blueCirc;
     [SerializeField] private GameObject greenCirc;
-    [SerializeField] private LayerMask scienceLayer;
-    [SerializeField] private UIDocument ui;
+    
 
     private int max = 500000;
+    private float radius = 2.5f;
     private int spawns = 0;
     private int spawnTimer = 10;
     
@@ -58,7 +58,10 @@ public class SpawnBubble : MonoBehaviour
 
     
 
-         
+    public void setRadius(float radius)
+    {
+        this.radius = radius;
+    }     
 
     // Based off of a random number
     // Spawns a red bubble on the sphere object if its 0
@@ -112,7 +115,7 @@ public class SpawnBubble : MonoBehaviour
     public Vector3 generateSpawn()    {
         
         float y = UnityEngine.Random.Range(-2f, 2f);
-        float z = Mathf.Sqrt((2.5f * 2.5f) - (y * y));
+        float z = Mathf.Sqrt((radius * radius) - (y * y));
 
         Vector3 vector = new Vector3(0, y, z);
 

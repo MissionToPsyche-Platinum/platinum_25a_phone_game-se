@@ -33,6 +33,8 @@ public class MenuSceneSchange : MonoBehaviour
 
     public void SwitchToSceneMinigameF()
     {
+        Debug.Log("Switching to Minigame F");
+        SceneManager.LoadScene("MinigameF");
 
     }
 }

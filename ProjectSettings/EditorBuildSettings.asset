@@ -4,6 +4,27 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/CentralHub.unity
+    guid: 548976b44853d704e83e8e27743cdad2
+  - enabled: 1
+    path: Assets/Scenes/MinigameA.unity
+    guid: 65dbad7421a212d479c898fd61345eb3
+  - enabled: 1
+    path: Assets/Scenes/MinigameBPowerBalance.unity
+    guid: 0d1989185ce1ac54f9a1af2440d88531
+  - enabled: 1
+    path: Assets/Scenes/MinigameD-Level1.unity
+    guid: 8ba86c7c01b10044b9c41d3bcdce6e37
+  - enabled: 1
+    path: Assets/Scenes/MinigameD-Tutorial.unity
+    guid: c8333f06237a84140a30f6a23b2a7a9b
+  - enabled: 1
+    path: Assets/Scenes/GravityAssist.unity
+    guid: 9d2e520ea27108b42b6f28f71ad7c408
+  - enabled: 1
+    path: Assets/Scenes/MiniGameF.unity
+    guid: d9daba977ba306c4f89706d48093a0d0
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
