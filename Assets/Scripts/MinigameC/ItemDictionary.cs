@@ -37,7 +37,7 @@ public class ItemDictionary : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning($"Item with ID {itemId} was not found in the dictionary");
+            Debug.LogWarning($"Item ID {itemId} could not be found in the dictionary");
             return null;
         }
     }

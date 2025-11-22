@@ -32,6 +32,60 @@ public class InventoryController : MonoBehaviour
         // }
     }
 
+    public bool AddItem(GameObject itemPrefab)
+    {
+        if (inventoryPanel == null)
+        {
+            Debug.LogError("InventoryController.AddItem: inventoryPanel is null!");
+            return false;
+        }
+        
+        if (itemPrefab == null)
+        {
+            Debug.LogError("InventoryController.AddItem: itemPrefab is null!");
+            return false;
+        }
+        
+        Debug.Log($"InventoryController.AddItem: Attempting to add item. Inventory panel has {inventoryPanel.transform.childCount} slots");
+        
+        foreach (Transform slotTransform in inventoryPanel.transform)
+        {
+            Slot slot = slotTransform.GetComponent<Slot>();
+            
+            if (slot == null)
+            {
+                Debug.LogWarning($"InventoryController.AddItem: Slot component not found on {slotTransform.name}");
+                continue;
+            }
+            
+            if (slot.currentItem == null)
+            {
+                Debug.Log($"InventoryController.AddItem: Found empty slot at {slotTransform.name}, adding item...");
+                GameObject newItem = Instantiate(itemPrefab, slot.transform);
+                
+                // Reset scale to (1,1,1) to ensure inventory items are not affected by scene item scaling
+                newItem.transform.localScale = Vector3.one;
+                
+                RectTransform rectTransform = newItem.GetComponent<RectTransform>();
+                if (rectTransform != null)
+                {
+                    rectTransform.anchoredPosition = Vector2.zero;
+                }
+                else
+                {
+                    Debug.LogWarning("InventoryController.AddItem: Item prefab doesn't have RectTransform component");
+                }
+                
+                slot.currentItem = newItem;
+                Debug.Log($"InventoryController.AddItem: Item successfully added to slot {slotTransform.name}");
+                return true;
+            }
+        }
+        
+        Debug.Log("InventoryController.AddItem: Inventory is full - no empty slots found");
+        return false;
+    }
+
     public List<InventorySaveData> GetInventoryItems()
     {
         List<InventorySaveData> invData = new List<InventorySaveData>();

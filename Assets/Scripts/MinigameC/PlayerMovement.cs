@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 5f;
+    public float speed = 0.4f;
     public Rigidbody2D rb;
     public Animator animator;
     private SpriteRenderer spriteRenderer;
@@ -30,6 +30,16 @@ public class PlayerMovement : MonoBehaviour
             spriteRenderer.flipX = horizontal > 0;
         }
         
-        rb.velocity = new Vector2(horizontal, vertical) * speed;
+        // Create movement vector and normalize to prevent faster diagonal movement
+        Vector2 inputVector = new Vector2(horizontal, vertical);
+        
+        // Normalize to ensure consistent speed in all directions (including diagonals)
+        if (inputVector.magnitude > 0.1f)
+        {
+            inputVector = inputVector.normalized;
+        }
+        
+        // Apply speed directly - no acceleration buildup
+        rb.velocity = inputVector * speed;
     }
 }
