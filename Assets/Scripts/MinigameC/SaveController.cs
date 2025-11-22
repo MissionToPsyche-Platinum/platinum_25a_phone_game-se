@@ -7,10 +7,13 @@ using Cinemachine;
 public class SaveController : MonoBehaviour
 {
     private string saveLocation;
+    private InventoryController inventoryController;
+
     // Start is called before the first frame update
     void Start()
     {
         saveLocation = Path.Combine(Application.persistentDataPath, "saveData.json");
+        inventoryController = FindFirstObjectByType<InventoryController>();
 
         LoadGame();
         
@@ -30,6 +33,15 @@ public class SaveController : MonoBehaviour
         if (confiner != null && confiner.m_BoundingShape2D != null)
         {
             saveData.mapBoundary = confiner.m_BoundingShape2D.gameObject.name;
+        }
+
+        if (inventoryController != null)
+        {
+            saveData.inventorySaveData = inventoryController.GetInventoryItems();
+        }
+        else
+        {
+            saveData.inventorySaveData = new List<InventorySaveData>();
         }
 
         File.WriteAllText(saveLocation, JsonUtility.ToJson(saveData));
@@ -55,6 +67,11 @@ public class SaveController : MonoBehaviour
                 {
                     confiner.m_BoundingShape2D = boundary.GetComponent<PolygonCollider2D>();
                 }
+            }
+
+            if (inventoryController != null)
+            {
+                inventoryController.SetInventoryItems(saveData.inventorySaveData);
             }
         } 
         else
