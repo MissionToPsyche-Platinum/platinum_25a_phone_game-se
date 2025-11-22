@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class InputDragLaunch : MonoBehaviour
 {
@@ -48,6 +49,7 @@ public class InputDragLaunch : MonoBehaviour
 
 
     }
+
     void Update()
     {
         HandleMouseInput();
@@ -57,6 +59,9 @@ public class InputDragLaunch : MonoBehaviour
 
     private void HandleMouseInput()
     {
+        // Block game input if clicking or dragging on UI
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
+
         // Mouse (also works on dexktop). Touch support is below.
         if (Input.GetMouseButtonDown(0))
         {
@@ -103,6 +108,8 @@ public class InputDragLaunch : MonoBehaviour
         // simple touch support
         if (Input.touchCount > 0)
         {
+             if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)) return;
+             
             var t = Input.GetTouch(0);
             Vector2 world = mainCam.ScreenToWorldPoint(t.position);
 

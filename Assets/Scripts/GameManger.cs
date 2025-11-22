@@ -181,6 +181,7 @@ public class GameManger : MonoBehaviour
     {
         // Start bbackground space ambience
         AudioManager.Instance.PlayBackground();
+      
     }
 
 
