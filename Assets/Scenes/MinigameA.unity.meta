@@ -1,6 +1,9 @@
 fileFormatVersion: 2
-guid: c8333f06237a84140a30f6a23b2a7a9b
+<<<<<<<< HEAD:Assets/Scenes/MinigameA.unity.meta
+guid: 65dbad7421a212d479c898fd61345eb3
+========
 guid: e63011bffb63b3847be3665bc92e75e3
+>>>>>>>> dev:Assets/Scenes/MinigameD-Tutorial.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
