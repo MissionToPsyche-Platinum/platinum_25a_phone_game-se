@@ -24,13 +24,18 @@ public class CameraFollow : MonoBehaviour
 
             if (targetY > highestY)
             {
-                transform.position = new Vector3(target.position.x, targetY, transform.position.z);
+                // keep camera's x position fixed 
+                float fixedX = transform.position.x;
+
+                transform.position = new Vector3(fixedX, targetY, transform.position.z);
                 highestY = targetY; 
             }
             else
             {
-                Vector3 desiredPosition = new Vector3(transform.position.x, highestY, transform.position.z);
-                transform.position = new Vector3(desiredPosition.x, highestY, desiredPosition.z);
+                // keep camera's x position fixed 
+                float fixedX = transform.position.x;
+
+                transform.position = new Vector3(fixedX, highestY, transform.position.z);
             }
         }
     }
