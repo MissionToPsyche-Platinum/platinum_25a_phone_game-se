@@ -607,6 +607,7 @@ GameObject:
   - component: {fileID: 649828264}
   - component: {fileID: 649828269}
   - component: {fileID: 649828268}
+  - component: {fileID: 649828270}
   m_Layer: 0
   m_Name: Asteroid
   m_TagString: Untagged
@@ -728,6 +729,21 @@ MonoBehaviour:
   redCirc: {fileID: 2095605143}
   blueCirc: {fileID: 1332267514}
   greenCirc: {fileID: 408486463}
+--- !u!114 &649828270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 649828262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ea88e85bafbb946948958a29fe5c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SceneName: MiniGameF
+  obj: {fileID: 649828267}
+  bubble: {fileID: 649828269}
 --- !u!1 &1045738594
 GameObject:
   m_ObjectHideFlags: 0
