@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class InputDragLaunch : MonoBehaviour
 {
@@ -22,6 +23,14 @@ public class InputDragLaunch : MonoBehaviour
     private bool dragging;
     private Vector2 dragStart;
 
+    // --------------------------------
+    // Task #156 - add link to gamemanager and track launch power
+    // --------------------------------
+
+    private GameManger gm;
+    private float lastLaunchPower = 0f;
+
+
 
     void Awake()
     {
@@ -40,6 +49,7 @@ public class InputDragLaunch : MonoBehaviour
 
 
     }
+
     void Update()
     {
         HandleMouseInput();
@@ -49,6 +59,9 @@ public class InputDragLaunch : MonoBehaviour
 
     private void HandleMouseInput()
     {
+        // Block game input if clicking or dragging on UI
+        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
+
         // Mouse (also works on dexktop). Touch support is below.
         if (Input.GetMouseButtonDown(0))
         {
@@ -60,6 +73,9 @@ public class InputDragLaunch : MonoBehaviour
 
                 // Show power UI when dragging starts
                 if (powerBarRoot) powerBarRoot.SetActive(true);
+
+                // Play Stretch Sound
+                AudioManager.Instance.PlayStretch();
             }
         }
 
@@ -84,11 +100,16 @@ public class InputDragLaunch : MonoBehaviour
         }
     }
 
+    //------------------------------
+    // Touch Input
+    //------------------------------
     private void HandleTouchInput()
     {
         // simple touch support
         if (Input.touchCount > 0)
         {
+             if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)) return;
+             
             var t = Input.GetTouch(0);
             Vector2 world = mainCam.ScreenToWorldPoint(t.position);
 
@@ -101,6 +122,9 @@ public class InputDragLaunch : MonoBehaviour
 
                     // show power UI when dragging starts
                     if (powerBarRoot) powerBarRoot.SetActive(true);
+
+                    // Play Stretch Sound
+                    AudioManager.Instance.PlayStretch();
                 }
             }
 
@@ -124,14 +148,28 @@ public class InputDragLaunch : MonoBehaviour
         }
 
     }
-    
+
+    // --------------------------------
+    // Launch Logic
+    // --------------------------------
+
     private void LaunchFromPointer(Vector2 pointerPos)
     {
         dragging = false;
 
+        // Stop stretch sound
+        AudioManager.Instance.StopStretch();
+
+        // Play thrust sound
+        AudioManager.Instance.StopAllGameplaySounds();
+        AudioManager.Instance.PlayThrust();
+
         Vector2 world = mainCam.ScreenToWorldPoint(pointerPos);
         Vector2 dragVec = dragStart - world;  // pull-back vector
         float dist = Mathf.Clamp(dragVec.magnitude, 0f, maxDragDistance);
+
+        // normalized power (0 to 1)
+        lastLaunchPower = dist / maxDragDistance;
 
         // calculate force
         Vector2 launchForce = dragVec.normalized * (dist * dragToSpeed);
@@ -157,6 +195,15 @@ public class InputDragLaunch : MonoBehaviour
 
         // disable launch while moving
         this.enabled = false;
+
+        Debug.Log($"[InputDragLaunch] Launched with power: {lastLaunchPower:F2}");
     }
+    
+    public float GetLastLaunchPower()
+    {
+        return lastLaunchPower;
+    }
+
+
 
 }
