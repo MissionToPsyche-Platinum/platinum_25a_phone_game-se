@@ -4,11 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - BoostRing
-  - PenaltyRing
   - Planet
   - Boundary
   - player
+  - Spacecraft
   layers:
   - Default
   - TransparentFX
@@ -17,7 +16,6 @@ TagManager:
   - Water
   - UI
   - UI on top
-  - 
   - 
   - World
   - Background
