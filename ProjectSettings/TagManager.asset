@@ -8,6 +8,9 @@ TagManager:
   - Boundary
   - player
   - Spacecraft
+  - BoostRing
+  - PenaltyRing
+  - JumpRing
   layers:
   - Default
   - TransparentFX
@@ -19,7 +22,6 @@ TagManager:
   - 
   - World
   - Background
-  - 
   - 
   - 
   - 
