@@ -12,6 +12,13 @@ public class GameManger : MonoBehaviour
     [Header("Controls")]
     [SerializeField] private InputDragLaunch dragLaunch;
 
+    [Header("Intro Overlay")]
+    [SerializeField] private GameObject introOverlayPanel;
+    [SerializeField] private float introDuration = 3f;
+
+    //Static flag: lets us skip intro after reset reloads the scene
+    private static bool skipIntroNextLoad = false;
+
     private bool gameEnded = false;
 
 
@@ -174,15 +181,90 @@ public class GameManger : MonoBehaviour
         {
             AudioManager.Instance.StopAllGameplaySounds();
         }
+
+        skipIntroNextLoad = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void Start()
     {
-        // Start bbackground space ambience
+        // Start background space ambience
         AudioManager.Instance.PlayBackground();
+
+        // if we just reset, skip intro one time
+        if (skipIntroNextLoad)
+        {
+            skipIntroNextLoad = false;
+            if(introOverlayPanel != null)
+                introOverlayPanel.SetActive(false);
+            EnableControl();
+            return;
+        }
+        // Normal entry from hub -> show intro
+        StartCoroutine(IntroRountine());
       
     }
 
+    // --------------------------------
+    // Intro Overlay Coroutine 
+    // --------------------------------
+    private System.Collections.IEnumerator IntroRountine()
+    {
+        ShowIntro();
+        
+        float t = 0f;
+        while (t < introDuration)
+        {
+            // dkip only on tap/click start (not dragging)
+            if (Input.GetMouseButtonDown(0))
+            {
+                break;
+            }
+            if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                break;
+            }
+           
+            t += Time.deltaTime;
+            yield return null;
+        }
+        HideIntro();
+    }
 
+    // --------------------------------
+    // Intro overlay handling
+    // --------------------------------
+    private void EnableControl()
+    {
+        if (dragLaunch != null)
+        {
+            dragLaunch.enabled = true;
+        }
+    }
+
+    private void ShowIntro() 
+    {
+        if (introOverlayPanel != null)
+        {
+            introOverlayPanel.SetActive(true);
+        }
+        DisableControl();
+        
+    }
+
+    private void HideIntro() 
+    {
+        if (introOverlayPanel != null)
+        {
+            introOverlayPanel.SetActive(false);
+        }
+        StartCoroutine(EnableControlNextFrame());
+    }
+
+
+    private System.Collections.IEnumerator EnableControlNextFrame()
+    {
+        yield return null; // wait one frame
+        EnableControl();
+    }
 }
