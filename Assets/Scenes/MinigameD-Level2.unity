@@ -1232,7 +1232,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialVelocity: 15
-  gravity: -2.5
+  initialGravity: -2.5
 --- !u!114 &2119888226
 MonoBehaviour:
   m_ObjectHideFlags: 0
