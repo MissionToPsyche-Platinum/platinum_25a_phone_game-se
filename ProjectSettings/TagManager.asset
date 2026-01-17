@@ -11,6 +11,7 @@ TagManager:
   - BoostRing
   - PenaltyRing
   - JumpRing
+  - ShieldRing
   layers:
   - Default
   - TransparentFX
