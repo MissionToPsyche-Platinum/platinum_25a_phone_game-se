@@ -19,17 +19,18 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
 
     private int[] grid = new int[36];
 
-    private ArrayList wire1;
-    private ArrayList wire2;
-    private ArrayList wire3;
+    private ArrayList wire1 = new ArrayList();
+    private ArrayList wire2 = new ArrayList();
+    private ArrayList wire3 = new ArrayList();
 
     private int[] wire1ends = new int[2];
     private int[] wire2ends = new int[2];
     private int[] wire3ends = new int[2];
 
-    private int lastWirePlaced;
+    private int lastWirePlaced = -1;
+    private int currentWire = -1;
 
-    private Boolean dragging = false;
+    private bool dragging = false;
 
     void Start()
     {
@@ -99,7 +100,6 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
         Collider2D[] colliders = Physics2D.OverlapPointAll(mousePosition);
         if (colliders.Length == 0)
         {
-            Debug.Log("Not hovering over anything");
             return;
         }
         Collider2D current = colliders.GetValue(0) as Collider2D;
@@ -107,7 +107,6 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
         {
             if (minigameBgrid[i].GetComponent<Collider2D>().Equals(current) && i != lastWirePlaced)
             {
-                Debug.Log("Hovering over " + i);
                 if (grid[i] > 0)
                 {
                     if (lastWirePlaced == -1)
@@ -115,72 +114,175 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
                         AddToLine(i, grid[i]);
                         lastWirePlaced = i;
                         dragging = true;
-                        Debug.Log("Started placing wire at " + i);
+                        currentWire = grid[i];
                     }
                     else
                     {
-                        switch (grid[i])
+                        if (currentWire == grid[i])
                         {
-                            case 1:
-                                if (wire1.Contains(lastWirePlaced))
+                            AddToLine(i, grid[i]);
+                            if (lastWirePlaced - i == 1)
+                            { //down
+                                if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 180f)
                                 {
-                                    AddToLine(i, grid[i]);
-                                    lastWirePlaced = i;
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = fullWire;
                                 }
-                                break;
-                            case 2:
-                                if (wire2.Contains(lastWirePlaced))
+                                else if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 90f)
                                 {
-                                    AddToLine(i, grid[i]);
-                                    lastWirePlaced = i;
+                                    minigameBgrid[lastWirePlaced].transform.Rotate(0f, 0f, -90f);
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = bentWire;
                                 }
-                                break;
-                            case 3:
-                                if (wire3.Contains(lastWirePlaced))
+                                else if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 270f)
                                 {
-                                    AddToLine(i, grid[i]);
-                                    lastWirePlaced = i;
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = bentWire;
                                 }
-                                break;
-                            default:
-                                break;
+                            }
+                            else if (lastWirePlaced - i == -1)
+                            {//up
+                                if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 0f)
+                                {
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = fullWire;
+                                }
+                                else if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 90f)
+                                {
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = bentWire;
+                                }
+                                else if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 270f)
+                                {
+                                    minigameBgrid[lastWirePlaced].transform.Rotate(0f, 0f, -90f);
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = bentWire;
+                                }
+                            }
+                            else if (lastWirePlaced - i == 6)
+                            { // left
+                                if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 90f)
+                                {
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = fullWire;
+                                }
+                                else if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 0f)
+                                {
+                                    minigameBgrid[lastWirePlaced].transform.Rotate(0f, 0f, -90f);
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = bentWire;
+                                }
+                                else if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 180f)
+                                {
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = bentWire;
+                                }
+                            }
+                            else if (lastWirePlaced - i == -6)
+                            {// right
+                                if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 270f)
+                                {
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = fullWire;
+                                }
+                                else if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 0f)
+                                {
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = bentWire;
+                                }
+                                else if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 180f)
+                                {
+                                    minigameBgrid[lastWirePlaced].transform.Rotate(0f, 0f, -90f);
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = bentWire;
+                                }
+                            }
+                            lastWirePlaced = i;
+                        }
+                        else
+                        {
+                            ClearLine(currentWire);
                         }
                     }
                 }
                 else if (grid[i] == 0)
                 {
-                    if (lastWirePlaced != -1 && (lastWirePlaced == i +1 || lastWirePlaced == i - 1 || lastWirePlaced == 1 + 6 || lastWirePlaced == i - 6))
+                    if (lastWirePlaced != -1 && (lastWirePlaced == i + 1 || lastWirePlaced == i - 1 || lastWirePlaced == i + 6 || lastWirePlaced == i - 6))
                     {
-                        AddToLine(i, grid[i]);
-                        lastWirePlaced = i;
+                        AddToLine(i, currentWire);
+                        if (grid[lastWirePlaced] == -1)
+                        {
+                            if (lastWirePlaced - i == 1)
+                            { //down
+                                if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 180f)
+                                {
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = fullWire;
+                                }
+                                else if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 90f)
+                                {
+                                    minigameBgrid[lastWirePlaced].transform.Rotate(0f, 0f, -90f);
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = bentWire;
+                                }
+                                else if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 270f)
+                                {
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = bentWire;
+                                }
+                            }
+                            else if (lastWirePlaced - i == -1) 
+                            {//up
+                                if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 0f)
+                                {
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = fullWire;
+                                }
+                                else if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 90f)
+                                {
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = bentWire;
+                                }
+                                else if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 270f)
+                                {
+                                    minigameBgrid[lastWirePlaced].transform.Rotate(0f, 0f, -90f);
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = bentWire;
+                                }
+                            }
+                            else if (lastWirePlaced - i == 6)
+                            { // left
+                                if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 90f)
+                                {
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = fullWire;
+                                }
+                                else if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 0f)
+                                {
+                                    minigameBgrid[lastWirePlaced].transform.Rotate(0f, 0f, -90f);
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = bentWire;
+                                }
+                                else if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 180f)
+                                {
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = bentWire;
+                                }
+                            }
+                            else if (lastWirePlaced - i == -6) 
+                            {// right
+                                if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 270f)
+                                {
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = fullWire;
+                                }
+                                else if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 0f)
+                                {
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = bentWire;
+                                }
+                                else if (minigameBgrid[lastWirePlaced].transform.rotation.eulerAngles.z == 180f)
+                                {
+                                    minigameBgrid[lastWirePlaced].transform.Rotate(0f, 0f, -90f);
+                                    minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = bentWire;
+                                }
+                            }
+                        }
                         minigameBgrid[i].GetComponent<Image>().sprite = halfWire;
                         minigameBgrid[i].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
-                        Debug.Log("Placed wire at " + i);
-                    }
-                    else if (lastWirePlaced == -1)
-                    {
-                        AddToLine(i, grid[i]);
-                        minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = fullWire;
+                        if (lastWirePlaced - i == 1)
+                            minigameBgrid[i].transform.Rotate(0f, 0f, 180f);
+                        else if (lastWirePlaced - i == -1)
+                            minigameBgrid[i].transform.Rotate(0f, 0f, 0f);
+                        else if (lastWirePlaced - i == 6)
+                            minigameBgrid[i].transform.Rotate(0f, 0f, 90f);
+                        else if (lastWirePlaced - i == -6)
+                            minigameBgrid[i].transform.Rotate(0f, 0f, 270f);
+                        grid[i] = -1;
                         lastWirePlaced = i;
-                        minigameBgrid[i].GetComponent<Image>().sprite = halfWire;
-                        minigameBgrid[i].GetComponent<Image>().color = new Color32(255, 255, 255, 255);
                     }
                 }
                 else
                 {
                     //clear line
-                    if (wire1.Contains(i))
-                    {
-                        ClearLine(1);
-                    }
-                    else if (wire2.Contains(i))
-                    {
-                        ClearLine(2);
-                    }
-                    else if (wire3.Contains(i))
-                    {
-                        ClearLine(3);
-                    }
+                    ClearLine(currentWire);
                 }
             }
         }
@@ -191,13 +293,12 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
     {
         if (lastWirePlaced == -1)
             return;
-        if (grid[lastWirePlaced] == -1)
+        if (grid[lastWirePlaced] != -1)
         {
             int wires = 0;
             if (wire1.Contains(wire1ends[1]) && wire1.Contains(wire1ends[0]))
             {
                 wires++;
-                minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = fullWire;
             }
             else
             {
@@ -206,7 +307,6 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
             if (wire2.Contains(wire2ends[1]) && wire2.Contains(wire2ends[0]))
             {
                 wires++;
-                minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = fullWire;
             }
             else
             {
@@ -215,7 +315,6 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
             if (wire3.Contains(wire3ends[1]) && wire3.Contains(wire3ends[0]))
             {
                 wires++;
-                minigameBgrid[lastWirePlaced].GetComponent<Image>().sprite = fullWire;
             }
             else
             {
@@ -227,6 +326,7 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
             }
         }
         lastWirePlaced = -1;
+        currentWire = -1;
         dragging = false;
     }
 
@@ -235,18 +335,28 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
         switch (wireNumber)
         {
             case 1:
-                wire1.Add(index);
+                if (!wire1.Contains(index))
+                    wire1.Add(index);
+                else
+                    ClearLine(1);
                 break;
             case 2:
-                wire2.Add(index);
+                if (!wire2.Contains(index))
+                    wire2.Add(index);
+                else
+                    ClearLine(2);
                 break;
             case 3:
-                wire3.Add(index);
+                if (!wire3.Contains(index))
+                    wire3.Add(index);
+                else
+                    ClearLine(3);
                 break;
             default:
                 break;
         }
-        grid[index] = -1;
+        if (grid[index] == 0)
+            grid[index] = -1;
     }
 
     private void ClearLine(int wireNumber)
@@ -256,21 +366,38 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
             case 1:
                 foreach (int index in wire1)
                 {
-                    grid[index] = 0;
+                    if (grid[index] == -1){
+                        grid[index] = 0;
+                        minigameBgrid[index].GetComponent<Image>().sprite = null;
+                        minigameBgrid[index].GetComponent<Image>().color = new Color32(255, 255, 255, 0);
+                        minigameBgrid[index].transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                    }
                 }
                 wire1.Clear();
                 break;
             case 2:
                 foreach (int index in wire2)
                 {
-                    grid[index] = 0;
+                    if (grid[index] == -1)
+                    {
+                        grid[index] = 0;
+                        minigameBgrid[index].GetComponent<Image>().sprite = null;
+                        minigameBgrid[index].GetComponent<Image>().color = new Color32(255, 255, 255, 0);
+                        minigameBgrid[index].transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                    }
                 }
                 wire2.Clear();
                 break;
             case 3:
                 foreach (int index in wire3)
                 {
-                    grid[index] = 0;
+                    if (grid[index] == -1)
+                    {
+                        grid[index] = 0;
+                        minigameBgrid[index].GetComponent<Image>().sprite = null;
+                        minigameBgrid[index].GetComponent<Image>().color = new Color32(255, 255, 255, 0);
+                        minigameBgrid[index].transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                    }
                 }
                 wire3.Clear();
                 break;
