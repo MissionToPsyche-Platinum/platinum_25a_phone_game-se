@@ -2,6 +2,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManger : MonoBehaviour
 {
@@ -185,6 +186,34 @@ public class GameManger : MonoBehaviour
         skipIntroNextLoad = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    // --------------------------------
+    // Back to Central Hub
+    // --------------------------------
+    public void GoBackToCentralHub()
+    {
+        StartCoroutine(GoBackRountine());
+    } 
+    private IEnumerator GoBackRountine()
+    {
+        // play click
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayButtonClick();
+        }
+
+        // Stop background/gameplay sounds
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StopBackground();
+            AudioManager.Instance.StopAllGameplaySounds();
+        }
+
+        // let the click sound start
+        yield return new WaitForSeconds(0.2f);
+
+        SceneManager.LoadScene("CentralHub");
+    }  
 
     private void Start()
     {

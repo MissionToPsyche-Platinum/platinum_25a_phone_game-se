@@ -541,6 +541,7 @@ Transform:
   - {fileID: 713586242}
   - {fileID: 460712240}
   - {fileID: 1076929023}
+  - {fileID: 466321302}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &250284257
@@ -1807,12 +1808,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 466321293}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 305.59668, y: 170.49525, z: 0.10353365}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -298.54614, y: -64.1169, z: 3.1428332}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 138289493}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &502234344
 GameObject:
@@ -2633,7 +2634,7 @@ MonoBehaviour:
   popupUI: {fileID: 741719198}
   messageText: {fileID: 502234346}
   dragLaunch: {fileID: 1076929025}
-  introOverlayPanel: {fileID: 0}
+  introOverlayPanel: {fileID: 1635890997}
   introDuration: 3
   accuracyWeight: 0.7
   fuelWeight: 0.3
@@ -5656,6 +5657,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 713586243}
+        m_TargetAssemblyTypeName: GameManger, Assembly-CSharp
+        m_MethodName: GoBackToCentralHub
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2075726036
 GameObject:
   m_ObjectHideFlags: 0
@@ -6182,4 +6195,3 @@ SceneRoots:
   - {fileID: 1845658616}
   - {fileID: 38066560}
   - {fileID: 1133838171}
-  - {fileID: 466321302}
