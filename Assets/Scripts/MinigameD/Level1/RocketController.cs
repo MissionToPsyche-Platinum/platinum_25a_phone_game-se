@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class RocketController : MonoBehaviour
 {
-    public float moveSpeed = 10f;
+    public Transform background;
+
+    public float moveSpeed = 7.5f;
     public float maxDragDistance = 200f; // drag sensitivity 
     public float smoothingSpeed = 10f; // higher = snappier, lower = smoother
 
@@ -17,12 +19,20 @@ public class RocketController : MonoBehaviour
 
     void Start()
     {
-        // calculate screen bounds in world units
-        float camDistance = Vector3.Distance(transform.position, Camera.main.transform.position);
-        Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, camDistance));
-        float spriteHalfWidth = GetComponent<SpriteRenderer>().bounds.extents.x;
-        minX = -screenBounds.x + spriteHalfWidth;
-        maxX = screenBounds.x - spriteHalfWidth;
+        if (background != null)
+        {
+            // get background bounds in world units
+            float backgroundHalfWidth = background.GetComponent<SpriteRenderer>().bounds.extents.x;
+            float backgroundCenterX = background.position.x;
+            float playerQuarterWidth = GetComponent<SpriteRenderer>().bounds.extents.x / 2;
+
+            minX = backgroundCenterX - backgroundHalfWidth + playerQuarterWidth;
+            maxX = backgroundCenterX + backgroundHalfWidth - playerQuarterWidth;
+        }
+        else
+        {
+            Debug.LogError("Background not assigned");
+        }
     }
 
     void Update()
