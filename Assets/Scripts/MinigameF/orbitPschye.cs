@@ -8,7 +8,7 @@ public class orbitPschye : MonoBehaviour
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    {
+    {        
         //sets Pschye to orginal coordinates at the start of the game
         obj.Rotate(0, 0, 0);
     }
