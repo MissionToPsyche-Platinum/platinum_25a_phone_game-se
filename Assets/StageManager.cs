@@ -64,7 +64,8 @@ public class StageManager : MonoBehaviour
         }
         else if(stage == 3)
         {
-            
+            pause hello = new pause();
+            hello.setPause();
             endGame.SetActive(true);
             menu.SetActive(false);
 
