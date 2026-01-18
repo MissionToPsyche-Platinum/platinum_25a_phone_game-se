@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 public class StageManager : MonoBehaviour
 {
 
-    
-
+    [SerializeField] pause asteroid;
+    [SerializeField] GameObject endGame;
+    [SerializeField] GameObject menu;
     private int difficulty = 0;
     private float time = 10f;
     private int stage = 0;
@@ -63,7 +64,11 @@ public class StageManager : MonoBehaviour
         }
         else if(stage == 3)
         {
-            SceneManager.LoadScene(SceneName);
+            
+            endGame.SetActive(true);
+            menu.SetActive(false);
+
+            
         }
 
     }
