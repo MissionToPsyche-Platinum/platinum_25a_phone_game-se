@@ -42,29 +42,35 @@ public class collectBlueScience : MonoBehaviour
     private void OnMouseUp()
     {
 
-        releaseClick = Time.time;
-
-        if (clickParticles != null)
+        if (Time.timeScale == 1)
         {
-            clickParticles.transform.position = transform.position;
-            clickParticles.Play();
+            releaseClick = Time.time;
+
+            if (clickParticles != null && Time.timeScale == 1)
+            {
+                clickParticles.transform.position = transform.position;
+                clickParticles.Play();
+
+            }
+
+
+
+
+            if ((releaseClick - firstCLicktime) > 5)
+            {
+                pointsAdded = 10;
+            }
+            else
+            {
+                pointsAdded = releaseClick - firstCLicktime;
+            }
+
+            pt.addPoints(pointsAdded);
+
+            Destroy(gameObject);
+
+            Debug.Log("Destroyed Blue points added: " + pointsAdded);
         }
-
-
-        Destroy(gameObject);
-
-        if ((releaseClick - firstCLicktime) > 5)
-        {
-            pointsAdded = 10;
-        }
-        else
-        {
-            pointsAdded = releaseClick - firstCLicktime;
-        }
-
-        pt.addPoints(pointsAdded);
-
-        Debug.Log("Destroyed Blue points added: " + pointsAdded);
 
     }
 }

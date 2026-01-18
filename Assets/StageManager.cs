@@ -29,7 +29,7 @@ public class StageManager : MonoBehaviour
     void Update()
     {
         stageTime -= Time.deltaTime;
-        Debug.Log("timer = " + stageTime);
+        //Debug.Log("timer = " + stageTime);
 
         if (stageTime <= 0f)        {
             

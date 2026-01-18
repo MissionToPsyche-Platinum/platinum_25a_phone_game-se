@@ -30,22 +30,25 @@ public class collectGreenScience : MonoBehaviour
     //works with mouse and touch screen
     private void OnMouseDown()
     {
-        if(Time.time - lastClickTime <= threshold)
+        if(Time.timeScale == 1)
         {
-            if (clickParticles != null)
+            if (Time.time - lastClickTime <= threshold)
             {
-                clickParticles.transform.position = transform.position;
-                clickParticles.Play();
+                if (clickParticles != null)
+                {
+                    clickParticles.transform.position = transform.position;
+                    clickParticles.Play();
+                }
+                pointsAdded = 2;
+                pt.addPoints(pointsAdded);
+                Destroy(gameObject);
+
+                Debug.Log("Destroyed Green Points added: " + pointsAdded);
+
             }
-            pointsAdded = 2;
-            pt.addPoints(pointsAdded);
-            Destroy(gameObject);
-            
-            Debug.Log("Destroyed Green Points added: " + pointsAdded);
 
+            lastClickTime = Time.time;
         }
-
-        lastClickTime = Time.time;
         
     }
 }

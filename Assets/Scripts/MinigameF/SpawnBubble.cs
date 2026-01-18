@@ -70,8 +70,8 @@ public class SpawnBubble : MonoBehaviour
     public void spawnObj(Vector3 pos)
     {
         int x = UnityEngine.Random.Range(0, 3);        
-        GameObject circ = new GameObject();     
-
+        GameObject circ = new GameObject();
+        Debug.Log(x);
         if (x == 0)
         {
             circ = Instantiate(redCirc, pos, transform.rotation);

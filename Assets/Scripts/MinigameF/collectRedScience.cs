@@ -40,17 +40,20 @@ public class collectPoints : MonoBehaviour
         pointsAdded = 1;
         Debug.Log("Points added: " + pointsAdded);
 
-        if(clickParticles != null)
+        if(Time.timeScale == 1)
         {
-            clickParticles.transform.position = transform.position;
-            clickParticles.Play();
-        }
+            if (clickParticles != null)
+            {
+                clickParticles.transform.position = transform.position;
+                clickParticles.Play();
+            }
 
-        
-        pt.addPoints(pointsAdded);
-               
-        
-        Destroy(gameObject);
+
+            pt.addPoints(pointsAdded);
+
+
+            Destroy(gameObject);
+        }
 
     }    
 
