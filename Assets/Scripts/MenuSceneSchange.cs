@@ -37,4 +37,10 @@ public class MenuSceneSchange : MonoBehaviour
         SceneManager.LoadScene("MinigameF");
 
     }
+
+    public void SwitchToCentralHub()
+    {
+        Debug.Log("Switching to CentralHub");
+        SceneManager.LoadScene("CentralHub");
+    }
 }
