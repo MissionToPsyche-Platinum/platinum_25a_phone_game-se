@@ -13,10 +13,27 @@ public class RocketVelocity : MonoBehaviour
     private bool ascending = true;
     private bool collisionEnabled = true;
 
+    private bool shielded = false; // is the shield ring enabled
+    private float shieldStartTime = 0f;
+    private float shieldDuration = 5f; // effect lasts 5 seconds
+
     void Start()
     {
         currentVelocity = initialVelocity;
         currentGravity = initialGravity;
+    }
+
+    private void Update()
+    {
+        // tracks duration for shield ring
+        if (shielded)
+        {
+            if (Time.time - shieldStartTime >= shieldDuration)
+            {
+                shielded = false;
+                shieldStartTime = 0f;
+            }
+        }
     }
 
     void FixedUpdate()
@@ -78,6 +95,9 @@ public class RocketVelocity : MonoBehaviour
         }
         else if (other.CompareTag("PenaltyRing"))
         {
+            if (shielded)
+                return; // ignore collisions if shield ring is enabled
+
             decreaseVelocity();
 
             other.gameObject.SetActive(false);
@@ -85,6 +105,12 @@ public class RocketVelocity : MonoBehaviour
         else if (other.CompareTag("JumpRing"))
         {
             doubleVelocity();
+
+            other.gameObject.SetActive(false);
+        } else if (other.CompareTag("ShieldRing"))
+        {
+            shielded = true;
+            shieldStartTime = Time.time;
 
             other.gameObject.SetActive(false);
         }
