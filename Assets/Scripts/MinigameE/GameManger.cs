@@ -9,6 +9,7 @@ public class GameManger : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private PopupUI popupUI;
     [SerializeField] private TMP_Text messageText;
+   
 
     [Header("Controls")]
     [SerializeField] private InputDragLaunch dragLaunch;
@@ -16,6 +17,9 @@ public class GameManger : MonoBehaviour
     [Header("Intro Overlay")]
     [SerializeField] private GameObject introOverlayPanel;
     [SerializeField] private float introDuration = 3f;
+
+    [Header ("Exit Confirmation")]
+    [SerializeField] private GameObject confirmExitPanel;
 
     //Static flag: lets us skip intro after reset reloads the scene
     private static bool skipIntroNextLoad = false;
@@ -214,6 +218,27 @@ public class GameManger : MonoBehaviour
 
         SceneManager.LoadScene("CentralHub");
     }  
+
+    // --------------------------------
+    // Back Button Confirmation Screen
+    // --------------------------------
+    public void ShowConfirmExit()
+    {
+        if (confirmExitPanel != null)
+        {
+            confirmExitPanel.SetActive(true);
+        }
+    }
+
+    public void HideConfirmExit()
+    {
+        if (confirmExitPanel != null)
+        {
+            confirmExitPanel.SetActive(false);
+        }
+    }
+
+    // --------------------------------
 
     private void Start()
     {
