@@ -17,6 +17,7 @@ public class MinigameBWeightTracking : MonoBehaviour
 
     private bool won = false;
 
+    [SerializeField] private GameObject tutorialPanel;
     [SerializeField] private GameObject winPanel;
 
     // Start is called before the first frame update
@@ -33,7 +34,13 @@ public class MinigameBWeightTracking : MonoBehaviour
         if (!won && goalWeightInt == currentWeightInt)
         {
             winPanel.SetActive(true);
+            winPanel.transform.SetAsLastSibling();
             won = true;
         }
+    }
+
+    public void closeTutorial()
+    {
+        tutorialPanel.SetActive(false);
     }
 }
