@@ -7,6 +7,7 @@ TagManager:
   - Planet
   - Boundary
   - player
+  - Spacecraft
   layers:
   - Default
   - TransparentFX
@@ -16,9 +17,8 @@ TagManager:
   - UI
   - UI on top
   - 
-  - 
   - World
-  - 
+  - Background
   - 
   - 
   - 
