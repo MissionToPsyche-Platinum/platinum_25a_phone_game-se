@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0f8d54c806f19c4ca6eba4f202dab20, type: 3}
   m_Name: NewNPCDialogue
   m_EditorClassIdentifier: 
-  npcName: Colleage 3
+  npcName: Dr. Priya Patel
   npcPortrait: {fileID: -988137707233985536, guid: 688e2a6c28cd4d0e97f64be44e1b4c1f, type: 3}
   dialogueLines:
   - Hello there

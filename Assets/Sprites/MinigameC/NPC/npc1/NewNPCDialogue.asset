@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0f8d54c806f19c4ca6eba4f202dab20, type: 3}
   m_Name: NewNPCDialogue
   m_EditorClassIdentifier: 
-  npcName: Colleage 1
+  npcName: Dr. Sarah Chen
   npcPortrait: {fileID: -7527145504033472756, guid: c49433f6bde89d54dbec5107894a7e09, type: 3}
   dialogueLines:
   - Hello there

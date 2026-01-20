@@ -12,12 +12,18 @@ public class npc : MonoBehaviour, IInteractable
     public Image portraitImage;
 
     private int dialogueIndex;
-    private bool isTyping, isDialogueActive;
+    private bool isTyping;
     private bool playerInRange = false;
+    private float dialogueCooldown = 0.5f; // Cooldown period after dialogue ends
+    private float lastDialogueEndTime = -1f;
+
+    // Static reference to track which NPC currently has active dialogue
+    // This prevents state conflicts when multiple NPCs share the same dialogue panel
+    private static npc currentActiveNPC = null;
 
     public bool CanInteract()
     {
-        return !isDialogueActive;
+        return currentActiveNPC == null;
     }
 
     void Update()
@@ -25,9 +31,15 @@ public class npc : MonoBehaviour, IInteractable
         // Check for interaction input when player is in range
         if (playerInRange && (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space)))
         {
-            if (CanInteract() || isDialogueActive)
+            // If this NPC has active dialogue, advance it
+            if (currentActiveNPC == this)
             {
-                Interact();
+                NextLine();
+            }
+            // If no dialogue is active, try to start one
+            else if (currentActiveNPC == null)
+            {
+                TryStartDialogue();
             }
         }
     }
@@ -38,6 +50,26 @@ public class npc : MonoBehaviour, IInteractable
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
+            // Automatically start dialogue when player collides with NPC
+            TryStartDialogue();
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        // Check if player is still in range
+        if (other.CompareTag("Player"))
+        {
+            playerInRange = true;
+            // Allow retrigger if no dialogue is active and cooldown passed
+            if (currentActiveNPC == null && dialogueData != null)
+            {
+                float timeSinceEnd = Time.time - lastDialogueEndTime;
+                if (timeSinceEnd > dialogueCooldown || lastDialogueEndTime < 0)
+                {
+                    TryStartDialogue();
+                }
+            }
         }
     }
 
@@ -47,38 +79,63 @@ public class npc : MonoBehaviour, IInteractable
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
+
+            // Auto-close dialogue when player moves away from this NPC
+            if (currentActiveNPC == this)
+            {
+                EndDialogueInternal();
+            }
+        }
+    }
+
+    void TryStartDialogue()
+    {
+        // Don't start if any NPC already has active dialogue
+        if (currentActiveNPC != null)
+        {
+            return;
+        }
+
+        if (dialogueData != null)
+        {
+            // Check if enough time has passed since last dialogue ended, or if this is first trigger
+            bool canTrigger = (Time.time - lastDialogueEndTime > dialogueCooldown) || (lastDialogueEndTime < 0);
+            if (canTrigger)
+            {
+                StartDialogue();
+            }
         }
     }
 
     public void Interact()
     {
-        // If no dialogue data or the game is paused and no dialogue is active
-        if (dialogueData == null || (PauseController.IsGamePaused && !isDialogueActive))
+        // If no dialogue data
+        if (dialogueData == null)
         {
             return;
         }
 
-        if (isDialogueActive)
+        // If this NPC has active dialogue, advance it
+        if (currentActiveNPC == this)
         {
-            //NextLine
             NextLine();
         }
-        else
+        // If no dialogue is active, start one
+        else if (currentActiveNPC == null)
         {
-            //StartDialogue
             StartDialogue();
         }
     }
 
     void StartDialogue()
     {
-        isDialogueActive = true;
+        currentActiveNPC = this;
         dialogueIndex = 0;
         nameText.SetText(dialogueData.npcName);
         portraitImage.sprite = dialogueData.npcPortrait;
         dialoguePanel.SetActive(true);
-        PauseController.SetPause(true);
-        //TypeLine
+        // Don't pause the game so player can move and dialogue auto-closes when they walk away
+        // PauseController.SetPause(true);
         StartCoroutine(TypeLine());
     }
 
@@ -93,13 +150,13 @@ public class npc : MonoBehaviour, IInteractable
         }
         else if (++dialogueIndex < dialogueData.dialogueLines.Length)
         {
-            //If another line, type next line
+            // If another line, type next line
             StartCoroutine(TypeLine());
         }
         else
         {
-            //EndDialogue
-            EndDialogue();
+            // End dialogue
+            EndDialogueInternal();
         }
     }
 
@@ -121,12 +178,31 @@ public class npc : MonoBehaviour, IInteractable
         }
     }
 
+    // This is the method called by the close button
+    // It will end dialogue for whichever NPC is currently active
     public void EndDialogue()
     {
+        // If there's an active NPC dialogue, end it
+        if (currentActiveNPC != null)
+        {
+            currentActiveNPC.EndDialogueInternal();
+        }
+    }
+
+    // Internal method that actually ends this NPC's dialogue
+    private void EndDialogueInternal()
+    {
         StopAllCoroutines();
-        isDialogueActive = false;
+        isTyping = false;
         dialogueText.SetText("");
         dialoguePanel.SetActive(false);
-        PauseController.SetPause(false);
+        lastDialogueEndTime = Time.time;
+
+        // Clear the static reference
+        if (currentActiveNPC == this)
+        {
+            currentActiveNPC = null;
+        }
     }
 }
+

@@ -2955,7 +2955,7 @@ GameObject:
   - component: {fileID: 1606649901}
   - component: {fileID: 1606649900}
   m_Layer: 0
-  m_Name: Npc1
+  m_Name: Dr. Sarah Chen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2975,7 +2975,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueData: {fileID: 11400000, guid: 9d0236e39cab50f47a11e5409770edfe, type: 2}
   dialoguePanel: {fileID: 1062080929}
-  dialogueText: {fileID: 1986775573}
+  dialogueText: {fileID: 1630045232}
   nameText: {fileID: 1986775573}
   portraitImage: {fileID: 1274372865}
 --- !u!61 &1606649901
@@ -3008,7 +3008,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -18890,8 +18890,8 @@ GameObject:
   - component: {fileID: 2051811878}
   - component: {fileID: 2007203228}
   m_Layer: 0
-  m_Name: Npc2
-  m_TagString: Player
+  m_Name: Dr. Marcus Rodriguez
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18962,7 +18962,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueData: {fileID: 11400000, guid: 7cac4b62c66e4452832cd84156bf6278, type: 2}
   dialoguePanel: {fileID: 1062080929}
-  dialogueText: {fileID: 1986775573}
+  dialogueText: {fileID: 1630045232}
   nameText: {fileID: 1986775573}
   portraitImage: {fileID: 1274372865}
 --- !u!114 &2012554478
@@ -18979,7 +18979,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueData: {fileID: 11400000, guid: c27912a5745b4dfb927f23c64b0c55a9, type: 2}
   dialoguePanel: {fileID: 1062080929}
-  dialogueText: {fileID: 1986775573}
+  dialogueText: {fileID: 1630045232}
   nameText: {fileID: 1986775573}
   portraitImage: {fileID: 1274372865}
 --- !u!1 &2037771058
@@ -19101,8 +19101,8 @@ GameObject:
   - component: {fileID: 2124890140}
   - component: {fileID: 2143207746}
   m_Layer: 0
-  m_Name: Npc3
-  m_TagString: Player
+  m_Name: Dr. Priya Patel
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19120,8 +19120,8 @@ GameObject:
   - component: {fileID: 2086442148}
   - component: {fileID: 2012554478}
   m_Layer: 0
-  m_Name: Npc4
-  m_TagString: Player
+  m_Name: Dr. James Thompson
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19156,7 +19156,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -19254,7 +19254,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -19279,7 +19279,7 @@ Transform:
   m_GameObject: {fileID: 2047470698}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.91, y: -7.06, z: 0}
+  m_LocalPosition: {x: 13.76, y: 1.1, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19294,7 +19294,7 @@ Transform:
   m_GameObject: {fileID: 2042114611}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.31, y: -7, z: 0}
+  m_LocalPosition: {x: -18.12, y: -8.25, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19482,7 +19482,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -19684,7 +19684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueData: {fileID: 11400000, guid: 44436aa068f6497d8fe92b2dd790bb8f, type: 2}
   dialoguePanel: {fileID: 1062080929}
-  dialogueText: {fileID: 1986775573}
+  dialogueText: {fileID: 1630045232}
   nameText: {fileID: 1986775573}
   portraitImage: {fileID: 1274372865}
 --- !u!4 &2146023306
@@ -19696,7 +19696,7 @@ Transform:
   m_GameObject: {fileID: 2003550277}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.24, y: -6.87, z: 0}
+  m_LocalPosition: {x: -0.37, y: -12.33, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
