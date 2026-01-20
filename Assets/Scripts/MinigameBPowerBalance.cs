@@ -26,6 +26,7 @@ public class MinigameBPowerBalance : MonoBehaviour
     [SerializeField] private MinigameBPowerBalanceButtonToggle RightSourceButtonB;
     [SerializeField] private MinigameBPowerBalanceButtonToggle RightSourceButtonC;
 
+    [SerializeField] private GameObject TutorialScreen;
     [SerializeField] private GameObject WinScreen;
 
     private float LeftSourceValue = 30;
@@ -47,9 +48,9 @@ public class MinigameBPowerBalance : MonoBehaviour
         MiddleSourceNumber.text = MiddleSourceValue.ToString();
         RightSourceNumber.text = RightSourceValue.ToString();
 
-        LeftSinkNumber.text = LeftSinkFinalValue.ToString();
-        MiddleSinkNumber.text = MiddleSinkFinalValue.ToString();
-        RightSinkNumber.text = RightSinkFinalValue.ToString();
+        LeftSinkNumber.text = "A " + LeftSinkFinalValue.ToString();
+        MiddleSinkNumber.text = "B " + MiddleSinkFinalValue.ToString();
+        RightSinkNumber.text = "C " + RightSinkFinalValue.ToString();
     }
 
     // Update is called once per frame
@@ -161,5 +162,10 @@ public class MinigameBPowerBalance : MonoBehaviour
         {
             WinScreen.SetActive(true);
         }
+    }
+
+    public void CloseTutorial()
+    {
+        TutorialScreen.SetActive(false);
     }
 }
