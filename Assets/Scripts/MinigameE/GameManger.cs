@@ -23,6 +23,9 @@ public class GameManger : MonoBehaviour
     [SerializeField] private UnityEngine.UI.Button confirmExitYesButton;
     [SerializeField] private UnityEngine.UI.Button confirmExitNoButton;
 
+    [Header ("Info Panel")]
+    [SerializeField] private GameObject developerInfoPanel;
+
     //Static flag: lets us skip intro after reset reloads the scene
     private static bool skipIntroNextLoad = false;
 
@@ -254,6 +257,25 @@ public class GameManger : MonoBehaviour
     }
 
     // --------------------------------
+    // Developer Info Panel
+    // --------------------------------
+    public void ShowDeveloperInfo()
+    {
+        AudioManager.Instance.PlayButtonClick();
+        if (developerInfoPanel != null)
+        {
+            developerInfoPanel.SetActive(true);
+        }
+    }
+
+    public void HideDeveloperInfo()
+    {
+        AudioManager.Instance.PlayButtonClick();
+        if (developerInfoPanel != null)
+        {
+            developerInfoPanel.SetActive(false);
+        }
+    }
 
     private void Start()
     {
