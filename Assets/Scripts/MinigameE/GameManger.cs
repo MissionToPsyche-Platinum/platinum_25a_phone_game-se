@@ -18,8 +18,10 @@ public class GameManger : MonoBehaviour
     [SerializeField] private GameObject introOverlayPanel;
     [SerializeField] private float introDuration = 3f;
 
-    [Header ("Exit Confirmation")]
+    [Header ("Confirm Exit Modal")]
     [SerializeField] private GameObject confirmExitPanel;
+    [SerializeField] private UnityEngine.UI.Button confirmExitYesButton;
+    [SerializeField] private UnityEngine.UI.Button confirmExitNoButton;
 
     //Static flag: lets us skip intro after reset reloads the scene
     private static bool skipIntroNextLoad = false;
@@ -224,6 +226,7 @@ public class GameManger : MonoBehaviour
     // --------------------------------
     public void ShowConfirmExit()
     {
+        AudioManager.Instance.PlayButtonClick();
         if (confirmExitPanel != null)
         {
             confirmExitPanel.SetActive(true);
@@ -236,6 +239,18 @@ public class GameManger : MonoBehaviour
         {
             confirmExitPanel.SetActive(false);
         }
+    }
+
+    public void ConfirmExitYes()
+    {
+        HideConfirmExit();
+        GoBackToCentralHub();
+    }
+
+    public void ConfirmExitNo()
+    {
+        AudioManager.Instance.PlayButtonClick();
+        HideConfirmExit();
     }
 
     // --------------------------------

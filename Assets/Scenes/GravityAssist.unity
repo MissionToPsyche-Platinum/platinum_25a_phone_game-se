@@ -1071,7 +1071,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 359882311}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 713586243}
+        m_TargetAssemblyTypeName: GameManger, Assembly-CSharp
+        m_MethodName: ConfirmExitYes
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &359882311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2973,6 +2985,8 @@ MonoBehaviour:
   introOverlayPanel: {fileID: 1635890997}
   introDuration: 3
   confirmExitPanel: {fileID: 1196882190}
+  confirmExitYesButton: {fileID: 359882310}
+  confirmExitNoButton: {fileID: 1576770651}
   accuracyWeight: 0.7
   fuelWeight: 0.3
   maxOrbitError: 5
@@ -5218,7 +5232,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1576770652}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 713586243}
+        m_TargetAssemblyTypeName: GameManger, Assembly-CSharp
+        m_MethodName: ConfirmExitNo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1576770652
 MonoBehaviour:
   m_ObjectHideFlags: 0
