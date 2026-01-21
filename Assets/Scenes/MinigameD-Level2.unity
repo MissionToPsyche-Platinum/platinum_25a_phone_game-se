@@ -780,6 +780,7 @@ MonoBehaviour:
   penaltyPrefab: {fileID: 1111596236}
   tilePrefab: {fileID: 1202132265}
   numberOfTiles: 45
+  difficulty: 2
 --- !u!4 &982676543
 Transform:
   m_ObjectHideFlags: 0
@@ -1352,7 +1353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e20b6e15ddb824a946b7707355b82f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialVelocity: 15
+  initialVelocity: 12.5
   initialGravity: -2.5
 --- !u!114 &2119888226
 MonoBehaviour:
