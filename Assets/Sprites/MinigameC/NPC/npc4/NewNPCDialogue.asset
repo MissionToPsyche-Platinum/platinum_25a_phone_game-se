@@ -15,8 +15,9 @@ MonoBehaviour:
   npcName: Dr. James Thompson
   npcPortrait: {fileID: 230432114434957312, guid: e0ef18dd0fff485cb2dc302f83842fb3, type: 3}
   dialogueLines:
-  - Hello there
-  - 'What information would you need? '
+  - Systems Integration Review verifies the combined system works together.
+  - In January 2021 the integration review was completed.
+  - KDP-D approval closes Phase C.
   autoProgressLines: 0100
   autoProgressDelay: 1.5
   typingSpeed: 0.05

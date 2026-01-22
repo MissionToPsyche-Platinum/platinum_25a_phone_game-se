@@ -15,8 +15,9 @@ MonoBehaviour:
   npcName: Dr. Sarah Chen
   npcPortrait: {fileID: -7527145504033472756, guid: c49433f6bde89d54dbec5107894a7e09, type: 3}
   dialogueLines:
-  - Hello there
-  - 'What information would you need? '
+  - Phase C focuses on final design and building the spacecraft instruments.
+  - The instrument set includes the magnetometer, multispectral imager, and gamma ray and neutron spectrometer.
+  - Talk to the team to complete each assembly step.
   autoProgressLines: 0100
   autoProgressDelay: 1.5
   typingSpeed: 0.05

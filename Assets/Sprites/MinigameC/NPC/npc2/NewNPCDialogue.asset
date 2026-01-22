@@ -15,8 +15,9 @@ MonoBehaviour:
   npcName: Dr. Marcus Rodriguez
   npcPortrait: {fileID: -4139792667531712512, guid: b623dcbcad524122959049064ae62f8f, type: 3}
   dialogueLines:
-  - Hello there
-  - 'What information would you need? '
+  - The spacecraft bus is the main structure that holds subsystems and instruments.
+  - By May 2020 the bus was completed.
+  - Finish the bus step before the design review.
   autoProgressLines: 0100
   autoProgressDelay: 1.5
   typingSpeed: 0.05

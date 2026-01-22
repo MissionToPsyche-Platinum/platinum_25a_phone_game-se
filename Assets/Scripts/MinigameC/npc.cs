@@ -13,6 +13,7 @@ public class npc : MonoBehaviour, IInteractable
 
     private int dialogueIndex;
     private bool isTyping;
+    private string[] activeDialogueLines;
     private bool playerInRange = false;
     private float dialogueCooldown = 0.5f; // Cooldown period after dialogue ends
     private float lastDialogueEndTime = -1f;
@@ -129,6 +130,11 @@ public class npc : MonoBehaviour, IInteractable
 
     void StartDialogue()
     {
+        if (dialogueData == null)
+        {
+            return;
+        }
+
         currentActiveNPC = this;
         dialogueIndex = 0;
         nameText.SetText(dialogueData.npcName);
@@ -136,6 +142,12 @@ public class npc : MonoBehaviour, IInteractable
         dialoguePanel.SetActive(true);
         // Don't pause the game so player can move and dialogue auto-closes when they walk away
         // PauseController.SetPause(true);
+        activeDialogueLines = ResolveDialogueLines();
+        if (activeDialogueLines == null || activeDialogueLines.Length == 0)
+        {
+            EndDialogueInternal();
+            return;
+        }
         StartCoroutine(TypeLine());
     }
 
@@ -145,10 +157,10 @@ public class npc : MonoBehaviour, IInteractable
         {
             // Skip typing animation and show the full line
             StopAllCoroutines();
-            dialogueText.SetText(dialogueData.dialogueLines[dialogueIndex]);
+            dialogueText.SetText(activeDialogueLines[dialogueIndex]);
             isTyping = false;
         }
-        else if (++dialogueIndex < dialogueData.dialogueLines.Length)
+        else if (++dialogueIndex < activeDialogueLines.Length)
         {
             // If another line, type next line
             StartCoroutine(TypeLine());
@@ -164,14 +176,14 @@ public class npc : MonoBehaviour, IInteractable
     {
         isTyping = true;
         dialogueText.SetText("");
-        foreach (char letter in dialogueData.dialogueLines[dialogueIndex])
+        foreach (char letter in activeDialogueLines[dialogueIndex])
         {
             dialogueText.text += letter;
             yield return new WaitForSeconds(dialogueData.typingSpeed);
         }
         isTyping = false;
 
-        if (dialogueData.autoProgressLines.Length > dialogueIndex && dialogueData.autoProgressLines[dialogueIndex])
+        if (ShouldAutoProgressLine(dialogueIndex))
         {
             yield return new WaitForSeconds(dialogueData.autoProgressDelay);
             NextLine();
@@ -203,6 +215,55 @@ public class npc : MonoBehaviour, IInteractable
         {
             currentActiveNPC = null;
         }
+
+        if (dialogueData != null)
+        {
+            PhaseCAssemblyController controller = PhaseCAssemblyController.Instance;
+            if (controller != null)
+            {
+                controller.NotifyDialogueClosed(dialogueData.npcName);
+            }
+        }
+    }
+
+    public void RefreshDialogueLines()
+    {
+        if (dialogueData == null)
+        {
+            return;
+        }
+
+        activeDialogueLines = ResolveDialogueLines();
+    }
+
+    private string[] ResolveDialogueLines()
+    {
+        if (dialogueData == null)
+        {
+            return null;
+        }
+
+        PhaseCAssemblyController controller = PhaseCAssemblyController.Instance;
+        if (controller != null)
+        {
+            string[] phaseCLines = controller.GetDialogueLinesForNpc(dialogueData.npcName);
+            if (phaseCLines != null && phaseCLines.Length > 0)
+            {
+                return phaseCLines;
+            }
+        }
+
+        return dialogueData.dialogueLines;
+    }
+
+    private bool ShouldAutoProgressLine(int index)
+    {
+        if (dialogueData == null || dialogueData.autoProgressLines == null)
+        {
+            return false;
+        }
+
+        return dialogueData.autoProgressLines.Length > index && dialogueData.autoProgressLines[index];
     }
 }
 

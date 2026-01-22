@@ -15,8 +15,9 @@ MonoBehaviour:
   npcName: Dr. Priya Patel
   npcPortrait: {fileID: -988137707233985536, guid: 688e2a6c28cd4d0e97f64be44e1b4c1f, type: 3}
   dialogueLines:
-  - Hello there
-  - 'What information would you need? '
+  - Critical Design Review checks the final design before integration.
+  - In May 2020 the team completed the CDR.
+  - After review we move toward integration readiness.
   autoProgressLines: 0100
   autoProgressDelay: 1.5
   typingSpeed: 0.05
