@@ -9,6 +9,7 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
 {
     [SerializeField] private GameObject[] minigameBgrid;
     [SerializeField] private GameObject endScreen;
+    [SerializeField] private GameObject tutorialScreen;
 
     [SerializeField] private Sprite halfWire;
     [SerializeField] private Sprite fullWire;
@@ -404,5 +405,10 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void CloseTutorial()
+    {
+        tutorialScreen.SetActive(false);
     }
 }
