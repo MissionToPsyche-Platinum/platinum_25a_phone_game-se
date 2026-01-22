@@ -4,8 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - BoostRing
-  - PenaltyRing
   - Planet
   - Boundary
   - player
@@ -18,7 +16,6 @@ TagManager:
   - Water
   - UI
   - UI on top
-  - 
   - 
   - World
   - Background
