@@ -7,6 +7,7 @@ public class RingGenerator : MonoBehaviour
     public GameObject boostPrefab; 
     public GameObject penaltyPrefab;
     public GameObject shieldPrefab;
+    public GameObject jumpPrefab;
 
     public GameObject tilePrefab; 
     public int numberOfTiles = 5;
@@ -56,6 +57,11 @@ public class RingGenerator : MonoBehaviour
                 if (randomChance <= 0.05f) // 5% chance of spawning a shield ring
                 {
                     spawnRing(tilePosition, shieldPrefab);
+                }
+
+                if (randomChance <= 0.025f) // 2.5% chance of spawning a jump ring
+                {
+                    spawnRing(tilePosition, jumpPrefab);
                 }
 
                 // spawn 1 boost ring per tile
