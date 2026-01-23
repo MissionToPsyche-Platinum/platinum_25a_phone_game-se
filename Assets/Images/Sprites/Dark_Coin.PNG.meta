@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: f316fd68c484d3742a7d21a066476984
+guid: a3813d5c61e41864a99cff850223c171
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1374350820846668936
-    second: Continue icon_0
-  - first:
-      213: 7802032588361338594
-    second: Continue icon_1
+      213: -4490348739035034348
+    second: Dark_Coin_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -113,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Continue icon_0
+      name: Dark_Coin_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 0
-        width: 1019
-        height: 1019
+        x: 110
+        y: 110
+        width: 1419
+        height: 1419
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,29 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 873faa6c5335dece0800000000000000
-      internalID: -1374350820846668936
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Continue icon_1
-      rect:
-        serializedVersion: 2
-        x: 394
-        y: 577
-        width: 263
-        height: 309
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2ee8c4b5d43664c60800000000000000
-      internalID: 7802032588361338594
+      spriteID: 41d813cdc931fa1c0800000000000000
+      internalID: -4490348739035034348
       vertices: []
       indices: 
       edges: []
@@ -164,9 +140,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Continue icon_0: -1374350820846668936
-      Continue icon_1: 7802032588361338594
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

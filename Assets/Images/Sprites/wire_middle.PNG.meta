@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: f316fd68c484d3742a7d21a066476984
+guid: e447a6144b3b4ce49b8f3fbafa2fcdbf
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1374350820846668936
-    second: Continue icon_0
-  - first:
-      213: 7802032588361338594
-    second: Continue icon_1
+      213: -6114852892434693154
+    second: wire_middle_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -113,43 +110,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Continue icon_0
+      name: wire_middle_0
       rect:
         serializedVersion: 2
-        x: 3
+        x: 0
         y: 0
-        width: 1019
-        height: 1019
+        width: 1640
+        height: 1640
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 873faa6c5335dece0800000000000000
-      internalID: -1374350820846668936
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Continue icon_1
-      rect:
-        serializedVersion: 2
-        x: 394
-        y: 577
-        width: 263
-        height: 309
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2ee8c4b5d43664c60800000000000000
-      internalID: 7802032588361338594
+      spriteID: ed309a431bda32ba0800000000000000
+      internalID: -6114852892434693154
       vertices: []
       indices: 
       edges: []
@@ -157,7 +133,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 616c2c730af41ee41b327f989085ac2d
     internalID: 0
     vertices: []
     indices: 
@@ -165,8 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Continue icon_0: -1374350820846668936
-      Continue icon_1: 7802032588361338594
+      wire_middle_0: -6114852892434693154
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
