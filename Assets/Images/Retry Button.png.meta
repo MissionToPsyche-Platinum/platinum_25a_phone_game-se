@@ -188,7 +188,10 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Retry Button_0: -4522775963711636329
+      Retry Button_1: -2821087793079354556
+      Retry Button_2: -4076717483934083680
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

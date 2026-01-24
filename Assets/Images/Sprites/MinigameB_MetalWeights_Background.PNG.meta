@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: f316fd68c484d3742a7d21a066476984
+guid: 5e0272ac2c3c29346afe6132b7f772a1
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1374350820846668936
-    second: Continue icon_0
-  - first:
-      213: 7802032588361338594
-    second: Continue icon_1
+      213: -167285282334508633
+    second: MinigameB_MetalWeights_Background_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -113,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Continue icon_0
+      name: MinigameB_MetalWeights_Background_0
       rect:
         serializedVersion: 2
-        x: 3
+        x: 0
         y: 0
-        width: 1019
-        height: 1019
+        width: 2360
+        height: 1640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -127,29 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 873faa6c5335dece0800000000000000
-      internalID: -1374350820846668936
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Continue icon_1
-      rect:
-        serializedVersion: 2
-        x: 394
-        y: 577
-        width: 263
-        height: 309
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2ee8c4b5d43664c60800000000000000
-      internalID: 7802032588361338594
+      spriteID: 7a9fc4a0ceeadadf0800000000000000
+      internalID: -167285282334508633
       vertices: []
       indices: 
       edges: []
@@ -164,9 +140,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Continue icon_0: -1374350820846668936
-      Continue icon_1: 7802032588361338594
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
