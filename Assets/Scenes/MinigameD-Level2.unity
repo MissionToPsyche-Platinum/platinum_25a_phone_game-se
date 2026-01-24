@@ -1254,7 +1254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetHeight: 875
-  sceneToLoad: MinigameD-Level2
+  sceneToLoad: MinigameD-Level3
   transitionManager: {fileID: 1628373}
 --- !u!1 &2137218739
 GameObject:

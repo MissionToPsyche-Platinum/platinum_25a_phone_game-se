@@ -6,14 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MinigameD-Level1.unity
-    guid: 8ba86c7c01b10044b9c41d3bcdce6e37
-  - enabled: 1
     path: Assets/Scenes/CentralHub.unity
     guid: 8f3253af094a2a44092c9116a3755814
   - enabled: 1
+    path: Assets/Scenes/MinigameD-Level1.unity
+    guid: 8ba86c7c01b10044b9c41d3bcdce6e37
+  - enabled: 1
     path: Assets/Scenes/MinigameD-Level2.unity
-    guid: 267e712c55e1af246b44488de16cf3a4
+    guid: 927c29cd6874fe542a07055516e23117
+  - enabled: 1
+    path: Assets/Scenes/MinigameD-Level3.unity
+    guid: 2dcd6d715a3140b4189ee86446c1903f
   - enabled: 1
     path: Assets/Scenes/MinigameD-Game-Lost.unity
     guid: 4843230532822474c8eaf71a52034e61
