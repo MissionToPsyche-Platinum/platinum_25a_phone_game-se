@@ -33,7 +33,7 @@ public class MenuSceneSchange : MonoBehaviour
 
     public void SwitchToSceneMinigameFstart()
     {
-        Debug.Log("Switching to Minigame F start screne");
+        Debug.Log("Switching to Minigame F start screen");
         SceneManager.LoadScene("MinigameF_Start");
 
     }

@@ -206,7 +206,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 107724807}
         m_TargetAssemblyTypeName: MenuSceneSchange, Assembly-CSharp
-        m_MethodName: SwitchToCentralHub
+        m_MethodName: SwitchToSceneMinigameFstart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
