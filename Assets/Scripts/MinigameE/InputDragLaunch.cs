@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using NUnit.Framework;
 
 public class InputDragLaunch : MonoBehaviour
 {
@@ -52,6 +53,17 @@ public class InputDragLaunch : MonoBehaviour
 
     void Update()
     {
+   
+        if (IsAnyModalActive())
+        {
+                 Debug.Log("model is open");
+            dragging = false;
+            if (powerBarFill) powerBarFill.fillAmount = 0f;
+            if (powerBarRoot) powerBarRoot.SetActive(false);
+            if (preview) preview.Clear();
+            AudioManager.Instance.StopStretch();
+            return;
+        }
         HandleMouseInput();
         HandleTouchInput();
     }
@@ -59,6 +71,22 @@ public class InputDragLaunch : MonoBehaviour
 
     private void HandleMouseInput()
     {
+        // remove this in sprint 6
+        if(IsAnyModalActive())
+        {
+            if(dragging)
+            {
+                // Cancel drag if modal becomes active
+                dragging = false;
+                preview.Clear();
+                if (powerBarFill) powerBarFill.fillAmount = 0f;
+                if (powerBarRoot) powerBarRoot.SetActive(false);
+                AudioManager.Instance.StopStretch();
+            }
+        }
+        // till this point
+
+
         // Block game input if clicking or dragging on UI
         if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
 
@@ -105,6 +133,20 @@ public class InputDragLaunch : MonoBehaviour
     //------------------------------
     private void HandleTouchInput()
     {
+        // remove this in sprint 6
+                if(IsAnyModalActive())
+        {
+            if(dragging)
+            {
+                // Cancel drag if modal becomes active
+                dragging = false;
+                preview.Clear();
+                if (powerBarFill) powerBarFill.fillAmount = 0f;
+                if (powerBarRoot) powerBarRoot.SetActive(false);
+                AudioManager.Instance.StopStretch();
+            }
+        }
+        // this this point
         // simple touch support
         if (Input.touchCount > 0)
         {
@@ -202,6 +244,25 @@ public class InputDragLaunch : MonoBehaviour
     public float GetLastLaunchPower()
     {
         return lastLaunchPower;
+    }
+
+
+    
+    // remove this in sprint 6
+    [Header("Modal Blocking")]
+    [SerializeField] private GameObject popupPanel;
+    [SerializeField] private GameObject educationPopupPanel;
+    [SerializeField] private GameObject introOverlayPanel;
+    [SerializeField] private GameObject confirmationPanel;
+    [SerializeField] private GameObject developmentInfoPanel;
+
+    private bool IsAnyModalActive()
+    {
+        return (popupPanel != null && popupPanel.activeInHierarchy) 
+        || (educationPopupPanel != null && educationPopupPanel.activeInHierarchy) 
+        || (introOverlayPanel != null && introOverlayPanel.activeInHierarchy) 
+        || (confirmationPanel != null && confirmationPanel.activeInHierarchy)
+        || (developmentInfoPanel != null && developmentInfoPanel.activeInHierarchy);
     }
 
 
