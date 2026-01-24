@@ -640,7 +640,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3577485275521527324, guid: 38eb6640b299d0843b9d1a98e3fc8f66, type: 3}
+  m_Sprite: {fileID: 3577485275521527324, guid: 8d8655dc51b65064a9b6cff2f6920c7c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2102,7 +2102,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 947454359}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -2345,7 +2345,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4423791112337925252, guid: 54101bfbb18f77d4e8ad96ce5d572ecf, type: 3}
+  m_Sprite: {fileID: -4423791112337925252, guid: 7ebebf84c33b8e9479d63d080a614e5a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2639,7 +2639,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3577485275521527324, guid: 38eb6640b299d0843b9d1a98e3fc8f66, type: 3}
+  m_Sprite: {fileID: 3577485275521527324, guid: 8d8655dc51b65064a9b6cff2f6920c7c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -8800,7 +8800,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2481487276787759244, guid: 5a719de6a7e2a8e488bdd500e1ac4cf9, type: 3}
+  m_Sprite: {fileID: 2481487276787759244, guid: 4f61f0a1095688e428696816f7d6144e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9035,7 +9035,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3577485275521527324, guid: 38eb6640b299d0843b9d1a98e3fc8f66, type: 3}
+  m_Sprite: {fileID: 3577485275521527324, guid: 8d8655dc51b65064a9b6cff2f6920c7c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -9688,7 +9688,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3577485275521527324, guid: 38eb6640b299d0843b9d1a98e3fc8f66, type: 3}
+  m_Sprite: {fileID: 3577485275521527324, guid: 8d8655dc51b65064a9b6cff2f6920c7c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

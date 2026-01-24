@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 34fb36374a1031747a9e63dbde09cd78
+guid: 1efc0dece832ed748b71206d0d9503ca
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1502974598090458567
-    second: Pschye_0
+      213: 2711229489518314210
+    second: PschyeHeight_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -122,7 +122,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Pschye_0
+      name: PschyeHeight_0
       rect:
         serializedVersion: 2
         x: 0
@@ -136,8 +136,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7c50e911f63abd410800000000000000
-      internalID: 1502974598090458567
+      spriteID: 2e28d432bd830a520800000000000000
+      internalID: 2711229489518314210
       vertices: []
       indices: 
       edges: []

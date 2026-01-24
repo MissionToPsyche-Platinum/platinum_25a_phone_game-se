@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 38eb6640b299d0843b9d1a98e3fc8f66
+guid: 968fcc34f2cab5b41846b5aaa9da5f3c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3577485275521527324
-    second: Solar_0
+      213: -348499273175844454
+    second: Dish_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -122,13 +122,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Solar_0
+      name: Dish_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 256
-        height: 256
+        width: 800
+        height: 600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -136,8 +136,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c1ea6ac57e7c5a130800000000000000
-      internalID: 3577485275521527324
+      spriteID: a993fd9e1c1e92bf0800000000000000
+      internalID: -348499273175844454
       vertices: []
       indices: 
       edges: []
