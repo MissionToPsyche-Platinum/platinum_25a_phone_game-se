@@ -53,10 +53,6 @@ public class StageManager : MonoBehaviour
         {
 
             StartCoroutine(scaleOverTime(7.5f, 7.5f));
-                        
-
-            
-
             
 
         }
@@ -64,7 +60,6 @@ public class StageManager : MonoBehaviour
         {
 
             StartCoroutine(scaleOverTime(7.5f, 10f));
-            
             
 
         }
@@ -90,8 +85,12 @@ public class StageManager : MonoBehaviour
         {
             var t = elapsed / duration;
             transform.localScale = Vector3.Lerp(startScale, endScale, t);
-            rad = (rad + t) + 2;
-            bubble.setRadius(rad);
+            if (rad < scale/2)
+            {
+                rad = (rad + (scale/2 - rad)) * t;
+                bubble.setRadius(rad);
+            }
+            
             elapsed += Time.deltaTime;
             yield return null;
         }
