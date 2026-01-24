@@ -115,7 +115,7 @@ public class SpawnBubble : MonoBehaviour
     public Vector3 generateSpawn()    {
         
         float y = UnityEngine.Random.Range(-2f, 2f);
-        float z = Mathf.Sqrt((radius * radius) - (y * y));
+        float z = 3 + Mathf.Sqrt((radius * radius) - (y * y));
 
         Vector3 vector = new Vector3(0, y, z);
 
