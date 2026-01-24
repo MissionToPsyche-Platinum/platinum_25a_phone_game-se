@@ -392,7 +392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 1202132265}
-  numberOfTiles: 50
+  numberOfTiles: 80
   tileHeight: 0
 --- !u!4 &276450670
 Transform:
@@ -744,7 +744,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressBar: {fileID: 766001044}
   targetObject: {fileID: 2119888224}
-  maxHeight: 875
+  maxHeight: 1445
   minWidth: 0.25
   maxWidth: 5.25
 --- !u!1 &982676541
@@ -781,7 +781,7 @@ MonoBehaviour:
   shieldPrefab: {fileID: 1183894661}
   jumpPrefab: {fileID: 3444789985255705116}
   tilePrefab: {fileID: 1202132265}
-  numberOfTiles: 45
+  numberOfTiles: 75
   difficulty: 2
 --- !u!4 &982676543
 Transform:
@@ -1239,7 +1239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e20b6e15ddb824a946b7707355b82f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialVelocity: 17.5
+  initialVelocity: 18
   initialGravity: -2.5
 --- !u!114 &2119888226
 MonoBehaviour:
@@ -1253,7 +1253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5726ce0c2ce06bb4886ff2c8314650d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetHeight: 875
+  targetHeight: 1445
   sceneToLoad: MinigameD-Level3
   transitionManager: {fileID: 1628373}
 --- !u!1 &2137218739
