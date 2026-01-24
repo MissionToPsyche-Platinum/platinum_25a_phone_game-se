@@ -56,7 +56,10 @@ public class SpawnBubble : MonoBehaviour
 
     }
 
-    
+    public float getRadius()
+    {
+        return this.radius;
+    }
 
     public void setRadius(float radius)
     {
