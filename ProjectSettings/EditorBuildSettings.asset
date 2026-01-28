@@ -18,7 +18,19 @@ EditorBuildSettings:
     path: Assets/Scenes/MinigameD-Level3.unity
     guid: 2dcd6d715a3140b4189ee86446c1903f
   - enabled: 1
-    path: Assets/Scenes/MinigameD-Game-Lost.unity
-    guid: 4843230532822474c8eaf71a52034e61
+    path: Assets/Scenes/GravityAssist.unity
+    guid: 9d2e520ea27108b42b6f28f71ad7c408
+  - enabled: 1
+    path: Assets/Scenes/MinigameA.unity
+    guid: 65dbad7421a212d479c898fd61345eb3
+  - enabled: 1
+    path: Assets/Scenes/MinigameBMetalWeights.unity
+    guid: eb2e77f2622ca084ab3b07001ef3a8ae
+  - enabled: 1
+    path: Assets/Scenes/MinigameBPowerBalance.unity
+    guid: 0d1989185ce1ac54f9a1af2440d88531
+  - enabled: 1
+    path: Assets/Scenes/MinigameD-Tutorial.unity
+    guid: c8333f06237a84140a30f6a23b2a7a9b
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
