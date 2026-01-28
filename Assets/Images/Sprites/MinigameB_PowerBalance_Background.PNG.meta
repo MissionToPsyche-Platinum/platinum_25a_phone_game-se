@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      MinigameB_PowerBalance_Background_0: -5161077052555790954
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
