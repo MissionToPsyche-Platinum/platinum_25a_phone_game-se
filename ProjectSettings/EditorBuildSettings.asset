@@ -4,12 +4,6 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/CentralHub.unity
-    guid: 8f3253af094a2a44092c9116a3755814
-  - enabled: 1
-    path: Assets/Scenes/GravityAssist.unity
-    guid: 9d2e520ea27108b42b6f28f71ad7c408
+  m_Scenes: []
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

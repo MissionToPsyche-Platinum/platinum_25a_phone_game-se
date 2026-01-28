@@ -164,7 +164,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Continue icon_0: -1374350820846668936
+      Continue icon_1: 7802032588361338594
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
