@@ -53,8 +53,10 @@ public class InputDragLaunch : MonoBehaviour
 
     void Update()
     {
-   
-        if (IsAnyModalActive())
+        bool modalActive = IsAnyModalActive();
+        if (inputBlocker) inputBlocker.SetActive(modalActive);
+
+        if (modalActive)
         {
                  Debug.Log("model is open");
             dragging = false;
@@ -255,6 +257,7 @@ public class InputDragLaunch : MonoBehaviour
     [SerializeField] private GameObject introOverlayPanel;
     [SerializeField] private GameObject confirmationPanel;
     [SerializeField] private GameObject developmentInfoPanel;
+    [SerializeField] private GameObject inputBlocker;
 
     private bool IsAnyModalActive()
     {

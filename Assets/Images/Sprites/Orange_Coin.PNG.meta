@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Orange_Coin_0: -8986802193464191479
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
