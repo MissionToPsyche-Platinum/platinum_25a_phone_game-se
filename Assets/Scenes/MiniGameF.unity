@@ -700,6 +700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obj: {fileID: 367890777}
+  speed: -0.25
 --- !u!114 &367890773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1449,6 +1450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obj: {fileID: 649828267}
+  speed: -0.25
 --- !u!114 &649828269
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1480,6 +1482,7 @@ MonoBehaviour:
   endGame: {fileID: 947454359}
   menu: {fileID: 830148231}
   diff: {fileID: 1588473256}
+  speed: {fileID: 649828268}
   SceneName: MiniGameF
   obj: {fileID: 649828267}
   bubble: {fileID: 649828269}
@@ -2052,7 +2055,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &947454360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2100,7 +2103,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 947454359}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}

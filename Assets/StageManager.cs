@@ -9,7 +9,9 @@ public class StageManager : MonoBehaviour
     [SerializeField] pause asteroid;
     [SerializeField] GameObject endGame;
     [SerializeField] GameObject menu;
+
     [SerializeField] spinDiff diff;
+    [SerializeField] orbitPschye speed;
     
     private float time = 10f;
     private int stage = 0;
@@ -55,6 +57,7 @@ public class StageManager : MonoBehaviour
 
             StartCoroutine(scaleOverTime(7.5f, 7.5f));
             diff.setStage(1);
+            speed.setSpeed(-0.5f);
 
         }
         else if (stage == 2)
@@ -62,6 +65,7 @@ public class StageManager : MonoBehaviour
 
             StartCoroutine(scaleOverTime(7.5f, 10f));
             diff.setStage(2);
+            speed.setSpeed(-1f);
             
 
         }
