@@ -5097,7 +5097,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &839457671
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6235,6 +6235,16 @@ MonoBehaviour:
   checkSprite: {fileID: 5744904054898057027, guid: 1119a071fce9aa84882803db8005cca7, type: 3}
   xSprite: {fileID: 5251744956290624300, guid: 1a05655f4536f2246a6371ed7a090945, type: 3}
   tutorial: {fileID: 839457670}
+  labelA1: {fileID: 1216803827}
+  labelA2: {fileID: 1026895620}
+  labelA3: {fileID: 1669331011}
+  labelA4: {fileID: 297506428}
+  labelA5: {fileID: 388783434}
+  labelB1: {fileID: 548390773}
+  labelB2: {fileID: 1432676952}
+  labelB3: {fileID: 798302353}
+  labelB4: {fileID: 937433750}
+  labelB5: {fileID: 1106675970}
 --- !u!1 &1026895618
 GameObject:
   m_ObjectHideFlags: 0
