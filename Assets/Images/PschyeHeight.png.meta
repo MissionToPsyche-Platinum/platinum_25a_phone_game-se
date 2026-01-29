@@ -152,7 +152,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PschyeHeight_0: 2711229489518314210
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

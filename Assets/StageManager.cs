@@ -9,6 +9,7 @@ public class StageManager : MonoBehaviour
     [SerializeField] pause asteroid;
     [SerializeField] GameObject endGame;
     [SerializeField] GameObject menu;
+    [SerializeField] spinDiff diff;
     
     private float time = 10f;
     private int stage = 0;
@@ -53,13 +54,14 @@ public class StageManager : MonoBehaviour
         {
 
             StartCoroutine(scaleOverTime(7.5f, 7.5f));
-            
+            diff.setStage(1);
 
         }
         else if (stage == 2)
         {
 
             StartCoroutine(scaleOverTime(7.5f, 10f));
+            diff.setStage(2);
             
 
         }

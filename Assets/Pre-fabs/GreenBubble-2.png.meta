@@ -152,7 +152,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      GreenBubble-2_0: -1419363347634583554
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

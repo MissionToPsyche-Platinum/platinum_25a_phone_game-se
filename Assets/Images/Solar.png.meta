@@ -152,7 +152,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Solar_0: 3577485275521527324
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

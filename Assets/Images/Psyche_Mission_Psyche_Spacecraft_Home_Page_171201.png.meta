@@ -152,7 +152,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Psyche_Mission_Psyche_Spacecraft_Home_Page_171201_0: 2481487276787759244
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

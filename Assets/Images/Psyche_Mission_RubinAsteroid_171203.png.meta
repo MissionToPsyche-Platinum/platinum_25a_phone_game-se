@@ -152,7 +152,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Psyche_Mission_RubinAsteroid_171203_0: -4423791112337925252
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
