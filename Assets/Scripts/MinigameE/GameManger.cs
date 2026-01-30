@@ -2,15 +2,32 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManger : MonoBehaviour
 {
     [Header("UI References")]
     [SerializeField] private PopupUI popupUI;
     [SerializeField] private TMP_Text messageText;
+   
 
     [Header("Controls")]
     [SerializeField] private InputDragLaunch dragLaunch;
+
+    [Header("Intro Overlay")]
+    [SerializeField] private GameObject introOverlayPanel;
+    [SerializeField] private float introDuration = 3f;
+
+    [Header ("Confirm Exit Modal")]
+    [SerializeField] private GameObject confirmExitPanel;
+    [SerializeField] private UnityEngine.UI.Button confirmExitYesButton;
+    [SerializeField] private UnityEngine.UI.Button confirmExitNoButton;
+
+    [Header ("Info Panel")]
+    [SerializeField] private GameObject developerInfoPanel;
+
+    //Static flag: lets us skip intro after reset reloads the scene
+    private static bool skipIntroNextLoad = false;
 
     private bool gameEnded = false;
 
@@ -174,15 +191,171 @@ public class GameManger : MonoBehaviour
         {
             AudioManager.Instance.StopAllGameplaySounds();
         }
+
+        skipIntroNextLoad = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    // --------------------------------
+    // Back to Central Hub
+    // --------------------------------
+    public void GoBackToCentralHub()
+    {
+        StartCoroutine(GoBackRountine());
+    } 
+    private IEnumerator GoBackRountine()
+    {
+        // play click
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayButtonClick();
+        }
+
+        // Stop background/gameplay sounds
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StopBackground();
+            AudioManager.Instance.StopAllGameplaySounds();
+        }
+
+        // let the click sound start
+        yield return new WaitForSeconds(0.2f);
+
+        SceneManager.LoadScene("CentralHub");
+    }  
+
+    // --------------------------------
+    // Back Button Confirmation Screen
+    // --------------------------------
+    public void ShowConfirmExit()
+    {
+        AudioManager.Instance.PlayButtonClick();
+        if (confirmExitPanel != null)
+        {
+            confirmExitPanel.SetActive(true);
+        }
+    }
+
+    public void HideConfirmExit()
+    {
+        if (confirmExitPanel != null)
+        {
+            confirmExitPanel.SetActive(false);
+        }
+    }
+
+    public void ConfirmExitYes()
+    {
+        HideConfirmExit();
+        GoBackToCentralHub();
+    }
+
+    public void ConfirmExitNo()
+    {
+        AudioManager.Instance.PlayButtonClick();
+        HideConfirmExit();
+    }
+
+    // --------------------------------
+    // Developer Info Panel
+    // --------------------------------
+    public void ShowDeveloperInfo()
+    {
+        AudioManager.Instance.PlayButtonClick();
+        if (developerInfoPanel != null)
+        {
+            developerInfoPanel.SetActive(true);
+        }
+    }
+
+    public void HideDeveloperInfo()
+    {
+        AudioManager.Instance.PlayButtonClick();
+        if (developerInfoPanel != null)
+        {
+            developerInfoPanel.SetActive(false);
+        }
     }
 
     private void Start()
     {
-        // Start bbackground space ambience
+        // Start background space ambience
         AudioManager.Instance.PlayBackground();
+
+        // if we just reset, skip intro one time
+        if (skipIntroNextLoad)
+        {
+            skipIntroNextLoad = false;
+            if(introOverlayPanel != null)
+                introOverlayPanel.SetActive(false);
+            EnableControl();
+            return;
+        }
+        // Normal entry from hub -> show intro
+        StartCoroutine(IntroRountine());
       
     }
 
+    // --------------------------------
+    // Intro Overlay Coroutine 
+    // --------------------------------
+    private System.Collections.IEnumerator IntroRountine()
+    {
+        ShowIntro();
+        
+        float t = 0f;
+        while (t < introDuration)
+        {
+            // dkip only on tap/click start (not dragging)
+            if (Input.GetMouseButtonDown(0))
+            {
+                break;
+            }
+            if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                break;
+            }
+           
+            t += Time.deltaTime;
+            yield return null;
+        }
+        HideIntro();
+    }
 
+    // --------------------------------
+    // Intro overlay handling
+    // --------------------------------
+    private void EnableControl()
+    {
+        if (dragLaunch != null)
+        {
+            dragLaunch.enabled = true;
+        }
+    }
+
+    private void ShowIntro() 
+    {
+        if (introOverlayPanel != null)
+        {
+            introOverlayPanel.SetActive(true);
+        }
+        DisableControl();
+        
+    }
+
+    private void HideIntro() 
+    {
+        if (introOverlayPanel != null)
+        {
+            introOverlayPanel.SetActive(false);
+        }
+        StartCoroutine(EnableControlNextFrame());
+    }
+
+
+    private System.Collections.IEnumerator EnableControlNextFrame()
+    {
+        yield return null; // wait one frame
+        EnableControl();
+    }
 }
