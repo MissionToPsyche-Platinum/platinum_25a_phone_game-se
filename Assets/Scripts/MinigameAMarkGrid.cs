@@ -13,6 +13,11 @@ public class MinigameAMarkGrid : MonoBehaviour
     [SerializeField] private GameObject currentTutorial;
     [SerializeField] private GameObject nextTutorial;
 
+    public void setCheck(bool isCheck)
+    {
+        check = isCheck;
+    }
+
     public void ShowMark()
     {
         if (!isMarked)

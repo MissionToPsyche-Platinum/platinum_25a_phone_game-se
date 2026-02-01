@@ -1815,7 +1815,7 @@ GameObject:
   - component: {fileID: 297506429}
   - component: {fileID: 297506428}
   m_Layer: 0
-  m_Name: Vertical4
+  m_Name: Vertical3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2409,7 +2409,7 @@ GameObject:
   - component: {fileID: 388783435}
   - component: {fileID: 388783434}
   m_Layer: 0
-  m_Name: Vertical5
+  m_Name: Vertical4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3372,7 +3372,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mark: {fileID: 367278056}
   toggle: {fileID: 1388145824}
-  check: 1
+  check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
 --- !u!1 &546896236
@@ -3462,7 +3462,7 @@ GameObject:
   - component: {fileID: 548390774}
   - component: {fileID: 548390773}
   m_Layer: 0
-  m_Name: Horizontal1
+  m_Name: Horizontal0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4687,7 +4687,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mark: {fileID: 2020783414}
   toggle: {fileID: 1388145824}
-  check: 1
+  check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
 --- !u!1 &742041524
@@ -4883,7 +4883,7 @@ GameObject:
   - component: {fileID: 798302354}
   - component: {fileID: 798302353}
   m_Layer: 0
-  m_Name: Horizontal3
+  m_Name: Horizontal2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5596,7 +5596,7 @@ GameObject:
   - component: {fileID: 937433751}
   - component: {fileID: 937433750}
   m_Layer: 0
-  m_Name: Horizontal4
+  m_Name: Horizontal3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6235,16 +6235,18 @@ MonoBehaviour:
   checkSprite: {fileID: 5744904054898057027, guid: 1119a071fce9aa84882803db8005cca7, type: 3}
   xSprite: {fileID: 5251744956290624300, guid: 1a05655f4536f2246a6371ed7a090945, type: 3}
   tutorial: {fileID: 839457670}
-  labelA1: {fileID: 1216803827}
-  labelA2: {fileID: 1026895620}
-  labelA3: {fileID: 1669331011}
-  labelA4: {fileID: 297506428}
-  labelA5: {fileID: 388783434}
-  labelB1: {fileID: 548390773}
-  labelB2: {fileID: 1432676952}
-  labelB3: {fileID: 798302353}
-  labelB4: {fileID: 937433750}
-  labelB5: {fileID: 1106675970}
+  labelA:
+  - {fileID: 1216803827}
+  - {fileID: 1026895620}
+  - {fileID: 1669331011}
+  - {fileID: 297506428}
+  - {fileID: 388783434}
+  labelB:
+  - {fileID: 548390773}
+  - {fileID: 1432676952}
+  - {fileID: 798302353}
+  - {fileID: 937433750}
+  - {fileID: 1106675970}
 --- !u!1 &1026895618
 GameObject:
   m_ObjectHideFlags: 0
@@ -6257,7 +6259,7 @@ GameObject:
   - component: {fileID: 1026895621}
   - component: {fileID: 1026895620}
   m_Layer: 0
-  m_Name: Vertical2
+  m_Name: Vertical1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6968,7 +6970,7 @@ GameObject:
   - component: {fileID: 1106675971}
   - component: {fileID: 1106675970}
   m_Layer: 0
-  m_Name: Horizontal5
+  m_Name: Horizontal4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7365,7 +7367,7 @@ GameObject:
   - component: {fileID: 1216803828}
   - component: {fileID: 1216803827}
   m_Layer: 0
-  m_Name: Vertical1
+  m_Name: Vertical0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8524,7 +8526,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mark: {fileID: 1431105701}
   toggle: {fileID: 1388145824}
-  check: 1
+  check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
 --- !u!1 &1431105701
@@ -8614,7 +8616,7 @@ GameObject:
   - component: {fileID: 1432676953}
   - component: {fileID: 1432676952}
   m_Layer: 0
-  m_Name: Horizontal2
+  m_Name: Horizontal1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9566,7 +9568,7 @@ GameObject:
   - component: {fileID: 1669331012}
   - component: {fileID: 1669331011}
   m_Layer: 0
-  m_Name: Vertical3
+  m_Name: Vertical2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9723,8 +9725,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 190, y: -45}
-  m_SizeDelta: {x: 360, y: -110}
+  m_AnchoredPosition: {x: 190, y: -70}
+  m_SizeDelta: {x: 360, y: -160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1672704945
 MonoBehaviour:
@@ -11154,7 +11156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mark: {fileID: 1086789028}
   toggle: {fileID: 1388145824}
-  check: 1
+  check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
 --- !u!1 &1918757864
@@ -11854,7 +11856,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mark: {fileID: 894207748}
   toggle: {fileID: 1388145824}
-  check: 1
+  check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
 --- !u!1 &2008767342
