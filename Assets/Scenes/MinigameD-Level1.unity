@@ -773,13 +773,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 982676541}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36be3fb9e6ed97749b1b997bb52a1a90, type: 3}
+  m_Script: {fileID: 11500000, guid: e234430cf2cd1bd43aec405dc50ba74e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boostPrefab: {fileID: 1027737883}
   penaltyPrefab: {fileID: 1111596236}
+  shieldPrefab: {fileID: 0}
+  jumpPrefab: {fileID: 0}
   tilePrefab: {fileID: 1202132265}
   numberOfTiles: 45
+  difficulty: 1
 --- !u!4 &982676543
 Transform:
   m_ObjectHideFlags: 0
@@ -1232,7 +1235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialVelocity: 15
-  gravity: -2.5
+  initialGravity: -2.5
 --- !u!114 &2119888226
 MonoBehaviour:
   m_ObjectHideFlags: 0

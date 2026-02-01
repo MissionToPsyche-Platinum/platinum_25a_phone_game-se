@@ -744,7 +744,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressBar: {fileID: 766001044}
   targetObject: {fileID: 2119888224}
-  maxHeight: 1445
+  maxHeight: 875
   minWidth: 0.25
   maxWidth: 5.25
 --- !u!1 &982676541
@@ -972,7 +972,7 @@ GameObject:
   - component: {fileID: 1988241033}
   - component: {fileID: 1988241032}
   m_Layer: 0
-  m_Name: Level2-Background
+  m_Name: Level3-Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1019,12 +1019,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3527837347703713460, guid: d3e44fd7f8d27a44db9454df4f9a9cc1, type: 3}
+  m_Sprite: {fileID: 7236379655553497898, guid: 51cca7f6a7668b24db50788cd7d7c8bc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1080, y: 1920}
+  m_Size: {x: 10.8, y: 19.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1239,7 +1239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e20b6e15ddb824a946b7707355b82f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialVelocity: 18
+  initialVelocity: 17.5
   initialGravity: -2.5
 --- !u!114 &2119888226
 MonoBehaviour:
@@ -1253,7 +1253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5726ce0c2ce06bb4886ff2c8314650d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetHeight: 1445
+  targetHeight: 875
   sceneToLoad: MinigameD-Level3
   transitionManager: {fileID: 1628373}
 --- !u!1 &2137218739
