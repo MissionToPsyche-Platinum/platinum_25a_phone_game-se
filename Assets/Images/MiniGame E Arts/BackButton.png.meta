@@ -524,7 +524,24 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BackButton_0: -2970073484504309273
+      BackButton_1: 2859090124196206043
+      BackButton_10: -3059570037765097985
+      BackButton_11: 1930165463338681574
+      BackButton_12: -7696151648420856665
+      BackButton_13: 3240367614096108708
+      BackButton_14: 1020668370260711524
+      BackButton_15: 452206394019966336
+      BackButton_16: -3433729086622397403
+      BackButton_2: -4887147996159126257
+      BackButton_3: -8336110684063622119
+      BackButton_4: -1935469014880341831
+      BackButton_5: -4406400952531246195
+      BackButton_6: 696633626141976819
+      BackButton_7: 3343490036533245332
+      BackButton_8: 884768639266062388
+      BackButton_9: 2360569173120202473
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

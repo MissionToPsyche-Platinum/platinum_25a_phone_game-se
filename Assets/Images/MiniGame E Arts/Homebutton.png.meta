@@ -428,7 +428,20 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Homebutton_0: 4114779940442759611
+      Homebutton_1: 4149331287722633800
+      Homebutton_10: 7685785152257226794
+      Homebutton_11: 1386029756845574462
+      Homebutton_12: -7506326376586802594
+      Homebutton_2: -5922183964881913621
+      Homebutton_3: -8696317611596787742
+      Homebutton_4: 4116456166365304456
+      Homebutton_5: 8783157219843269800
+      Homebutton_6: 790913260048061451
+      Homebutton_7: 6135331698296884395
+      Homebutton_8: -3188879257369287188
+      Homebutton_9: 1040514198256959897
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

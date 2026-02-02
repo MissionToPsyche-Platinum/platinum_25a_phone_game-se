@@ -476,7 +476,22 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      ResetButton_0: 5243372756566668239
+      ResetButton_1: 2880343884717272659
+      ResetButton_10: -5224602614033249047
+      ResetButton_11: -1054290515809608673
+      ResetButton_12: -4702814935055636897
+      ResetButton_13: -4969343423221934845
+      ResetButton_14: -6622851329729636450
+      ResetButton_2: -3895726437705364145
+      ResetButton_3: 8608253505448841608
+      ResetButton_4: -6892768173967684607
+      ResetButton_5: 3223167989003487110
+      ResetButton_6: -551291131440969054
+      ResetButton_7: -7931568494442321616
+      ResetButton_8: -1792747499274620546
+      ResetButton_9: 8932753691718922646
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

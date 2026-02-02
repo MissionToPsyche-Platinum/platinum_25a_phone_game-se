@@ -1,31 +1,31 @@
 fileFormatVersion: 2
-guid: 52248b75c96ae734588fe5b7e905169d
+guid: c5bea34e7303f7d4aa52eef68a1eb16d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4957278366038313638
-    second: closebutton_0
+      213: -157189447820176801
+    second: RetryButtonforPopup_0
   - first:
-      213: -2070061263285004763
-    second: closebutton_1
+      213: 3618452783049616113
+    second: RetryButtonforPopup_1
   - first:
-      213: -6640336740761618203
-    second: closebutton_2
+      213: -761378208982279793
+    second: RetryButtonforPopup_2
   - first:
-      213: -7964173996442245854
-    second: closebutton_3
+      213: -4196361140476978908
+    second: RetryButtonforPopup_3
   - first:
-      213: -3356284517970000308
-    second: closebutton_4
+      213: 9209423947555620933
+    second: RetryButtonforPopup_4
   - first:
-      213: -4892565298904590606
-    second: closebutton_5
+      213: -3541950068841829917
+    second: RetryButtonforPopup_5
   - first:
-      213: -412435399969817660
-    second: closebutton_6
+      213: -7814337936464888663
+    second: RetryButtonforPopup_6
   - first:
-      213: 4070609967910865813
-    second: closebutton_7
+      213: 5405412142749105453
+    second: RetryButtonforPopup_7
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -131,7 +131,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: closebutton_0
+      name: RetryButtonforPopup_0
       rect:
         serializedVersion: 2
         x: 11
@@ -145,18 +145,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6aa417cb86acbc440800000000000000
-      internalID: 4957278366038313638
+      spriteID: f521d30b70d81ddf0800000000000000
+      internalID: -157189447820176801
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: closebutton_1
+      name: RetryButtonforPopup_1
       rect:
         serializedVersion: 2
-        x: 83
-        y: 735
+        x: 995
+        y: 770
         width: 6
         height: 6
       alignment: 0
@@ -166,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 526d99aaf3aa543e0800000000000000
-      internalID: -2070061263285004763
+      spriteID: 1fa223282a3573230800000000000000
+      internalID: 3618452783049616113
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: closebutton_2
+      name: RetryButtonforPopup_2
       rect:
         serializedVersion: 2
         x: 994
-        y: 736
-        width: 6
-        height: 6
+        y: 752
+        width: 7
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,40 +187,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5e8bde19ae8c8d3a0800000000000000
-      internalID: -6640336740761618203
+      spriteID: f8953e98d8a0f65f0800000000000000
+      internalID: -761378208982279793
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: closebutton_3
+      name: RetryButtonforPopup_3
       rect:
         serializedVersion: 2
-        x: 1041
+        x: 82
         y: 735
-        width: 6
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 22528ac32f1997190800000000000000
-      internalID: -7964173996442245854
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: closebutton_4
-      rect:
-        serializedVersion: 2
-        x: 994
-        y: 728
-        width: 6
+        width: 7
         height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -229,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c46414563051c61d0800000000000000
-      internalID: -3356284517970000308
+      spriteID: 429dd98a6c783c5c0800000000000000
+      internalID: -4196361140476978908
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: closebutton_5
+      name: RetryButtonforPopup_4
       rect:
         serializedVersion: 2
         x: 82
@@ -250,14 +229,56 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2f6936658cd1a1cb0800000000000000
-      internalID: -4892565298904590606
+      spriteID: 548470469427ecf70800000000000000
+      internalID: 9209423947555620933
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: closebutton_6
+      name: RetryButtonforPopup_5
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 198
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e9238ead2778dec0800000000000000
+      internalID: -3541950068841829917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RetryButtonforPopup_6
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 104
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9acb6268c05ed8390800000000000000
+      internalID: -7814337936464888663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RetryButtonforPopup_7
       rect:
         serializedVersion: 2
         x: 1041
@@ -271,29 +292,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4cbb00c503cb64af0800000000000000
-      internalID: -412435399969817660
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: closebutton_7
-      rect:
-        serializedVersion: 2
-        x: 995
-        y: 10
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 59bcd74e236bd7830800000000000000
-      internalID: 4070609967910865813
+      spriteID: d2db42964b1e30b40800000000000000
+      internalID: 5405412142749105453
       vertices: []
       indices: 
       edges: []
@@ -308,15 +308,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      closebutton_0: 4957278366038313638
-      closebutton_1: -2070061263285004763
-      closebutton_2: -6640336740761618203
-      closebutton_3: -7964173996442245854
-      closebutton_4: -3356284517970000308
-      closebutton_5: -4892565298904590606
-      closebutton_6: -412435399969817660
-      closebutton_7: 4070609967910865813
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
