@@ -308,7 +308,15 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      RetryButtonforPopup_0: -157189447820176801
+      RetryButtonforPopup_1: 3618452783049616113
+      RetryButtonforPopup_2: -761378208982279793
+      RetryButtonforPopup_3: -4196361140476978908
+      RetryButtonforPopup_4: 9209423947555620933
+      RetryButtonforPopup_5: -3541950068841829917
+      RetryButtonforPopup_6: -7814337936464888663
+      RetryButtonforPopup_7: 5405412142749105453
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      marsPlanet_0: 8614769219143619750
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
