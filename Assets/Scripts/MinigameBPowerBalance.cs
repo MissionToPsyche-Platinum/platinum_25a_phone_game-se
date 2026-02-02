@@ -26,6 +26,7 @@ public class MinigameBPowerBalance : MonoBehaviour
     [SerializeField] private MinigameBPowerBalanceButtonToggle RightSourceButtonB;
     [SerializeField] private MinigameBPowerBalanceButtonToggle RightSourceButtonC;
 
+    [SerializeField] private GameObject TutorialScreen;
     [SerializeField] private GameObject WinScreen;
 
     private float LeftSourceValue = 30;
@@ -43,13 +44,63 @@ public class MinigameBPowerBalance : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Random.InitState(System.DateTime.Now.Millisecond);
+        LeftSourceValue = Random.Range(5, 16) * 3;
+        MiddleSourceValue = Random.Range(5, 16) * 3;
+        RightSourceValue = Random.Range(5, 16) * 3;
+
+        float totalSource = LeftSourceValue + MiddleSourceValue + RightSourceValue;
+
+        bool[] sourceToSink = new bool[9];
+        for (int i = 0; i < 9; i++)
+        {
+            sourceToSink[i] = Random.value > 0.5f;
+            if (i%3 == 2 && !sourceToSink[i] && !sourceToSink[i - 1])
+            {
+                sourceToSink[i] = true;
+            }
+            if (i/3 == 2 && !sourceToSink[i - 3] && !sourceToSink[i - 6])
+            {
+                sourceToSink[i] = true;
+            }
+        }
+
+        int LeftSourceDivision = 0;
+        int MiddleSourceDivision = 0;
+        int RightSourceDivision = 0;
+        for (int i = 0; i < 9; i++)
+        {
+            if (i%3 == 0 && sourceToSink[i])
+            {
+                LeftSourceDivision += 1;
+            }
+            else if (i % 3 == 1 && sourceToSink[i])
+            {
+                MiddleSourceDivision += 1;
+            }
+            else if (i % 3 == 2 && sourceToSink[i])
+            {
+                RightSourceDivision += 1;
+            }
+        }
+
+        LeftSinkFinalValue = sourceToSink[0] ? LeftSourceValue / LeftSourceDivision : 0;
+        LeftSinkFinalValue += sourceToSink[1] ? MiddleSourceValue / MiddleSourceDivision : 0;
+        LeftSinkFinalValue += sourceToSink[2] ? RightSourceValue / RightSourceDivision : 0;
+        MiddleSinkFinalValue = sourceToSink[3] ? LeftSourceValue / LeftSourceDivision : 0;
+        MiddleSinkFinalValue += sourceToSink[4] ? MiddleSourceValue / MiddleSourceDivision : 0;
+        MiddleSinkFinalValue += sourceToSink[5] ? RightSourceValue / RightSourceDivision : 0;
+        RightSinkFinalValue = sourceToSink[6] ? LeftSourceValue / LeftSourceDivision : 0;
+        RightSinkFinalValue += sourceToSink[7] ? MiddleSourceValue / MiddleSourceDivision : 0;
+        RightSinkFinalValue += sourceToSink[8] ? RightSourceValue / RightSourceDivision : 0;
+
         LeftSourceNumber.text = LeftSourceValue.ToString();
         MiddleSourceNumber.text = MiddleSourceValue.ToString();
         RightSourceNumber.text = RightSourceValue.ToString();
 
-        LeftSinkNumber.text = LeftSinkFinalValue.ToString();
-        MiddleSinkNumber.text = MiddleSinkFinalValue.ToString();
-        RightSinkNumber.text = RightSinkFinalValue.ToString();
+        LeftSinkNumber.text = "A " + LeftSinkFinalValue.ToString();
+        MiddleSinkNumber.text = "B " + MiddleSinkFinalValue.ToString();
+        RightSinkNumber.text = "C " + RightSinkFinalValue.ToString();
     }
 
     // Update is called once per frame
@@ -89,7 +140,7 @@ public class MinigameBPowerBalance : MonoBehaviour
         float middleOutput = 0;
         if (middleOutputs != 0)
         {
-            middleOutput = RightSourceValue / middleOutputs;
+            middleOutput = MiddleSourceValue / middleOutputs;
         }
         int rightOutputs = 0;
         if (RightSourceButtonA.GetToggleState())
@@ -161,5 +212,10 @@ public class MinigameBPowerBalance : MonoBehaviour
         {
             WinScreen.SetActive(true);
         }
+    }
+
+    public void CloseTutorial()
+    {
+        TutorialScreen.SetActive(false);
     }
 }
