@@ -42,6 +42,7 @@ public class MenuSceneSchange : MonoBehaviour
 
     public void SwitchToSceneMinigameE()
     {
+        // Scene Loading for Minigame E
         Debug.Log("Switching to Minigame E");
         SceneManager.LoadScene("GravityAssist");
     }
