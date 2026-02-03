@@ -17,17 +17,7 @@ public class PhaseCOpeningController : MonoBehaviour
     private const string OpeningCanvasName = "PhaseCOpeningCanvas";
     private const string PlayerPrefsOpeningSeen = "PhaseCOpeningSeen";
 
-    // Space / NASA-inspired palette
-    private static readonly Color BackgroundTop = new Color(0.02f, 0.04f, 0.12f, 0.98f);
-    private static readonly Color BackgroundBottom = new Color(0.06f, 0.02f, 0.08f, 0.98f);
-    private static readonly Color PanelBg = new Color(0.07f, 0.09f, 0.16f, 0.94f);
-    private static readonly Color PanelBorder = new Color(0.35f, 0.55f, 0.75f, 0.5f);
-    private static readonly Color AccentGold = new Color(0.89f, 0.75f, 0.35f, 1f);
-    private static readonly Color AccentCyan = new Color(0.45f, 0.72f, 0.88f, 1f);
-    private static readonly Color TextTitle = new Color(0.95f, 0.92f, 0.85f, 1f);
-    private static readonly Color TextBody = new Color(0.88f, 0.88f, 0.9f, 1f);
-    private static readonly Color ButtonBg = new Color(0.15f, 0.35f, 0.55f, 1f);
-    private static readonly Color ButtonAccent = new Color(0.4f, 0.65f, 0.9f, 1f);
+    // Use shared Phase C design tokens
 
     [Tooltip("If true, opening is shown every time the scene loads. If false, only first time (per PlayerPrefs).")]
     [SerializeField] private bool alwaysShowOpening = true;
@@ -146,7 +136,7 @@ public class PhaseCOpeningController : MonoBehaviour
 
         CanvasScaler scaler = openingRoot.AddComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        scaler.referenceResolution = new Vector2(1920, 1080);
+        scaler.referenceResolution = new Vector2(PhaseCUITheme.RefWidth, PhaseCUITheme.RefHeight);
         scaler.matchWidthOrHeight = 0.5f;
 
         openingRoot.AddComponent<GraphicRaycaster>();
@@ -155,7 +145,7 @@ public class PhaseCOpeningController : MonoBehaviour
         GameObject bgObject = new GameObject("OpeningBackground");
         bgObject.transform.SetParent(openingRoot.transform, false);
         Image bgImage = bgObject.AddComponent<Image>();
-        gradientTexture = CreateGradientTexture(4, 256, BackgroundTop, BackgroundBottom);
+        gradientTexture = CreateGradientTexture(4, 256, PhaseCUITheme.BackgroundTop, PhaseCUITheme.BackgroundBottom);
         bgImage.sprite = Sprite.Create(gradientTexture, new Rect(0, 0, gradientTexture.width, gradientTexture.height), new Vector2(0.5f, 0.5f));
         bgImage.type = Image.Type.Simple;
         bgImage.color = Color.white;
@@ -171,10 +161,10 @@ public class PhaseCOpeningController : MonoBehaviour
         badgeObject.transform.SetParent(openingRoot.transform, false);
         TMP_Text badgeText = badgeObject.AddComponent<TextMeshProUGUI>();
         badgeText.text = "NASA PSYCHE MISSION · PHASE C";
-        badgeText.fontSize = 13f;
+        badgeText.fontSize = PhaseCUITheme.FontSizeBadge;
         badgeText.fontStyle = FontStyles.SmallCaps;
         badgeText.alignment = TextAlignmentOptions.Center;
-        badgeText.color = new Color(AccentCyan.r, AccentCyan.g, AccentCyan.b, 0.85f);
+        badgeText.color = PhaseCUITheme.AccentCyanMuted;
 
         RectTransform badgeRect = badgeObject.GetComponent<RectTransform>();
         badgeRect.anchorMin = new Vector2(0.5f, 1f);
@@ -187,7 +177,7 @@ public class PhaseCOpeningController : MonoBehaviour
         GameObject panelBorderObj = new GameObject("PanelBorder");
         panelBorderObj.transform.SetParent(openingRoot.transform, false);
         Image borderBg = panelBorderObj.AddComponent<Image>();
-        borderBg.color = new Color(PanelBorder.r, PanelBorder.g, PanelBorder.b, 0.6f);
+        borderBg.color = new Color(PhaseCUITheme.PanelBorder.r, PhaseCUITheme.PanelBorder.g, PhaseCUITheme.PanelBorder.b, 0.6f);
         RectTransform borderRect = panelBorderObj.GetComponent<RectTransform>();
         borderRect.anchorMin = new Vector2(0.1f, 0.16f);
         borderRect.anchorMax = new Vector2(0.9f, 0.8f);
@@ -198,7 +188,7 @@ public class PhaseCOpeningController : MonoBehaviour
         GameObject panelObject = new GameObject("OpeningPanel");
         panelObject.transform.SetParent(openingRoot.transform, false);
         Image panelImage = panelObject.AddComponent<Image>();
-        panelImage.color = PanelBg;
+        panelImage.color = PhaseCUITheme.PanelBg;
 
         RectTransform panelRect = panelObject.GetComponent<RectTransform>();
         panelRect.anchorMin = new Vector2(0.12f, 0.18f);
@@ -210,24 +200,24 @@ public class PhaseCOpeningController : MonoBehaviour
         GameObject accentBar = new GameObject("AccentBar");
         accentBar.transform.SetParent(panelObject.transform, false);
         Image accentImage = accentBar.AddComponent<Image>();
-        accentImage.color = AccentGold;
+        accentImage.color = PhaseCUITheme.AccentGold;
 
         RectTransform accentRect = accentBar.GetComponent<RectTransform>();
         accentRect.anchorMin = new Vector2(0f, 1f);
         accentRect.anchorMax = new Vector2(1f, 1f);
         accentRect.pivot = new Vector2(0.5f, 1f);
         accentRect.anchoredPosition = Vector2.zero;
-        accentRect.sizeDelta = new Vector2(0f, 5f);
+        accentRect.sizeDelta = new Vector2(0f, PhaseCUITheme.AccentBarHeight);
 
         // Title text - fixed strip below accent, centered, no overlap with body
         GameObject titleObject = new GameObject("OpeningTitle");
         titleObject.transform.SetParent(panelObject.transform, false);
         titleText = titleObject.AddComponent<TextMeshProUGUI>();
         titleText.enableWordWrapping = true;
-        titleText.fontSize = 34f;
+        titleText.fontSize = PhaseCUITheme.FontSizeTitle;
         titleText.fontStyle = FontStyles.Bold;
         titleText.alignment = TextAlignmentOptions.Center;
-        titleText.color = AccentGold;
+        titleText.color = PhaseCUITheme.AccentGold;
         titleText.overflowMode = TextOverflowModes.Overflow;
 
         RectTransform titleRect = titleObject.GetComponent<RectTransform>();
@@ -242,10 +232,10 @@ public class PhaseCOpeningController : MonoBehaviour
         bodyObject.transform.SetParent(panelObject.transform, false);
         bodyText = bodyObject.AddComponent<TextMeshProUGUI>();
         bodyText.enableWordWrapping = true;
-        bodyText.fontSize = 26f;
-        bodyText.lineSpacing = 10f;
+        bodyText.fontSize = PhaseCUITheme.FontSizeBody;
+        bodyText.lineSpacing = PhaseCUITheme.LineSpacingBody;
         bodyText.alignment = TextAlignmentOptions.Center;
-        bodyText.color = TextBody;
+        bodyText.color = PhaseCUITheme.TextBody;
         bodyText.overflowMode = TextOverflowModes.Overflow;
 
         RectTransform bodyRect = bodyObject.GetComponent<RectTransform>();
@@ -253,8 +243,8 @@ public class PhaseCOpeningController : MonoBehaviour
         bodyRect.anchorMax = new Vector2(0.95f, 0.78f);
         bodyRect.pivot = new Vector2(0.5f, 0.5f);
         bodyRect.anchoredPosition = Vector2.zero;
-        bodyRect.offsetMin = new Vector2(32f, 24f);
-        bodyRect.offsetMax = new Vector2(-32f, -24f);
+        bodyRect.offsetMin = new Vector2(PhaseCUITheme.PaddingPanel, PhaseCUITheme.PaddingTight);
+        bodyRect.offsetMax = new Vector2(-PhaseCUITheme.PaddingPanel, -PhaseCUITheme.PaddingTight);
 
         // Progress dots
         progressDots = new List<Image>();
@@ -264,24 +254,23 @@ public class PhaseCOpeningController : MonoBehaviour
         dotsRect.anchorMin = new Vector2(0.5f, 0f);
         dotsRect.anchorMax = new Vector2(0.5f, 0f);
         dotsRect.pivot = new Vector2(0.5f, 0f);
-        dotsRect.anchoredPosition = new Vector2(0f, 78f);
+        dotsRect.anchoredPosition = new Vector2(0f, PhaseCUITheme.PaddingWide);
         int panelCount = panels.Count;
-        float dotSpacing = 28f;
-        dotsRect.sizeDelta = new Vector2(Mathf.Max(120f, (panelCount - 1) * dotSpacing + 20f), 20f);
+        dotsRect.sizeDelta = new Vector2(Mathf.Max(120f, (panelCount - 1) * PhaseCUITheme.DotSpacing + 24f), 24f);
 
         for (int i = 0; i < panelCount; i++)
         {
             GameObject dotObj = new GameObject("Dot" + i);
             dotObj.transform.SetParent(dotsContainer.transform, false);
             Image dotImage = dotObj.AddComponent<Image>();
-            dotImage.color = new Color(0.32f, 0.36f, 0.44f, 0.9f);
+            dotImage.color = PhaseCUITheme.DotInactive;
             RectTransform dotRect = dotObj.GetComponent<RectTransform>();
             dotRect.anchorMin = new Vector2(0.5f, 0.5f);
             dotRect.anchorMax = new Vector2(0.5f, 0.5f);
             dotRect.pivot = new Vector2(0.5f, 0.5f);
-            float startX = -0.5f * (panelCount - 1) * dotSpacing;
-            dotRect.anchoredPosition = new Vector2(startX + i * dotSpacing, 0f);
-            dotRect.sizeDelta = new Vector2(10f, 10f);
+            float startX = -0.5f * (panelCount - 1) * PhaseCUITheme.DotSpacing;
+            dotRect.anchoredPosition = new Vector2(startX + i * PhaseCUITheme.DotSpacing, 0f);
+            dotRect.sizeDelta = new Vector2(PhaseCUITheme.DotSize, PhaseCUITheme.DotSize);
             progressDots.Add(dotImage);
         }
 
@@ -289,35 +278,35 @@ public class PhaseCOpeningController : MonoBehaviour
         GameObject buttonGlow = new GameObject("ButtonGlow");
         buttonGlow.transform.SetParent(panelObject.transform, false);
         Image glowImage = buttonGlow.AddComponent<Image>();
-        glowImage.color = new Color(ButtonAccent.r, ButtonAccent.g, ButtonAccent.b, 0.3f);
+        glowImage.color = PhaseCUITheme.ButtonGlow;
 
         RectTransform glowRect = buttonGlow.GetComponent<RectTransform>();
         glowRect.anchorMin = new Vector2(0.5f, 0f);
         glowRect.anchorMax = new Vector2(0.5f, 0f);
         glowRect.pivot = new Vector2(0.5f, 0f);
         glowRect.anchoredPosition = new Vector2(0f, 32f);
-        glowRect.sizeDelta = new Vector2(296f, 60f);
+        glowRect.sizeDelta = new Vector2(PhaseCUITheme.ButtonWidthMin + 24f, PhaseCUITheme.ButtonHeight + 12f);
 
         GameObject buttonObject = new GameObject("OpeningButton");
         buttonObject.transform.SetParent(panelObject.transform, false);
         continueButton = buttonObject.AddComponent<Button>();
 
         Image buttonImage = buttonObject.AddComponent<Image>();
-        buttonImage.color = ButtonBg;
+        buttonImage.color = PhaseCUITheme.ButtonBg;
 
         RectTransform buttonRect = buttonObject.GetComponent<RectTransform>();
         buttonRect.anchorMin = new Vector2(0.5f, 0f);
         buttonRect.anchorMax = new Vector2(0.5f, 0f);
         buttonRect.pivot = new Vector2(0.5f, 0f);
-        buttonRect.anchoredPosition = new Vector2(0f, 32f);
-        buttonRect.sizeDelta = new Vector2(276f, 50f);
+        buttonRect.anchoredPosition = new Vector2(0f, 36f);
+        buttonRect.sizeDelta = new Vector2(PhaseCUITheme.ButtonWidthMin, PhaseCUITheme.ButtonHeight);
 
         // Button border accent
         GameObject buttonBorder = new GameObject("ButtonBorder");
         buttonBorder.transform.SetParent(buttonObject.transform, false);
         buttonBorder.transform.SetAsFirstSibling();
         Image borderImage = buttonBorder.AddComponent<Image>();
-        borderImage.color = ButtonAccent;
+        borderImage.color = PhaseCUITheme.ButtonAccent;
         RectTransform buttonBorderRect = buttonBorder.GetComponent<RectTransform>();
         buttonBorderRect.anchorMin = Vector2.zero;
         buttonBorderRect.anchorMax = Vector2.one;
@@ -328,7 +317,7 @@ public class PhaseCOpeningController : MonoBehaviour
         labelObject.transform.SetParent(buttonObject.transform, false);
         buttonLabel = labelObject.AddComponent<TextMeshProUGUI>();
         buttonLabel.text = "Continue";
-        buttonLabel.fontSize = 24f;
+        buttonLabel.fontSize = PhaseCUITheme.FontSizeButton;
         buttonLabel.fontStyle = FontStyles.Bold;
         buttonLabel.alignment = TextAlignmentOptions.Center;
         buttonLabel.color = Color.white;
@@ -339,11 +328,11 @@ public class PhaseCOpeningController : MonoBehaviour
         labelRect.offsetMin = Vector2.zero;
         labelRect.offsetMax = Vector2.zero;
 
-        // Button hover/press feedback
+        // Button hover/press feedback (touch-friendly)
         ColorBlock colors = continueButton.colors;
         colors.normalColor = Color.white;
-        colors.highlightedColor = new Color(0.92f, 0.94f, 1f, 1f);
-        colors.pressedColor = new Color(0.85f, 0.88f, 0.95f, 1f);
+        colors.highlightedColor = PhaseCUITheme.ButtonHighlight;
+        colors.pressedColor = PhaseCUITheme.ButtonPressed;
         continueButton.colors = colors;
 
         continueButton.onClick.AddListener(OnContinueClicked);
@@ -364,7 +353,7 @@ public class PhaseCOpeningController : MonoBehaviour
         buttonLabel.text = isLastPanel ? "Begin" : "Continue";
 
         for (int i = 0; i < progressDots.Count; i++)
-            progressDots[i].color = i == index ? AccentGold : new Color(0.3f, 0.35f, 0.45f, 0.8f);
+            progressDots[i].color = i == index ? PhaseCUITheme.AccentGold : PhaseCUITheme.DotInactive;
     }
 
     private void OnContinueClicked()

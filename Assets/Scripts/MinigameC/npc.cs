@@ -11,8 +11,13 @@ public class npc : MonoBehaviour, IInteractable
     public TMP_Text dialogueText, nameText;
     public Image portraitImage;
 
+    [Tooltip("Optional: assign to override. If unset, uses Image on dialoguePanel.")]
+    public Image dialogueBackground;
+
     [Tooltip("Optional: show when this NPC is the current step objective (e.g. icon or '!').")]
     public GameObject objectiveIndicator;
+
+    private static readonly Vector2 DialoguePanelSize = new Vector2(720f, 240f);
 
     private int dialogueIndex;
     private bool isTyping;
@@ -142,6 +147,7 @@ public class npc : MonoBehaviour, IInteractable
         dialogueIndex = 0;
         nameText.SetText(dialogueData.npcName);
         portraitImage.sprite = dialogueData.npcPortrait;
+        ApplyDialoguePanelStyle();
         dialoguePanel.SetActive(true);
         // Don't pause the game so player can move and dialogue auto-closes when they walk away
         // PauseController.SetPause(true);
@@ -263,6 +269,59 @@ public class npc : MonoBehaviour, IInteractable
         }
 
         return dialogueData.dialogueLines;
+    }
+
+    void ApplyDialoguePanelStyle()
+    {
+        if (dialoguePanel == null) return;
+
+        // Panel root: ensure it has a visible size (scene may have 0.8x0.8 = invisible)
+        RectTransform panelRect = dialoguePanel.GetComponent<RectTransform>();
+        if (panelRect != null)
+        {
+            Vector2 size = panelRect.sizeDelta;
+            if (size.x < 100f || size.y < 100f)
+                panelRect.sizeDelta = DialoguePanelSize;
+        }
+
+        // Ensure there is an Image on the panel for the background (create if missing)
+        Image panelImage = dialoguePanel.GetComponent<Image>();
+        if (panelImage == null)
+            panelImage = dialoguePanel.AddComponent<Image>();
+        panelImage.color = PhaseCUITheme.PanelBg;
+        panelImage.enabled = true;
+        panelImage.raycastTarget = true;
+        // Unity UI Image with no sprite still draws solid color; use a white sprite for reliability
+        if (panelImage.sprite == null)
+            panelImage.sprite = CreateSolidSprite();
+
+        // Optional override: use assigned background instead
+        if (dialogueBackground != null)
+        {
+            dialogueBackground.color = PhaseCUITheme.PanelBg;
+            dialogueBackground.enabled = true;
+            dialogueBackground.raycastTarget = true;
+            if (dialogueBackground.sprite == null)
+                dialogueBackground.sprite = CreateSolidSprite();
+        }
+
+        if (dialogueText != null)
+            dialogueText.color = PhaseCUITheme.TextBody;
+        if (nameText != null)
+            nameText.color = PhaseCUITheme.AccentCyan;
+    }
+
+    private static Texture2D _solidWhiteTexture;
+    private static Sprite _solidWhiteSprite;
+
+    private static Sprite CreateSolidSprite()
+    {
+        if (_solidWhiteSprite != null) return _solidWhiteSprite;
+        _solidWhiteTexture = new Texture2D(1, 1);
+        _solidWhiteTexture.SetPixel(0, 0, Color.white);
+        _solidWhiteTexture.Apply();
+        _solidWhiteSprite = Sprite.Create(_solidWhiteTexture, new Rect(0, 0, 1, 1), new Vector2(0.5f, 0.5f));
+        return _solidWhiteSprite;
     }
 
     private bool ShouldAutoProgressLine(int index)
