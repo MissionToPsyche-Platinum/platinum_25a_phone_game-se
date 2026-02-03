@@ -80,7 +80,7 @@ public class RingGenerator : MonoBehaviour
                     spawnRing(tilePosition, shieldPrefab);
                 }
 
-                if (randomChance <= 0.01f) // 1.25% chance of spawning a jump ring
+                if (randomChance <= 0.0125f) // 1.25% chance of spawning a jump ring
                 {
                     spawnRing(tilePosition, jumpPrefab);
                 }
