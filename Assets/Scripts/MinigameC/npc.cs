@@ -11,6 +11,9 @@ public class npc : MonoBehaviour, IInteractable
     public TMP_Text dialogueText, nameText;
     public Image portraitImage;
 
+    [Tooltip("Optional: show when this NPC is the current step objective (e.g. icon or '!').")]
+    public GameObject objectiveIndicator;
+
     private int dialogueIndex;
     private bool isTyping;
     private string[] activeDialogueLines;
@@ -234,6 +237,12 @@ public class npc : MonoBehaviour, IInteractable
         }
 
         activeDialogueLines = ResolveDialogueLines();
+    }
+
+    public void SetIsCurrentObjective(bool isCurrent)
+    {
+        if (objectiveIndicator != null)
+            objectiveIndicator.SetActive(isCurrent);
     }
 
     private string[] ResolveDialogueLines()

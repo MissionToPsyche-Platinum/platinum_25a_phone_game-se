@@ -66,9 +66,10 @@ public class PhaseCAssemblyController : MonoBehaviour
     public StepInfo GetCurrentStepInfo()
     {
         if (steps == null || steps.Count == 0)
-        {
             return StepInfo.Empty;
-        }
+
+        if (currentStepIndex >= steps.Count)
+            return new StepInfo("", "Phase C complete", "", "Thank you for playing.", 0, steps.Count);
 
         int safeIndex = Mathf.Clamp(currentStepIndex, 0, steps.Count - 1);
         PhaseCStep step = steps[safeIndex];
@@ -134,6 +135,25 @@ public class PhaseCAssemblyController : MonoBehaviour
         {
             npcComponent.RefreshDialogueLines();
         }
+
+        UpdateObjectiveIndicators();
+    }
+
+    private void UpdateObjectiveIndicators()
+    {
+        if (npcByName == null || npcByName.Count == 0)
+            return;
+
+        if (steps == null || steps.Count == 0 || currentStepIndex >= steps.Count)
+        {
+            foreach (npc n in npcByName.Values)
+                n.SetIsCurrentObjective(false);
+            return;
+        }
+
+        string completionNpc = steps[currentStepIndex].CompletionNpc;
+        foreach (KeyValuePair<string, npc> kvp in npcByName)
+            kvp.Value.SetIsCurrentObjective(kvp.Key == completionNpc);
     }
 
     private void NotifyStepChanged()
@@ -211,209 +231,194 @@ public class PhaseCAssemblyController : MonoBehaviour
     {
         steps = new List<PhaseCStep>
         {
+            // Step 1: Instrument Build – Dr. Sarah Chen (enthusiastic, science-focused)
             new PhaseCStep(
                 "C1",
                 "Instrument Build",
                 NpcInstruments,
-                "Build and confirm the instrument suite.",
+                "Help Sarah lock in the instrument suite for Psyche.",
                 new Dictionary<string, string[]>
                 {
                     {
                         NpcInstruments,
                         new[]
                         {
-                            "Phase C is final design and building the instruments.",
-                            "Psyche uses a magnetometer, multispectral imager, and gamma ray and neutron spectrometer.",
-                            "Confirm the instruments are built so we can move on."
+                            "Welcome to the instrument team. We're building three science instruments for Psyche: a Magnetometer, a Multispectral Imager, and a Gamma-Ray and Neutron Spectrometer.",
+                            "The Magnetometer will look for evidence of an ancient magnetic field at Psyche. The Multispectral Imager will characterize the surface in visible and near-infrared wavelengths. The Gamma-Ray and Neutron Spectrometer will help us determine the asteroid's elemental composition.",
+                            "Once we've got these locked in, we move on to the bus. Come back when you're ready and we'll close out this step."
                         }
                     },
                     {
                         NpcBus,
                         new[]
                         {
-                            "We cannot finish the spacecraft bus until the instruments are ready.",
-                            "Check in with Dr. Sarah Chen first."
+                            "The bus can't move forward until the instruments are set. Sarah's got that in hand. Go see her when you get a chance; she'll get you up to speed."
                         }
                     },
                     {
                         NpcReview,
                         new[]
                         {
-                            "Critical Design Review comes after the builds.",
-                            "Finish the instrument build step first."
+                            "Critical Design Review comes after we finish the builds. Right now we're still in the instrument phase. Sarah's the one to talk to."
                         }
                     },
                     {
                         NpcIntegration,
                         new[]
                         {
-                            "Systems integration happens after design review.",
-                            "We are not there yet."
+                            "Systems integration is down the road. For now we're focused on getting the instruments right. Sarah would love to walk you through it."
                         }
                     }
                 }),
+            // Step 2: Spacecraft Bus Complete – Dr. Marcus Rodriguez (practical, organized)
             new PhaseCStep(
                 "C2",
                 "Spacecraft Bus Complete",
                 NpcBus,
-                "Confirm the spacecraft bus is completed.",
+                "Help Marcus close out the spacecraft bus.",
                 new Dictionary<string, string[]>
                 {
                     {
                         NpcInstruments,
                         new[]
                         {
-                            "The instruments are ready to mount on the spacecraft bus.",
-                            "Meet Dr. Marcus Rodriguez to complete the bus."
+                            "The instruments are ready to mount. Marcus is wrapping up the bus so we have somewhere to put them. Go see him when you can."
                         }
                     },
                     {
                         NpcBus,
                         new[]
                         {
-                            "By May 2020 the spacecraft bus was completed.",
-                            "The bus is the main body that holds subsystems and instruments.",
-                            "Mark the bus complete to proceed."
+                            "By May 2020 we had the spacecraft bus finished. It's the main structure that holds all the subsystems and science instruments.",
+                            "Once we sign off on the bus, we move to the Critical Design Review. Come back when you're ready and we'll close out this step."
                         }
                     },
                     {
                         NpcReview,
                         new[]
                         {
-                            "After the bus is complete, we hold the Critical Design Review.",
-                            "Finish the bus step before we review."
+                            "We do the Critical Design Review after the bus is done. Marcus is closing that out. Once he's signed off, we're on."
                         }
                     },
                     {
                         NpcIntegration,
                         new[]
                         {
-                            "Integration happens after the design review.",
-                            "Come back after the bus is signed off."
+                            "Integration comes after design review. Right now we need the bus signed off. Marcus is your person for that."
                         }
                     }
                 }),
+            // Step 3: Critical Design Review – Dr. Priya Patel (analytical, calm)
             new PhaseCStep(
                 "C3",
                 "Critical Design Review",
                 NpcReview,
-                "Complete the Critical Design Review.",
+                "Work with Priya to complete the Critical Design Review.",
                 new Dictionary<string, string[]>
                 {
                     {
                         NpcInstruments,
                         new[]
                         {
-                            "With the bus complete, we can move into design review.",
-                            "Visit Dr. Priya Patel for the Critical Design Review."
+                            "With the bus complete, we're ready for design review. Priya runs the CDR. She'll walk you through what we're locking in."
                         }
                     },
                     {
                         NpcBus,
                         new[]
                         {
-                            "Design review verifies the final design before full system integration.",
-                            "Talk to Dr. Priya Patel next."
+                            "The CDR verifies the design before we integrate everything. Priya's got it under control. Go talk to her when you're ready."
                         }
                     },
                     {
                         NpcReview,
                         new[]
                         {
-                            "In May 2020 we completed the Critical Design Review.",
-                            "It verifies the design meets requirements before full integration.",
-                            "We also confirm plans for X-band radio and the laser comm demo.",
-                            "Approve the review to continue."
+                            "In May 2020 we completed the Critical Design Review. It verifies that the design meets every requirement before we move to full system integration.",
+                            "We also locked in plans for X-band telecommunications and technology demonstrations such as laser communications. When you're ready, we'll approve the review and move forward."
                         }
                     },
                     {
                         NpcIntegration,
                         new[]
                         {
-                            "Systems integration review happens after critical design review.",
-                            "Complete the CDR first."
+                            "Systems integration review happens after we pass the CDR. Priya's running the review. Once she gives the nod, we're on to integration."
                         }
                     }
                 }),
+            // Step 4: Systems Integration Review – Dr. James Thompson (collaborative, big picture)
             new PhaseCStep(
                 "C4",
                 "Systems Integration Review",
                 NpcIntegration,
-                "Verify readiness to integrate the full system.",
+                "Work with James to complete the Systems Integration Review.",
                 new Dictionary<string, string[]>
                 {
                     {
                         NpcInstruments,
                         new[]
                         {
-                            "Integration review checks the full system readiness.",
-                            "Meet Dr. James Thompson to complete it."
+                            "We're at the integration review now. James is making sure the whole system is ready to come together. He's the one to see."
                         }
                     },
                     {
                         NpcBus,
                         new[]
                         {
-                            "After CDR we verify the integrated system is ready for assembly and test.",
-                            "Go to Dr. James Thompson for the integration review."
+                            "After the CDR we verify the integrated system is ready for assembly and test. James has the full picture. Go talk to him."
                         }
                     },
                     {
                         NpcReview,
                         new[]
                         {
-                            "The Systems Integration Review happened in January 2021.",
-                            "Finish it to reach the final approval."
+                            "The Systems Integration Review happened in January 2021. James runs it. Once that's done, we're set for final approval."
                         }
                     },
                     {
                         NpcIntegration,
                         new[]
                         {
-                            "In January 2021 we completed the Systems Integration Review.",
-                            "It confirms subsystems can be combined and tested as a whole.",
-                            "Mark the integration review complete."
+                            "In January 2021 we completed the Systems Integration Review. It confirms that all subsystems can be combined and tested as a whole.",
+                            "When you're ready, we'll close out integration. Then it's on to final approval."
                         }
                     }
                 }),
+            // Step 5: Key Decision Point D – Dr. Sarah Chen (closing the loop)
             new PhaseCStep(
                 "C5",
                 "Key Decision Point D",
                 NpcInstruments,
-                "Finalize Phase C with KDP-D approval.",
+                "Finalize Phase C with Sarah and KDP-D approval.",
                 new Dictionary<string, string[]>
                 {
                     {
                         NpcInstruments,
                         new[]
                         {
-                            "Key Decision Point D approves the mission to move forward.",
-                            "With instruments built, bus complete, and reviews done, Phase C wraps up.",
-                            "Confirm KDP-D to finish Phase C."
+                            "Key Decision Point D is NASA's approval to proceed to the next phase. Instruments built, bus complete, reviews passed.",
+                            "When you're ready, we'll close out Phase C together. Two years of design and build, and we're ready for what comes next."
                         }
                     },
                     {
                         NpcBus,
                         new[]
                         {
-                            "We are waiting on KDP-D approval.",
-                            "Check with Dr. Sarah Chen to finalize Phase C."
+                            "We're waiting on KDP-D to wrap Phase C. Sarah's leading the close-out. Go see her when you're ready to finish this chapter."
                         }
                     },
                     {
                         NpcReview,
                         new[]
                         {
-                            "KDP-D is the final approval before the next phase.",
-                            "Talk to Dr. Sarah Chen to close out Phase C."
+                            "KDP-D is the final approval before the next phase. Sarah's handling the sign-off. Talk to her when you're ready to close Phase C."
                         }
                     },
                     {
                         NpcIntegration,
                         new[]
                         {
-                            "Final approval happens after all reviews are complete.",
-                            "Go to Dr. Sarah Chen for KDP-D."
+                            "Final approval happens after all the reviews are in. Sarah's got the last word on Phase C. Go see her when you're ready."
                         }
                     }
                 })

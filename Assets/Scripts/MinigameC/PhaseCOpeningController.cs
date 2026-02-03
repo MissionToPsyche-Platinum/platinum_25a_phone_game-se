@@ -93,11 +93,11 @@ public class PhaseCOpeningController : MonoBehaviour
     private void BuildPanelContent()
     {
         panels.Clear();
-        panels.Add(("Welcome", "You're joining the Psyche mission team.\n\nIn this minigame you experience Phase C: designing and building the spacecraft that will journey to Psyche, a metal asteroid between Mars and Jupiter."));
-        panels.Add(("The Mission", "We're building a spacecraft to explore Psyche.\n\nYour job: talk to the team, collect materials, build instruments, and complete each step from instrument build through Critical Design Review to Phase C approval."));
-        panels.Add(("How to Play", "Move with WASD or arrow keys. Talk to scientists by pressing E or Space when near them.\n\nFollow the guide at the top. Complete each step by speaking to the right team member. Use your inventory (Tab) to gather and use materials."));
+        panels.Add(("Welcome", "You're joining the Psyche mission team.\n\nThis experience follows Phase C (May 2019 to January 2021): the period when the spacecraft was designed and built to journey to Psyche, a metal-rich asteroid in the main belt between Mars and Jupiter."));
+        panels.Add(("The Mission", "We're building a spacecraft to explore Psyche.\n\nYour role: work with the team through the instrument suite, spacecraft bus completion, Critical Design Review (CDR), Systems Integration Review (SIR), and Phase C approval (KDP-D)."));
+        panels.Add(("How to Play", "Move with WASD or arrow keys. Talk to team members by pressing E or Space when near them.\n\nFollow the guide at the top. Complete each step by speaking to the right team member. Use your inventory (Tab) to gather and use materials."));
         panels.Add(("Your Team", "Dr. Sarah Chen - Instrument Lead\nDr. Marcus Rodriguez - Bus Lead\nDr. Priya Patel - Review Lead\nDr. James Thompson - Integration Lead"));
-        panels.Add(("Welcome Aboard", "Let's build something amazing."));
+        panels.Add(("Welcome Aboard", "Let's build something remarkable."));
     }
 
     private void CachePlayerMovement()
@@ -170,7 +170,7 @@ public class PhaseCOpeningController : MonoBehaviour
         GameObject badgeObject = new GameObject("MissionBadge");
         badgeObject.transform.SetParent(openingRoot.transform, false);
         TMP_Text badgeText = badgeObject.AddComponent<TextMeshProUGUI>();
-        badgeText.text = "PSYCHE MISSION · PHASE C";
+        badgeText.text = "NASA PSYCHE MISSION · PHASE C";
         badgeText.fontSize = 13f;
         badgeText.fontStyle = FontStyles.SmallCaps;
         badgeText.alignment = TextAlignmentOptions.Center;
