@@ -6,6 +6,7 @@ public class clickpenalty : MonoBehaviour
 {
 
     [SerializeField] public PointTracker pt;
+    [SerializeField] ParticleSystem clickParticles;
 
     // Start is called before the first frame update
     void Start()
@@ -23,5 +24,18 @@ public class clickpenalty : MonoBehaviour
     {
         int penalty = -2;
         pt.addPoints(penalty);
+
+        if (Time.timeScale == 1)
+        {
+            if (clickParticles != null)
+            {
+                clickParticles.transform.position = transform.position;
+                clickParticles.Play();
+            }
+                   
+
+
+        
+        }
     }
 }
