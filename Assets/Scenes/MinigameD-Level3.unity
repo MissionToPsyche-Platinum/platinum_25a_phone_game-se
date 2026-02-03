@@ -782,7 +782,7 @@ MonoBehaviour:
   jumpPrefab: {fileID: 3444789985255705116}
   tilePrefab: {fileID: 1202132265}
   numberOfTiles: 75
-  difficulty: 2
+  difficulty: 3
 --- !u!4 &982676543
 Transform:
   m_ObjectHideFlags: 0
