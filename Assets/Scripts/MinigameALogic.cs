@@ -25,6 +25,11 @@ public class MinigameALogic : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] labelA; //A1 - B3 //A2 - B2 //A3 - B4 //A4 - B5 //A5 - B1
     [SerializeField] private TextMeshProUGUI[] labelB;
 
+    [SerializeField] private TextMeshProUGUI clues1;
+    [SerializeField] private TextMeshProUGUI clues2;
+    [SerializeField] private TextMeshProUGUI clues3;
+    [SerializeField] private TextMeshProUGUI clues4;
+
     private int[] generateRandomChecks(int total, int max)
     {
         int[] randoms = new int[total];
@@ -87,13 +92,24 @@ public class MinigameALogic : MonoBehaviour
         checks = new int[5];
         Random.InitState(DateTime.Now.Millisecond);
         int max = MinigameAPremises.premises.Count;
+        string[] keys = new string[6];
+        MinigameAPremises.premises.Keys.CopyTo(keys, 0);
         int[] randoms = generateRandomChecks(5, max);
         int scenario = Random.Range(0, 2);
+        
+        //set clues
+        string texttmp = MinigameAPremises.clues[scenario][Random.Range(0,6)];
+        clues1.text = texttmp.Replace("1", keys[randoms[0]]).Replace("2", MinigameAPremises.premises[keys[randoms[0]]][scenario]);
+        texttmp = MinigameAPremises.clues[scenario][Random.Range(0, 6)];
+        clues2.text = texttmp.Replace("1", keys[randoms[1]]).Replace("2", MinigameAPremises.premises[keys[randoms[1]]][scenario]);
+        texttmp = MinigameAPremises.clues[scenario][Random.Range(0, 6)];
+        clues3.text = texttmp.Replace("1", keys[randoms[2]]).Replace("2", MinigameAPremises.premises[keys[randoms[2]]][scenario]);
+        texttmp = MinigameAPremises.clues[scenario][Random.Range(6, 10)];
+        clues4.text = texttmp.Replace("3", keys[randoms[3]]).Replace("4", MinigameAPremises.premises[keys[randoms[4]]][scenario]);
+
         if (Random.Range(0, 2) == 0)
         {
             // set labels for grid
-            string[] keys = new string[6];
-            MinigameAPremises.premises.Keys.CopyTo(keys, 0);
             Dictionary<int, string> map = new Dictionary<int, string>();
             for (int i = 0; i < 5; i++)
             { 
@@ -116,8 +132,6 @@ public class MinigameALogic : MonoBehaviour
         else
         {
             // set labels for grid
-            string[] keys = new string[6];
-            MinigameAPremises.premises.Keys.CopyTo(keys, 0);
             Dictionary<int, string> map = new Dictionary<int, string>();
             for (int i = 0; i < 5; i++)
             {
@@ -154,7 +168,6 @@ public class MinigameALogic : MonoBehaviour
                 }
             }
         }
-        // assign clues
     }
 
     // Update is called once per frame

@@ -5097,7 +5097,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &839457671
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6247,6 +6247,10 @@ MonoBehaviour:
   - {fileID: 798302353}
   - {fileID: 937433750}
   - {fileID: 1106675970}
+  clues1: {fileID: 742041526}
+  clues2: {fileID: 2142973943}
+  clues3: {fileID: 236158502}
+  clues4: {fileID: 1736670312}
 --- !u!1 &1026895618
 GameObject:
   m_ObjectHideFlags: 0
