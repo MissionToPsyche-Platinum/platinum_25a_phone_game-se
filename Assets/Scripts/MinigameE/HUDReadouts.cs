@@ -6,39 +6,51 @@ public class HUDReadouts : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private InputDragLaunch input;
-    [SerializeField] private Rigidbody2D spacecraftRb;
-    [SerializeField] private TMP_Text angleText;
-    [SerializeField] private TMP_Text speedText;
+    [SerializeField] private TextMeshProUGUI angleText;
+    [SerializeField] private TextMeshProUGUI speedText;
 
-    [Header("Display")]
-    [SerializeField] private bool showAimWhileDragging = true;
-    [SerializeField] private bool showLiveVelocityAfterLaunch = true;
+    [Header("Foratting Settings")]
+    [SerializeField] private string anglePrefix = "Angle: ";
+    [SerializeField] private string speedPrefix = "Speed: ";
 
-    void Update()
+    private void Awake()
     {
-        if(showAimWhileDragging && input != null && input.IsDragging)
+        if (!input)
         {
-            SetAngleSpeed(input.CurrentAimAngleDeg, input.CurrentAimSpeed);
-            return;
+            input = FindFirstObjectByType<InputDragLaunch>();
         }
-        if (showLiveVelocityAfterLaunch && spacecraftRb != null)
+        if (!angleText)
         {
-            Vector2 v = spacecraftRb.velocity;
-            float speed = v.magnitude;
-
-            float angle = 0f;
-            if(speed > 0.01f)
-                angle = Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
-
-            SetAngleSpeed(angle, speed);
+            var t = transform.Find("AngleText");
+            if (t)
+            {
+                angleText = t.GetComponent<TextMeshProUGUI>();
+            }
+        }
+        if (!speedText)
+        {
+            var t = transform.Find("SpeedText");
+            if (t)
+            {
+                speedText = t.GetComponent<TextMeshProUGUI>();
+            }
         }
     }
 
-    private void SetAngleSpeed(float angleDeg, float speed)
+    private void Update()
     {
-        if (angleText != null)
-            angleText.text = $"Angle: {angleDeg:0.0}°";
-        if (speedText != null)
-            speedText.text = $"Speed: {speed:0.00} u/s";
+        if (!input || !angleText || !speedText)
+        {
+            return;
+        }
+        if (!input.IsDragging && input.HasLastShot)
+        {
+            angleText.text = anglePrefix + input.CurrentAimAngleDeg.ToString("F0") + "°";
+            speedText.text = speedPrefix + input.CurrentAimSpeed.ToString("F1") + " m/s";
+            return;
+
+        }
+            angleText.text = anglePrefix + input.CurrentAimAngleDeg.ToString("F0") + "°";
+            speedText.text = speedPrefix + input.CurrentAimSpeed.ToString("F1") + " m/s";
     }
 }

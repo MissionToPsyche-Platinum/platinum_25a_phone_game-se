@@ -6132,6 +6132,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af7ed7c666c1d914abdd1ac3b44e7731, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  input: {fileID: 1076929025}
+  angleText: {fileID: 2052587321}
+  speedText: {fileID: 250284259}
+  anglePrefix: 'Angle: '
+  speedPrefix: 'Speed: '
 --- !u!1 &1750851726
 GameObject:
   m_ObjectHideFlags: 0
