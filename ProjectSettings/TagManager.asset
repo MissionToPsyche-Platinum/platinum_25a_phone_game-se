@@ -8,6 +8,10 @@ TagManager:
   - Boundary
   - player
   - Spacecraft
+  - BoostRing
+  - PenaltyRing
+  - JumpRing
+  - ShieldRing
   layers:
   - Default
   - TransparentFX
@@ -42,7 +46,6 @@ TagManager:
   - 
   - 
   - 
-  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
@@ -55,4 +58,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 2514908935
+    locked: 0
+  - name: IntroPanel
+    uniqueID: 3110812965
     locked: 0

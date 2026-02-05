@@ -33,7 +33,7 @@ public class EducationalPopupController : MonoBehaviour
 
     private void Start()
     {
-        ShowRandomFact();
+        ShowRandomFact();  
     }
 
     // ---------------------------------------------------------
