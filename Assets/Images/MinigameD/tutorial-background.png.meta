@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7ab9aeb844d6bff4b814c9d902acc40c
+guid: 830291bbb7f8b354ead4efd5d2c2d9e8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3832499418286107810
-    second: MinigameD-tutorial-background_0
+      213: 8236302440273700129
+    second: tutorial-background_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -122,13 +122,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MinigameD-tutorial-background_0
+      name: tutorial-background_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 360
-        height: 640
+        width: 1080
+        height: 1920
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -136,8 +136,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2aca5dc5ae5cf2530800000000000000
-      internalID: 3832499418286107810
+      spriteID: 125623f7e693d4270800000000000000
+      internalID: 8236302440273700129
       vertices: []
       indices: 
       edges: []
@@ -152,8 +152,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      MinigameD-tutorial-background_0: 3832499418286107810
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
