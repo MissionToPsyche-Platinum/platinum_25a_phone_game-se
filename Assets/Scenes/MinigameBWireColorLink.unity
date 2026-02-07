@@ -8138,6 +8138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c424cc6514a43574cbd7109e6fe330fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioClipManager: {fileID: 1213432198}
   minigameBgrid:
   - {fileID: 151883328}
   - {fileID: 1127856938}

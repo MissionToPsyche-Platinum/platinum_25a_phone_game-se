@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class MinigameBPowerBalanceButtonToggle : MonoBehaviour
 {
+    [SerializeField] private AudioClipManager audioClipManager;
+
     private bool isToggled = false;
 
     public void ToggleButton()
@@ -18,6 +20,7 @@ public class MinigameBPowerBalanceButtonToggle : MonoBehaviour
         {
             GetComponent<Image>().color = Color.black;
         }
+        audioClipManager.PlayClick();
     }
 
     public bool GetToggleState()

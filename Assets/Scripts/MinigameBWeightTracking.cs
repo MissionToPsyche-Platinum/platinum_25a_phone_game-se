@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class MinigameBWeightTracking : MonoBehaviour
 {
+    [SerializeField] private AudioClipManager audioClipManager;
+
     [SerializeField] private TextMeshProUGUI goalWeight;
     [SerializeField] private MinigameBScaleWeightTracker scaleArea;
     [SerializeField] private TextMeshProUGUI currentWeight;
@@ -44,6 +46,7 @@ public class MinigameBWeightTracking : MonoBehaviour
         {
             winPanel.SetActive(true);
             winPanel.transform.SetAsLastSibling();
+            audioClipManager.PlayCongrats();
             won = true;
         }
     }
