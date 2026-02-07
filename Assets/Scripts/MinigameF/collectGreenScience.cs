@@ -10,13 +10,14 @@ public class collectGreenScience : MonoBehaviour
     private float threshold = 0.5f;
     private float pointsAdded = 2f;
     [SerializeField] public PointTracker pt;
+    [SerializeField] AudioSource audio;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
-        
+       
+
     }
 
     // Update is called once per frame
@@ -38,6 +39,7 @@ public class collectGreenScience : MonoBehaviour
                 {
                     clickParticles.transform.position = transform.position;
                     clickParticles.Play();
+                    audio.Play();
                 }
                 pointsAdded = 2;
                 pt.addPoints(pointsAdded);

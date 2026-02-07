@@ -10,6 +10,7 @@ public class collectPoints : MonoBehaviour
     public float pointsAdded = 1f;
     public ParticleSystem clickParticles;
     [SerializeField] public PointTracker pt;
+    [SerializeField] AudioSource audio;
 
     [SerializeField] GameObject asteroid;
     GameObject test;
@@ -24,7 +25,7 @@ public class collectPoints : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-      
+
         
 
     }
@@ -53,6 +54,7 @@ public class collectPoints : MonoBehaviour
                 {
                     clickParticles.transform.position = transform.position;
                     clickParticles.Play();
+                    audio.Play();
                 }
 
 

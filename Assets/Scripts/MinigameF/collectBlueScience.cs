@@ -10,6 +10,7 @@ public class collectBlueScience : MonoBehaviour
     float releaseClick = 0f;
 
     [SerializeField] public PointTracker pt;
+    [SerializeField] AudioSource audio;
 
     public ParticleSystem clickParticles;
 
@@ -18,6 +19,7 @@ public class collectBlueScience : MonoBehaviour
     void Start()
     {
         
+
     }
 
     // Update is called once per frame
@@ -50,6 +52,7 @@ public class collectBlueScience : MonoBehaviour
             {
                 clickParticles.transform.position = transform.position;
                 clickParticles.Play();
+                audio.Play();
 
             }
 

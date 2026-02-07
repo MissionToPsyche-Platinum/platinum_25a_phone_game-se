@@ -7,6 +7,7 @@ public class clickpenalty : MonoBehaviour
 
     [SerializeField] public PointTracker pt;
     [SerializeField] ParticleSystem clickParticles;
+    [SerializeField] AudioSource audio;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +32,7 @@ public class clickpenalty : MonoBehaviour
             {
                 clickParticles.transform.position = transform.position;
                 clickParticles.Play();
+                audio.Play();
             }
                    
 
