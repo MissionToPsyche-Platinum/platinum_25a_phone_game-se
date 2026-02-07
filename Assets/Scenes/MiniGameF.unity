@@ -914,6 +914,8 @@ GameObject:
   - component: {fileID: 408486465}
   - component: {fileID: 408486464}
   - component: {fileID: 408486468}
+  - component: {fileID: 408486469}
+  - component: {fileID: 408486470}
   m_Layer: 0
   m_Name: GreenScience
   m_TagString: Untagged
@@ -1057,7 +1059,46 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 1.2800003
+  m_Radius: 0.25
+--- !u!114 &408486469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 408486463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f036c36e8070b7540b0a2b2ca3a28b4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &408486470
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 408486463}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &528632733
 GameObject:
   m_ObjectHideFlags: 0
@@ -1337,6 +1378,7 @@ GameObject:
   - component: {fileID: 618509021}
   - component: {fileID: 618509020}
   - component: {fileID: 618509019}
+  - component: {fileID: 618509022}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -1447,6 +1489,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &618509022
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618509018}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &634607475
 GameObject:
   m_ObjectHideFlags: 0
@@ -13297,6 +13366,8 @@ GameObject:
   - component: {fileID: 1332267515}
   - component: {fileID: 1332267519}
   - component: {fileID: 1332267518}
+  - component: {fileID: 1332267520}
+  - component: {fileID: 1332267521}
   m_Layer: 8
   m_Name: BlueScience
   m_TagString: Science
@@ -13426,7 +13497,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5000002
+  m_Radius: 0.25
 --- !u!114 &1332267519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13441,6 +13512,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pt: {fileID: 1750789559}
   clickParticles: {fileID: 634607477}
+--- !u!114 &1332267520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332267514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f036c36e8070b7540b0a2b2ca3a28b4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &1332267521
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332267514}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &1377161627
 GameObject:
   m_ObjectHideFlags: 0
@@ -15059,6 +15169,8 @@ GameObject:
   - component: {fileID: 2095605144}
   - component: {fileID: 2095605148}
   - component: {fileID: 2095605147}
+  - component: {fileID: 2095605149}
+  - component: {fileID: 2095605150}
   m_Layer: 8
   m_Name: RedScience
   m_TagString: Science
@@ -15188,7 +15300,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5000001
+  m_Radius: 0.25
 --- !u!114 &2095605148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15205,6 +15317,45 @@ MonoBehaviour:
   clickParticles: {fileID: 634607477}
   pt: {fileID: 1750789559}
   asteroid: {fileID: 0}
+--- !u!114 &2095605149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095605143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f036c36e8070b7540b0a2b2ca3a28b4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!50 &2095605150
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2095605143}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

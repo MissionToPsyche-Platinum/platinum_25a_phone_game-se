@@ -13,7 +13,7 @@ public class SpawnBubble : MonoBehaviour
     private int max = 500000;
     private float radius = 2.5f;
     private int spawns = 0;
-    private int spawnTimer = 10;
+    private int spawnTimer = 250;
     private bool spawn = true;
     
     
@@ -45,7 +45,7 @@ public class SpawnBubble : MonoBehaviour
                 }
                 else
                 {
-                    spawnTimer = 1000;
+                    spawnTimer = 100;
                     spawned = false;
                 }
             }

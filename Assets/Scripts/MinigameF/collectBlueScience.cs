@@ -69,7 +69,6 @@ public class collectBlueScience : MonoBehaviour
 
             Destroy(gameObject);
 
-            Debug.Log("Destroyed Blue points added: " + pointsAdded);
         }
 
     }
