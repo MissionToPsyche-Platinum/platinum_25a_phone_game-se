@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -54,8 +55,9 @@ public class StageManager : MonoBehaviour
         }
         else if (stage == 1)
         {
-
+            
             StartCoroutine(scaleOverTime(7.5f, 7.5f));
+            bubble.setRadius(7.5f / 2);
             diff.setStage(1);
             speed.setSpeed(-0.5f);
 
@@ -64,6 +66,7 @@ public class StageManager : MonoBehaviour
         {
 
             StartCoroutine(scaleOverTime(7.5f, 10f));
+            bubble.setRadius(10f / 2);
             diff.setStage(2);
             speed.setSpeed(-1f);
             
@@ -85,26 +88,20 @@ public class StageManager : MonoBehaviour
         Vector3 startScale = transform.localScale;
         Vector3 endScale = Vector3.one * scale;
         float elapsed = 0f;
-        float rad = bubble.getRadius();
 
+        bubble.Yield();
         while (elapsed < duration)
         {
             var t = elapsed / duration;
             transform.localScale = Vector3.Lerp(startScale, endScale, t);
-            if (rad < scale/2)
-            {
-                rad = (rad + (scale/2 - rad)) * t;
-                bubble.setRadius(rad);
-            }
-            
+
             elapsed += Time.deltaTime;
             yield return null;
         }
 
         transform.localScale = endScale;
-        {
-
-        }
+        
+    
     }
     
 }
