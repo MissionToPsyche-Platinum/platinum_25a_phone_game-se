@@ -11,6 +11,8 @@ using Random = UnityEngine.Random;
 
 public class MinigameALogic : MonoBehaviour
 {
+    [SerializeField] private AudioClipManager audioClipManager;
+
     [SerializeField] private GameObject[] minigameAgrid;
     private Boolean[] gridChecks = new Boolean[25];
     [SerializeField] private GameObject endScreen;
@@ -184,6 +186,7 @@ public class MinigameALogic : MonoBehaviour
         }
         if (totalChecks >= 5) 
         {
+            audioClipManager.PlayCongrats();
             endScreen.SetActive(true);
         }
     }

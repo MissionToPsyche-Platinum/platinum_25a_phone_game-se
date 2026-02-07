@@ -244,6 +244,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &21118904
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,6 +596,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &88323293
 GameObject:
   m_ObjectHideFlags: 0
@@ -898,6 +900,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &118399195
 GameObject:
   m_ObjectHideFlags: 0
@@ -1097,6 +1100,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &222005445
 GameObject:
   m_ObjectHideFlags: 0
@@ -1221,6 +1225,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &236158500
 GameObject:
   m_ObjectHideFlags: 0
@@ -1604,6 +1609,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &295099203
 GameObject:
   m_ObjectHideFlags: 0
@@ -1690,6 +1696,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 2060467798}
   nextTutorial: {fileID: 951028103}
+  audioClipManager: {fileID: 1992227625}
 --- !u!114 &295099207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2061,6 +2068,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &338023323
 GameObject:
   m_ObjectHideFlags: 0
@@ -2322,6 +2330,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &367278056
 GameObject:
   m_ObjectHideFlags: 0
@@ -2681,6 +2690,134 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 434301380}
   m_CullTransparentMesh: 1
+--- !u!1 &440198986
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 440198988}
+  - component: {fileID: 440198987}
+  m_Layer: 0
+  m_Name: Audio Source
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &440198987
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440198986}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &440198988
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440198986}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1992227626}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &466849053
 GameObject:
   m_ObjectHideFlags: 0
@@ -3115,6 +3252,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &531732650
 GameObject:
   m_ObjectHideFlags: 0
@@ -3375,6 +3513,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &546896236
 GameObject:
   m_ObjectHideFlags: 0
@@ -3670,6 +3809,7 @@ MonoBehaviour:
   check: 1
   currentTutorial: {fileID: 1546990909}
   nextTutorial: {fileID: 898256017}
+  audioClipManager: {fileID: 1992227625}
 --- !u!114 &551894974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3944,6 +4084,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 2060467798}
   nextTutorial: {fileID: 951028103}
+  audioClipManager: {fileID: 1992227625}
 --- !u!114 &609966356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4690,6 +4831,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &742041524
 GameObject:
   m_ObjectHideFlags: 0
@@ -5097,7 +5239,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &839457671
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5584,6 +5726,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &937433748
 GameObject:
   m_ObjectHideFlags: 0
@@ -5842,6 +5985,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &951028103
 GameObject:
   m_ObjectHideFlags: 0
@@ -6005,6 +6149,7 @@ MonoBehaviour:
   check: 1
   currentTutorial: {fileID: 21118904}
   nextTutorial: {fileID: 1839025466}
+  audioClipManager: {fileID: 1992227625}
 --- !u!114 &972507186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6205,6 +6350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 803b9d9239018204390727c5e4d6de8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioClipManager: {fileID: 1992227625}
   minigameAgrid:
   - {fileID: 894885950}
   - {fileID: 546896236}
@@ -6623,6 +6769,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &1084515620
 GameObject:
   m_ObjectHideFlags: 0
@@ -7134,6 +7281,7 @@ MonoBehaviour:
   tutorial3: {fileID: 2060467798}
   tutorial5: {fileID: 522333523}
   tutorial6: {fileID: 21118904}
+  audioClipManager: {fileID: 1992227625}
 --- !u!114 &1113183512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7826,6 +7974,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &1314121464
 GameObject:
   m_ObjectHideFlags: 0
@@ -8380,6 +8529,7 @@ MonoBehaviour:
   tutorial3: {fileID: 0}
   tutorial5: {fileID: 0}
   tutorial6: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!114 &1388145825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8533,6 +8683,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &1431105701
 GameObject:
   m_ObjectHideFlags: 0
@@ -9227,6 +9378,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &1625467296
 GameObject:
   m_ObjectHideFlags: 0
@@ -9485,6 +9637,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &1659935781
 GameObject:
   m_ObjectHideFlags: 0
@@ -10225,6 +10378,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &1781728890
 GameObject:
   m_ObjectHideFlags: 0
@@ -10349,6 +10503,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &1798506923
 GameObject:
   m_ObjectHideFlags: 0
@@ -10905,6 +11060,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &1898393929
 GameObject:
   m_ObjectHideFlags: 0
@@ -11163,6 +11319,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &1918757864
 GameObject:
   m_ObjectHideFlags: 0
@@ -11664,6 +11821,59 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
+--- !u!1 &1992227624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1992227626}
+  - component: {fileID: 1992227625}
+  m_Layer: 0
+  m_Name: AudioClipManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1992227625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992227624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c4c7afc8cee71f43ba236b85fef3e79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 440198987}
+  correct: {fileID: 8300000, guid: 2adffd7f1de75ec4c995735365738049, type: 3}
+  incorrect: {fileID: 8300000, guid: 417ac6963db023048ad3c8398ec1d803, type: 3}
+  click: {fileID: 8300000, guid: c986eac5915e65e419e79990146e38d9, type: 3}
+  coinPickUp: {fileID: 8300000, guid: 5ada86ed3d2237045a8d1ba9cf8eb033, type: 3}
+  coinDrop: {fileID: 8300000, guid: a057c90672e3e67428c3387443cdf798, type: 3}
+  congrats: {fileID: 8300000, guid: ee8887b0d160ca34981fcce4be3ddc05, type: 3}
+--- !u!4 &1992227626
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1992227624}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1246.4441, y: 644.1003, z: 6.0273304}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 440198988}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1992947742
 GameObject:
   m_ObjectHideFlags: 0
@@ -11863,6 +12073,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &2008767342
 GameObject:
   m_ObjectHideFlags: 0
@@ -12663,6 +12874,7 @@ MonoBehaviour:
   check: 0
   currentTutorial: {fileID: 0}
   nextTutorial: {fileID: 0}
+  audioClipManager: {fileID: 1992227625}
 --- !u!1 &2059755589
 GameObject:
   m_ObjectHideFlags: 0
@@ -13296,3 +13508,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 1926401351}
   - {fileID: 2100780285}
+  - {fileID: 1992227626}

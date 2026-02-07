@@ -13,6 +13,8 @@ public class MinigameAMarkGrid : MonoBehaviour
     [SerializeField] private GameObject currentTutorial;
     [SerializeField] private GameObject nextTutorial;
 
+    [SerializeField] private AudioClipManager audioClipManager;
+
     public void setCheck(bool isCheck)
     {
         check = isCheck;
@@ -27,6 +29,11 @@ public class MinigameAMarkGrid : MonoBehaviour
                 if (!check)
                 {
                     mark.GetComponent<Image>().color = Color.red;
+                    audioClipManager.PlayIncorrect();
+                }
+                else
+                {
+                    audioClipManager.PlayCorrect();
                 }
             }
             else
@@ -34,6 +41,11 @@ public class MinigameAMarkGrid : MonoBehaviour
                 if (check)
                 {
                     mark.GetComponent<Image>().color = Color.red;
+                    audioClipManager.PlayIncorrect();
+                }
+                else
+                {
+                    audioClipManager.PlayCorrect();
                 }
             }
             mark.SetActive(true);
