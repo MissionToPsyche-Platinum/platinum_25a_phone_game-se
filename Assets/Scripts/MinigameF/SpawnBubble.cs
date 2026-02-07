@@ -14,6 +14,8 @@ public class SpawnBubble : MonoBehaviour
     private float radius = 2.5f;
     private int spawns = 0;
     private int spawnTimer = 10;
+    private bool spawn = true;
+    
     
     bool spawned = false;
 
@@ -29,29 +31,33 @@ public class SpawnBubble : MonoBehaviour
     // Spawns bubbles at a predetermined rate and at a random possition on a rotating sphere
     void Update()
     {
-        if (spawns >= max)
+        if (spawn)
         {
-            
-        }
-        else if (spawned)
-        {
-            if (spawnTimer > 0)
+            if (spawns >= max)
             {
-                spawnTimer--;
-            }else
-            {
-                spawnTimer = 1000;
-                spawned = false;
-            }            
-        }
-        else
-        {
 
-            Vector3 vector = generateSpawn();
-           
-            spawnObj(vector);
-            spawned = true;
-;
+            }
+            else if (spawned)
+            {
+                if (spawnTimer > 0)
+                {
+                    spawnTimer--;
+                }
+                else
+                {
+                    spawnTimer = 1000;
+                    spawned = false;
+                }
+            }
+            else
+            {
+
+                Vector3 vector = generateSpawn();
+
+                spawnObj(vector);
+                spawned = true;
+                ;
+            }
         }
 
     }
@@ -64,7 +70,12 @@ public class SpawnBubble : MonoBehaviour
     public void setRadius(float radius)
     {
         this.radius = radius;
-    }     
+    }
+    
+    public void setSpawn(bool spawn)
+    {
+        this.spawn = spawn;
+    }
 
     // Based off of a random number
     // Spawns a red bubble on the sphere object if its 0

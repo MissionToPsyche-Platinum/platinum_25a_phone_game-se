@@ -16,12 +16,16 @@ public class StageManager : MonoBehaviour
     
     private float time = 10f;
     private int stage = 0;
-    private float stageTime = 10f;
+    private float stageTime = 30f;
 
 
     public string SceneName;
     [SerializeField] private Transform obj;
     [SerializeField] private SpawnBubble bubble;
+
+
+    
+
 
     Vector3 scale = new Vector3(5,5,5);
 
@@ -56,8 +60,8 @@ public class StageManager : MonoBehaviour
         else if (stage == 1)
         {
             
-            StartCoroutine(scaleOverTime(7.5f, 7.5f));
-            bubble.setRadius(7.5f / 2);
+            StartCoroutine(scaleOverTime(10f, 7.5f));
+            
             diff.setStage(1);
             speed.setSpeed(-0.5f);
 
@@ -65,8 +69,8 @@ public class StageManager : MonoBehaviour
         else if (stage == 2)
         {
 
-            StartCoroutine(scaleOverTime(7.5f, 10f));
-            bubble.setRadius(10f / 2);
+            StartCoroutine(scaleOverTime(10f, 10f));
+            
             diff.setStage(2);
             speed.setSpeed(-1f);
             
@@ -89,7 +93,7 @@ public class StageManager : MonoBehaviour
         Vector3 endScale = Vector3.one * scale;
         float elapsed = 0f;
 
-        bubble.Yield();
+        bubble.setSpawn(false);
         while (elapsed < duration)
         {
             var t = elapsed / duration;
@@ -100,8 +104,9 @@ public class StageManager : MonoBehaviour
         }
 
         transform.localScale = endScale;
-        
-    
+        bubble.setSpawn(true);
+        bubble.setRadius(scale/2);
+
     }
     
 }

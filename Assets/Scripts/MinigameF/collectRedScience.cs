@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 using UnityEngine.Events;
+using UnityEngine.UIElements;
 
 public class collectPoints : MonoBehaviour
 {
     public float pointsAdded = 1f;
     public ParticleSystem clickParticles;
     [SerializeField] public PointTracker pt;
+
+    [SerializeField] GameObject asteroid;
+    GameObject test;
+    
     
 
     private UnityAction addPoints;
@@ -36,24 +41,27 @@ public class collectPoints : MonoBehaviour
     //works with mouse and touch screen
     public void OnMouseDown()
     {
+       
 
-        pointsAdded = 1;
-        Debug.Log("Points added: " + pointsAdded);
+        
+            pointsAdded = 1;
+            Debug.Log("Points added: " + pointsAdded);
 
-        if(Time.timeScale == 1)
-        {
-            if (clickParticles != null)
+            if (Time.timeScale == 1)
             {
-                clickParticles.transform.position = transform.position;
-                clickParticles.Play();
+                if (clickParticles != null)
+                {
+                    clickParticles.transform.position = transform.position;
+                    clickParticles.Play();
+                }
+
+
+                pt.addPoints(pointsAdded);
+
+
+                Destroy(gameObject);
             }
-
-
-            pt.addPoints(pointsAdded);
-
-
-            Destroy(gameObject);
-        }
+        
 
     }    
 
