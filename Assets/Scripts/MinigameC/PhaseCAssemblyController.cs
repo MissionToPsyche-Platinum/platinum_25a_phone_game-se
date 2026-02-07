@@ -33,6 +33,9 @@ public class PhaseCAssemblyController : MonoBehaviour
 
     public event Action<StepInfo> StepChanged;
 
+    /// <summary>Fired when the player completes the final step (KDP-D) and Phase C is complete.</summary>
+    public event Action PhaseCComplete;
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void EnsureController()
     {
@@ -214,7 +217,10 @@ public class PhaseCAssemblyController : MonoBehaviour
         if (currentStepIndex == 0 && instrumentsBuilt < 3)
             return;
 
+        bool wasLastStep = currentStepIndex == steps.Count - 1;
         AdvanceStep();
+        if (wasLastStep)
+            PhaseCComplete?.Invoke();
     }
 
     public void NotifyNpcInRange(string npcName, int stepIndex)

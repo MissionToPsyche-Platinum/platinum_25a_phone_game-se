@@ -28,13 +28,31 @@ public class PhaseCGuideUI : MonoBehaviour
     private TMP_Text storyMomentBody;
     private Button storyMomentButton;
     private PhaseCAssemblyController.StepInfo? pendingStepAfterStoryMoment;
+    /// <summary>Story moments where the player discovers new information about the Psyche mission after completing each step.</summary>
     private static readonly (string title, string body)[] StoryMoments =
     {
-        ("Months pass.", "The instrument suite is locked in. The team turns to the spacecraft bus."),
-        ("May 2020.", "The bus is complete. The Critical Design Review is next."),
-        ("Approved.", "CDR is complete. The team moves to Systems Integration Review."),
-        ("January 2021.", "Systems Integration Review is complete. Final approval, Key Decision Point D, is next.")
+        (
+            "Science Payload Locked In",
+            "You've helped lock in Psyche's three science instruments: the Magnetometer (to search for an ancient magnetic field at the asteroid), the Multispectral Imager (to map the surface in visible and near-infrared light), and the Gamma-Ray and Neutron Spectrometer (to reveal elemental composition). This instrument suite is the heart of the mission's science. Next: the spacecraft bus that will carry it all."
+        ),
+        (
+            "Spacecraft Bus Complete: May 2020",
+            "The spacecraft bus is the main structure that holds every subsystem and science instrument. With it complete, the team can move to Critical Design Review (CDR), which verifies that the full design meets every requirement before systems are integrated. You're on track for Phase C."
+        ),
+        (
+            "Critical Design Review Passed",
+            "CDR confirms the design is ready for the next phase. The team also locked in plans for X-band telecommunications and technology demonstrations, including deep-space laser communications. The next milestone is the Systems Integration Review, which checks that all subsystems can work together as one."
+        ),
+        (
+            "Systems Integration Review: January 2021",
+            "The Systems Integration Review is complete. It confirms that all subsystems can be combined and tested as a whole. Phase C closes with Key Decision Point D (KDP-D): NASA's formal approval to proceed beyond Phase C. Talk to Dr. Sarah Chen to finalize the milestone."
+        )
     };
+
+    private static readonly (string title, string body) FinalStoryMoment = (
+        "Key Decision Point D: Phase C Complete",
+        "NASA has approved the mission to proceed. Phase C (Final Design & Subsystem Fabrication) is complete: instruments locked in, spacecraft bus built, Critical Design Review and Systems Integration Review passed. You've discovered how the real Psyche mission reached this milestone on the way to the asteroid."
+    );
 
     private void Awake()
     {
@@ -53,12 +71,23 @@ public class PhaseCGuideUI : MonoBehaviour
         if (controller != null)
         {
             controller.StepChanged -= UpdateGuide;
+            controller.PhaseCComplete -= OnPhaseCComplete;
         }
 
         if (stepCompleteRoutine != null)
         {
             StopCoroutine(stepCompleteRoutine);
         }
+    }
+
+    private void OnPhaseCComplete()
+    {
+        if (storyMomentRoot == null || storyMomentTitle == null || storyMomentBody == null)
+            return;
+        pendingStepAfterStoryMoment = null;
+        storyMomentTitle.text = FinalStoryMoment.title;
+        storyMomentBody.text = FinalStoryMoment.body;
+        storyMomentRoot.SetActive(true);
     }
 
     private void Subscribe()
@@ -70,6 +99,8 @@ public class PhaseCGuideUI : MonoBehaviour
         {
             controller.StepChanged -= UpdateGuide;
             controller.StepChanged += UpdateGuide;
+            controller.PhaseCComplete -= OnPhaseCComplete;
+            controller.PhaseCComplete += OnPhaseCComplete;
         }
     }
 
@@ -253,12 +284,13 @@ public class PhaseCGuideUI : MonoBehaviour
         storyMomentBody = CreateLabel(panel.transform, "StoryMomentBody", PhaseCUITheme.StoryMomentBodySize, false);
         storyMomentBody.color = PhaseCUITheme.TextPrimary;
         storyMomentBody.alignment = TextAlignmentOptions.Center;
+        storyMomentBody.enableWordWrapping = true;
         RectTransform bodyRect = storyMomentBody.GetComponent<RectTransform>();
         bodyRect.anchorMin = new Vector2(0f, 1f);
         bodyRect.anchorMax = new Vector2(1f, 1f);
         bodyRect.pivot = new Vector2(0.5f, 1f);
         bodyRect.anchoredPosition = new Vector2(0f, -110f);
-        bodyRect.offsetMin = new Vector2(PhaseCUITheme.PaddingPanel, -240f);
+        bodyRect.offsetMin = new Vector2(PhaseCUITheme.PaddingPanel, -280f);
         bodyRect.offsetMax = new Vector2(-PhaseCUITheme.PaddingPanel, -100f);
 
         GameObject btnObj = new GameObject("StoryMomentContinue");
