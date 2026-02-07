@@ -71,8 +71,10 @@ public class RingGenerator : MonoBehaviour
                 // spawn 1 boost ring per tile
                 spawnRing(tilePosition, boostPrefab);
 
-                // spawn 1 penalty ring per tile
-                spawnRing(tilePosition, penaltyPrefab);
+                if (i % 2 == 0) // spawn 1 penalty ring every 2 tiles
+                {
+                    spawnRing(tilePosition, penaltyPrefab);
+                }
 
                 float randomChance = Random.value;
                 if (randomChance <= 0.025f) // 2.5% chance of spawning a shield ring

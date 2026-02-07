@@ -633,7 +633,7 @@ MonoBehaviour:
   fillImage: {fileID: 630701481}
   miniRocket: {fileID: 715747077}
   targetObject: {fileID: 2119888224}
-  maxHeight: 875
+  maxHeight: 1440
   minX: -2.326
   maxX: 2.888
 --- !u!114 &630701481
@@ -1325,8 +1325,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e20b6e15ddb824a946b7707355b82f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialVelocity: 18
-  initialGravity: -3
+  initialVelocity: 17.5
+  initialGravity: -2.5
 --- !u!114 &2119888226
 MonoBehaviour:
   m_ObjectHideFlags: 0
