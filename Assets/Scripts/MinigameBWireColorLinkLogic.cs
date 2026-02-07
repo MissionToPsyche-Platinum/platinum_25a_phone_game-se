@@ -8,6 +8,8 @@ using Random = UnityEngine.Random;
 
 public class MinigameBWireColorLinkLogic : MonoBehaviour
 {
+    [SerializeField] private AudioClipManager audioClipManager;
+
     [SerializeField] private GameObject[] minigameBgrid;
     [SerializeField] private GameObject endScreen;
     [SerializeField] private GameObject tutorialScreen;
@@ -305,6 +307,7 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
                 {
                     if (lastWirePlaced == -1)
                     {
+                        audioClipManager.PlayClick();
                         AddToLine(i, grid[i]);
                         lastWirePlaced = i;
                         dragging = true;
@@ -485,6 +488,7 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
 
     public void dropWire()
     {
+        audioClipManager.PlayClick();
         if (lastWirePlaced == -1)
             return;
         if (grid[lastWirePlaced] != -1)
@@ -516,6 +520,7 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
             }
             if (wires >= 3)
             {
+                audioClipManager.PlayCongrats();
                 endScreen.SetActive(true);
             }
         }
@@ -531,20 +536,26 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
             case 1:
                 if (!wire1.Contains(index))
                     wire1.Add(index);
-                else
+                else{
                     ClearLine(1);
+                    audioClipManager.PlayIncorrect();
+                }
                 break;
             case 2:
                 if (!wire2.Contains(index))
                     wire2.Add(index);
-                else
+                else{
                     ClearLine(2);
+                    audioClipManager.PlayIncorrect();
+                }
                 break;
             case 3:
                 if (!wire3.Contains(index))
                     wire3.Add(index);
-                else
+                else{
                     ClearLine(3);
+                    audioClipManager.PlayIncorrect();
+                }
                 break;
             default:
                 break;

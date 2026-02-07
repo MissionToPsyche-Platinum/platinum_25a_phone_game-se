@@ -5239,7 +5239,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &839457671
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10686,7 +10686,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1815343029}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc468af4786017f4a8ca3a3e5539614b, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d6296581d111794895067144d83f686, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1815343032
@@ -10734,8 +10734,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1815343031}
-        m_TargetAssemblyTypeName: BackButton, Assembly-CSharp
-        m_MethodName: goBack
+        m_TargetAssemblyTypeName: GoBack, Assembly-CSharp
+        m_MethodName: GoBackToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -16,15 +16,18 @@ public class MenuSceneSchange : MonoBehaviour
     public void SwitchToSceneMinigameB()
     {
         Debug.Log("Switching to Minigame B");
-        Random.InitState(System.DateTime.Now.Millisecond);
-        int rand = Random.Range(0, 2);
+        int rand = Random.Range(0, 3);
         if (rand == 0)
         {
             SceneManager.LoadScene("MinigameBMetalWeights");
         }
-        else
+        else if (rand == 1)
         {
             SceneManager.LoadScene("MinigameBPowerBalance");
+        }
+        else
+        {
+            SceneManager.LoadScene("MinigameBWireColorLink");
         }
     }
 
