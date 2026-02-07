@@ -4,11 +4,10 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class MinigameBWireColorLinkLogic : MonoBehaviour
 {
-    [SerializeField] private AudioClipManager audioClipManager;
-
     [SerializeField] private GameObject[] minigameBgrid;
     [SerializeField] private GameObject endScreen;
     [SerializeField] private GameObject tutorialScreen;
@@ -43,49 +42,241 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
             minigameBgrid[i].GetComponent<Image>().color = new Color32(255, 255, 255, 0);
         }
         //generate nodes
-        int index = 10;
+        Random.InitState(DateTime.Now.Millisecond);
+        //generate wire 1
+        int length = Random.Range(1, 11);
+        int index = Random.Range(0,36);
         grid[index] = 1;
         minigameBgrid[index].GetComponent<Image>().sprite = circle;
         minigameBgrid[index].GetComponent<Image>().color = new Color32(243, 242, 244, 255);
         wire1ends[0] = index;
-        index = 30;
+        wire1.Add(index);
+        for (int i = 0; i < length; i++)
+        {
+            int direction = Random.Range(0, 4);
+            switch (direction)
+            {
+                case 0:
+                    //up
+                    index += 1;
+                    direction = 1;
+                    break;
+                case 1:
+                    //right
+                    index += 6;
+                    direction = 6;
+                    break;
+                case 2:
+                    //down
+                    index -= 1;
+                    direction = -1;
+                    break;
+                case 3:
+                    //left
+                    index -= 6;
+                    direction = -6;
+                    break;
+                default:
+                    break;
+            }
+            if (index < 0 || index > 35)
+            {
+                index -= direction * 2;
+            }
+            if (wire1.Contains(index))
+            {
+                i -= 1;
+            }
+            else
+            {
+                wire1.Add(index);
+            }
+            if ((wire1.Contains(index + 1) || index + 1 > 35) &&
+                (wire1.Contains(index - 1) || index - 1 < 0) &&
+                (wire1.Contains(index + 6) || index + 1 > 35) &&
+                (wire1.Contains(index - 6) || index - 1 < 0))
+            {
+                break;
+            }
+        }
         grid[index] = 1;
         minigameBgrid[index].GetComponent<Image>().sprite = circle;
         minigameBgrid[index].GetComponent<Image>().color = new Color32(243, 242, 244, 255);
         wire1ends[1] = index;
-        index = 7;
+
+        //generate wire 2
+        length = Random.Range(1, 11);
+        index = Random.Range(0, 36);
+        while (wire1.Contains(index))
+        {
+            index = Random.Range(0, 36);
+        }
+        if ((wire1.Contains(index + 1) || index + 1 > 35) && (wire1.Contains(index - 1) || index - 1 < 0) && 
+            (wire1.Contains(index + 6) || index + 6 > 35) && (wire1.Contains(index - 6) || index - 6 < 0))
+        {
+            wire1.Add(index);
+        }
+        while (wire1.Contains(index))
+        {
+            index = Random.Range(0, 36);
+        }
         grid[index] = 2;
         minigameBgrid[index].GetComponent<Image>().sprite = circle;
         minigameBgrid[index].GetComponent<Image>().color = new Color32(196, 192, 198, 255);
         wire2ends[0] = index;
-        index = 31;
+        wire2.Add(index);
+        for (int i = 0; i < length; i++)
+        {
+            int direction = Random.Range(0, 4);
+            switch (direction)
+            {
+                case 0:
+                    //up
+                    index += 1;
+                    direction = 1;
+                    break;
+                case 1:
+                    //right
+                    index += 6;
+                    direction = 6;
+                    break;
+                case 2:
+                    //down
+                    index -= 1;
+                    direction = -1;
+                    break;
+                case 3:
+                    //left
+                    index -= 6;
+                    direction = -6;
+                    break;
+                default:
+                    break;
+            }
+            if (index < 0 || index > 35)
+            {
+                index -= direction * 2;
+            }
+            if (wire1.Contains(index) || wire2.Contains(index))
+            {
+                i -= 1;
+            }
+            else 
+            { 
+                wire2.Add(index);
+            }
+            if ((wire1.Contains(index + 1) || wire2.Contains(index + 1) || index + 1 > 35) &&
+                (wire1.Contains(index - 1) || wire2.Contains(index - 1) || index - 1 < 0) &&
+                (wire1.Contains(index + 6) || wire2.Contains(index + 6) || index + 1 > 35) &&
+                (wire1.Contains(index - 6) || wire2.Contains(index - 6) || index - 1 < 0))
+            {
+                break;
+            }
+        }
         grid[index] = 2;
         minigameBgrid[index].GetComponent<Image>().sprite = circle;
         minigameBgrid[index].GetComponent<Image>().color = new Color32(196, 192, 198, 255);
         wire2ends[1] = index;
-        index = 27;
+
+        //generate wire 3
+        length = Random.Range(2, 11);
+        index = Random.Range(0, 36);
+        while (wire1.Contains(index) || wire2.Contains(index))
+        {
+            index = Random.Range(0, 36);
+        }
+        if ((wire1.Contains(index + 1) || wire2.Contains(index + 1) || index + 1 > 35) && (wire1.Contains(index - 1) || wire2.Contains(index - 1) || index - 1 < 0) &&
+            (wire1.Contains(index + 6) || wire2.Contains(index + 6) || index + 6 > 35) && (wire1.Contains(index - 6) || wire2.Contains(index - 6) || index - 6 < 0))
+        {
+            wire2.Add(index);
+        }
+        while (wire1.Contains(index) || wire2.Contains(index))
+        {
+            index = Random.Range(0, 36);
+        }
+        if ((wire1.Contains(index + 1) || wire2.Contains(index + 1) || index + 1 > 35) && (wire1.Contains(index - 1) || wire2.Contains(index - 1) || index - 1 < 0) &&
+            (wire1.Contains(index + 6) || wire2.Contains(index + 6) || index + 6 > 35) && (wire1.Contains(index - 6) || wire2.Contains(index - 6) || index - 6 < 0))
+        {
+            wire2.Add(index);
+        }
+        while (wire1.Contains(index) || wire2.Contains(index))
+        {
+            index = Random.Range(0, 36);
+        }
         grid[index] = 3;
         minigameBgrid[index].GetComponent<Image>().sprite = circle;
         minigameBgrid[index].GetComponent<Image>().color = new Color32(136, 129, 142, 255);
         wire3ends[0] = index;
-        index = 35;
+        wire3.Add(index);
+        for (int i = 0; i < length; i++)
+        {
+            int direction = Random.Range(0, 4);
+            switch (direction)
+            {
+                case 0:
+                    //up
+                    index += 1;
+                    direction = 1;
+                    break;
+                case 1:
+                    //right
+                    index += 6;
+                    direction = 6;
+                    break;
+                case 2:
+                    //down
+                    index -= 1;
+                    direction = -1;
+                    break;
+                case 3:
+                    //left
+                    index -= 6;
+                    direction = -6;
+                    break;
+                default:
+                    break;
+            }
+            if (index < 0 || index > 35)
+            {
+                index -= direction * 2;
+            }
+            if (wire1.Contains(index) || wire2.Contains(index) || wire3.Contains(index))
+            {
+                i -= 1;
+            }
+            else
+            {
+                wire3.Add(index);
+            }
+            if ((wire1.Contains(index + 1) || wire2.Contains(index + 1) || wire3.Contains(index + 1) || index + 1 > 35) &&
+                (wire1.Contains(index - 1) || wire2.Contains(index - 1) || wire3.Contains(index - 1) || index - 1 < 0) &&
+                (wire1.Contains(index + 6) || wire2.Contains(index + 6) || wire3.Contains(index + 6) || index + 1 > 35) &&
+                (wire1.Contains(index - 6) || wire2.Contains(index - 6) || wire3.Contains(index - 6) || index - 1 < 0)) 
+            {
+                break;
+            }
+        }
         grid[index] = 3;
         minigameBgrid[index].GetComponent<Image>().sprite = circle;
         minigameBgrid[index].GetComponent<Image>().color = new Color32(136, 129, 142, 255);
         wire3ends[1] = index;
+
         //generate blocks
-        index = 9;
-        grid[index] = -1;
-        minigameBgrid[index].GetComponent<Image>().sprite = block;
-        minigameBgrid[index].GetComponent<Image>().color = new Color32(18, 3, 29, 255);
-        index = 25;
-        grid[index] = -1;
-        minigameBgrid[index].GetComponent<Image>().sprite = block;
-        minigameBgrid[index].GetComponent<Image>().color = new Color32(18, 3, 29, 255);
-        index = 34;
-        grid[index] = -1;
-        minigameBgrid[index].GetComponent<Image>().sprite = block;
-        minigameBgrid[index].GetComponent<Image>().color = new Color32(18, 3, 29, 255);
+        int blocks = Random.Range(3, 11);
+        for (int i = 0; i < blocks; i++)
+        {
+            index = Random.Range(0, 36);
+            while (wire1.Contains(index) || wire2.Contains(index) || wire3.Contains(index) || grid[index] == -1)
+            {
+                index = Random.Range(0, 36);
+            }
+            grid[index] = -1;
+            minigameBgrid[index].GetComponent<Image>().sprite = block;
+            minigameBgrid[index].GetComponent<Image>().color = new Color32(18, 3, 29, 255);
+        }
+        wire1.Clear();
+        wire2.Clear();
+        wire3.Clear();
     }
 
     // Update is called once per frame
@@ -114,7 +305,6 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
                 {
                     if (lastWirePlaced == -1)
                     {
-                        audioClipManager.PlayClick();
                         AddToLine(i, grid[i]);
                         lastWirePlaced = i;
                         dragging = true;
@@ -295,7 +485,6 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
 
     public void dropWire()
     {
-        audioClipManager.PlayClick();
         if (lastWirePlaced == -1)
             return;
         if (grid[lastWirePlaced] != -1)
@@ -327,7 +516,6 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
             }
             if (wires >= 3)
             {
-                audioClipManager.PlayCongrats();
                 endScreen.SetActive(true);
             }
         }
@@ -343,26 +531,20 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
             case 1:
                 if (!wire1.Contains(index))
                     wire1.Add(index);
-                else {
+                else
                     ClearLine(1);
-                    audioClipManager.PlayIncorrect();
-                }
                 break;
             case 2:
                 if (!wire2.Contains(index))
                     wire2.Add(index);
-                else{
+                else
                     ClearLine(2);
-                    audioClipManager.PlayIncorrect();
-                }
                 break;
             case 3:
                 if (!wire3.Contains(index))
                     wire3.Add(index);
-                else{
+                else
                     ClearLine(3);
-                    audioClipManager.PlayIncorrect();
-                }
                 break;
             default:
                 break;
