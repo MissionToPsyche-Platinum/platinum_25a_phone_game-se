@@ -11,6 +11,62 @@ public class InventoryController : MonoBehaviour
 
     private ItemDictionary itemDictionary;
 
+    /// <summary>Returns true if inventory contains at least one of each given item ID.</summary>
+    public bool HasAllItems(IReadOnlyList<int> itemIds)
+    {
+        if (itemIds == null || itemIds.Count == 0) return true;
+        if (inventoryPanel == null) return false;
+
+        foreach (int needId in itemIds)
+        {
+            bool found = false;
+            foreach (Transform slotTransform in inventoryPanel.transform)
+            {
+                Slot slot = slotTransform.GetComponent<Slot>();
+                if (slot == null || slot.currentItem == null) continue;
+                Item item = slot.currentItem.GetComponent<Item>();
+                if (item != null && item.ID == needId) { found = true; break; }
+            }
+            if (!found) return false;
+        }
+        return true;
+    }
+
+    /// <summary>Removes one of each given item ID from inventory. Returns false if any are missing (no items removed).</summary>
+    public bool RemoveItems(IReadOnlyList<int> itemIds)
+    {
+        if (itemIds == null || itemIds.Count == 0) return true;
+        if (inventoryPanel == null) return false;
+
+        // Build list of slot+item to remove: one slot per required ID
+        var toRemove = new List<(Transform slot, GameObject item)>();
+        foreach (int needId in itemIds)
+        {
+            bool found = false;
+            foreach (Transform slotTransform in inventoryPanel.transform)
+            {
+                Slot slot = slotTransform.GetComponent<Slot>();
+                if (slot == null || slot.currentItem == null) continue;
+                Item item = slot.currentItem.GetComponent<Item>();
+                if (item != null && item.ID == needId)
+                {
+                    toRemove.Add((slotTransform, slot.currentItem));
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) return false;
+        }
+
+        foreach (var (slotTransform, itemObj) in toRemove)
+        {
+            Slot slot = slotTransform.GetComponent<Slot>();
+            if (slot != null) slot.currentItem = null;
+            Destroy(itemObj);
+        }
+        return true;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

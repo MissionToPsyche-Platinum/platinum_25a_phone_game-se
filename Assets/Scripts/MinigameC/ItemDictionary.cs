@@ -41,4 +41,15 @@ public class ItemDictionary : MonoBehaviour
             return null;
         }
     }
+
+    /// <summary>Returns display name for an item ID (from prefab's Item.displayName), or a fallback.</summary>
+    public string GetDisplayName(int itemId)
+    {
+        if (itemPrefabs == null) return $"Item {itemId}";
+        int index = itemId - 1;
+        if (index < 0 || index >= itemPrefabs.Count) return $"Item {itemId}";
+        Item item = itemPrefabs[index].GetComponent<Item>();
+        if (item != null && !string.IsNullOrEmpty(item.displayName)) return item.displayName;
+        return $"Item {itemId}";
+    }
 }

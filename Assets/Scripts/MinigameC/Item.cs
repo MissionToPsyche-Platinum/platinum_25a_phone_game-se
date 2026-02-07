@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    // Start is called before the first frame update
     public int ID;
+    [Tooltip("Display name for objectives and UI (e.g. 'Magnetometer Parts').")]
+    public string displayName;
 }

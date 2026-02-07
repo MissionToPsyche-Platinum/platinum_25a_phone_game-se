@@ -14,9 +14,22 @@ public class PhaseCAssemblyController : MonoBehaviour
     private const string NpcReview = "Dr. Priya Patel";
     private const string NpcIntegration = "Dr. James Thompson";
 
+    // Item IDs (1-based; must match ItemDictionary prefab list order)
+    private static readonly int IdMagnetometerParts = 1;
+    private static readonly int IdWiring = 2;
+    private static readonly int IdCameraSensor = 3;
+    private static readonly int IdSpectrometerCore = 4;
+    private static readonly int IdInsulation = 5;
+
     private int currentStepIndex;
     private List<PhaseCStep> steps;
     private readonly Dictionary<string, npc> npcByName = new Dictionary<string, npc>();
+
+    /// <summary>Step 1 (Instrument Build): 0 = none, 1 = magnetometer, 2 = imager, 3 = spectrometer. Step completes when 3 and dialogue closed.</summary>
+    private int instrumentsBuilt;
+
+    private InventoryController inventoryController;
+    private ItemDictionary itemDictionary;
 
     public event Action<StepInfo> StepChanged;
 
@@ -55,6 +68,8 @@ public class PhaseCAssemblyController : MonoBehaviour
             return;
         }
 
+        inventoryController = FindFirstObjectByType<InventoryController>();
+        itemDictionary = FindFirstObjectByType<ItemDictionary>();
         BuildSteps();
         CacheNpcs();
         AttachStepTriggers();
@@ -69,11 +84,28 @@ public class PhaseCAssemblyController : MonoBehaviour
             return StepInfo.Empty;
 
         if (currentStepIndex >= steps.Count)
-            return new StepInfo("", "Phase C complete", "", "Thank you for playing.", 0, steps.Count);
+            return new StepInfo("", "Phase C complete", "", "Thank you for playing.", null, 0, steps.Count);
 
         int safeIndex = Mathf.Clamp(currentStepIndex, 0, steps.Count - 1);
         PhaseCStep step = steps[safeIndex];
-        return new StepInfo(step.Id, step.Title, step.CompletionNpc, step.Summary, safeIndex + 1, steps.Count);
+        string collectObjective = GetCollectObjective(safeIndex, step);
+        return new StepInfo(step.Id, step.Title, step.CompletionNpc, step.Summary, collectObjective, safeIndex + 1, steps.Count);
+    }
+
+    private string GetCollectObjective(int stepIndex, PhaseCStep step)
+    {
+        if (stepIndex != 0 || itemDictionary == null) return null;
+        if (instrumentsBuilt >= 3) return null;
+
+        int[][] recipes = GetInstrumentRecipes();
+        int next = instrumentsBuilt;
+        if (next < 0 || next >= recipes.Length) return null;
+
+        int[] ids = recipes[next];
+        var names = new List<string>();
+        foreach (int id in ids)
+            names.Add(itemDictionary.GetDisplayName(id));
+        return "Collect: " + string.Join(", ", names) + ". Bring to " + step.CompletionNpc + ".";
     }
 
     public string[] GetDialogueLinesForNpc(string npcName)
@@ -84,7 +116,82 @@ public class PhaseCAssemblyController : MonoBehaviour
         }
 
         int safeIndex = Mathf.Clamp(currentStepIndex, 0, steps.Count - 1);
+
+        // Step 1 Instrument Build: deliver items to Sarah when player has the next recipe
+        if (safeIndex == 0 && npcName == NpcInstruments)
+        {
+            TryDeliverInstrumentBuild();
+            string[] instrumentLines = GetInstrumentBuildDialogueForSarah();
+            if (instrumentLines != null && instrumentLines.Length > 0)
+                return instrumentLines;
+        }
+
         return steps[safeIndex].GetNpcLines(npcName);
+    }
+
+    private static int[][] GetInstrumentRecipes()
+    {
+        return new[]
+        {
+            new[] { IdMagnetometerParts, IdWiring },
+            new[] { IdCameraSensor, IdWiring },
+            new[] { IdSpectrometerCore, IdInsulation }
+        };
+    }
+
+    /// <summary>If player has items for the next instrument, consume them and increment instrumentsBuilt. Called when opening dialogue with Sarah on step 1.</summary>
+    private void TryDeliverInstrumentBuild()
+    {
+        if (currentStepIndex != 0 || inventoryController == null) return;
+        if (instrumentsBuilt >= 3) return;
+
+        int[][] recipes = GetInstrumentRecipes();
+        int[] nextRecipe = recipes[instrumentsBuilt];
+        if (inventoryController.HasAllItems(nextRecipe) && inventoryController.RemoveItems(nextRecipe))
+        {
+            instrumentsBuilt++;
+            NotifyStepChanged();
+        }
+    }
+
+    private string[] GetInstrumentBuildDialogueForSarah()
+    {
+        if (instrumentsBuilt == 0)
+        {
+            return new[]
+            {
+                "Welcome to the instrument team. We're building three science instruments for Psyche.",
+                "First up: the Magnetometer. It'll look for evidence of an ancient magnetic field. I need Magnetometer Parts and Wiring. Gather those and bring them to me.",
+                "Parts spawn around the facility. Once you have them, come back and we'll lock in the first instrument."
+            };
+        }
+        if (instrumentsBuilt == 1)
+        {
+            return new[]
+            {
+                "Magnetometer's done. Next is the Multispectral Imager. It'll characterize the surface in visible and near-infrared.",
+                "I need a Camera Sensor and Wiring. Find them and bring them here.",
+                "Come back when you've got the parts."
+            };
+        }
+        if (instrumentsBuilt == 2)
+        {
+            return new[]
+            {
+                "Imager's complete. Last one: the Gamma-Ray and Neutron Spectrometer for elemental composition.",
+                "I need the Spectrometer Core and Insulation. Bring those and we'll close out the instrument suite.",
+                "See you when you have them."
+            };
+        }
+        if (instrumentsBuilt == 3)
+        {
+            return new[]
+            {
+                "All three instruments are complete. We've locked in the instrument suite for Psyche.",
+                "Once we've got these signed off, we move on to the bus. Come back when you're ready and we'll close out this step."
+            };
+        }
+        return null;
     }
 
     public void NotifyDialogueClosed(string npcName)
@@ -100,10 +207,14 @@ public class PhaseCAssemblyController : MonoBehaviour
         }
 
         PhaseCStep currentStep = steps[currentStepIndex];
-        if (currentStep.IsCompletionNpc(npcName))
-        {
-            AdvanceStep();
-        }
+        if (!currentStep.IsCompletionNpc(npcName))
+            return;
+
+        // Step 1 (Instrument Build) only completes when all three instruments have been delivered
+        if (currentStepIndex == 0 && instrumentsBuilt < 3)
+            return;
+
+        AdvanceStep();
     }
 
     public void NotifyNpcInRange(string npcName, int stepIndex)
@@ -427,21 +538,24 @@ public class PhaseCAssemblyController : MonoBehaviour
 
     public readonly struct StepInfo
     {
-        public static readonly StepInfo Empty = new StepInfo("", "", "", "", 0, 0);
+        public static readonly StepInfo Empty = new StepInfo("", "", "", "", null, 0, 0);
 
         public string Id { get; }
         public string Title { get; }
         public string CompletionNpc { get; }
         public string Summary { get; }
+        /// <summary>When set (e.g. Step 1 Instrument Build), show this as the objective instead of Summary.</summary>
+        public string CollectObjective { get; }
         public int StepNumber { get; }
         public int StepCount { get; }
 
-        public StepInfo(string id, string title, string completionNpc, string summary, int stepNumber, int stepCount)
+        public StepInfo(string id, string title, string completionNpc, string summary, string collectObjective, int stepNumber, int stepCount)
         {
             Id = id;
             Title = title;
             CompletionNpc = completionNpc;
             Summary = summary;
+            CollectObjective = collectObjective;
             StepNumber = stepNumber;
             StepCount = stepCount;
         }

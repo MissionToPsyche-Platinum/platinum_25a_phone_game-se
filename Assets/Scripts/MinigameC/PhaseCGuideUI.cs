@@ -33,7 +33,7 @@ public class PhaseCGuideUI : MonoBehaviour
         ("Months pass.", "The instrument suite is locked in. The team turns to the spacecraft bus."),
         ("May 2020.", "The bus is complete. The Critical Design Review is next."),
         ("Approved.", "CDR is complete. The team moves to Systems Integration Review."),
-        ("January 2021.", "Systems Integration Review is complete. Final approval—Key Decision Point D—is next.")
+        ("January 2021.", "Systems Integration Review is complete. Final approval, Key Decision Point D, is next.")
     };
 
     private void Awake()
@@ -396,7 +396,7 @@ public class PhaseCGuideUI : MonoBehaviour
         }
 
         stepTitleText.text = $"Step {stepInfo.StepNumber} of {stepInfo.StepCount}: {stepInfo.Title}";
-        objectiveText.text = stepInfo.Summary;
+        objectiveText.text = !string.IsNullOrEmpty(stepInfo.CollectObjective) ? stepInfo.CollectObjective : stepInfo.Summary;
         talkToText.text = $"Talk to: {stepInfo.CompletionNpc}";
         controlsText.text = "E or Space near NPC to talk";
 
