@@ -33,11 +33,11 @@ public class PhaseCGuideUI : MonoBehaviour
     {
         (
             "Science Payload Locked In",
-            "You've helped lock in Psyche's three science instruments: the Magnetometer (to search for an ancient magnetic field at the asteroid), the Multispectral Imager (to map the surface in visible and near-infrared light), and the Gamma-Ray and Neutron Spectrometer (to reveal elemental composition). This instrument suite is the heart of the mission's science. Next: X-band radio and laser communication."
+            "You've helped lock in Psyche's three science instruments: the Magnetometer (to search for an ancient magnetic field at the asteroid), the Multispectral Imager (to map the surface in visible and near-infrared light), and the Gamma-Ray and Neutron Spectrometer (to reveal elemental composition). This instrument suite is the heart of the mission's science. Next: X-band radio and laser communication. "
         ),
         (
             "X-Band Radio and Laser Communication Locked In",
-            "You've helped Dr. Priya Patel lock in both communication systems. X-band radio is the primary link for commanding the spacecraft and receiving data from deep space. Laser communication will send high-rate data back to Earth. With these set, the team can move to the spacecraft bus. Next: see Dr. Marcus Rodriguez."
+            "You've helped Dr. Priya Patel lock in both communication systems. X-band radio is the primary link for commanding the spacecraft and receiving data from deep space. Laser communication will send high-rate data back to Earth. With these set, the team can move to the spacecraft bus. Next: see Dr. Marcus Rodriguez. "
         ),
         (
             "Spacecraft Bus Complete: May 2020",

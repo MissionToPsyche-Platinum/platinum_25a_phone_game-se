@@ -50,7 +50,7 @@ public class PhaseCAssemblyController : MonoBehaviour
 
     public event Action<StepInfo> StepChanged;
 
-    /// <summary>Fired when the player completes the final step (KDP-D) and Phase C is complete.</summary>
+    /// <summary>Fired when the  player completes the final step (KDP-D) and Phase C is complete.</summary>
     public event Action PhaseCComplete;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
@@ -356,8 +356,8 @@ public class PhaseCAssemblyController : MonoBehaviour
         {
             return new[]
             {
-                "All three instruments are complete. We've locked in the instrument suite for Psyche.",
-                "Next up is communications: X-band radio and laser. Priya runs that. Come back when you're ready and we'll close out this step."
+                "All three instruments are complete. We've locked in the instrument suite for Psyche. ",
+                "Next up is communications: X-band radio and laser. Priya runs that. Come back when you're ready and we'll close out this step. "
             };
         }
         return null;
