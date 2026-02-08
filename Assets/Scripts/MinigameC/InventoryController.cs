@@ -11,58 +11,76 @@ public class InventoryController : MonoBehaviour
 
     private ItemDictionary itemDictionary;
 
-    /// <summary>Returns true if inventory contains at least one of each given item ID.</summary>
+    /// <summary>Returns true if inventory contains at least the required count of each item ID (supports duplicates, e.g. Metal Alloy x2).</summary>
     public bool HasAllItems(IReadOnlyList<int> itemIds)
     {
         if (itemIds == null || itemIds.Count == 0) return true;
         if (inventoryPanel == null) return false;
 
-        foreach (int needId in itemIds)
+        var needCount = new Dictionary<int, int>();
+        foreach (int id in itemIds)
         {
-            bool found = false;
-            foreach (Transform slotTransform in inventoryPanel.transform)
-            {
-                Slot slot = slotTransform.GetComponent<Slot>();
-                if (slot == null || slot.currentItem == null) continue;
-                Item item = slot.currentItem.GetComponent<Item>();
-                if (item != null && item.ID == needId) { found = true; break; }
-            }
-            if (!found) return false;
+            needCount.TryGetValue(id, out int c);
+            needCount[id] = c + 1;
         }
+
+        var haveCount = new Dictionary<int, int>();
+        foreach (Transform slotTransform in inventoryPanel.transform)
+        {
+            Slot slot = slotTransform.GetComponent<Slot>();
+            if (slot == null || slot.currentItem == null) continue;
+            Item item = slot.currentItem.GetComponent<Item>();
+            if (item == null) continue;
+            haveCount.TryGetValue(item.ID, out int c);
+            haveCount[item.ID] = c + 1;
+        }
+
+        foreach (var kv in needCount)
+            if (!haveCount.TryGetValue(kv.Key, out int have) || have < kv.Value) return false;
         return true;
     }
 
-    /// <summary>Removes one of each given item ID from inventory. Returns false if any are missing (no items removed).</summary>
+    /// <summary>Removes the required count of each item ID from inventory (supports duplicates). Returns false if any are missing.</summary>
     public bool RemoveItems(IReadOnlyList<int> itemIds)
     {
         if (itemIds == null || itemIds.Count == 0) return true;
         if (inventoryPanel == null) return false;
 
-        // Build list of slot+item to remove: one slot per required ID
-        var toRemove = new List<(Transform slot, GameObject item)>();
-        foreach (int needId in itemIds)
+        var toRemove = new Dictionary<int, int>();
+        foreach (int id in itemIds)
         {
-            bool found = false;
-            foreach (Transform slotTransform in inventoryPanel.transform)
-            {
-                Slot slot = slotTransform.GetComponent<Slot>();
-                if (slot == null || slot.currentItem == null) continue;
-                Item item = slot.currentItem.GetComponent<Item>();
-                if (item != null && item.ID == needId)
-                {
-                    toRemove.Add((slotTransform, slot.currentItem));
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) return false;
+            toRemove.TryGetValue(id, out int c);
+            toRemove[id] = c + 1;
         }
 
-        foreach (var (slotTransform, itemObj) in toRemove)
+        var slotsById = new Dictionary<int, List<(Transform slot, GameObject item)>>();
+        foreach (Transform slotTransform in inventoryPanel.transform)
         {
             Slot slot = slotTransform.GetComponent<Slot>();
-            if (slot != null) slot.currentItem = null;
-            Destroy(itemObj);
+            if (slot == null || slot.currentItem == null) continue;
+            Item item = slot.currentItem.GetComponent<Item>();
+            if (item == null) continue;
+            int id = item.ID;
+            if (!toRemove.ContainsKey(id)) continue;
+            if (!slotsById.TryGetValue(id, out var list)) { list = new List<(Transform, GameObject)>(); slotsById[id] = list; }
+            list.Add((slotTransform, slot.currentItem));
+        }
+
+        foreach (var kv in toRemove)
+        {
+            if (!slotsById.TryGetValue(kv.Key, out var list) || list.Count < kv.Value) return false;
+        }
+
+        foreach (var kv in toRemove)
+        {
+            var list = slotsById[kv.Key];
+            for (int i = 0; i < kv.Value; i++)
+            {
+                var (slotTransform, itemObj) = list[i];
+                Slot slot = slotTransform.GetComponent<Slot>();
+                if (slot != null) slot.currentItem = null;
+                Destroy(itemObj);
+            }
         }
         return true;
     }

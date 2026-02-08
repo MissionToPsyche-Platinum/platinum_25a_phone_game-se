@@ -15,6 +15,10 @@ public class ItemAutoSpawner : MonoBehaviour
     [SerializeField] private float spawnCheckRadius = 0.4f;
     [SerializeField] private int spawnAttempts = 12;
 
+    [Header("Spawn Bias")]
+    [Tooltip("Chance (0-1) to spawn an item that is needed for the current step. Makes the right parts appear more often.")]
+    [SerializeField] [Range(0f, 1f)] private float preferCurrentStepChance = 0.65f;
+
     private float nextSpawnTime;
     private ItemDictionary itemDictionary;
     private GameObject player;
@@ -93,7 +97,7 @@ public class ItemAutoSpawner : MonoBehaviour
                 continue;
             }
 
-            Item itemPrefab = itemDictionary.itemPrefabs[Random.Range(0, itemDictionary.itemPrefabs.Count)];
+            Item itemPrefab = PickItemPrefab();
             if (itemPrefab == null)
             {
                 continue;
@@ -106,6 +110,30 @@ public class ItemAutoSpawner : MonoBehaviour
             }
             return;
         }
+    }
+
+    private Item PickItemPrefab()
+    {
+        if (itemDictionary == null || itemDictionary.itemPrefabs == null || itemDictionary.itemPrefabs.Count == 0)
+            return null;
+
+        PhaseCAssemblyController controller = PhaseCAssemblyController.Instance;
+        if (controller != null && Random.value < preferCurrentStepChance)
+        {
+            var requiredIds = controller.GetCurrentStepRequiredItemIds();
+            if (requiredIds != null && requiredIds.Count > 0)
+            {
+                int id = requiredIds[Random.Range(0, requiredIds.Count)];
+                int index = id - 1;
+                if (index >= 0 && index < itemDictionary.itemPrefabs.Count)
+                {
+                    Item prefab = itemDictionary.itemPrefabs[index];
+                    if (prefab != null) return prefab;
+                }
+            }
+        }
+
+        return itemDictionary.itemPrefabs[Random.Range(0, itemDictionary.itemPrefabs.Count)];
     }
 
     private bool HasItemAtPosition(Vector2 position)
