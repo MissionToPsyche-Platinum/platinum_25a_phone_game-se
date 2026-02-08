@@ -33,15 +33,19 @@ public class PhaseCGuideUI : MonoBehaviour
     {
         (
             "Science Payload Locked In",
-            "You've helped lock in Psyche's three science instruments: the Magnetometer (to search for an ancient magnetic field at the asteroid), the Multispectral Imager (to map the surface in visible and near-infrared light), and the Gamma-Ray and Neutron Spectrometer (to reveal elemental composition). This instrument suite is the heart of the mission's science. Next: the spacecraft bus that will carry it all."
+            "You've helped lock in Psyche's three science instruments: the Magnetometer (to search for an ancient magnetic field at the asteroid), the Multispectral Imager (to map the surface in visible and near-infrared light), and the Gamma-Ray and Neutron Spectrometer (to reveal elemental composition). This instrument suite is the heart of the mission's science. Next: X-band radio and laser communication."
+        ),
+        (
+            "X-Band Radio and Laser Communication Locked In",
+            "You've helped Dr. Priya Patel lock in both communication systems. X-band radio is the primary link for commanding the spacecraft and receiving data from deep space. Laser communication will send high-rate data back to Earth. With these set, the team can move to the spacecraft bus. Next: see Dr. Marcus Rodriguez."
         ),
         (
             "Spacecraft Bus Complete: May 2020",
-            "The spacecraft bus is the main structure that holds every subsystem and science instrument. With it complete, the team can move to Critical Design Review (CDR), which verifies that the full design meets every requirement before systems are integrated. You're on track for Phase C."
+            "The spacecraft bus is the main structure that holds every subsystem, science instruments, and communications. With it complete, the team can move to Critical Design Review (CDR), which verifies that the full design meets every requirement before systems are integrated. You're on track for Phase C."
         ),
         (
             "Critical Design Review Passed",
-            "CDR confirms the design is ready for the next phase. The team also locked in plans for X-band telecommunications and technology demonstrations, including deep-space laser communications. The next milestone is the Systems Integration Review, which checks that all subsystems can work together as one."
+            "CDR confirms the design is ready for the next phase. X-band and laser communication were already locked in; the CDR verified those plans. The next milestone is the Systems Integration Review, which checks that all subsystems can work together as one."
         ),
         (
             "Systems Integration Review: January 2021",
@@ -51,7 +55,7 @@ public class PhaseCGuideUI : MonoBehaviour
 
     private static readonly (string title, string body) FinalStoryMoment = (
         "Key Decision Point D: Phase C Complete",
-        "NASA has approved the mission to proceed. Phase C (Final Design & Subsystem Fabrication) is complete: instruments locked in, spacecraft bus built, Critical Design Review and Systems Integration Review passed. You've discovered how the real Psyche mission reached this milestone on the way to the asteroid."
+        "NASA has approved the mission to proceed. Phase C (Final Design & Subsystem Fabrication) is complete: instruments locked in, X-band radio and laser communication built, spacecraft bus built, Critical Design Review and Systems Integration Review passed. You've discovered how the real Psyche mission reached this milestone on the way to the asteroid."
     );
 
     private void Awake()
@@ -161,7 +165,8 @@ public class PhaseCGuideUI : MonoBehaviour
         accentRect.anchoredPosition = Vector2.zero;
         accentRect.sizeDelta = new Vector2(0f, PhaseCUITheme.AccentBarHeight);
 
-        // Step progress strip (1–5 dots)
+        // Step progress strip (1-6 dots)
+        const int stepCount = 6;
         GameObject dotsContainer = new GameObject("StepDots");
         dotsContainer.transform.SetParent(panel.transform, false);
         RectTransform dotsRect = dotsContainer.GetComponent<RectTransform>();
@@ -170,10 +175,9 @@ public class PhaseCGuideUI : MonoBehaviour
         dotsRect.anchorMax = new Vector2(0.5f, 1f);
         dotsRect.pivot = new Vector2(0.5f, 1f);
         dotsRect.anchoredPosition = new Vector2(0f, -32f);
-        dotsRect.sizeDelta = new Vector2(5 * PhaseCUITheme.GuideDotSpacing + 8f, 28f);
+        dotsRect.sizeDelta = new Vector2(stepCount * PhaseCUITheme.GuideDotSpacing + 8f, 28f);
 
         stepDots = new List<Image>();
-        int stepCount = 5;
         for (int i = 0; i < stepCount; i++)
         {
             GameObject dot = new GameObject("Dot" + i);
@@ -385,7 +389,7 @@ public class PhaseCGuideUI : MonoBehaviour
 
         stepCompleteRoutine = null;
 
-        if (completedStep >= 1 && completedStep <= 4 && storyMomentRoot != null && storyMomentTitle != null && storyMomentBody != null)
+        if (completedStep >= 1 && completedStep <= 5 && storyMomentRoot != null && storyMomentTitle != null && storyMomentBody != null)
         {
             int index = completedStep - 1;
             if (index >= 0 && index < StoryMoments.Length)

@@ -20,6 +20,14 @@ public class PhaseCAssemblyController : MonoBehaviour
     private static readonly int IdCameraSensor = 3;
     private static readonly int IdSpectrometerCore = 4;
     private static readonly int IdInsulation = 5;
+    private static readonly int IdMetalAlloy = 6;
+    private static readonly int IdCircuitBoard = 7;
+    private static readonly int IdSolarCells = 10;
+    private static readonly int IdBattery = 11;
+    private static readonly int IdRadioAntenna = 12;
+    private static readonly int IdLaserModule = 13;
+    private static readonly int IdNavigationSystem = 14;
+    private static readonly int IdPropellant = 15;
 
     private int currentStepIndex;
     private List<PhaseCStep> steps;
@@ -27,6 +35,15 @@ public class PhaseCAssemblyController : MonoBehaviour
 
     /// <summary>Step 1 (Instrument Build): 0 = none, 1 = magnetometer, 2 = imager, 3 = spectrometer. Step completes when 3 and dialogue closed.</summary>
     private int instrumentsBuilt;
+
+    /// <summary>Step 2 (Communications): 0 = none, 1 = X-band radio, 2 = laser communication. Step completes when 2 and dialogue closed.</summary>
+    private int commsBuilt;
+
+    /// <summary>Step 3 (Spacecraft Bus): 0 = none, 1 = bus frame, 2 = power system. Step completes when 2 and dialogue closed.</summary>
+    private int busBuilt;
+
+    /// <summary>Step 5 (SIR): 0 = none, 1 = propulsion delivered. Step completes when 1 and dialogue closed.</summary>
+    private int propulsionDelivered;
 
     private InventoryController inventoryController;
     private ItemDictionary itemDictionary;
@@ -95,20 +112,119 @@ public class PhaseCAssemblyController : MonoBehaviour
         return new StepInfo(step.Id, step.Title, step.CompletionNpc, step.Summary, collectObjective, safeIndex + 1, steps.Count);
     }
 
+    /// <summary>Returns item IDs needed for the next delivery in the current step (for spawn bias). Empty if no collection step.</summary>
+    public List<int> GetCurrentStepRequiredItemIds()
+    {
+        var ids = new List<int>();
+        if (steps == null || steps.Count == 0 || itemDictionary == null) return ids;
+        int stepIndex = currentStepIndex;
+        if (stepIndex == 0 && instrumentsBuilt < 3)
+        {
+            int[][] r = GetInstrumentRecipes();
+            if (instrumentsBuilt >= 0 && instrumentsBuilt < r.Length) ids.AddRange(r[instrumentsBuilt]);
+        }
+        else if (stepIndex == 1 && commsBuilt < 2)
+        {
+            int[][] r = GetCommunicationsRecipes();
+            if (commsBuilt >= 0 && commsBuilt < r.Length) ids.AddRange(r[commsBuilt]);
+        }
+        else if (stepIndex == 2 && busBuilt < 2)
+        {
+            int[][] r = GetBusRecipes();
+            if (busBuilt >= 0 && busBuilt < r.Length) ids.AddRange(r[busBuilt]);
+        }
+        else if (stepIndex == 4 && propulsionDelivered < 1)
+            ids.AddRange(GetPropulsionRecipe());
+        return ids;
+    }
+
+    /// <summary>World position of the current step's completion NPC, or null if none (e.g. game complete). Used by objective arrow.</summary>
+    public Vector3? GetCurrentStepCompletionNpcWorldPosition()
+    {
+        if (steps == null || steps.Count == 0 || currentStepIndex >= steps.Count) return null;
+        string npcName = steps[currentStepIndex].CompletionNpc;
+        if (string.IsNullOrEmpty(npcName) || !npcByName.TryGetValue(npcName, out npc npcComponent)) return null;
+        return npcComponent.transform.position;
+    }
+
+    /// <summary>Current step index for arrow target locking. -1 if no step.</summary>
+    public int GetCurrentStepIndexForArrow()
+    {
+        if (steps == null || steps.Count == 0 || currentStepIndex >= steps.Count) return -1;
+        return currentStepIndex;
+    }
+
+    /// <summary>Sub-progress within current step so arrow knows when to re-pick target (e.g. after delivering one item).</summary>
+    public int GetCurrentStepSubProgressForArrow()
+    {
+        if (steps == null || steps.Count == 0 || currentStepIndex >= steps.Count) return 0;
+        int sub = 0;
+        if (currentStepIndex == 0) sub = instrumentsBuilt;
+        else if (currentStepIndex == 1) sub = commsBuilt;
+        else if (currentStepIndex == 2) sub = busBuilt;
+        else if (currentStepIndex == 4) sub = propulsionDelivered;
+        return sub;
+    }
+
+    /// <summary>Completion NPC component for current step (for arrow to lock onto transform). Null if none.</summary>
+    public npc GetCompletionNpcComponentForArrow()
+    {
+        if (steps == null || steps.Count == 0 || currentStepIndex >= steps.Count) return null;
+        string npcName = steps[currentStepIndex].CompletionNpc;
+        if (string.IsNullOrEmpty(npcName) || !npcByName.TryGetValue(npcName, out npc npcComponent)) return null;
+        return npcComponent;
+    }
+
     private string GetCollectObjective(int stepIndex, PhaseCStep step)
     {
-        if (stepIndex != 0 || itemDictionary == null) return null;
-        if (instrumentsBuilt >= 3) return null;
+        if (itemDictionary == null) return null;
 
-        int[][] recipes = GetInstrumentRecipes();
-        int next = instrumentsBuilt;
-        if (next < 0 || next >= recipes.Length) return null;
+        if (stepIndex == 0 && instrumentsBuilt < 3)
+        {
+            int[][] recipes = GetInstrumentRecipes();
+            int next = instrumentsBuilt;
+            if (next < 0 || next >= recipes.Length) return null;
+            int[] ids = recipes[next];
+            var names = new List<string>();
+            foreach (int id in ids)
+                names.Add(itemDictionary.GetDisplayName(id));
+            return "Collect: " + string.Join(", ", names) + ". Bring to " + step.CompletionNpc + ".";
+        }
 
-        int[] ids = recipes[next];
-        var names = new List<string>();
-        foreach (int id in ids)
-            names.Add(itemDictionary.GetDisplayName(id));
-        return "Collect: " + string.Join(", ", names) + ". Bring to " + step.CompletionNpc + ".";
+        if (stepIndex == 1 && commsBuilt < 2)
+        {
+            int[][] recipes = GetCommunicationsRecipes();
+            int next = commsBuilt;
+            if (next < 0 || next >= recipes.Length) return null;
+            int[] ids = recipes[next];
+            var names = new List<string>();
+            foreach (int id in ids)
+                names.Add(itemDictionary.GetDisplayName(id));
+            return "Collect: " + string.Join(", ", names) + ". Bring to " + step.CompletionNpc + ".";
+        }
+
+        if (stepIndex == 2 && busBuilt < 2)
+        {
+            int[][] recipes = GetBusRecipes();
+            int next = busBuilt;
+            if (next < 0 || next >= recipes.Length) return null;
+            int[] ids = recipes[next];
+            var names = new List<string>();
+            foreach (int id in ids)
+                names.Add(itemDictionary.GetDisplayName(id));
+            return "Collect: " + string.Join(", ", names) + ". Bring to " + step.CompletionNpc + ".";
+        }
+
+        if (stepIndex == 4 && propulsionDelivered < 1)
+        {
+            int[] ids = GetPropulsionRecipe();
+            var names = new List<string>();
+            foreach (int id in ids)
+                names.Add(itemDictionary.GetDisplayName(id));
+            return "Collect: " + string.Join(", ", names) + ". Bring to " + step.CompletionNpc + ".";
+        }
+
+        return null;
     }
 
     public string[] GetDialogueLinesForNpc(string npcName)
@@ -129,6 +245,33 @@ public class PhaseCAssemblyController : MonoBehaviour
                 return instrumentLines;
         }
 
+        // Step 2 Communications: deliver X-band radio and laser comm to Priya
+        if (safeIndex == 1 && npcName == NpcReview)
+        {
+            TryDeliverCommunications();
+            string[] commsLines = GetCommunicationsDialogueForPriya();
+            if (commsLines != null && commsLines.Length > 0)
+                return commsLines;
+        }
+
+        // Step 3 Bus: deliver bus frame and power system to Marcus
+        if (safeIndex == 2 && npcName == NpcBus)
+        {
+            TryDeliverBus();
+            string[] busLines = GetBusDialogueForMarcus();
+            if (busLines != null && busLines.Length > 0)
+                return busLines;
+        }
+
+        // Step 5 SIR: deliver propulsion components to James
+        if (safeIndex == 4 && npcName == NpcIntegration)
+        {
+            TryDeliverPropulsion();
+            string[] sirLines = GetSIRDialogueForJames();
+            if (sirLines != null && sirLines.Length > 0)
+                return sirLines;
+        }
+
         return steps[safeIndex].GetNpcLines(npcName);
     }
 
@@ -140,6 +283,29 @@ public class PhaseCAssemblyController : MonoBehaviour
             new[] { IdCameraSensor, IdWiring },
             new[] { IdSpectrometerCore, IdInsulation }
         };
+    }
+
+    private static int[][] GetCommunicationsRecipes()
+    {
+        return new[]
+        {
+            new[] { IdRadioAntenna, IdWiring, IdCircuitBoard },
+            new[] { IdLaserModule, IdCameraSensor }
+        };
+    }
+
+    private static int[][] GetBusRecipes()
+    {
+        return new[]
+        {
+            new[] { IdMetalAlloy, IdMetalAlloy },
+            new[] { IdSolarCells, IdBattery, IdWiring }
+        };
+    }
+
+    private static int[] GetPropulsionRecipe()
+    {
+        return new[] { IdPropellant, IdMetalAlloy, IdNavigationSystem };
     }
 
     /// <summary>If player has items for the next instrument, consume them and increment instrumentsBuilt. Called when opening dialogue with Sarah on step 1.</summary>
@@ -191,7 +357,130 @@ public class PhaseCAssemblyController : MonoBehaviour
             return new[]
             {
                 "All three instruments are complete. We've locked in the instrument suite for Psyche.",
-                "Once we've got these signed off, we move on to the bus. Come back when you're ready and we'll close out this step."
+                "Next up is communications: X-band radio and laser. Priya runs that. Come back when you're ready and we'll close out this step."
+            };
+        }
+        return null;
+    }
+
+    /// <summary>If player has items for the next communications build, consume them and increment commsBuilt. Called when opening dialogue with Priya on step 2.</summary>
+    private void TryDeliverCommunications()
+    {
+        if (currentStepIndex != 1 || inventoryController == null) return;
+        if (commsBuilt >= 2) return;
+
+        int[][] recipes = GetCommunicationsRecipes();
+        int[] nextRecipe = recipes[commsBuilt];
+        if (inventoryController.HasAllItems(nextRecipe) && inventoryController.RemoveItems(nextRecipe))
+        {
+            commsBuilt++;
+            NotifyStepChanged();
+        }
+    }
+
+    private string[] GetCommunicationsDialogueForPriya()
+    {
+        if (commsBuilt == 0)
+        {
+            return new[]
+            {
+                "I'm Dr. Priya Patel, communications. We need two systems to talk to Earth from deep space: X-band radio and optical laser communication.",
+                "First is the X-band radio. It's our primary link for commanding the spacecraft and receiving data. I need a Radio Antenna, Wiring, and a Circuit Board. Bring those and we'll lock it in.",
+                "Once you have the parts, come back and we'll get the X-band system ready."
+            };
+        }
+        if (commsBuilt == 1)
+        {
+            return new[]
+            {
+                "X-band radio is done. Next is laser communication: we'll send data back with lasers from deep space. Much higher data rates.",
+                "I need the Laser Module and a Camera Sensor. Find them and bring them here.",
+                "When you've got those, we'll close out the communications suite."
+            };
+        }
+        if (commsBuilt == 2)
+        {
+            return new[]
+            {
+                "Both systems are complete. We've locked in X-band radio and laser communication for Psyche.",
+                "The bus team can move forward with a clear comms design. Come back when you're ready and we'll close out this step."
+            };
+        }
+        return null;
+    }
+
+    private void TryDeliverBus()
+    {
+        if (currentStepIndex != 2 || inventoryController == null) return;
+        if (busBuilt >= 2) return;
+        int[][] recipes = GetBusRecipes();
+        int[] nextRecipe = recipes[busBuilt];
+        if (inventoryController.HasAllItems(nextRecipe) && inventoryController.RemoveItems(nextRecipe))
+        {
+            busBuilt++;
+            NotifyStepChanged();
+        }
+    }
+
+    private string[] GetBusDialogueForMarcus()
+    {
+        if (busBuilt == 0)
+        {
+            return new[]
+            {
+                "Marcus here. With instruments and comms set, we're building the bus: the structure that holds everything.",
+                "First is the bus frame. I need two Metal Alloy units. Bring those and we'll get the frame locked in.",
+                "Parts show up around the facility. Come back when you have them."
+            };
+        }
+        if (busBuilt == 1)
+        {
+            return new[]
+            {
+                "Frame's done. Next is power: Solar Cells, a Battery, and Wiring for the distribution. That'll keep the whole spacecraft powered.",
+                "Gather those and bring them here. Then we can close out the bus."
+            };
+        }
+        if (busBuilt == 2)
+        {
+            return new[]
+            {
+                "Bus frame and power system are complete. The spacecraft bus is ready for the next phase.",
+                "Priya will run the Critical Design Review. Come back when you're ready and we'll close out this step."
+            };
+        }
+        return null;
+    }
+
+    private void TryDeliverPropulsion()
+    {
+        if (currentStepIndex != 4 || inventoryController == null) return;
+        if (propulsionDelivered >= 1) return;
+        int[] recipe = GetPropulsionRecipe();
+        if (inventoryController.HasAllItems(recipe) && inventoryController.RemoveItems(recipe))
+        {
+            propulsionDelivered++;
+            NotifyStepChanged();
+        }
+    }
+
+    private string[] GetSIRDialogueForJames()
+    {
+        if (propulsionDelivered == 0)
+        {
+            return new[]
+            {
+                "James Thompson, systems integration. We're at the Systems Integration Review: we need to confirm every subsystem is ready.",
+                "Propulsion is part of that. I need Propellant, Metal Alloy, and the Navigation System. Bring those and we'll lock in propulsion for the review.",
+                "Once that's in, we can close out SIR and move to final approval."
+            };
+        }
+        if (propulsionDelivered == 1)
+        {
+            return new[]
+            {
+                "Propulsion components are in. The Systems Integration Review can confirm all subsystems work together.",
+                "Come back when you're ready and we'll close out this step. Then it's Key Decision Point D with Sarah."
             };
         }
         return null;
@@ -217,23 +506,30 @@ public class PhaseCAssemblyController : MonoBehaviour
         if (currentStepIndex == 0 && instrumentsBuilt < 3)
             return;
 
+        // Step 2 (Communications) only completes when both X-band and laser comm are delivered
+        if (currentStepIndex == 1 && commsBuilt < 2)
+            return;
+
+        // Step 3 (Bus) only completes when both bus frame and power system are delivered
+        if (currentStepIndex == 2 && busBuilt < 2)
+            return;
+
+        // Step 5 (SIR) only completes when propulsion is delivered
+        if (currentStepIndex == 4 && propulsionDelivered < 1)
+            return;
+
         bool wasLastStep = currentStepIndex == steps.Count - 1;
         AdvanceStep();
         if (wasLastStep)
             PhaseCComplete?.Invoke();
     }
 
-    public void NotifyNpcInRange(string npcName, int stepIndex)
+    public void NotifyNpcInRange(string npcName)
     {
-        if (currentStepIndex != stepIndex)
-        {
-            return;
-        }
-
+        if (currentStepIndex >= steps.Count) return;
+        if (!steps[currentStepIndex].IsCompletionNpc(npcName)) return;
         if (npcByName.TryGetValue(npcName, out npc npcComponent))
-        {
             npcComponent.RefreshDialogueLines();
-        }
     }
 
     private void AdvanceStep()
@@ -313,21 +609,16 @@ public class PhaseCAssemblyController : MonoBehaviour
 
     private void AttachStepTriggers()
     {
+        HashSet<string> completionNpcs = new HashSet<string>();
+        foreach (PhaseCStep step in steps)
+            completionNpcs.Add(step.CompletionNpc);
         foreach (KeyValuePair<string, npc> entry in npcByName)
         {
-            int stepIndex = GetStepIndexForCompletionNpc(entry.Key);
-            if (stepIndex < 0)
-            {
-                continue;
-            }
-
+            if (!completionNpcs.Contains(entry.Key)) continue;
             PhaseCStepTrigger trigger = entry.Value.GetComponent<PhaseCStepTrigger>();
             if (trigger == null)
-            {
                 trigger = entry.Value.gameObject.AddComponent<PhaseCStepTrigger>();
-            }
-
-            trigger.Initialize(entry.Key, stepIndex);
+            trigger.Initialize(entry.Key);
         }
     }
 
@@ -348,7 +639,7 @@ public class PhaseCAssemblyController : MonoBehaviour
     {
         steps = new List<PhaseCStep>
         {
-            // Step 1: Instrument Build – Dr. Sarah Chen (enthusiastic, science-focused)
+            // Step 1: Instrument Build - Dr. Sarah Chen (enthusiastic, science-focused)
             new PhaseCStep(
                 "C1",
                 "Instrument Build",
@@ -387,9 +678,46 @@ public class PhaseCAssemblyController : MonoBehaviour
                         }
                     }
                 }),
-            // Step 2: Spacecraft Bus Complete – Dr. Marcus Rodriguez (practical, organized)
+            // Step 2: Communications (X-band radio and laser) - Dr. Priya Patel
             new PhaseCStep(
                 "C2",
+                "Communications",
+                NpcReview,
+                "Help Priya lock in X-band radio and laser communication for Psyche.",
+                new Dictionary<string, string[]>
+                {
+                    {
+                        NpcInstruments,
+                        new[]
+                        {
+                            "Instruments are done. Next we need communications: X-band radio and laser. Priya runs that. Go see her and she'll tell you what to collect."
+                        }
+                    },
+                    {
+                        NpcBus,
+                        new[]
+                        {
+                            "The bus waits on communications to be set. Priya's building the X-band and laser systems. Go see her when you get a chance."
+                        }
+                    },
+                    {
+                        NpcReview,
+                        new[]
+                        {
+                            "We need X-band radio for commanding and data, and laser communication for high-rate data from deep space. Bring me the parts and we'll lock them in."
+                        }
+                    },
+                    {
+                        NpcIntegration,
+                        new[]
+                        {
+                            "Systems integration needs a clear comms design first. Priya's locking in X-band and laser. Talk to her to get the communications step done."
+                        }
+                    }
+                }),
+            // Step 3: Spacecraft Bus Complete - Dr. Marcus Rodriguez (practical, organized)
+            new PhaseCStep(
+                "C3",
                 "Spacecraft Bus Complete",
                 NpcBus,
                 "Help Marcus close out the spacecraft bus.",
@@ -399,14 +727,14 @@ public class PhaseCAssemblyController : MonoBehaviour
                         NpcInstruments,
                         new[]
                         {
-                            "The instruments are ready to mount. Marcus is wrapping up the bus so we have somewhere to put them. Go see him when you can."
+                            "Instruments and communications are set. Marcus is wrapping up the bus so we have somewhere to put everything. Go see him when you can."
                         }
                     },
                     {
                         NpcBus,
                         new[]
                         {
-                            "By May 2020 we had the spacecraft bus finished. It's the main structure that holds all the subsystems and science instruments.",
+                            "By May 2020 we had the spacecraft bus finished. It's the main structure that holds all the subsystems, science instruments, and communications.",
                             "Once we sign off on the bus, we move to the Critical Design Review. Come back when you're ready and we'll close out this step."
                         }
                     },
@@ -425,9 +753,9 @@ public class PhaseCAssemblyController : MonoBehaviour
                         }
                     }
                 }),
-            // Step 3: Critical Design Review – Dr. Priya Patel (analytical, calm)
+            // Step 4: Critical Design Review - Dr. Priya Patel (analytical, calm)
             new PhaseCStep(
-                "C3",
+                "C4",
                 "Critical Design Review",
                 NpcReview,
                 "Work with Priya to complete the Critical Design Review.",
@@ -437,7 +765,7 @@ public class PhaseCAssemblyController : MonoBehaviour
                         NpcInstruments,
                         new[]
                         {
-                            "With the bus complete, we're ready for design review. Priya runs the CDR. She'll walk you through what we're locking in."
+                            "With instruments, communications, and the bus complete, we're ready for design review. Priya runs the CDR. She'll walk you through what we're locking in."
                         }
                     },
                     {
@@ -452,7 +780,7 @@ public class PhaseCAssemblyController : MonoBehaviour
                         new[]
                         {
                             "In May 2020 we completed the Critical Design Review. It verifies that the design meets every requirement before we move to full system integration.",
-                            "We also locked in plans for X-band telecommunications and technology demonstrations such as laser communications. When you're ready, we'll approve the review and move forward."
+                            "We had already locked in X-band radio and laser communication; the CDR confirmed those plans. When you're ready, we'll approve the review and move forward."
                         }
                     },
                     {
@@ -463,9 +791,9 @@ public class PhaseCAssemblyController : MonoBehaviour
                         }
                     }
                 }),
-            // Step 4: Systems Integration Review – Dr. James Thompson (collaborative, big picture)
+            // Step 5: Systems Integration Review - Dr. James Thompson (collaborative, big picture)
             new PhaseCStep(
-                "C4",
+                "C5",
                 "Systems Integration Review",
                 NpcIntegration,
                 "Work with James to complete the Systems Integration Review.",
@@ -501,9 +829,9 @@ public class PhaseCAssemblyController : MonoBehaviour
                         }
                     }
                 }),
-            // Step 5: Key Decision Point D – Dr. Sarah Chen (closing the loop)
+            // Step 6: Key Decision Point D - Dr. Sarah Chen (closing the loop)
             new PhaseCStep(
-                "C5",
+                "C6",
                 "Key Decision Point D",
                 NpcInstruments,
                 "Finalize Phase C with Sarah and KDP-D approval.",
@@ -513,7 +841,7 @@ public class PhaseCAssemblyController : MonoBehaviour
                         NpcInstruments,
                         new[]
                         {
-                            "Key Decision Point D is NASA's approval to proceed to the next phase. Instruments built, bus complete, reviews passed.",
+                            "Key Decision Point D is NASA's approval to proceed to the next phase. Instruments built, X-band and laser communication locked in, bus complete, reviews passed.",
                             "When you're ready, we'll close out Phase C together. Two years of design and build, and we're ready for what comes next."
                         }
                     },
