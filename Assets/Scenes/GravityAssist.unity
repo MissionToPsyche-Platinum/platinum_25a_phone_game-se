@@ -7168,7 +7168,8 @@ PrefabInstance:
       propertyPath: spacecraft
       value: 
       objectReference: {fileID: 732825115}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8591347124287625144, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
