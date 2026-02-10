@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class MenuSceneSchange : MonoBehaviour
 {
-    [SerializeField] private GameObject UnavailableScreen;
-
     public void SwitchToSceneMinigameA()
     {
         Debug.Log("Switching to Minigame A");
@@ -33,30 +31,36 @@ public class MenuSceneSchange : MonoBehaviour
 
     public void SwitchToSceneMinigameC()
     {
-        Debug.Log("Switching to Minigame C");
-        UnavailableScreen.SetActive(true);
+
     }
 
     public void SwitchToSceneMinigameD()
     {
-        Debug.Log("Switching to Minigame D");
-        SceneManager.LoadScene("MinigameD-Tutorial");
+
     }
 
     public void SwitchToSceneMinigameE()
     {
-        Debug.Log("Switching to Minigame E");
-        SceneManager.LoadScene("GravityAssist");
+
+    }
+
+    public void SwitchToSceneMinigameFstart()
+    {
+        Debug.Log("Switching to Minigame F start screen");
+        SceneManager.LoadScene("MinigameF_Start");
+
     }
 
     public void SwitchToSceneMinigameF()
     {
         Debug.Log("Switching to Minigame F");
-        UnavailableScreen.SetActive(true);
+        SceneManager.LoadScene("MinigameF");
+
     }
 
-    public void CloseUnavailableScreen()
+    public void SwitchToCentralHub()
     {
-        UnavailableScreen.SetActive(false);
+        Debug.Log("Switching to CentralHub");
+        SceneManager.LoadScene("CentralHub");
     }
 }
