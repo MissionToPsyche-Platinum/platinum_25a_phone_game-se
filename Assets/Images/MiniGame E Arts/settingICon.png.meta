@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: 6fc7df4aef1ca3646afdb9016ee08192
+guid: 606ec6c4d1cedf044a721d89cfcc6292
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7491113600065772389
-    second: Jump-ring_0
+      213: -3730179773016866427
+    second: settingICon_0
+  - first:
+      213: 4606775161276662582
+    second: settingICon_1
+  - first:
+      213: -3402407658358711384
+    second: settingICon_2
+  - first:
+      213: -1072784010114669531
+    second: settingICon_3
+  - first:
+      213: 2919645278016343280
+    second: settingICon_4
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -106,29 +118,17 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Jump-ring_0
+      name: settingICon_0
       rect:
         serializedVersion: 2
         x: 11
-        y: 11
-        width: 490
-        height: 490
+        y: 0
+        width: 1516
+        height: 1024
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -136,8 +136,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b946bffced73a0890800000000000000
-      internalID: -7491113600065772389
+      spriteID: 5818bf0824dbb3cc0800000000000000
+      internalID: -3730179773016866427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: settingICon_1
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 744
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6330df7f99d8eef30800000000000000
+      internalID: 4606775161276662582
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: settingICon_2
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 735
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8abd57ee24838c0d0800000000000000
+      internalID: -3402407658358711384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: settingICon_3
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 638
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 524656c60a4bc11f0800000000000000
+      internalID: -1072784010114669531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: settingICon_4
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 622
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fc8f4259e9a48820800000000000000
+      internalID: 2919645278016343280
       vertices: []
       indices: 
       edges: []
@@ -153,7 +237,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Jump-ring_0: -7491113600065772389
+      settingICon_0: -3730179773016866427
+      settingICon_1: 4606775161276662582
+      settingICon_2: -3402407658358711384
+      settingICon_3: -1072784010114669531
+      settingICon_4: 2919645278016343280
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

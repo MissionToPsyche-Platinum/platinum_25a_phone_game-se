@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 6fc7df4aef1ca3646afdb9016ee08192
+guid: a677af392f0b6674b9d320489a5b7455
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7491113600065772389
-    second: Jump-ring_0
+      213: 2617750605151601512
+    second: BackgroundForPanel_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -106,29 +106,17 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Jump-ring_0
+      name: BackgroundForPanel_0
       rect:
         serializedVersion: 2
-        x: 11
-        y: 11
-        width: 490
-        height: 490
+        x: 0
+        y: 0
+        width: 1247
+        height: 683
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -136,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b946bffced73a0890800000000000000
-      internalID: -7491113600065772389
+      spriteID: 86300a25e4e145420800000000000000
+      internalID: 2617750605151601512
       vertices: []
       indices: 
       edges: []
@@ -153,7 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Jump-ring_0: -7491113600065772389
+      BackgroundForPanel_0: 2617750605151601512
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
