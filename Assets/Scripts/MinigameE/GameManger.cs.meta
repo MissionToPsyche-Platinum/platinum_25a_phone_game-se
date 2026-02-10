@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/PointTracker.cs.meta
+guid: d682a6c770acf134f9252938c3480253
+========
 guid: 36802ee78a4416942aea10fb68e3147b
+>>>>>>>> dev:Assets/Scripts/GameManger.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
