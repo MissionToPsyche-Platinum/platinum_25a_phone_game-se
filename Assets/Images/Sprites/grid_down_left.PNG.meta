@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9987d0cac8b23b54eae6200d3e6ce10d
+guid: b688b2b16a6127644988869ed9d44b0e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -180163140088125795
-    second: toggle_circle_0
+      213: -1731432198644239881
+    second: grid_down_left_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: toggle_circle_0
+      name: grid_down_left_0
       rect:
         serializedVersion: 2
-        x: 747
-        y: 592
-        width: 511
-        height: 507
+        x: 0
+        y: 0
+        width: 1600
+        height: 1600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d96ad61249eef7df0800000000000000
-      internalID: -180163140088125795
+      spriteID: 7f1f22fb697b8f7e0800000000000000
+      internalID: -1731432198644239881
       vertices: []
       indices: 
       edges: []
@@ -140,8 +140,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      toggle_circle_0: -180163140088125795
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
