@@ -1,0 +1,3324 @@
+fileFormatVersion: 2
+guid: 5e766ed9c0e2db0429b0b512759b6e3a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2484601183152103202
+    second: ContinueButton_0
+  - first:
+      213: -167407846366928881
+    second: ContinueButton_1
+  - first:
+      213: 4029745940991211579
+    second: ContinueButton_2
+  - first:
+      213: 6327792345499367415
+    second: ContinueButton_3
+  - first:
+      213: 9088802061310861613
+    second: ContinueButton_4
+  - first:
+      213: 1269677538550890222
+    second: ContinueButton_5
+  - first:
+      213: 2074300040049100045
+    second: ContinueButton_6
+  - first:
+      213: 4342853709273274831
+    second: ContinueButton_7
+  - first:
+      213: -2313652825154799771
+    second: ContinueButton_8
+  - first:
+      213: -8295746867946330437
+    second: ContinueButton_9
+  - first:
+      213: 1921260290844512109
+    second: ContinueButton_10
+  - first:
+      213: -5848689624069527838
+    second: ContinueButton_11
+  - first:
+      213: 5300077573116185247
+    second: ContinueButton_12
+  - first:
+      213: 199176887288186347
+    second: ContinueButton_13
+  - first:
+      213: -6617329688434918994
+    second: ContinueButton_14
+  - first:
+      213: -2732802914529899119
+    second: ContinueButton_15
+  - first:
+      213: 8746390953387831908
+    second: ContinueButton_16
+  - first:
+      213: 6788421087198286229
+    second: ContinueButton_17
+  - first:
+      213: -5401285057453290857
+    second: ContinueButton_18
+  - first:
+      213: -593426084888594004
+    second: ContinueButton_19
+  - first:
+      213: 4846940319457285327
+    second: ContinueButton_20
+  - first:
+      213: 6435270012156931403
+    second: ContinueButton_21
+  - first:
+      213: 2012839101453990641
+    second: ContinueButton_22
+  - first:
+      213: -7011217746391274227
+    second: ContinueButton_23
+  - first:
+      213: -1223901697065852024
+    second: ContinueButton_24
+  - first:
+      213: -1011383356398044634
+    second: ContinueButton_25
+  - first:
+      213: 656020920280311758
+    second: ContinueButton_26
+  - first:
+      213: -8656317351103039086
+    second: ContinueButton_27
+  - first:
+      213: -6509179934302643682
+    second: ContinueButton_28
+  - first:
+      213: -44507625092876438
+    second: ContinueButton_29
+  - first:
+      213: -591549798527788896
+    second: ContinueButton_30
+  - first:
+      213: -8707602217061928553
+    second: ContinueButton_31
+  - first:
+      213: -6595918808075696870
+    second: ContinueButton_32
+  - first:
+      213: 5085179978998086114
+    second: ContinueButton_33
+  - first:
+      213: -4163157844629203617
+    second: ContinueButton_34
+  - first:
+      213: 7843726259482359939
+    second: ContinueButton_35
+  - first:
+      213: -5776840497957484464
+    second: ContinueButton_36
+  - first:
+      213: 8605175905130529448
+    second: ContinueButton_37
+  - first:
+      213: -919476214473398419
+    second: ContinueButton_38
+  - first:
+      213: -269687330491012041
+    second: ContinueButton_39
+  - first:
+      213: -4401690965964059666
+    second: ContinueButton_40
+  - first:
+      213: -2737723572923967786
+    second: ContinueButton_41
+  - first:
+      213: 4780515087794678243
+    second: ContinueButton_42
+  - first:
+      213: 4052292288449505701
+    second: ContinueButton_43
+  - first:
+      213: -1052263296144426993
+    second: ContinueButton_44
+  - first:
+      213: -1779417293602740429
+    second: ContinueButton_45
+  - first:
+      213: 3383217908496985552
+    second: ContinueButton_46
+  - first:
+      213: 6317064403248610923
+    second: ContinueButton_47
+  - first:
+      213: 157569488979445219
+    second: ContinueButton_48
+  - first:
+      213: -1645263921403999656
+    second: ContinueButton_49
+  - first:
+      213: -2517029102174067705
+    second: ContinueButton_50
+  - first:
+      213: -1234027288380490681
+    second: ContinueButton_51
+  - first:
+      213: -4556000641276963263
+    second: ContinueButton_52
+  - first:
+      213: 6877861534855870364
+    second: ContinueButton_53
+  - first:
+      213: 3470986670081693916
+    second: ContinueButton_54
+  - first:
+      213: -7031320629820771081
+    second: ContinueButton_55
+  - first:
+      213: -4960697338004324533
+    second: ContinueButton_56
+  - first:
+      213: -3234730492514283194
+    second: ContinueButton_57
+  - first:
+      213: -2353132854449456425
+    second: ContinueButton_58
+  - first:
+      213: -5781423526505602179
+    second: ContinueButton_59
+  - first:
+      213: -3150313747722743692
+    second: ContinueButton_60
+  - first:
+      213: -5443683172183446056
+    second: ContinueButton_61
+  - first:
+      213: 4666106811576611035
+    second: ContinueButton_62
+  - first:
+      213: -2232646196463070369
+    second: ContinueButton_63
+  - first:
+      213: 6776238860275226581
+    second: ContinueButton_64
+  - first:
+      213: -3744945987488920637
+    second: ContinueButton_65
+  - first:
+      213: 331532829883146611
+    second: ContinueButton_66
+  - first:
+      213: -4483453289561812346
+    second: ContinueButton_67
+  - first:
+      213: 1498458433779947804
+    second: ContinueButton_68
+  - first:
+      213: 1581773823134701029
+    second: ContinueButton_69
+  - first:
+      213: -8958489081504246751
+    second: ContinueButton_70
+  - first:
+      213: -2124818210704044000
+    second: ContinueButton_71
+  - first:
+      213: 3166015944596914234
+    second: ContinueButton_72
+  - first:
+      213: 1543673040693806532
+    second: ContinueButton_73
+  - first:
+      213: -5655181463375944116
+    second: ContinueButton_74
+  - first:
+      213: -8694647622360904325
+    second: ContinueButton_75
+  - first:
+      213: 8067743697807268994
+    second: ContinueButton_76
+  - first:
+      213: -1884775726149317446
+    second: ContinueButton_77
+  - first:
+      213: -7437801907946320805
+    second: ContinueButton_78
+  - first:
+      213: -9094564532224282908
+    second: ContinueButton_79
+  - first:
+      213: -504407383476487032
+    second: ContinueButton_80
+  - first:
+      213: 1559842081732872212
+    second: ContinueButton_81
+  - first:
+      213: -5908155073854404605
+    second: ContinueButton_82
+  - first:
+      213: -5925916760178613724
+    second: ContinueButton_83
+  - first:
+      213: -8720299470022013332
+    second: ContinueButton_84
+  - first:
+      213: -2080678382123541260
+    second: ContinueButton_85
+  - first:
+      213: 2171485913973003681
+    second: ContinueButton_86
+  - first:
+      213: -4101607240171105212
+    second: ContinueButton_87
+  - first:
+      213: 7092428966249409805
+    second: ContinueButton_88
+  - first:
+      213: -4517334817186156418
+    second: ContinueButton_89
+  - first:
+      213: 5097944568086860281
+    second: ContinueButton_90
+  - first:
+      213: -4487653260509765096
+    second: ContinueButton_91
+  - first:
+      213: -811978638911457003
+    second: ContinueButton_92
+  - first:
+      213: -2537093442435122612
+    second: ContinueButton_93
+  - first:
+      213: 8614440138179017784
+    second: ContinueButton_94
+  - first:
+      213: -3801149203103696856
+    second: ContinueButton_95
+  - first:
+      213: 2310256815010999593
+    second: ContinueButton_96
+  - first:
+      213: -8323171929506247737
+    second: ContinueButton_97
+  - first:
+      213: 9009433084700667276
+    second: ContinueButton_98
+  - first:
+      213: -158975786767737171
+    second: ContinueButton_99
+  - first:
+      213: 3874985077897559963
+    second: ContinueButton_100
+  - first:
+      213: 2546612513003251510
+    second: ContinueButton_101
+  - first:
+      213: 216380902618269620
+    second: ContinueButton_102
+  - first:
+      213: -4044509204190109715
+    second: ContinueButton_103
+  - first:
+      213: 4893760971477959195
+    second: ContinueButton_104
+  - first:
+      213: 5229794912058039048
+    second: ContinueButton_105
+  - first:
+      213: 7947560199944470095
+    second: ContinueButton_106
+  - first:
+      213: 6884035955077729010
+    second: ContinueButton_107
+  - first:
+      213: -2155572229981413989
+    second: ContinueButton_108
+  - first:
+      213: -8047621382245543544
+    second: ContinueButton_109
+  - first:
+      213: 5852134117435498145
+    second: ContinueButton_110
+  - first:
+      213: -5178433852253907206
+    second: ContinueButton_111
+  - first:
+      213: -3018907621167135352
+    second: ContinueButton_112
+  - first:
+      213: 43884731247417348
+    second: ContinueButton_113
+  - first:
+      213: -2485251710042574312
+    second: ContinueButton_114
+  - first:
+      213: -2991074209816512387
+    second: ContinueButton_115
+  - first:
+      213: -1435622509219942838
+    second: ContinueButton_116
+  - first:
+      213: 5427265866465627144
+    second: ContinueButton_117
+  - first:
+      213: 38783543087770298
+    second: ContinueButton_118
+  - first:
+      213: -1836085631579253457
+    second: ContinueButton_119
+  - first:
+      213: -1365106133516919061
+    second: ContinueButton_120
+  - first:
+      213: 6209380018035541872
+    second: ContinueButton_121
+  - first:
+      213: -4617569315701415134
+    second: ContinueButton_122
+  - first:
+      213: 5430660182224720518
+    second: ContinueButton_123
+  - first:
+      213: -4807154539820630908
+    second: ContinueButton_124
+  - first:
+      213: 3501222412597436565
+    second: ContinueButton_125
+  - first:
+      213: -7092658436266388054
+    second: ContinueButton_126
+  - first:
+      213: -4868796373680020879
+    second: ContinueButton_127
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ContinueButton_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 0
+        width: 327
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22fdb42bc931b7220800000000000000
+      internalID: 2484601183152103202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_1
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 991
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f00afa0637f3dadf0800000000000000
+      internalID: -167407846366928881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_2
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 983
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b387ad335988ce730800000000000000
+      internalID: 4029745940991211579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_3
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 734
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f7fce5bc95d0d750800000000000000
+      internalID: 6327792345499367415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_4
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 671
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d21a54af159e12e70800000000000000
+      internalID: 9088802061310861613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_5
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 648
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eee3e988efcce9110800000000000000
+      internalID: 1269677538550890222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_6
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 620
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0584b475e469cc10800000000000000
+      internalID: 2074300040049100045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_7
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 526
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc998bc607ae44c30800000000000000
+      internalID: 4342853709273274831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_8
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 518
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 567b117830144efd0800000000000000
+      internalID: -2313652825154799771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_9
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 452
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb6ef752d269fdc80800000000000000
+      internalID: -8295746867946330437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_10
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 395
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6fc9d42e00b9aa10800000000000000
+      internalID: 1921260290844512109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_11
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 390
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e6a2db46c745dea0800000000000000
+      internalID: -5848689624069527838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_12
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 350
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9aca93c878ad8940800000000000000
+      internalID: 5300077573116185247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_13
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 323
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be5c74ed25e93c200800000000000000
+      internalID: 199176887288186347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_14
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 300
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea9b03f55b58a24a0800000000000000
+      internalID: -6617329688434918994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_15
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 286
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19d0b4e6a32231ad0800000000000000
+      internalID: -2732802914529899119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_16
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 271
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4623f535b3c616970800000000000000
+      internalID: 8746390953387831908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_17
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 229
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59199302301553e50800000000000000
+      internalID: 6788421087198286229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_18
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 220
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79a0fd38bd7ca05b0800000000000000
+      internalID: -5401285057453290857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_19
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 139
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca9b3c1be1ab3c7f0800000000000000
+      internalID: -593426084888594004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_20
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 91
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc415c45a8ac34340800000000000000
+      internalID: 4846940319457285327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_21
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 86
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4d66540bfbae4950800000000000000
+      internalID: 6435270012156931403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_22
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 35
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fa7e209f7a0feb10800000000000000
+      internalID: 2012839101453990641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_23
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 23
+        width: 8
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0dee6f4b9623be90800000000000000
+      internalID: -7011217746391274227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_24
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 0
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 883646a14e3d30fe0800000000000000
+      internalID: -1223901697065852024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_25
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 807
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62af6262238d6f1f0800000000000000
+      internalID: -1011383356398044634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_26
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 710
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec7688e1d87aa1900800000000000000
+      internalID: 656020920280311758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_27
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 636
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 299f3787b359ed780800000000000000
+      internalID: -8656317351103039086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_28
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 470
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1a5acc365fbaa5a0800000000000000
+      internalID: -6509179934302643682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_29
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 336
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a67fa800d80e16ff0800000000000000
+      internalID: -44507625092876438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_30
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 246
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a81cc7a7946ac7f0800000000000000
+      internalID: -591549798527788896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_31
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 52
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 791be9e1be1682780800000000000000
+      internalID: -8707602217061928553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_32
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 8
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a15845d6ac69674a0800000000000000
+      internalID: -6595918808075696870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_33
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 532
+        width: 6
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e9fb1b9f30329640800000000000000
+      internalID: 5085179978998086114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_34
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 484
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f55def66ffd7936c0800000000000000
+      internalID: -4163157844629203617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_35
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 479
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38879d3a9738adc60800000000000000
+      internalID: 7843726259482359939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_36
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 460
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05847239c2a84dfa0800000000000000
+      internalID: -5776840497957484464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_37
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 427
+        width: 6
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a24e0fb4e9bb6770800000000000000
+      internalID: 8605175905130529448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_38
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 406
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6764e8214d5d33f0800000000000000
+      internalID: -919476214473398419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_39
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 236
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73ce8a14dc0e14cf0800000000000000
+      internalID: -269687330491012041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_40
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 188
+        width: 6
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eeb8aaa336d0ae2c0800000000000000
+      internalID: -4401690965964059666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_41
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 180
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d657ae5ae6a10ad0800000000000000
+      internalID: -2737723572923967786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_42
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 68
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e9a563e42dc75240800000000000000
+      internalID: 4780515087794678243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_43
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 0
+        width: 891
+        height: 697
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a9661bcd52ac3830800000000000000
+      internalID: 4052292288449505701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_44
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 695
+        width: 709
+        height: 329
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0831277b1c9561f0800000000000000
+      internalID: -1052263296144426993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_45
+      rect:
+        serializedVersion: 2
+        x: 651
+        y: 96
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3372f93366d3e47e0800000000000000
+      internalID: -1779417293602740429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_46
+      rect:
+        serializedVersion: 2
+        x: 654
+        y: 43
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0dde3b143ca93fe20800000000000000
+      internalID: 3383217908496985552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_47
+      rect:
+        serializedVersion: 2
+        x: 698
+        y: 109
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6ef5e20b98baa750800000000000000
+      internalID: 6317064403248610923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_48
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 95
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e54f0a8d9ccf2200800000000000000
+      internalID: 157569488979445219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_49
+      rect:
+        serializedVersion: 2
+        x: 732
+        y: 98
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85ac2f23e29da29e0800000000000000
+      internalID: -1645263921403999656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_50
+      rect:
+        serializedVersion: 2
+        x: 743
+        y: 84
+        width: 17
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 704289b0e57b11dd0800000000000000
+      internalID: -2517029102174067705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_51
+      rect:
+        serializedVersion: 2
+        x: 743
+        y: 100
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74c31f828badfdee0800000000000000
+      internalID: -1234027288380490681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_52
+      rect:
+        serializedVersion: 2
+        x: 743
+        y: 96
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1461c343e85d5c0c0800000000000000
+      internalID: -4556000641276963263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_53
+      rect:
+        serializedVersion: 2
+        x: 746
+        y: 113
+        width: 11
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c97386f10a2137f50800000000000000
+      internalID: 6877861534855870364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_54
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 81
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd8d5528cfb6b2030800000000000000
+      internalID: 3470986670081693916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_55
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 72
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f438a5042bbb6e90800000000000000
+      internalID: -7031320629820771081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_56
+      rect:
+        serializedVersion: 2
+        x: 755
+        y: 89
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4fb602dd00182bb0800000000000000
+      internalID: -4960697338004324533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_57
+      rect:
+        serializedVersion: 2
+        x: 762
+        y: 88
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 641df8161cdeb13d0800000000000000
+      internalID: -3234730492514283194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_58
+      rect:
+        serializedVersion: 2
+        x: 766
+        y: 104
+        width: 12
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7da3d35e22ef75fd0800000000000000
+      internalID: -2353132854449456425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_59
+      rect:
+        serializedVersion: 2
+        x: 769
+        y: 109
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d732c861fe144cfa0800000000000000
+      internalID: -5781423526505602179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_60
+      rect:
+        serializedVersion: 2
+        x: 776
+        y: 85
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 470d4f76656d744d0800000000000000
+      internalID: -3150313747722743692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_61
+      rect:
+        serializedVersion: 2
+        x: 779
+        y: 119
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ddeb3c2ff62474b0800000000000000
+      internalID: -5443683172183446056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_62
+      rect:
+        serializedVersion: 2
+        x: 779
+        y: 96
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd0fd0c4c6751c040800000000000000
+      internalID: 4666106811576611035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_63
+      rect:
+        serializedVersion: 2
+        x: 781
+        y: 88
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5311b60d1c0401e0800000000000000
+      internalID: -2232646196463070369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_64
+      rect:
+        serializedVersion: 2
+        x: 787
+        y: 95
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d717e367590a0e50800000000000000
+      internalID: 6776238860275226581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_65
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 117
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cbc2b84777470cc0800000000000000
+      internalID: -3744945987488920637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_66
+      rect:
+        serializedVersion: 2
+        x: 826
+        y: 86
+        width: 8
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 371a09c2a57d99400800000000000000
+      internalID: 331532829883146611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_67
+      rect:
+        serializedVersion: 2
+        x: 828
+        y: 80
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6829c9cccf297c1c0800000000000000
+      internalID: -4483453289561812346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_68
+      rect:
+        serializedVersion: 2
+        x: 829
+        y: 113
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c195420a1089bc410800000000000000
+      internalID: 1498458433779947804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_69
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 99
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e594fa59e693f510800000000000000
+      internalID: 1581773823134701029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_70
+      rect:
+        serializedVersion: 2
+        x: 846
+        y: 97
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12459bcf4ad0da380800000000000000
+      internalID: -8958489081504246751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_71
+      rect:
+        serializedVersion: 2
+        x: 846
+        y: 83
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02054ba58112382e0800000000000000
+      internalID: -2124818210704044000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_72
+      rect:
+        serializedVersion: 2
+        x: 846
+        y: 65
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a300ce23ab2ffeb20800000000000000
+      internalID: 3166015944596914234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_73
+      rect:
+        serializedVersion: 2
+        x: 846
+        y: 41
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c5c6e7a37a3c6510800000000000000
+      internalID: 1543673040693806532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_74
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 115
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c466a17eb62c481b0800000000000000
+      internalID: -5655181463375944116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_75
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 92
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7dcbfdbd08665780800000000000000
+      internalID: -8694647622360904325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_76
+      rect:
+        serializedVersion: 2
+        x: 848
+        y: 43
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28cd2bef52266ff60800000000000000
+      internalID: 8067743697807268994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_77
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 107
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abc4799867ee7d5e0800000000000000
+      internalID: -1884775726149317446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_78
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 112
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5c0327629e97c890800000000000000
+      internalID: -7437801907946320805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_79
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 104
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4eea7e53ebd99c180800000000000000
+      internalID: -9094564532224282908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_80
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 96
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88cbccd382cfff8f0800000000000000
+      internalID: -504407383476487032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_81
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 88
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 418c463eb1ca5a510800000000000000
+      internalID: 1559842081732872212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_82
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 72
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3088cf85344020ea0800000000000000
+      internalID: -5908155073854404605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_83
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 64
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 422250d7a1ae2cda0800000000000000
+      internalID: -5925916760178613724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_84
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 56
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6e8f4a85d54bf680800000000000000
+      internalID: -8720299470022013332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_85
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 48
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fc11bd0902ff13e0800000000000000
+      internalID: -2080678382123541260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_86
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 40
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a510290feaa22e10800000000000000
+      internalID: 2171485913973003681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_87
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 24
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4445e6142f92417c0800000000000000
+      internalID: -4101607240171105212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_88
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 80
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0dacf7419e5d6260800000000000000
+      internalID: 7092428966249409805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_89
+      rect:
+        serializedVersion: 2
+        x: 930
+        y: 92
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e707d1aeae33f41c0800000000000000
+      internalID: -4517334817186156418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_90
+      rect:
+        serializedVersion: 2
+        x: 931
+        y: 99
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f1137913998fb640800000000000000
+      internalID: 5097944568086860281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_91
+      rect:
+        serializedVersion: 2
+        x: 941
+        y: 107
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 812213cd227a8b1c0800000000000000
+      internalID: -4487653260509765096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_92
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 111
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5193a7edab54bb4f0800000000000000
+      internalID: -811978638911457003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_93
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 95
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4a7ea9c4fe6accd0800000000000000
+      internalID: -2537093442435122612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_94
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 88
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83cf6071aa3ac8770800000000000000
+      internalID: 8614440138179017784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_95
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 80
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 828beba60fa9f3bc0800000000000000
+      internalID: -3801149203103696856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_96
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 63
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92de7ae355eaf0020800000000000000
+      internalID: 2310256815010999593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_97
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 39
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cb07496a372e7c80800000000000000
+      internalID: -8323171929506247737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_98
+      rect:
+        serializedVersion: 2
+        x: 968
+        y: 88
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8d2c3118afe70d70800000000000000
+      internalID: 9009433084700667276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_99
+      rect:
+        serializedVersion: 2
+        x: 992
+        y: 691
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dae12dd3d543bcdf0800000000000000
+      internalID: -158975786767737171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_100
+      rect:
+        serializedVersion: 2
+        x: 993
+        y: 35
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9ff506d566b6c530800000000000000
+      internalID: 3874985077897559963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_101
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 699
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 637af1a8692675320800000000000000
+      internalID: 2546612513003251510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_102
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 103
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b78db4d84db00300800000000000000
+      internalID: 216380902618269620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_103
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 94
+        width: 7
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: def5379be440fd7c0800000000000000
+      internalID: -4044509204190109715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_104
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 88
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b124d90eca12ae340800000000000000
+      internalID: 4893760971477959195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_105
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 80
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80b5d5d83c6f39840800000000000000
+      internalID: 5229794912058039048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_106
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 72
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4ef8b4d4e76b4e60800000000000000
+      internalID: 7947560199944470095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_107
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 51
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2facc6b5a32098f50800000000000000
+      internalID: 6884035955077729010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_108
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 23
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b9dd2404a7ed512e0800000000000000
+      internalID: -2155572229981413989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_109
+      rect:
+        serializedVersion: 2
+        x: 994
+        y: 3
+        width: 7
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8819a60bdfa115090800000000000000
+      internalID: -8047621382245543544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_110
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 707
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1aedfaf49f4f63150800000000000000
+      internalID: 5852134117435498145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_111
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 65
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af65c8f09d18228b0800000000000000
+      internalID: -5178433852253907206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_112
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 59
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8850d9e638faa16d0800000000000000
+      internalID: -3018907621167135352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_113
+      rect:
+        serializedVersion: 2
+        x: 995
+        y: 41
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 408d0193ee8eb9000800000000000000
+      internalID: 43884731247417348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_114
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 960
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 812fa75bcbc928dd0800000000000000
+      internalID: -2485251710042574312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_115
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 893
+        width: 6
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d78fd038ad19d76d0800000000000000
+      internalID: -2991074209816512387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_116
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 872
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4ee3622fe4a31ce0800000000000000
+      internalID: -1435622509219942838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_117
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 765
+        width: 6
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80c4948fc85815b40800000000000000
+      internalID: 5427265866465627144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_118
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 735
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abaa0ec4d69c98000800000000000000
+      internalID: 38783543087770298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_119
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 694
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f25158898d9e486e0800000000000000
+      internalID: -1836085631579253457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_120
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 95
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bee5407443b2e0de0800000000000000
+      internalID: -1365106133516919061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_121
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 71
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 077ca6a4a362c2650800000000000000
+      internalID: 6209380018035541872
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_122
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 46
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 223afdb1c291befb0800000000000000
+      internalID: -4617569315701415134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_123
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 39
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 682dc51b9a49d5b40800000000000000
+      internalID: 5430660182224720518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_124
+      rect:
+        serializedVersion: 2
+        x: 1041
+        y: 5
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48cb5995a6e894db0800000000000000
+      internalID: -4807154539820630908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_125
+      rect:
+        serializedVersion: 2
+        x: 1057
+        y: 0
+        width: 470
+        height: 1024
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 590a186eb37d69030800000000000000
+      internalID: 3501222412597436565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_126
+      rect:
+        serializedVersion: 2
+        x: 1087
+        y: 19
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa51a211bb0d19d90800000000000000
+      internalID: -7092658436266388054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ContinueButton_127
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 978
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 172a71f7e7f8e6cb0800000000000000
+      internalID: -4868796373680020879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      ContinueButton_0: 2484601183152103202
+      ContinueButton_1: -167407846366928881
+      ContinueButton_10: 1921260290844512109
+      ContinueButton_100: 3874985077897559963
+      ContinueButton_101: 2546612513003251510
+      ContinueButton_102: 216380902618269620
+      ContinueButton_103: -4044509204190109715
+      ContinueButton_104: 4893760971477959195
+      ContinueButton_105: 5229794912058039048
+      ContinueButton_106: 7947560199944470095
+      ContinueButton_107: 6884035955077729010
+      ContinueButton_108: -2155572229981413989
+      ContinueButton_109: -8047621382245543544
+      ContinueButton_11: -5848689624069527838
+      ContinueButton_110: 5852134117435498145
+      ContinueButton_111: -5178433852253907206
+      ContinueButton_112: -3018907621167135352
+      ContinueButton_113: 43884731247417348
+      ContinueButton_114: -2485251710042574312
+      ContinueButton_115: -2991074209816512387
+      ContinueButton_116: -1435622509219942838
+      ContinueButton_117: 5427265866465627144
+      ContinueButton_118: 38783543087770298
+      ContinueButton_119: -1836085631579253457
+      ContinueButton_12: 5300077573116185247
+      ContinueButton_120: -1365106133516919061
+      ContinueButton_121: 6209380018035541872
+      ContinueButton_122: -4617569315701415134
+      ContinueButton_123: 5430660182224720518
+      ContinueButton_124: -4807154539820630908
+      ContinueButton_125: 3501222412597436565
+      ContinueButton_126: -7092658436266388054
+      ContinueButton_127: -4868796373680020879
+      ContinueButton_13: 199176887288186347
+      ContinueButton_14: -6617329688434918994
+      ContinueButton_15: -2732802914529899119
+      ContinueButton_16: 8746390953387831908
+      ContinueButton_17: 6788421087198286229
+      ContinueButton_18: -5401285057453290857
+      ContinueButton_19: -593426084888594004
+      ContinueButton_2: 4029745940991211579
+      ContinueButton_20: 4846940319457285327
+      ContinueButton_21: 6435270012156931403
+      ContinueButton_22: 2012839101453990641
+      ContinueButton_23: -7011217746391274227
+      ContinueButton_24: -1223901697065852024
+      ContinueButton_25: -1011383356398044634
+      ContinueButton_26: 656020920280311758
+      ContinueButton_27: -8656317351103039086
+      ContinueButton_28: -6509179934302643682
+      ContinueButton_29: -44507625092876438
+      ContinueButton_3: 6327792345499367415
+      ContinueButton_30: -591549798527788896
+      ContinueButton_31: -8707602217061928553
+      ContinueButton_32: -6595918808075696870
+      ContinueButton_33: 5085179978998086114
+      ContinueButton_34: -4163157844629203617
+      ContinueButton_35: 7843726259482359939
+      ContinueButton_36: -5776840497957484464
+      ContinueButton_37: 8605175905130529448
+      ContinueButton_38: -919476214473398419
+      ContinueButton_39: -269687330491012041
+      ContinueButton_4: 9088802061310861613
+      ContinueButton_40: -4401690965964059666
+      ContinueButton_41: -2737723572923967786
+      ContinueButton_42: 4780515087794678243
+      ContinueButton_43: 4052292288449505701
+      ContinueButton_44: -1052263296144426993
+      ContinueButton_45: -1779417293602740429
+      ContinueButton_46: 3383217908496985552
+      ContinueButton_47: 6317064403248610923
+      ContinueButton_48: 157569488979445219
+      ContinueButton_49: -1645263921403999656
+      ContinueButton_5: 1269677538550890222
+      ContinueButton_50: -2517029102174067705
+      ContinueButton_51: -1234027288380490681
+      ContinueButton_52: -4556000641276963263
+      ContinueButton_53: 6877861534855870364
+      ContinueButton_54: 3470986670081693916
+      ContinueButton_55: -7031320629820771081
+      ContinueButton_56: -4960697338004324533
+      ContinueButton_57: -3234730492514283194
+      ContinueButton_58: -2353132854449456425
+      ContinueButton_59: -5781423526505602179
+      ContinueButton_6: 2074300040049100045
+      ContinueButton_60: -3150313747722743692
+      ContinueButton_61: -5443683172183446056
+      ContinueButton_62: 4666106811576611035
+      ContinueButton_63: -2232646196463070369
+      ContinueButton_64: 6776238860275226581
+      ContinueButton_65: -3744945987488920637
+      ContinueButton_66: 331532829883146611
+      ContinueButton_67: -4483453289561812346
+      ContinueButton_68: 1498458433779947804
+      ContinueButton_69: 1581773823134701029
+      ContinueButton_7: 4342853709273274831
+      ContinueButton_70: -8958489081504246751
+      ContinueButton_71: -2124818210704044000
+      ContinueButton_72: 3166015944596914234
+      ContinueButton_73: 1543673040693806532
+      ContinueButton_74: -5655181463375944116
+      ContinueButton_75: -8694647622360904325
+      ContinueButton_76: 8067743697807268994
+      ContinueButton_77: -1884775726149317446
+      ContinueButton_78: -7437801907946320805
+      ContinueButton_79: -9094564532224282908
+      ContinueButton_8: -2313652825154799771
+      ContinueButton_80: -504407383476487032
+      ContinueButton_81: 1559842081732872212
+      ContinueButton_82: -5908155073854404605
+      ContinueButton_83: -5925916760178613724
+      ContinueButton_84: -8720299470022013332
+      ContinueButton_85: -2080678382123541260
+      ContinueButton_86: 2171485913973003681
+      ContinueButton_87: -4101607240171105212
+      ContinueButton_88: 7092428966249409805
+      ContinueButton_89: -4517334817186156418
+      ContinueButton_9: -8295746867946330437
+      ContinueButton_90: 5097944568086860281
+      ContinueButton_91: -4487653260509765096
+      ContinueButton_92: -811978638911457003
+      ContinueButton_93: -2537093442435122612
+      ContinueButton_94: 8614440138179017784
+      ContinueButton_95: -3801149203103696856
+      ContinueButton_96: 2310256815010999593
+      ContinueButton_97: -8323171929506247737
+      ContinueButton_98: 9009433084700667276
+      ContinueButton_99: -158975786767737171
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
