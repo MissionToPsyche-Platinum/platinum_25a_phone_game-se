@@ -136,7 +136,8 @@ public class InventoryController : MonoBehaviour
             {
                 Debug.Log($"InventoryController.AddItem: Found empty slot at {slotTransform.name}, adding item...");
                 GameObject newItem = Instantiate(itemPrefab, slot.transform);
-                
+                newItem.SetActive(true);
+
                 // Reset scale to (1,1,1) to ensure inventory items are not affected by scene item scaling
                 newItem.transform.localScale = Vector3.one;
                 

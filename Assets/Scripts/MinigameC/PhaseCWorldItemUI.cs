@@ -16,7 +16,6 @@ public class PhaseCWorldItemUI : MonoBehaviour
     [SerializeField] private float pulseAmount = 0.12f;
     [SerializeField] private float bobSpeed = 1.5f;
     [SerializeField] private float bobAmount = 0.15f;
-    [SerializeField] private float glowRadius = 0.6f;
 
     private SpriteRenderer mainSprite;
     private SpriteRenderer glowSprite;

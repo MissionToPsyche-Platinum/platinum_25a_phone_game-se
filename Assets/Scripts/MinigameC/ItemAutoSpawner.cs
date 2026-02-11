@@ -6,18 +6,18 @@ public class ItemAutoSpawner : MonoBehaviour
     private const string TargetSceneName = "MinigameC";
 
     [Header("Spawn Timing")]
-    [SerializeField] private float spawnIntervalSeconds = 5f;
-    [SerializeField] private int maxItemsInScene = 8;
+    [SerializeField] private float spawnIntervalSeconds = 2f;
+    [SerializeField] private int maxItemsInScene = 12;
 
     [Header("Spawn Area")]
-    [SerializeField] private float minSpawnRadius = 3f;
-    [SerializeField] private float maxSpawnRadius = 8f;
+    [SerializeField] private float minSpawnRadius = 1.5f;
+    [SerializeField] private float maxSpawnRadius = 5f;
     [SerializeField] private float spawnCheckRadius = 0.4f;
-    [SerializeField] private int spawnAttempts = 12;
+    [SerializeField] private int spawnAttempts = 16;
 
     [Header("Spawn Bias")]
     [Tooltip("Chance (0-1) to spawn an item that is needed for the current step. Makes the right parts appear more often.")]
-    [SerializeField] [Range(0f, 1f)] private float preferCurrentStepChance = 0.65f;
+    [SerializeField] [Range(0f, 1f)] private float preferCurrentStepChance = 0.75f;
 
     private float nextSpawnTime;
     private ItemDictionary itemDictionary;
@@ -104,6 +104,7 @@ public class ItemAutoSpawner : MonoBehaviour
             }
 
             GameObject spawnedItem = Instantiate(itemPrefab.gameObject, spawnPosition, Quaternion.identity);
+            spawnedItem.SetActive(true);
             if (!spawnedItem.CompareTag("Item"))
             {
                 spawnedItem.tag = "Item";

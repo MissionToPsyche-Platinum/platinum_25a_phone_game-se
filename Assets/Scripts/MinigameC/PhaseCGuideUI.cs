@@ -434,7 +434,7 @@ public class PhaseCGuideUI : MonoBehaviour
         stepTitleText.text = $"Step {stepInfo.StepNumber} of {stepInfo.StepCount}: {stepInfo.Title}";
         objectiveText.text = !string.IsNullOrEmpty(stepInfo.CollectObjective) ? stepInfo.CollectObjective : stepInfo.Summary;
         talkToText.text = $"Talk to: {stepInfo.CompletionNpc}";
-        controlsText.text = "E or Space near NPC to talk";
+        controlsText.text = "E/Space: talk | I: inventory | P: save | Tab: menu";
 
         if (stepDots != null)
         {
