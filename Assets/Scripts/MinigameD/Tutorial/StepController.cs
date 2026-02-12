@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class StepController : MonoBehaviour
 {
@@ -10,6 +8,8 @@ public class StepController : MonoBehaviour
     public GameObject page4;
 
     public void ShowPage1() {
+        MinigameD_AudioManager.Instance.playButton();
+
         page1.SetActive(true);
         page2.SetActive(false);
         page3.SetActive(false);
@@ -17,6 +17,8 @@ public class StepController : MonoBehaviour
     }
 
     public void ShowPage2() {
+        MinigameD_AudioManager.Instance.playButton();
+
         page1.SetActive(false);
         page2.SetActive(true);
         page3.SetActive(false);
@@ -24,6 +26,8 @@ public class StepController : MonoBehaviour
     }
 
     public void ShowPage3(){
+        MinigameD_AudioManager.Instance.playButton();
+
         page1.SetActive(false);
         page2.SetActive(false);
         page3.SetActive(true);
@@ -31,6 +35,8 @@ public class StepController : MonoBehaviour
     }
 
     public void ShowPage4(){
+        MinigameD_AudioManager.Instance.playButton();
+
         page1.SetActive(false);
         page2.SetActive(false);
         page3.SetActive(false);
