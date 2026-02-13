@@ -33,6 +33,7 @@ public class MinigameAMarkGrid : MonoBehaviour
                 }
                 else
                 {
+                    mark.GetComponent<Image>().color = Color.white;
                     audioClipManager.PlayCorrect();
                 }
             }

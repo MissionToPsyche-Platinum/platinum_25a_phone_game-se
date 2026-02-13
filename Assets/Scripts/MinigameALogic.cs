@@ -109,47 +109,22 @@ public class MinigameALogic : MonoBehaviour
         texttmp = MinigameAPremises.clues[scenario][Random.Range(6, 10)];
         clues4.text = texttmp.Replace("3", keys[randoms[3]]).Replace("4", MinigameAPremises.premises[keys[randoms[4]]][scenario]);
 
-        if (Random.Range(0, 2) == 0)
-        {
-            // set labels for grid
-            Dictionary<int, string> map = new Dictionary<int, string>();
-            for (int i = 0; i < 5; i++)
-            { 
-                labelA[i].text = keys[randoms[i]];
-                map[i] = keys[randoms[i]];
-            }
-            randoms = generateRandomChecks(randoms);
-            for (int i = 0; i < 5; i++)
-            {
-                labelB[i].text = MinigameAPremises.premises[keys[randoms[i]]][scenario];
-                for (int j = 0; j < 5; j++)
-                {
-                    if (map[j] == keys[randoms[i]])
-                    {
-                        checks[i] = (j * 5) + i;
-                    }
-                }
-            }
+        // set labels for grid
+        Dictionary<int, string> map = new Dictionary<int, string>();
+        for (int i = 0; i < 5; i++)
+        { 
+            labelA[i].text = keys[randoms[i]];
+            map[i] = keys[randoms[i]];
         }
-        else
+        randoms = generateRandomChecks(randoms);
+        for (int i = 0; i < 5; i++)
         {
-            // set labels for grid
-            Dictionary<int, string> map = new Dictionary<int, string>();
-            for (int i = 0; i < 5; i++)
+            labelB[i].text = MinigameAPremises.premises[keys[randoms[i]]][scenario];
+            for (int j = 0; j < 5; j++)
             {
-                labelB[i].text = keys[randoms[i]];
-                map[i] = keys[randoms[i]];
-            }
-            randoms = generateRandomChecks(randoms);
-            for (int i = 0; i < 5; i++)
-            {
-                labelA[i].text = MinigameAPremises.premises[keys[randoms[i]]][scenario];
-                for (int j = 0; j < 5; j++)
+                if (map[j] == keys[randoms[i]])
                 {
-                    if (map[j] == keys[randoms[i]])
-                    {
-                        checks[i] = (i * 5) + j;
-                    }
+                    checks[i] = (j * 5) + i;
                 }
             }
         }
