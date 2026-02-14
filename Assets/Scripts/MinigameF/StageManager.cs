@@ -13,6 +13,9 @@ public class StageManager : MonoBehaviour
 
     [SerializeField] spinDiff diff;
     [SerializeField] orbitPschye speed;
+    [SerializeField] setDiff dif;
+
+    public int difficulty = 0;
     
     private float time = 10f;
     private int stage = 0;
@@ -33,7 +36,8 @@ public class StageManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        difficulty = dif.getDiff();
+        Debug.Log(difficulty);
 
     }
 
@@ -50,6 +54,11 @@ public class StageManager : MonoBehaviour
             stageTime = time;
         }
 
+    }
+
+    public void setDifficulty(int difficulty)
+    {
+        this.difficulty = difficulty;
     }
 
     void setStage(int stage)

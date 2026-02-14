@@ -3700,6 +3700,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1014126736}
   - component: {fileID: 1014126737}
+  - component: {fileID: 1014126738}
   m_Layer: 5
   m_Name: Easy
   m_TagString: Untagged
@@ -3774,8 +3775,32 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1014126738}
+        m_TargetAssemblyTypeName: setDiff, Assembly-CSharp
+        m_MethodName: setDif
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
+--- !u!114 &1014126738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1014126735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d46b5779f5cfef549bc4e6eb5e365da5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1047826803
 GameObject:
   m_ObjectHideFlags: 0
@@ -4162,6 +4187,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1123021100}
   - component: {fileID: 1123021101}
+  - component: {fileID: 1123021102}
   m_Layer: 5
   m_Name: Hard
   m_TagString: Untagged
@@ -4236,8 +4262,32 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1123021102}
+        m_TargetAssemblyTypeName: setDiff, Assembly-CSharp
+        m_MethodName: setDif
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
+--- !u!114 &1123021102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123021099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d46b5779f5cfef549bc4e6eb5e365da5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1171440226
 GameObject:
   m_ObjectHideFlags: 0
@@ -7512,6 +7562,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1892572737}
   - component: {fileID: 1892572738}
+  - component: {fileID: 1892572739}
   m_Layer: 5
   m_Name: Normal
   m_TagString: Untagged
@@ -7586,8 +7637,32 @@ MonoBehaviour:
   m_Group: {fileID: 0}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1892572739}
+        m_TargetAssemblyTypeName: setDiff, Assembly-CSharp
+        m_MethodName: setDif
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
+--- !u!114 &1892572739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892572736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d46b5779f5cfef549bc4e6eb5e365da5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1898086645
 GameObject:
   m_ObjectHideFlags: 0
