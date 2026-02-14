@@ -118,12 +118,14 @@ public class RocketVelocity : MonoBehaviour
     // boost ring: stabilize velocity
     public void boostVelocity()
     {
+        MinigameD_AudioManager.Instance.boostRing();
         currentVelocity = initialVelocity;
     }
 
     // penalty ring: decrease velocity by 20%
     public void decreaseVelocity()
     {
+        MinigameD_AudioManager.Instance.penaltyRing();
         currentVelocity = currentVelocity * (float)0.80;
     }
 

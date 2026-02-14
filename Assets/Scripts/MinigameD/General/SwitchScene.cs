@@ -7,7 +7,7 @@ public class SwitchScene : MonoBehaviour
 
     public void ChangeScene()
     {
-        MinigameD_AudioManager.Instance.playButton();
+        MinigameD_AudioManager.Instance.buttonClick();
         SceneManager.LoadScene(sceneName);
     }
 }

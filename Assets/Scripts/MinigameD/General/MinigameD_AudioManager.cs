@@ -1,3 +1,5 @@
+using System;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class MinigameD_AudioManager : MonoBehaviour
@@ -5,6 +7,8 @@ public class MinigameD_AudioManager : MonoBehaviour
     public static MinigameD_AudioManager Instance { get; private set; }
 
     [SerializeField] private AudioSource buttonSound;
+    [SerializeField] private AudioSource boostSound;
+    [SerializeField] private AudioSource penaltySound;
 
     void Awake()
     {
@@ -19,8 +23,17 @@ public class MinigameD_AudioManager : MonoBehaviour
         }
     }
 
-    public void playButton()
+    public void buttonClick()
     {
-        buttonSound.Play();
+        if (buttonSound != null) buttonSound.Play();
+    }
+
+    public void boostRing()
+    {
+        if (boostSound != null) boostSound.PlayOneShot(boostSound.clip);
+    }
+    public void penaltyRing()
+    {
+        if (penaltySound != null) penaltySound.PlayOneShot(penaltySound.clip);
     }
 }
