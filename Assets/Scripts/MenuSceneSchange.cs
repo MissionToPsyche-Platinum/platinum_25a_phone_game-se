@@ -28,9 +28,10 @@ public class MenuSceneSchange : MonoBehaviour
 
     public void SwitchToSceneMinigameE()
     {
-
+        Debug.Log("Switching to Minigame E");
+        SceneManager.LoadScene("GravityAssist");
     }
-
+    
     public void SwitchToSceneMinigameFstart()
     {
         Debug.Log("Switching to Minigame F start screen");
@@ -42,7 +43,6 @@ public class MenuSceneSchange : MonoBehaviour
     {
         Debug.Log("Switching to Minigame F");
         SceneManager.LoadScene("MinigameF");
-
     }
 
     public void SwitchToCentralHub()
