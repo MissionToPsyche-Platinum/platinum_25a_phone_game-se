@@ -6,8 +6,7 @@ using Debug = UnityEngine.Debug;
 
 public class checkCollison : MonoBehaviour
 {
-
-    float time = 1.5f;
+    private float check = 0.000005f;
 
 
     // Start is called before the first frame update
@@ -24,31 +23,50 @@ public class checkCollison : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision) {
 
-        float check = 0.000001f;
-        
+             
 
         if(collision.gameObject.name == "RedScience(Clone)" || collision.gameObject.name == "GreenScience(Clone)" || collision.gameObject.name == "BlueScience(Clone)" )
         {
+
             if (gameObject.name == "RedScience(Clone)" || gameObject.name == "GreenScience(Clone)" || gameObject.name == "BlueScience(Clone)")
             {
-                if (collision.gameObject.transform.position.z - gameObject.transform.position.z < check)
-                {
-                    
 
-                    countDown(gameObject);
+                if (gameObject.name == "RedScience(Clone)" && collision.gameObject.name == "GreenScience(Clone)")
+                {
+                    if (collision.gameObject.transform.position.z - gameObject.transform.position.z < check)
+                    {
+                        Destroy(gameObject, 0.5f);
+                    }
+
+                } else if (gameObject.name == "GreenScience(Clone)" && collision.gameObject.name == "BlueScience(Clone)")
+                {
+                    if (collision.gameObject.transform.position.z - gameObject.transform.position.z < check)
+                    {
+                        Destroy(gameObject, 0.5f);
+                    }
+
+                } else if (gameObject.name == "BlueScience(Clone)" && collision.gameObject.name == "RedScience(Clone)")
+                {
+                    if (collision.gameObject.transform.position.z - gameObject.transform.position.z < check)
+                    {
+                        Destroy(gameObject, 0.5f);
+                    }
+                } else if (gameObject.name == collision.gameObject.name)
+                {
+                    if (collision.gameObject.transform.position.z - gameObject.transform.position.z < check)
+                    {
+                        Destroy(gameObject, 0.5f);
+                    }
                 }
+
+                   
             }
         }
     }
 
-    void countDown(GameObject gameObject)
+    public void setCheck(float check)
     {
-        time -= Time.deltaTime;      
-        
-
-        if (time <= 0)
-        {
-            Destroy(gameObject);
-        }
+        this.check = check;
     }
+    
 }
