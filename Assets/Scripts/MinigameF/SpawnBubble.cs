@@ -15,6 +15,8 @@ public class SpawnBubble : MonoBehaviour
     private int spawns = 0;
     private int spawnTimer = 250;
     private bool spawn = true;
+
+    private bool collide = false;
     
     
     bool spawned = false;
@@ -60,7 +62,7 @@ public class SpawnBubble : MonoBehaviour
             }
         }
 
-    }
+    }   
 
     public float getRadius()
     {
@@ -129,7 +131,7 @@ public class SpawnBubble : MonoBehaviour
     public Vector3 generateSpawn()    {
         
         float y = UnityEngine.Random.Range(-2f, 2f);
-        float z = 3 + Mathf.Sqrt((radius * radius) - (y * y));
+        float z = Mathf.Sqrt(3 + (radius * radius) - (y * y));
 
         Vector3 vector = new Vector3(0, y, z);
 
