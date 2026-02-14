@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class MenuSceneSchange : MonoBehaviour
 {
-    [SerializeField] private GameObject UnavailableScreen;
-
     public void SwitchToSceneMinigameA()
     {
         Debug.Log("Switching to Minigame A");
@@ -15,37 +13,25 @@ public class MenuSceneSchange : MonoBehaviour
 
     public void SwitchToSceneMinigameB()
     {
-        Debug.Log("Switching to Minigame B");
-        Random.InitState(System.DateTime.Now.Millisecond);
-        int rand = Random.Range(0, 2);
-        if (rand == 0)
-        {
-            SceneManager.LoadScene("MinigameBMetalWeights");
-        }
-        else
-        {
-            SceneManager.LoadScene("MinigameBPowerBalance");
-        }
+
     }
 
     public void SwitchToSceneMinigameC()
     {
-        Debug.Log("Switching to Minigame C");
-        UnavailableScreen.SetActive(true);
+
     }
 
     public void SwitchToSceneMinigameD()
     {
-        Debug.Log("Switching to Minigame D");
-        SceneManager.LoadScene("MinigameD-Tutorial");
+
     }
 
     public void SwitchToSceneMinigameE()
     {
-        Debug.Log("Switching to Minigame E");
-        SceneManager.LoadScene("GravityAssist");
-    }       
-public void SwitchToSceneMinigameFstart()
+
+    }
+
+    public void SwitchToSceneMinigameFstart()
     {
         Debug.Log("Switching to Minigame F start screen");
         SceneManager.LoadScene("MinigameF_Start");
@@ -63,10 +49,5 @@ public void SwitchToSceneMinigameFstart()
     {
         Debug.Log("Switching to CentralHub");
         SceneManager.LoadScene("CentralHub");
-    }
-
-    public void CloseUnavailableScreen()
-    {
-        UnavailableScreen.SetActive(false);
     }
 }
