@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class StageManager : MonoBehaviour
 {
 
+    
     [SerializeField] pause asteroid;
     [SerializeField] GameObject endGame;
     [SerializeField] GameObject menu;

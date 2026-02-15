@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class setDiff : MonoBehaviour
 {
+
+    public static setDiff Instance { get; private set; }
     private int diff = 0;
 
     // Start is called before the first frame update
@@ -18,6 +20,18 @@ public class setDiff : MonoBehaviour
         
     }
 
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+
+        Instance = this;
+
+        DontDestroyOnLoad(gameObject);
+    }
+
     public int getDiff()
     {
         return diff;
@@ -25,6 +39,6 @@ public class setDiff : MonoBehaviour
 
     public void setDif(int diff)
     {
-        this.diff = diff;
+        Instance.diff = diff;
     }
 }
