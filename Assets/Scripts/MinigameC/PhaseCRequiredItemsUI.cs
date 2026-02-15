@@ -332,13 +332,28 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
         if (itemDictionary == null) return null;
 
         GameObject prefab = itemDictionary.GetItemPrefab(itemId);
-        if (prefab == null) return null;
+        if (prefab != null)
+        {
+            Image img = prefab.GetComponent<Image>();
+            if (img != null && img.sprite != null) return img.sprite;
 
-        Image img = prefab.GetComponent<Image>();
-        if (img != null && img.sprite != null) return img.sprite;
+            SpriteRenderer sr = prefab.GetComponent<SpriteRenderer>();
+            if (sr != null && sr.sprite != null) return sr.sprite;
+        }
 
-        SpriteRenderer sr = prefab.GetComponent<SpriteRenderer>();
-        if (sr != null && sr.sprite != null) return sr.sprite;
+        // Fallback: Load sprite directly from Resources using naming convention
+        string itemName = itemDictionary.GetDisplayName(itemId).ToLower().Replace(" ", "_");
+        string[] possibleNames = new string[]
+        {
+            $"MinigameC/Items/item_{itemName}_0",
+            $"MinigameC/Items/item_{itemName}"
+        };
+        
+        foreach (string spritePath in possibleNames)
+        {
+            Sprite loadedSprite = Resources.Load<Sprite>(spritePath);
+            if (loadedSprite != null) return loadedSprite;
+        }
 
         return null;
     }

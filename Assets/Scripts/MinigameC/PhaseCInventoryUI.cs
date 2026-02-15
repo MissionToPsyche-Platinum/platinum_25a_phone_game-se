@@ -31,6 +31,7 @@ public class PhaseCInventoryUI : MonoBehaviour
     // Track items in our slots (by item ID, 0 = empty)
     private int[] slotItemIds = new int[SlotCount];
     private GameObject[] slotItemObjects = new GameObject[SlotCount];
+    private int[] slotItemCounts = new int[SlotCount]; // Track quantity for stacked items
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void EnsureInventoryUI()
@@ -288,6 +289,7 @@ public class PhaseCInventoryUI : MonoBehaviour
                 slotItemObjects[i] = null;
             }
             slotItemIds[i] = 0;
+            slotItemCounts[i] = 0;
 
             // Reset slot color
             if (i < slotImages.Count)
@@ -296,27 +298,43 @@ public class PhaseCInventoryUI : MonoBehaviour
             }
         }
 
-        // Read from legacy inventory
-        int slotIndex = 0;
+        // Count items from legacy inventory and stack them
+        Dictionary<int, int> itemCounts = new Dictionary<int, int>();
+        List<Item> uniqueItems = new List<Item>();
+        
         foreach (Transform slotTransform in legacyController.inventoryPanel.transform)
         {
-            if (slotIndex >= SlotCount) break;
-
             Slot legacySlot = slotTransform.GetComponent<Slot>();
             if (legacySlot != null && legacySlot.currentItem != null)
             {
                 Item item = legacySlot.currentItem.GetComponent<Item>();
                 if (item != null)
                 {
-                    slotItemIds[slotIndex] = item.ID;
-                    CreateItemDisplay(slotIndex, item);
+                    if (!itemCounts.ContainsKey(item.ID))
+                    {
+                        itemCounts[item.ID] = 0;
+                        uniqueItems.Add(item);
+                    }
+                    itemCounts[item.ID]++;
                 }
             }
+        }
+
+        // Display stacked items
+        int slotIndex = 0;
+        foreach (Item item in uniqueItems)
+        {
+            if (slotIndex >= SlotCount) break;
+            
+            int count = itemCounts[item.ID];
+            slotItemIds[slotIndex] = item.ID;
+            slotItemCounts[slotIndex] = count;
+            CreateItemDisplay(slotIndex, item, count);
             slotIndex++;
         }
     }
 
-    private void CreateItemDisplay(int slotIndex, Item item)
+    private void CreateItemDisplay(int slotIndex, Item item, int count = 1)
     {
         if (slotIndex < 0 || slotIndex >= slots.Count) return;
 
@@ -352,6 +370,40 @@ public class PhaseCInventoryUI : MonoBehaviour
         else
         {
             itemIcon.color = GetItemColor(item.ID);
+        }
+
+        // Quantity badge (top-right corner, shown if count > 1)
+        if (count > 1)
+        {
+            GameObject badgeGo = new GameObject("QuantityBadge");
+            badgeGo.transform.SetParent(containerGo.transform, false);
+            Image badgeBg = badgeGo.AddComponent<Image>();
+            badgeBg.color = new Color(0.9f, 0.3f, 0.3f, 0.9f);
+            badgeBg.raycastTarget = false;
+            
+            RectTransform badgeRect = badgeGo.GetComponent<RectTransform>();
+            badgeRect.anchorMin = new Vector2(1f, 1f);
+            badgeRect.anchorMax = new Vector2(1f, 1f);
+            badgeRect.pivot = new Vector2(1f, 1f);
+            badgeRect.sizeDelta = new Vector2(22f, 18f);
+            badgeRect.anchoredPosition = new Vector2(-2f, -2f);
+
+            GameObject badgeTextGo = new GameObject("QuantityText");
+            badgeTextGo.transform.SetParent(badgeGo.transform, false);
+            Text badgeText = badgeTextGo.AddComponent<Text>();
+            badgeText.text = "x" + count;
+            badgeText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            badgeText.fontSize = 11;
+            badgeText.fontStyle = FontStyle.Bold;
+            badgeText.color = Color.white;
+            badgeText.alignment = TextAnchor.MiddleCenter;
+            badgeText.raycastTarget = false;
+            
+            RectTransform badgeTextRect = badgeTextGo.GetComponent<RectTransform>();
+            badgeTextRect.anchorMin = Vector2.zero;
+            badgeTextRect.anchorMax = Vector2.one;
+            badgeTextRect.offsetMin = Vector2.zero;
+            badgeTextRect.offsetMax = Vector2.zero;
         }
 
         // Item name label (bottom portion of slot)
@@ -392,6 +444,7 @@ public class PhaseCInventoryUI : MonoBehaviour
 
         if (itemDictionary != null)
         {
+            // Try to get sprite from ItemDictionary's prefab
             GameObject prefab = itemDictionary.GetItemPrefab(item.ID);
             if (prefab != null)
             {
@@ -400,6 +453,19 @@ public class PhaseCInventoryUI : MonoBehaviour
 
                 SpriteRenderer prefabSr = prefab.GetComponent<SpriteRenderer>();
                 if (prefabSr != null && prefabSr.sprite != null) return prefabSr.sprite;
+            }
+
+            // Fallback: Load sprite directly from Resources using naming convention
+            string[] possibleNames = new string[]
+            {
+                $"MinigameC/Items/item_{item.displayName.ToLower().Replace(" ", "_")}_0",
+                $"MinigameC/Items/item_{item.displayName.ToLower().Replace(" ", "_")}"
+            };
+            
+            foreach (string spritePath in possibleNames)
+            {
+                Sprite loadedSprite = Resources.Load<Sprite>(spritePath);
+                if (loadedSprite != null) return loadedSprite;
             }
         }
 

@@ -12,8 +12,8 @@ public class ItemDictionary : MonoBehaviour
     /// <summary>All Phase C item definitions: ID, display name, sprite resource path.</summary>
     private static readonly (int id, string name, string spritePath)[] AllItems =
     {
-        (1,  "Magnetometer Parts",  "MinigameC/Items/item_magnetometer_parts"),
-        (2,  "Wiring",              "MinigameC/Items/item_wiring"),
+        (1,  "Magnetometer Parts",  "MinigameC/Items/item_magnetometer_parts_0"),
+        (2,  "Wiring",              "MinigameC/Items/item_wiring_0"),
         (3,  "Camera Sensor",       "MinigameC/Items/item_camera_sensor"),
         (4,  "Spectrometer Core",   "MinigameC/Items/item_spectrometer_core"),
         (5,  "Insulation",          "MinigameC/Items/item_insulation"),
