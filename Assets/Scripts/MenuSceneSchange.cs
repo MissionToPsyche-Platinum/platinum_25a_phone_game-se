@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuSceneSchange : MonoBehaviour
 {
     [SerializeField] private GameObject UnavailableScreen;
+    [SerializeField] private float sceneLoadDelay = 0.15f;
 
     public void SwitchToSceneMinigameA()
     {
         Debug.Log("Switching to Minigame A");
-        SceneManager.LoadScene("MinigameA");
+        StartCoroutine(LoadSceneWithDelay("MinigameA"));
     }
 
     public void SwitchToSceneMinigameB()
@@ -20,11 +22,11 @@ public class MenuSceneSchange : MonoBehaviour
         int rand = Random.Range(0, 2);
         if (rand == 0)
         {
-            SceneManager.LoadScene("MinigameBMetalWeights");
+            StartCoroutine(LoadSceneWithDelay("MinigameBMetalWeights"));
         }
         else
         {
-            SceneManager.LoadScene("MinigameBPowerBalance");
+            StartCoroutine(LoadSceneWithDelay("MinigameBPowerBalance"));
         }
     }
 
@@ -37,14 +39,14 @@ public class MenuSceneSchange : MonoBehaviour
     public void SwitchToSceneMinigameD()
     {
         Debug.Log("Switching to Minigame D");
-        SceneManager.LoadScene("MinigameD-Tutorial");
+        StartCoroutine(LoadSceneWithDelay("MinigameD-Tutorial"));
     }
 
     public void SwitchToSceneMinigameE()
     {
         // Scene Loading for Minigame E
         Debug.Log("Switching to Minigame E");
-        SceneManager.LoadScene("GravityAssist");
+        StartCoroutine(LoadSceneWithDelay("GravityAssist"));
     }
 
     public void SwitchToSceneMinigameF()
@@ -56,5 +58,11 @@ public class MenuSceneSchange : MonoBehaviour
     public void CloseUnavailableScreen()
     {
         UnavailableScreen.SetActive(false);
+    }
+
+    private IEnumerator LoadSceneWithDelay(string sceneName)
+    {
+        yield return new WaitForSeconds(sceneLoadDelay);
+        SceneManager.LoadScene(sceneName);
     }
 }
