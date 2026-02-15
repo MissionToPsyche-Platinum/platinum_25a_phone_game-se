@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class InventoryController : MonoBehaviour
 {
+    // Slot count is enforced here in code so it is never affected by stale scene data.
+    private const int TotalSlots = 8;
+
     public GameObject inventoryPanel;
     public GameObject slotPrefab;
-    public int slotCount;
+    /// <summary>Read-only: always returns TotalSlots (8). Kept public for external readers.</summary>
+    public int slotCount => TotalSlots;
     public GameObject[] itemPrefabs;
+
+    [Header("Inventory Limits")]
+    [Tooltip("Maximum number of different item types allowed at once. Duplicate quantities of the same type are always allowed.")]
+    [SerializeField] private int maxUniqueItemTypes = 8;
 
     private ItemDictionary itemDictionary;
 
@@ -121,7 +129,30 @@ public class InventoryController : MonoBehaviour
         }
         
         Debug.Log($"InventoryController.AddItem: Attempting to add item. Inventory panel has {inventoryPanel.transform.childCount} slots");
-        
+
+        // Enforce unique-type limit: multiple quantities of the same type are allowed;
+        // only adding a brand-new type is restricted.
+        Item newItemComp = itemPrefab.GetComponent<Item>();
+        if (newItemComp != null)
+        {
+            var typesInInventory = new System.Collections.Generic.HashSet<int>();
+            bool typeAlreadyPresent = false;
+            foreach (Transform slotTransform in inventoryPanel.transform)
+            {
+                Slot s = slotTransform.GetComponent<Slot>();
+                if (s == null || s.currentItem == null) continue;
+                Item it = s.currentItem.GetComponent<Item>();
+                if (it == null) continue;
+                if (it.ID == newItemComp.ID) typeAlreadyPresent = true;
+                typesInInventory.Add(it.ID);
+            }
+            if (!typeAlreadyPresent && typesInInventory.Count >= maxUniqueItemTypes)
+            {
+                Debug.Log($"InventoryController.AddItem: Rejected – inventory already has {maxUniqueItemTypes} different item types.");
+                return false;
+            }
+        }
+
         foreach (Transform slotTransform in inventoryPanel.transform)
         {
             Slot slot = slotTransform.GetComponent<Slot>();
