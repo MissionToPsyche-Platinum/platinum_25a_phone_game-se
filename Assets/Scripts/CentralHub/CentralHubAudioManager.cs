@@ -111,4 +111,31 @@ public class CentralHubAudioManager : MonoBehaviour
         }
         source.volume = to;
     }
+
+    public void SetHubMusicVolume(float v)
+    {
+        v = Mathf.Clamp01(v);
+
+        bgVolume = v;
+        if (bySource != null)
+        {
+            bySource.volume = bgVolume;
+        }
+    }
+
+    public float GetHubMusicVolume()
+    {
+        return bgVolume;
+    }
+
+    public void SetHubMasterVolume(float v)
+    {
+        v = Mathf.Clamp01(v);
+        bgVolume = v;
+        clickVolume = v;
+        if (bySource != null)
+        {
+            bySource.volume = bgVolume;
+        }
+    }
 }
