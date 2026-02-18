@@ -108,6 +108,8 @@ public class RocketVelocity : MonoBehaviour
             other.gameObject.SetActive(false);
         } else if (other.CompareTag("ShieldRing"))
         {
+            MinigameD_AudioManager.Instance.playShieldRing();
+
             shielded = true;
             shieldStartTime = Time.time;
 
@@ -118,20 +120,21 @@ public class RocketVelocity : MonoBehaviour
     // boost ring: stabilize velocity
     public void boostVelocity()
     {
-        MinigameD_AudioManager.Instance.boostRing();
+        MinigameD_AudioManager.Instance.playBoostRing();
         currentVelocity = initialVelocity;
     }
 
     // penalty ring: decrease velocity by 20%
     public void decreaseVelocity()
     {
-        MinigameD_AudioManager.Instance.penaltyRing();
+        MinigameD_AudioManager.Instance.playPenaltyRing();
         currentVelocity = currentVelocity * (float)0.80;
     }
 
     // jump ring: double velocity + start invulnerability
     public void doubleVelocity()
     {
+        MinigameD_AudioManager.Instance.playJumpRing();
         currentVelocity = initialVelocity * 2;
     }
 }

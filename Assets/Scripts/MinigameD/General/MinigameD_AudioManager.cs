@@ -7,8 +7,11 @@ public class MinigameD_AudioManager : MonoBehaviour
     public static MinigameD_AudioManager Instance { get; private set; }
 
     [SerializeField] private AudioSource buttonSound;
-    [SerializeField] private AudioSource boostSound;
-    [SerializeField] private AudioSource penaltySound;
+
+    [SerializeField] private AudioSource boostRingSound;
+    [SerializeField] private AudioSource penaltyRingSound;
+    [SerializeField] private AudioSource jumpRingSound;
+    [SerializeField] private AudioSource shieldRingSound;
 
     void Awake()
     {
@@ -28,12 +31,20 @@ public class MinigameD_AudioManager : MonoBehaviour
         if (buttonSound != null) buttonSound.Play();
     }
 
-    public void boostRing()
+    public void playBoostRing()
     {
-        if (boostSound != null) boostSound.PlayOneShot(boostSound.clip);
+        if (boostRingSound != null) boostRingSound.PlayOneShot(boostRingSound.clip);
     }
-    public void penaltyRing()
+    public void playPenaltyRing()
     {
-        if (penaltySound != null) penaltySound.PlayOneShot(penaltySound.clip);
+        if (penaltyRingSound != null) penaltyRingSound.PlayOneShot(penaltyRingSound.clip);
+    }
+    public void playJumpRing()
+    {
+        if (jumpRingSound != null) jumpRingSound.PlayOneShot(jumpRingSound.clip);
+    }
+    public void playShieldRing()
+    {
+        if (shieldRingSound != null) shieldRingSound.PlayOneShot(shieldRingSound.clip);
     }
 }
