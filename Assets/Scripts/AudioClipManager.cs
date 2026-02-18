@@ -45,7 +45,7 @@ public class AudioClipManager : MonoBehaviour
 
     public void PlayCongrats()
     {
-        audioSource.volume = 0.1f;
+        audioSource.volume = 0.2f;
         audioSource.PlayOneShot(congrats);
     }
 }
