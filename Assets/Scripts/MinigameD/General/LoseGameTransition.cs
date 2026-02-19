@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -21,7 +19,13 @@ public class LoseGameTransition : MonoBehaviour
 
     private System.Collections.IEnumerator TransitionScene()
     {
-        SceneManager.LoadScene("MinigameD-Game-Lost");
-        yield return null;
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("MinigameD-Game-Lost");
+
+        MinigameD_AudioManager.Instance.playGameLost();
+
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
     }
 }

@@ -13,6 +13,9 @@ public class MinigameD_AudioManager : MonoBehaviour
     [SerializeField] private AudioSource jumpRingSound;
     [SerializeField] private AudioSource shieldRingSound;
 
+    [SerializeField] private AudioSource gameLostSound;
+    [SerializeField] private AudioSource gameWonSound;
+
     void Awake()
     {
         if (Instance == null)
@@ -46,5 +49,13 @@ public class MinigameD_AudioManager : MonoBehaviour
     public void playShieldRing()
     {
         if (shieldRingSound != null) shieldRingSound.PlayOneShot(shieldRingSound.clip);
+    }
+    public void playGameWon()
+    {
+        if (gameWonSound != null) gameWonSound.PlayOneShot(gameWonSound.clip);
+    }
+    public void playGameLost()
+    {
+        if (gameLostSound != null) gameLostSound.PlayOneShot(gameLostSound.clip);
     }
 }

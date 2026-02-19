@@ -20,13 +20,16 @@ public class SceneTransitionManager : MonoBehaviour
 
         // load scene asynchronously
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
+
+        if (sceneName == "MinigameD-Game-Won")
+        {
+            MinigameD_AudioManager.Instance.playGameWon();
+        }
+
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
-
-        // fade in
-        yield return StartCoroutine(FadeIn());
     }
 
     private IEnumerator FadeOut()
@@ -39,17 +42,5 @@ public class SceneTransitionManager : MonoBehaviour
             yield return null;
         }
         fadeImage.color = new Color(0, 0, 0, 1);
-    }
-
-    private IEnumerator FadeIn()
-    {
-        float timer = 0f;
-        while (timer <= fadeDuration)
-        {
-            fadeImage.color = new Color(0, 0, 0, Mathf.Lerp(1, 0, timer / fadeDuration));
-            timer += Time.deltaTime;
-            yield return null;
-        }
-        fadeImage.color = new Color(0, 0, 0, 0);
     }
 }
