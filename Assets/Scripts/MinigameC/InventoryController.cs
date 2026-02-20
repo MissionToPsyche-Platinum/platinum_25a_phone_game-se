@@ -15,7 +15,7 @@ public class InventoryController : MonoBehaviour
 
     [Header("Inventory Limits")]
     [Tooltip("Maximum number of different item types allowed at once. Duplicate quantities of the same type are always allowed.")]
-    [SerializeField] private int maxUniqueItemTypes = 8;
+    [SerializeField] private int maxUniqueItemTypes = 4;
 
     private ItemDictionary itemDictionary;
 
@@ -188,7 +188,67 @@ public class InventoryController : MonoBehaviour
             }
         }
         
-        Debug.Log("InventoryController.AddItem: Inventory is full - no empty slots found");
+        // No empty slot found — create one dynamically so quantities are unlimited
+        Debug.Log("InventoryController.AddItem: No empty slot found, creating dynamic slot");
+        GameObject newSlotObj;
+        if (slotPrefab != null)
+        {
+            newSlotObj = Instantiate(slotPrefab, inventoryPanel.transform);
+        }
+        else
+        {
+            newSlotObj = new GameObject($"Slot_Dynamic_{inventoryPanel.transform.childCount}");
+            newSlotObj.transform.SetParent(inventoryPanel.transform, false);
+            newSlotObj.AddComponent<Slot>();
+        }
+        Slot dynamicSlot = newSlotObj.GetComponent<Slot>();
+        if (dynamicSlot != null)
+        {
+            GameObject newItem = Instantiate(itemPrefab, dynamicSlot.transform);
+            newItem.SetActive(true);
+            newItem.transform.localScale = Vector3.one;
+            RectTransform dynRect = newItem.GetComponent<RectTransform>();
+            if (dynRect != null) dynRect.anchoredPosition = Vector2.zero;
+            dynamicSlot.currentItem = newItem;
+            Debug.Log("InventoryController.AddItem: Item added to new dynamic slot");
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>Returns true when all 4 unique item type slots are taken.</summary>
+    public bool IsInventoryFull()
+    {
+        if (inventoryPanel == null) return false;
+        var types = new System.Collections.Generic.HashSet<int>();
+        foreach (Transform slotTransform in inventoryPanel.transform)
+        {
+            Slot s = slotTransform.GetComponent<Slot>();
+            if (s == null || s.currentItem == null) continue;
+            Item it = s.currentItem.GetComponent<Item>();
+            if (it == null) continue;
+            types.Add(it.ID);
+        }
+        return types.Count >= maxUniqueItemTypes;
+    }
+
+    /// <summary>Removes one instance of the given item type from inventory. Returns false if not found.</summary>
+    public bool DropItem(int itemId)
+    {
+        if (inventoryPanel == null) return false;
+        foreach (Transform slotTransform in inventoryPanel.transform)
+        {
+            Slot slot = slotTransform.GetComponent<Slot>();
+            if (slot == null || slot.currentItem == null) continue;
+            Item item = slot.currentItem.GetComponent<Item>();
+            if (item != null && item.ID == itemId)
+            {
+                Destroy(slot.currentItem);
+                slot.currentItem = null;
+                Debug.Log($"InventoryController.DropItem: Dropped item ID {itemId}");
+                return true;
+            }
+        }
         return false;
     }
 

@@ -12,10 +12,10 @@ public class PhaseCInventoryUI : MonoBehaviour
 {
     private const string TargetSceneName = "MinigameC";
     private const string CanvasName = "PhaseCInventoryCanvas";
-    private const int SlotCount = 12;
+    private const int SlotCount = 4;
     private const float SlotSize = 80f;
     private const float SlotSpacing = 10f;
-    private const int SlotsPerRow = 6;
+    private const int SlotsPerRow = 4;
 
     private Canvas canvas;
     private GameObject canvasObject;
@@ -27,6 +27,7 @@ public class PhaseCInventoryUI : MonoBehaviour
     private InventoryController legacyController;
     private ItemDictionary itemDictionary;
     private bool initialized;
+    private Text statusText;
 
     // Track items in our slots (by item ID, 0 = empty)
     private int[] slotItemIds = new int[SlotCount];
@@ -64,6 +65,8 @@ public class PhaseCInventoryUI : MonoBehaviour
         initialized = true;
     }
 
+    private static readonly KeyCode[] DropKeys = { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4 };
+
     private void Update()
     {
         if (!initialized) return;
@@ -73,10 +76,21 @@ public class PhaseCInventoryUI : MonoBehaviour
             bool show = !canvasObject.activeSelf;
             canvasObject.SetActive(show);
 
-            // Sync immediately when opening so items are up to date
             if (show)
             {
                 SyncFromLegacyInventory();
+            }
+        }
+
+        // Press 1-4 while inventory is open to drop the item in that slot
+        if (canvasObject.activeSelf && legacyController != null)
+        {
+            for (int i = 0; i < SlotCount; i++)
+            {
+                if (Input.GetKeyDown(DropKeys[i]) && slotItemIds[i] != 0)
+                {
+                    legacyController.DropItem(slotItemIds[i]);
+                }
             }
         }
     }
@@ -129,9 +143,10 @@ public class PhaseCInventoryUI : MonoBehaviour
         float gridHeight = (SlotSize * rowCount) + (SlotSpacing * (rowCount - 1));
         float panelPadding = 24f;
         float titleHeight = 40f;
+        float statusHeight = 24f;
         float hintHeight = 28f;
         float panelWidth = gridWidth + panelPadding * 2;
-        float panelHeight = titleHeight + gridHeight + hintHeight + panelPadding * 2;
+        float panelHeight = titleHeight + gridHeight + statusHeight + hintHeight + panelPadding * 2;
 
         // Centered panel
         panelObject = new GameObject("InventoryPanel");
@@ -195,13 +210,31 @@ public class PhaseCInventoryUI : MonoBehaviour
             CreateSlot(i, gridWidth, gridHeight);
         }
 
+        // Status text — shown in red when inventory is full
+        GameObject statusGo = new GameObject("StatusText");
+        statusGo.transform.SetParent(panelObject.transform, false);
+        statusText = statusGo.AddComponent<Text>();
+        statusText.text = "";
+        statusText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        statusText.fontSize = 13;
+        statusText.fontStyle = FontStyle.Bold;
+        statusText.color = new Color(1f, 0.35f, 0.35f, 1f);
+        statusText.alignment = TextAnchor.MiddleCenter;
+        statusText.raycastTarget = false;
+        RectTransform statusRect = statusGo.GetComponent<RectTransform>();
+        statusRect.anchorMin = new Vector2(0f, 0f);
+        statusRect.anchorMax = new Vector2(1f, 0f);
+        statusRect.pivot = new Vector2(0.5f, 0f);
+        statusRect.sizeDelta = new Vector2(0f, statusHeight);
+        statusRect.anchoredPosition = new Vector2(0f, hintHeight + 4f);
+
         // Hint text at bottom
         GameObject hintGo = new GameObject("Hint");
         hintGo.transform.SetParent(panelObject.transform, false);
         Text hintText = hintGo.AddComponent<Text>();
-        hintText.text = "Press I to close";
+        hintText.text = "Press I to close  |  Press 1-4 to drop item";
         hintText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        hintText.fontSize = 14;
+        hintText.fontSize = 12;
         hintText.color = PhaseCUITheme.TextSecondary;
         hintText.alignment = TextAnchor.MiddleCenter;
         hintText.raycastTarget = false;
@@ -325,12 +358,20 @@ public class PhaseCInventoryUI : MonoBehaviour
         foreach (Item item in uniqueItems)
         {
             if (slotIndex >= SlotCount) break;
-            
+
             int count = itemCounts[item.ID];
             slotItemIds[slotIndex] = item.ID;
             slotItemCounts[slotIndex] = count;
             CreateItemDisplay(slotIndex, item, count);
             slotIndex++;
+        }
+
+        // Update full-inventory status banner
+        if (statusText != null && legacyController != null)
+        {
+            statusText.text = legacyController.IsInventoryFull()
+                ? "INVENTORY FULL — Only 4 unique items allowed"
+                : "";
         }
     }
 
