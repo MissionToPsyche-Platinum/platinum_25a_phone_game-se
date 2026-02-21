@@ -23,6 +23,9 @@ public class CentralHubAudioManager : MonoBehaviour
 
     private Coroutine duckRountine;
 
+    private const string PREF_KEY = "MasterVolume"; //Key for PlayerPrefs
+    [SerializeField] private float defaultMasterVolume = 0.7f; //Default volume
+
     private void Awake()
     {
         bySource = gameObject.AddComponent<AudioSource>();
@@ -38,7 +41,11 @@ public class CentralHubAudioManager : MonoBehaviour
         sfxSource.spatialBlend = 0f;
         sfxSource.volume = 1f;
 
+        float saved = Mathf.Clamp01(PlayerPrefs.GetFloat(PREF_KEY, defaultMasterVolume)); //Load saved volume or use default
+        SetMasterVolume(saved);
+
     }
+
 
     private void Start()
     {
@@ -112,30 +119,19 @@ public class CentralHubAudioManager : MonoBehaviour
         source.volume = to;
     }
 
-    public void SetHubMusicVolume(float v)
-    {
-        v = Mathf.Clamp01(v);
-
-        bgVolume = v;
-        if (bySource != null)
-        {
-            bySource.volume = bgVolume;
-        }
-    }
-
-    public float GetHubMusicVolume()
-    {
-        return bgVolume;
-    }
-
-    public void SetHubMasterVolume(float v)
+    public void SetMasterVolume(float v)
     {
         v = Mathf.Clamp01(v);
         bgVolume = v;
         clickVolume = v;
+
         if (bySource != null)
         {
             bySource.volume = bgVolume;
+        }
+        if (sfxSource != null)
+        {
+            sfxSource.volume = clickVolume;
         }
     }
 }

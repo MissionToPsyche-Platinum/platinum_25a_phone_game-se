@@ -293,6 +293,7 @@ MonoBehaviour:
   fadeDownSeconds: 0.15
   holdSeconds: 0.2
   fadeUpSeconds: 0.25
+  defaultMasterVolume: 0.7
 --- !u!1 &277261139
 GameObject:
   m_ObjectHideFlags: 0
@@ -1141,6 +1142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingOverlay: {fileID: 1153198292}
+  settingsCard: {fileID: 1495174171}
   settingsButton: {fileID: 1618981159}
   volumeSlider: {fileID: 658689751}
   volumePercentText: {fileID: 1183319092}
@@ -1780,9 +1782,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slider: {fileID: 658689751}
   percentText: {fileID: 1183319092}
-  prefskey: MasterVolume
   defaultVolume: 0.7
-  audioManagerBehaviour: {fileID: 0}
 --- !u!1 &1495174171
 GameObject:
   m_ObjectHideFlags: 0
@@ -3365,5 +3365,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 277261142}
   - {fileID: 2143529589}
-  - {fileID: 966878025}
   - {fileID: 521507042}
+  - {fileID: 966878025}

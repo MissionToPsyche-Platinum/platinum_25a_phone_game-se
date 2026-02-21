@@ -1624,6 +1624,7 @@ MonoBehaviour:
   impactSound: {fileID: 466321297}
   backgroundSpaceSound: {fileID: 466321295}
   butttonClickSound: {fileID: 466321296}
+  defaultMasterVolume: 0.7
 --- !u!82 &466321295
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4146,7 +4147,10 @@ MonoBehaviour:
   settingsOverlay: {fileID: 884664711}
   settingsCard: {fileID: 1476830083}
   SettingsButton: {fileID: 1719417732}
+  volumeSlider: {fileID: 65076844}
+  volumePercentText: {fileID: 379384053}
   audioManager: {fileID: 466321294}
+  defaultVolume: 0.7
 --- !u!1 &1101958261
 GameObject:
   m_ObjectHideFlags: 0
