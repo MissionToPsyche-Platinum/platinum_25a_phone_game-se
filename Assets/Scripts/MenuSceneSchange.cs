@@ -13,7 +13,20 @@ public class MenuSceneSchange : MonoBehaviour
 
     public void SwitchToSceneMinigameB()
     {
-
+        Debug.Log("Switching to Minigame B");
+        int rand = Random.Range(0, 3);
+        if (rand == 0)
+        {
+            SceneManager.LoadScene("MinigameBMetalWeights");
+        }
+        else if (rand == 1)
+        {
+            SceneManager.LoadScene("MinigameBPowerBalance");
+        }
+        else
+        {
+            SceneManager.LoadScene("MinigameBWireColorLink");
+        }
     }
 
     public void SwitchToSceneMinigameC()

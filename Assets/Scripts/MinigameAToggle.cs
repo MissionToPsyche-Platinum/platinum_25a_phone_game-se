@@ -13,6 +13,8 @@ public class MinigameAToggle : MonoBehaviour
     [SerializeField] private GameObject tutorial5;
     [SerializeField] private GameObject tutorial6;
 
+    [SerializeField] private AudioClipManager audioClipManager;
+
     private void Start()
     {
         x.SetActive(false);
@@ -21,6 +23,7 @@ public class MinigameAToggle : MonoBehaviour
 
     public void Toggle()
     {
+        audioClipManager.PlayClick();
         if (isCheck)
         {
             check.SetActive(false);
