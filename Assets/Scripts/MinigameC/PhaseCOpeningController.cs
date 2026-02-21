@@ -13,6 +13,9 @@ public class PhaseCOpeningController : MonoBehaviour
 {
     public static PhaseCOpeningController Instance { get; private set; }
 
+    /// <summary>Set to true before reloading the scene to skip the opening once (e.g. on retry).</summary>
+    public static bool SkipNextOpening = false;
+
     private const string TargetSceneName = "MinigameC";
     private const string OpeningCanvasName = "PhaseCOpeningCanvas";
     private const string PlayerPrefsOpeningSeen = "PhaseCOpeningSeen";
@@ -67,6 +70,15 @@ public class PhaseCOpeningController : MonoBehaviour
         }
 
         BuildPanelContent();
+
+        // Retry path: skip opening so the player goes straight back into the game.
+        if (SkipNextOpening)
+        {
+            SkipNextOpening = false;
+            EnablePlayerMovement();
+            return;
+        }
+
         bool alreadySeen = !alwaysShowOpening && PlayerPrefs.GetInt(PlayerPrefsOpeningSeen, 0) == 1;
         if (alreadySeen)
         {

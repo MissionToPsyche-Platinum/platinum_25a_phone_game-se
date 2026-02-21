@@ -32,7 +32,7 @@ RectTransform:
   m_GameObject: {fileID: 3727263109460303043}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.0390625, y: 0.0390625, z: 0.0390625}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -70,7 +70,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 4750651203034271755, guid: ed44911b1edc9ca4f85fb1edf53c9c53, type: 3}
+  m_Sprite: {fileID: 551121759747247011, guid: cf3edd992842e021fba0ff831d8bff2d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID: 1
+  displayName: Magnetometer Parts
 --- !u!212 &-6680698969627724009
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -157,8 +158,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1287307621
   m_SortingLayer: 5
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 4750651203034271755, guid: ed44911b1edc9ca4f85fb1edf53c9c53, type: 3}
+  m_SortingOrder: 10
+  m_Sprite: {fileID: 551121759747247011, guid: cf3edd992842e021fba0ff831d8bff2d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

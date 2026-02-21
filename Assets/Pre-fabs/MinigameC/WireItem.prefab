@@ -8,14 +8,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6877179262352331851, guid: 5d8437996f32aba4bbfac5a493776414, type: 3}
+      propertyPath: ID
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -6877179262352331851, guid: 5d8437996f32aba4bbfac5a493776414, type: 3}
+      propertyPath: displayName
+      value: Wiring
+      objectReference: {fileID: 0}
     - target: {fileID: -6680698969627724009, guid: 5d8437996f32aba4bbfac5a493776414, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 8611733002928981209, guid: 06ed5a8d4ac849c4194b0b1f52479f40, type: 3}
+      objectReference: {fileID: -5072644726919696818, guid: 48bb2ed4c968d02649abe5f4138eec17, type: 3}
     - target: {fileID: 1516166969858098702, guid: 5d8437996f32aba4bbfac5a493776414, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 8611733002928981209, guid: 06ed5a8d4ac849c4194b0b1f52479f40, type: 3}
+      objectReference: {fileID: -5072644726919696818, guid: 48bb2ed4c968d02649abe5f4138eec17, type: 3}
     - target: {fileID: 3727263109460303043, guid: 5d8437996f32aba4bbfac5a493776414, type: 3}
       propertyPath: m_Name
       value: WireItem
@@ -54,11 +62,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7132996721413952030, guid: 5d8437996f32aba4bbfac5a493776414, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.0390625
       objectReference: {fileID: 0}
     - target: {fileID: 7132996721413952030, guid: 5d8437996f32aba4bbfac5a493776414, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.0390625
       objectReference: {fileID: 0}
     - target: {fileID: 7132996721413952030, guid: 5d8437996f32aba4bbfac5a493776414, type: 3}
       propertyPath: m_LocalPosition.x

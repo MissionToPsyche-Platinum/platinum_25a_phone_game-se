@@ -232,6 +232,22 @@ public class InventoryController : MonoBehaviour
         return types.Count >= maxUniqueItemTypes;
     }
 
+    /// <summary>Clears all items from every inventory slot. Does not destroy slots. Used e.g. on game over.</summary>
+    public void ClearAllInventory()
+    {
+        if (inventoryPanel == null) return;
+        foreach (Transform slotTransform in inventoryPanel.transform)
+        {
+            Slot slot = slotTransform.GetComponent<Slot>();
+            if (slot == null) continue;
+            if (slot.currentItem != null)
+            {
+                Destroy(slot.currentItem);
+                slot.currentItem = null;
+            }
+        }
+    }
+
     /// <summary>Removes one instance of the given item type from inventory. Returns false if not found.</summary>
     public bool DropItem(int itemId)
     {

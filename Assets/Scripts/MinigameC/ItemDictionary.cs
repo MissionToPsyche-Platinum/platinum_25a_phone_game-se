@@ -132,7 +132,6 @@ public class ItemDictionary : MonoBehaviour
             GameObject itemGo = Instantiate(template.gameObject);
             itemGo.name = def.name;
             itemGo.SetActive(false);
-            DontDestroyOnLoad(itemGo);
 
             // Patch metadata
             Item item = itemGo.GetComponent<Item>();

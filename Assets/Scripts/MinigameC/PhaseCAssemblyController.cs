@@ -542,6 +542,21 @@ public class PhaseCAssemblyController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Resets all step progress back to Step 1. Called when the mission timer expires.
+    /// Inventory is cleared separately by MissionTimer before calling this.
+    /// </summary>
+    public void ResetProgress()
+    {
+        currentStepIndex   = 0;
+        instrumentsBuilt   = 0;
+        commsBuilt         = 0;
+        busBuilt           = 0;
+        propulsionDelivered = 0;
+        UpdateNpcDialogue();
+        NotifyStepChanged();
+    }
+
     private void UpdateNpcDialogue()
     {
         foreach (npc npcComponent in npcByName.Values)
