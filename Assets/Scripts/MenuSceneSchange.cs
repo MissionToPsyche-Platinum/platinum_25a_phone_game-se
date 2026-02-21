@@ -36,7 +36,8 @@ public class MenuSceneSchange : MonoBehaviour
 
     public void SwitchToSceneMinigameD()
     {
-
+        Debug.Log("Switching to Minigame D");
+        SceneManager.LoadScene("MinigameD-Level1");
     }
 
     public void SwitchToSceneMinigameE()
