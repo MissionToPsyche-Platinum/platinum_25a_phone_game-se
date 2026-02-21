@@ -13,8 +13,7 @@ public class StageManager : MonoBehaviour
     [SerializeField] GameObject menu;
 
     [SerializeField] spinDiff diff;
-    [SerializeField] orbitPschye speed;
-    [SerializeField] setDiff dif;
+    [SerializeField] orbitPschye speed;    
 
     public int difficulty = 0;
     
@@ -37,7 +36,7 @@ public class StageManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        difficulty = dif.getDiff();
+        difficulty = setDiff.Instance.getDiff();
         Debug.Log(difficulty);
 
     }

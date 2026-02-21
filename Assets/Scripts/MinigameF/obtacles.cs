@@ -16,7 +16,7 @@ public class obtacles : MonoBehaviour
 
     void Start()
     {
-
+        diff = setDiff.Instance.getDiff();
         // 0 = easy
         // 1 = normal
         // 2 = hard

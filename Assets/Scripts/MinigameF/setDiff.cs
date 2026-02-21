@@ -39,6 +39,6 @@ public class setDiff : MonoBehaviour
 
     public void setDif(int diff)
     {
-        Instance.diff = diff;
+        this.diff = diff;
     }
 }
