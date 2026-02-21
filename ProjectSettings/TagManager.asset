@@ -3,7 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Planet
+  - Boundary
+  - player
+  - Spacecraft
+  - BoostRing
+  - PenaltyRing
+  - JumpRing
+  - ShieldRing
   layers:
   - Default
   - TransparentFX
@@ -11,10 +19,10 @@ TagManager:
   - 
   - Water
   - UI
+  - UI on top
   - 
-  - 
-  - 
-  - 
+  - World
+  - Background
   - 
   - 
   - 
@@ -40,4 +48,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 1559017925
+    locked: 0
+  - name: World
+    uniqueID: 1160548495
+    locked: 0
+  - name: UI
+    uniqueID: 2514908935
+    locked: 0
+  - name: IntroPanel
+    uniqueID: 3110812965
     locked: 0
