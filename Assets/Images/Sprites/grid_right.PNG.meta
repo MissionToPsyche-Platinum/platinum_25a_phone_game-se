@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9987d0cac8b23b54eae6200d3e6ce10d
+guid: fcfd18353be9fbc409922345a80b98cf
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -180163140088125795
-    second: toggle_circle_0
+      213: -382806549321212938
+    second: grid_right_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -106,41 +106,17 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: toggle_circle_0
+      name: grid_right_0
       rect:
         serializedVersion: 2
-        x: 747
-        y: 592
-        width: 511
-        height: 507
+        x: 0
+        y: 0
+        width: 1600
+        height: 1600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -148,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d96ad61249eef7df0800000000000000
-      internalID: -180163140088125795
+      spriteID: 6fb140ab87fffaaf0800000000000000
+      internalID: -382806549321212938
       vertices: []
       indices: 
       edges: []
@@ -165,7 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      toggle_circle_0: -180163140088125795
+      grid_right_0: -382806549321212938
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

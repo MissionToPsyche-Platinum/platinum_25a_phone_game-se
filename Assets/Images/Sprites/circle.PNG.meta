@@ -137,10 +137,10 @@ TextureImporter:
       name: circle_0
       rect:
         serializedVersion: 2
-        x: 172
-        y: 172
-        width: 1296
-        height: 1296
+        x: 0
+        y: 0
+        width: 1600
+        height: 1600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

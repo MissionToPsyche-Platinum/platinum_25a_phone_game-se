@@ -6,7 +6,11 @@ using UnityEngine.EventSystems;
 public class MinigameBCoinScript : MonoBehaviour, IPointerDownHandler, IDropHandler, IPointerUpHandler
 {
     [SerializeField] private int coinWeight;
-    public int CoinWeight { get { return coinWeight; } }
+    public int CoinWeight
+    {
+        get { return coinWeight; }
+        set { coinWeight = value; }
+    }
     private bool held;
 
     public GameObject targetArea;
