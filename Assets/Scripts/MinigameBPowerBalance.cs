@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class MinigameBPowerBalance : MonoBehaviour
 {
+    [SerializeField] private AudioClipManager audioClipManager;
+
     [SerializeField] private TextMeshProUGUI LeftSourceNumber;
     [SerializeField] private TextMeshProUGUI MiddleSourceNumber;
     [SerializeField] private TextMeshProUGUI RightSourceNumber;
@@ -211,6 +213,7 @@ public class MinigameBPowerBalance : MonoBehaviour
         if (LeftSinkCurrentValue == LeftSinkFinalValue && MiddleSinkCurrentValue == MiddleSinkFinalValue && RightSinkCurrentValue == RightSinkFinalValue)
         {
             WinScreen.SetActive(true);
+            audioClipManager.PlayCongrats();
         }
     }
 
