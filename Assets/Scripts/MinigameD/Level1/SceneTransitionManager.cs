@@ -19,12 +19,8 @@ public class SceneTransitionManager : MonoBehaviour
         yield return StartCoroutine(FadeOut());
 
         // load scene asynchronously
+        MinigameD_AudioManager.Instance.resetAudioFlag();
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
-
-        if (sceneName == "MinigameD-Game-Won")
-        {
-            MinigameD_AudioManager.Instance.playGameWon();
-        }
 
         while (!asyncLoad.isDone)
         {

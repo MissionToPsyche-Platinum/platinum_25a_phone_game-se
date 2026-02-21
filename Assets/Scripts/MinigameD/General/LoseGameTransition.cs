@@ -19,9 +19,8 @@ public class LoseGameTransition : MonoBehaviour
 
     private System.Collections.IEnumerator TransitionScene()
     {
+        MinigameD_AudioManager.Instance.resetAudioFlag();
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("MinigameD-Game-Lost");
-
-        MinigameD_AudioManager.Instance.playGameLost();
 
         while (!asyncLoad.isDone)
         {
