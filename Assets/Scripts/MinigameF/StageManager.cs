@@ -7,12 +7,15 @@ using UnityEngine.SceneManagement;
 public class StageManager : MonoBehaviour
 {
 
+    
     [SerializeField] pause asteroid;
     [SerializeField] GameObject endGame;
     [SerializeField] GameObject menu;
 
     [SerializeField] spinDiff diff;
-    [SerializeField] orbitPschye speed;
+    [SerializeField] orbitPschye speed;    
+
+    public int difficulty = 0;
     
     private float time = 10f;
     private int stage = 0;
@@ -22,9 +25,10 @@ public class StageManager : MonoBehaviour
     public string SceneName;
     [SerializeField] private Transform obj;
     [SerializeField] private SpawnBubble bubble;
-
-
     
+
+
+
 
 
     Vector3 scale = new Vector3(5,5,5);
@@ -32,7 +36,8 @@ public class StageManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        difficulty = setDiff.Instance.getDiff();
+        Debug.Log(difficulty);
 
     }
 
@@ -51,6 +56,11 @@ public class StageManager : MonoBehaviour
 
     }
 
+    public void setDifficulty(int difficulty)
+    {
+        this.difficulty = difficulty;
+    }
+
     void setStage(int stage)
     {
         if (stage == 0)
@@ -60,20 +70,22 @@ public class StageManager : MonoBehaviour
         else if (stage == 1)
         {
             
-            StartCoroutine(scaleOverTime(10f, 7.5f));
+            StartCoroutine(scaleOverTime(7.5f, 7.5f));
             
             diff.setStage(1);
             speed.setSpeed(-0.5f);
+            
 
         }
         else if (stage == 2)
         {
 
-            StartCoroutine(scaleOverTime(10f, 10f));
+            StartCoroutine(scaleOverTime(7.5f, 10f));
             
             diff.setStage(2);
             speed.setSpeed(-1f);
             
+
 
         }
         else if(stage == 3)
@@ -93,19 +105,20 @@ public class StageManager : MonoBehaviour
         Vector3 endScale = Vector3.one * scale;
         float elapsed = 0f;
 
-        bubble.setSpawn(false);
+        
         while (elapsed < duration)
         {
             var t = elapsed / duration;
             transform.localScale = Vector3.Lerp(startScale, endScale, t);
-
             elapsed += Time.deltaTime;
+
             yield return null;
         }
+        Debug.Log("Check");
 
-        transform.localScale = endScale;
-        bubble.setSpawn(true);
-        bubble.setRadius(scale/2);
+        bubble.setRadius(((scale + 1) / 2) - 0.05f);
+        transform.localScale = endScale;        
+        
 
     }
     

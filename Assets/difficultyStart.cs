@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class asteroidClick : MonoBehaviour
+public class difficultyStart : MonoBehaviour
 {
+    public int difficulty = 0;
     // Start is called before the first frame update
     void Start()
     {
-        
+        setDiff.Instance.setDif(difficulty);
     }
 
     // Update is called once per frame
@@ -16,8 +17,8 @@ public class asteroidClick : MonoBehaviour
         
     }
 
-    private void OnMouseDown()
+    public void setDif(int diff)
     {
-        Debug.Log("ASTEROID");
+        difficulty = diff;
     }
 }
