@@ -35,27 +35,27 @@ public class checkCollison : MonoBehaviour
                 {
                     if (collision.gameObject.transform.position.z - gameObject.transform.position.z < check)
                     {
-                        Destroy(gameObject, 0.5f);
+                        Destroy(gameObject, 2f);
                     }
 
                 } else if (gameObject.name == "GreenScience(Clone)" && collision.gameObject.name == "BlueScience(Clone)")
                 {
                     if (collision.gameObject.transform.position.z - gameObject.transform.position.z < check)
                     {
-                        Destroy(gameObject, 0.5f);
+                        Destroy(gameObject, 2f);
                     }
 
                 } else if (gameObject.name == "BlueScience(Clone)" && collision.gameObject.name == "RedScience(Clone)")
                 {
                     if (collision.gameObject.transform.position.z - gameObject.transform.position.z < check)
                     {
-                        Destroy(gameObject, 0.5f);
+                        Destroy(gameObject, 2f);
                     }
                 } else if (gameObject.name == collision.gameObject.name)
                 {
                     if (collision.gameObject.transform.position.z - gameObject.transform.position.z < check)
                     {
-                        Destroy(gameObject, 0.5f);
+                        Destroy(gameObject, 2f);
                     }
                 }
 
