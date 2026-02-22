@@ -4773,7 +4773,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You get to be the Pschye satellite as it orbits the Pschye asteroid.
+  m_text: 'You get to be the Psyche satellite as it orbits the Psyche asteroid.
 
 
 '
@@ -7750,7 +7750,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Welcome to Pschye Orbiter
+  m_text: Welcome to Psyche Orbiter
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
