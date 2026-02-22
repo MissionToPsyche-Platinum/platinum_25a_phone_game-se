@@ -137,12 +137,12 @@ TextureImporter:
       name: checkmark_0
       rect:
         serializedVersion: 2
-        x: 179
-        y: 207
-        width: 1300
-        height: 1233
+        x: 0
+        y: 0
+        width: 1600
+        height: 1600
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -157,7 +157,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: c586253c9b4a8f84980d84a983c032de
     internalID: 0
     vertices: []
     indices: 

@@ -24,7 +24,7 @@ public class orbitPschye : MonoBehaviour
     void orbit()
     {
         //has Pschye rotate counterclockwise to simulate orbiting
-        obj.Rotate(0, speed, 0);
+        obj.Rotate(-speed, speed, 0);
     }
 
     public void setSpeed(float speed)

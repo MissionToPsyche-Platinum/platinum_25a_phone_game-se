@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d588f85c90daf7f42951044876233ec2
+guid: 86cb2ac48e3e1e04cbe54c782fa023fa
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6414098904965615021
-    second: toggle_background_0
+      213: 6652887746869774141
+    second: grid_left_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -106,41 +106,17 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: toggle_background_0
+      name: grid_left_0
       rect:
         serializedVersion: 2
-        x: 430
-        y: 657
-        width: 780
-        height: 360
+        x: 0
+        y: 0
+        width: 1600
+        height: 1600
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -148,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: dad82b088f4730950800000000000000
-      internalID: 6414098904965615021
+      spriteID: d37c8b2482ec35c50800000000000000
+      internalID: 6652887746869774141
       vertices: []
       indices: 
       edges: []
@@ -165,7 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      toggle_background_0: 6414098904965615021
+      grid_left_0: 6652887746869774141
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

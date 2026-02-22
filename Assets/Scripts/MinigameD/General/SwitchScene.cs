@@ -7,7 +7,6 @@ public class SwitchScene : MonoBehaviour
 
     public void ChangeScene()
     {
-        MinigameD_AudioManager.Instance.resetAudioFlag();
         MinigameD_AudioManager.Instance.buttonClick();
         SceneManager.LoadScene(sceneName);
     }

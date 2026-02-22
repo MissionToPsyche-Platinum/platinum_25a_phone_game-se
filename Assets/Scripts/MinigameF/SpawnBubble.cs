@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class SpawnBubble : MonoBehaviour    
+public class SpawnBubble : MonoBehaviour
 {
     [SerializeField] private GameObject redCirc;
     [SerializeField] private GameObject blueCirc;
     [SerializeField] private GameObject greenCirc;
+
+    [SerializeField] private GameObject asteroid;
     
 
     private int max = 500000;
@@ -15,6 +17,8 @@ public class SpawnBubble : MonoBehaviour
     private int spawns = 0;
     private int spawnTimer = 250;
     private bool spawn = true;
+
+    private bool collide = false;
     
     
     bool spawned = false;
@@ -45,7 +49,7 @@ public class SpawnBubble : MonoBehaviour
                 }
                 else
                 {
-                    spawnTimer = 100;
+                    spawnTimer = 75;
                     spawned = false;
                 }
             }
@@ -60,7 +64,7 @@ public class SpawnBubble : MonoBehaviour
             }
         }
 
-    }
+    }   
 
     public float getRadius()
     {
@@ -88,57 +92,39 @@ public class SpawnBubble : MonoBehaviour
         
         if (x == 0)
         {
-            circ = Instantiate(redCirc, pos, transform.rotation);
+            circ = Instantiate(redCirc, pos, asteroid.transform.rotation);
+            circ.transform.parent = asteroid.transform;
             
         }
         else if (x == 1)
         {
-            circ = Instantiate(blueCirc, pos, transform.rotation);
-            
+            circ = Instantiate(blueCirc, pos, asteroid.transform.rotation);
+            circ.transform.parent = asteroid.transform;
 
         }
         else if (x == 2)
         {
-            circ = Instantiate(greenCirc, pos, transform.rotation);
-            
+            circ = Instantiate(greenCirc, pos, asteroid.transform.rotation);
+            circ.transform.parent = asteroid.transform;
         }
 
 
-        circ.transform.parent = this.transform;        
+                
         spawns++;
         spawned = true;
         
                 
     } 
     
-    public bool checkSpawnFull(Vector3 pos)
-    {
-        bool full = false;
-
-        Collider[] colliders = Physics.OverlapSphere(pos, 500, 8);
-
-        if(colliders.Length > 0)
-        {
-            full = true;
-            Debug.Log("HEEEEELP");
-        }
-                
-        return full;
-    }
-
+   
     public Vector3 generateSpawn()    {
         
-        float y = UnityEngine.Random.Range(-2f, 2f);
-        float z = 3 + Mathf.Sqrt((radius * radius) - (y * y));
+        float y = UnityEngine.Random.Range(-2.65f, 2.65f);
+        float z = Mathf.Sqrt(3 + (radius * radius) - (y * y)) + 2.45f;
 
-        Vector3 vector = new Vector3(0, y, z);
+        Vector3 vector = new Vector3(0, y, -z);
 
-        
-
-        if (checkSpawnFull(vector))
-        {
-            generateSpawn();
-        }
+                    
 
 
         return new Vector3(0, y, z);

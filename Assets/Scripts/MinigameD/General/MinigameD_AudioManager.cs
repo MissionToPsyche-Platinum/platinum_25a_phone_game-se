@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 public class MinigameD_AudioManager : MonoBehaviour
 {
     public static MinigameD_AudioManager Instance { get; private set; }
-    private bool hasPlayedAudioThisScene = false;
 
     [SerializeField] private AudioSource buttonSound;
 
@@ -33,15 +32,8 @@ public class MinigameD_AudioManager : MonoBehaviour
         }
     }
 
-    public void resetAudioFlag()
-    {
-        hasPlayedAudioThisScene = false;
-    }
-
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (hasPlayedAudioThisScene == true) return;
-
         // play background music on levels 1-3 & game over scenes
         if (scene.name == "MinigameD-Level1" || scene.name == "MinigameD-Level2" || scene.name == "MinigameD-Level3" 
             || scene.name == "MinigameD-Game-Lost" || scene.name == "MinigameD-Game-Won")
@@ -60,8 +52,6 @@ public class MinigameD_AudioManager : MonoBehaviour
         {
             MinigameD_AudioManager.Instance.playGameWon();
         }
-
-        hasPlayedAudioThisScene = true;
     }
 
     public void buttonClick()
@@ -87,11 +77,11 @@ public class MinigameD_AudioManager : MonoBehaviour
     }
     public void playGameWon()
     {
-        if (gameWonSound != null) gameWonSound.PlayOneShot(gameWonSound.clip);
+        if (gameWonSound != null && !gameWonSound.isPlaying) gameWonSound.PlayOneShot(gameWonSound.clip);
     }
     public void playGameLost()
     {
-        if (gameLostSound != null) gameLostSound.PlayOneShot(gameLostSound.clip);
+        if (gameLostSound != null && !gameLostSound.isPlaying) gameLostSound.PlayOneShot(gameLostSound.clip);
     }
     public void playBackground()
     {

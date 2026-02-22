@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 3c4c7afc8cee71f43ba236b85fef3e79
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - audioSource: {instanceID: 0}
+  - correct: {fileID: 8300000, guid: 2adffd7f1de75ec4c995735365738049, type: 3}
+  - incorrect: {fileID: 8300000, guid: 417ac6963db023048ad3c8398ec1d803, type: 3}
+  - click: {fileID: 8300000, guid: c986eac5915e65e419e79990146e38d9, type: 3}
+  - coinPickUp: {fileID: 8300000, guid: 5ada86ed3d2237045a8d1ba9cf8eb033, type: 3}
+  - coinDrop: {fileID: 8300000, guid: a057c90672e3e67428c3387443cdf798, type: 3}
+  - congrats: {fileID: 8300000, guid: ee8887b0d160ca34981fcce4be3ddc05, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
