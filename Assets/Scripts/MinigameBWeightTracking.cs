@@ -21,6 +21,7 @@ public class MinigameBWeightTracking : MonoBehaviour
 
     [SerializeField] private GameObject tutorialPanel;
     [SerializeField] private GameObject winPanel;
+    [SerializeField] private GameObject backButton;
 
     // Start is called before the first frame update
     void Start()
@@ -46,6 +47,7 @@ public class MinigameBWeightTracking : MonoBehaviour
         {
             winPanel.SetActive(true);
             winPanel.transform.SetAsLastSibling();
+            backButton.transform.SetAsLastSibling();
             audioClipManager.PlayCongrats();
             won = true;
         }
