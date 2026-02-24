@@ -1,0 +1,1711 @@
+fileFormatVersion: 2
+guid: 6ed2ecb10be11e04783350adba43f6e9
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1940767847188164460
+    second: Overlay 1_0
+  - first:
+      213: -8029346220246675625
+    second: Overlay 1_1
+  - first:
+      213: 4460460753181106511
+    second: Overlay 1_2
+  - first:
+      213: 4901948626554667946
+    second: Overlay 1_3
+  - first:
+      213: -4463618440286272410
+    second: Overlay 1_4
+  - first:
+      213: 2623549696207358781
+    second: Overlay 1_5
+  - first:
+      213: -5542210659742047281
+    second: Overlay 1_6
+  - first:
+      213: 8281469009379448538
+    second: Overlay 1_7
+  - first:
+      213: 5958612405095712629
+    second: Overlay 1_8
+  - first:
+      213: -3811165852738045293
+    second: Overlay 1_9
+  - first:
+      213: -3709468647934630150
+    second: Overlay 1_10
+  - first:
+      213: 8610224476517050139
+    second: Overlay 1_11
+  - first:
+      213: 7321610949978900586
+    second: Overlay 1_12
+  - first:
+      213: -6710746941784296960
+    second: Overlay 1_13
+  - first:
+      213: 9043817485523345532
+    second: Overlay 1_14
+  - first:
+      213: -2333319963727641404
+    second: Overlay 1_15
+  - first:
+      213: -6599098110461770603
+    second: Overlay 1_16
+  - first:
+      213: -1752204012614333431
+    second: Overlay 1_17
+  - first:
+      213: -6313625435554517886
+    second: Overlay 1_18
+  - first:
+      213: -6393213603294279215
+    second: Overlay 1_19
+  - first:
+      213: -9036533320688065453
+    second: Overlay 1_20
+  - first:
+      213: -9056641494871146606
+    second: Overlay 1_21
+  - first:
+      213: -246097799354029809
+    second: Overlay 1_22
+  - first:
+      213: -6528182764087030422
+    second: Overlay 1_23
+  - first:
+      213: 7943125128103272135
+    second: Overlay 1_24
+  - first:
+      213: 520590067243513985
+    second: Overlay 1_25
+  - first:
+      213: 4918444865917852412
+    second: Overlay 1_26
+  - first:
+      213: 7288733319345103165
+    second: Overlay 1_27
+  - first:
+      213: -1015144122915454108
+    second: Overlay 1_28
+  - first:
+      213: -7866665163243479587
+    second: Overlay 1_29
+  - first:
+      213: -1378484774450013903
+    second: Overlay 1_30
+  - first:
+      213: -4992464729208342378
+    second: Overlay 1_31
+  - first:
+      213: 8098084609282069391
+    second: Overlay 1_32
+  - first:
+      213: -6601132429257429732
+    second: Overlay 1_33
+  - first:
+      213: -5552710348071054075
+    second: Overlay 1_34
+  - first:
+      213: -8365127842894390402
+    second: Overlay 1_35
+  - first:
+      213: -3437835649944510502
+    second: Overlay 1_36
+  - first:
+      213: 7845672380649397706
+    second: Overlay 1_37
+  - first:
+      213: -1785642373715994903
+    second: Overlay 1_38
+  - first:
+      213: -4192546447329545884
+    second: Overlay 1_39
+  - first:
+      213: -138151515091391072
+    second: Overlay 1_40
+  - first:
+      213: -7771411515052503021
+    second: Overlay 1_41
+  - first:
+      213: -6489484049484300970
+    second: Overlay 1_42
+  - first:
+      213: 2228757173153578505
+    second: Overlay 1_43
+  - first:
+      213: 4101500832056254884
+    second: Overlay 1_44
+  - first:
+      213: -6147644823443018269
+    second: Overlay 1_45
+  - first:
+      213: 6524610587446435839
+    second: Overlay 1_46
+  - first:
+      213: 1913940692147147111
+    second: Overlay 1_47
+  - first:
+      213: -1269970252204326801
+    second: Overlay 1_48
+  - first:
+      213: 9207735210171621431
+    second: Overlay 1_49
+  - first:
+      213: 9080750543180158625
+    second: Overlay 1_50
+  - first:
+      213: 4069246392874130710
+    second: Overlay 1_51
+  - first:
+      213: -8580137748815575382
+    second: Overlay 1_52
+  - first:
+      213: 298743927875808818
+    second: Overlay 1_53
+  - first:
+      213: -6016767614022906628
+    second: Overlay 1_54
+  - first:
+      213: -7918737094091313869
+    second: Overlay 1_55
+  - first:
+      213: -4400555711563939637
+    second: Overlay 1_56
+  - first:
+      213: -7841742491065559785
+    second: Overlay 1_57
+  - first:
+      213: -6768453797872984639
+    second: Overlay 1_58
+  - first:
+      213: -3173487147047562451
+    second: Overlay 1_59
+  - first:
+      213: -323299979512683662
+    second: Overlay 1_60
+  - first:
+      213: 7442097483382377946
+    second: Overlay 1_61
+  - first:
+      213: -9189289173987613559
+    second: Overlay 1_62
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 1
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Overlay 1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1
+        width: 786
+        height: 1912
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6f662b031efeea10800000000000000
+      internalID: 1940767847188164460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_1
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 1539
+        width: 218
+        height: 374
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75f429b6728029090800000000000000
+      internalID: -8029346220246675625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_2
+      rect:
+        serializedVersion: 2
+        x: 773
+        y: 0
+        width: 307
+        height: 1916
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f416ee72c6db6ed30800000000000000
+      internalID: 4460460753181106511
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_3
+      rect:
+        serializedVersion: 2
+        x: 788
+        y: 1909
+        width: 67
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa34101ed48370440800000000000000
+      internalID: 4901948626554667946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1205
+        width: 71
+        height: 327
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6648ad58daa0e02c0800000000000000
+      internalID: -4463618440286272410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_5
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 872
+        width: 212
+        height: 646
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3b060d6c88b86420800000000000000
+      internalID: 2623549696207358781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_6
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 1480
+        width: 113
+        height: 151
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc321b3d4cc1613b0800000000000000
+      internalID: -5542210659742047281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_7
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 1687
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad6d77adf20bde270800000000000000
+      internalID: 8281469009379448538
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_8
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 1510
+        width: 218
+        height: 392
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57747ff896e31b250800000000000000
+      internalID: 5958612405095712629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_9
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 1747
+        width: 38
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39a337f69d40c1bc0800000000000000
+      internalID: -3811165852738045293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_10
+      rect:
+        serializedVersion: 2
+        x: 809
+        y: 1742
+        width: 19
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af668661be1558cc0800000000000000
+      internalID: -3709468647934630150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_11
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 1492
+        width: 25
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b172c2fda89ad7770800000000000000
+      internalID: 8610224476517050139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_12
+      rect:
+        serializedVersion: 2
+        x: 762
+        y: 1424
+        width: 23
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a684a111e569b9560800000000000000
+      internalID: 7321610949978900586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_13
+      rect:
+        serializedVersion: 2
+        x: 830
+        y: 1486
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00278652633aed2a0800000000000000
+      internalID: -6710746941784296960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_14
+      rect:
+        serializedVersion: 2
+        x: 980
+        y: 1399
+        width: 44
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c70e51e3618128d70800000000000000
+      internalID: 9043817485523345532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_15
+      rect:
+        serializedVersion: 2
+        x: 1074
+        y: 1431
+        width: 6
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c4cfaefad16e9fd0800000000000000
+      internalID: -2333319963727641404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1399
+        width: 8
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59489f76b3b4b64a0800000000000000
+      internalID: -6599098110461770603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_17
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 1336
+        width: 77
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90ccb1eebbbeea7e0800000000000000
+      internalID: -1752204012614333431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_18
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 1251
+        width: 89
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28ce6ec0e1f7168a0800000000000000
+      internalID: -6313625435554517886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_19
+      rect:
+        serializedVersion: 2
+        x: 844
+        y: 1342
+        width: 43
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d9037ab91eb647a0800000000000000
+      internalID: -6393213603294279215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_20
+      rect:
+        serializedVersion: 2
+        x: 1003
+        y: 1325
+        width: 14
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 354286b82d8c79280800000000000000
+      internalID: -9036533320688065453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_21
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 1295
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29f74286b88505280800000000000000
+      internalID: -9056641494871146606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_22
+      rect:
+        serializedVersion: 2
+        x: 742
+        y: 1246
+        width: 64
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f096f79fa5fa59cf0800000000000000
+      internalID: -246097799354029809
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_23
+      rect:
+        serializedVersion: 2
+        x: 936
+        y: 1247
+        width: 43
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6dc3c52d5c3765a0800000000000000
+      internalID: -6528182764087030422
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_24
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 1186
+        width: 42
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ce13133836ab3e60800000000000000
+      internalID: 7943125128103272135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_25
+      rect:
+        serializedVersion: 2
+        x: 439
+        y: 1173
+        width: 23
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18875af68e1893700800000000000000
+      internalID: 520590067243513985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_26
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 1150
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfa9068eb83d14440800000000000000
+      internalID: 4918444865917852412
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_27
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 1082
+        width: 82
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d316e1a2658c62560800000000000000
+      internalID: 7288733319345103165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_28
+      rect:
+        serializedVersion: 2
+        x: 1066
+        y: 1151
+        width: 14
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4638cc57ccb79e1f0800000000000000
+      internalID: -1015144122915454108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_29
+      rect:
+        serializedVersion: 2
+        x: 471
+        y: 1104
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ddd9ee1a6bdf3d290800000000000000
+      internalID: -7866665163243479587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_30
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 1069
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1395f92b663aedce0800000000000000
+      internalID: -1378484774450013903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_31
+      rect:
+        serializedVersion: 2
+        x: 439
+        y: 1053
+        width: 36
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 698bedda7c337bab0800000000000000
+      internalID: -4992464729208342378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_32
+      rect:
+        serializedVersion: 2
+        x: 809
+        y: 1024
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f83d051fb0d226070800000000000000
+      internalID: 8098084609282069391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_33
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 1009
+        width: 7
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1dacc6a7011464a0800000000000000
+      internalID: -6601132429257429732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_34
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 988
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 505d692ab5fc0f2b0800000000000000
+      internalID: -5552710348071054075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_35
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 921
+        width: 11
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7bdc871c8819eb80800000000000000
+      internalID: -8365127842894390402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_36
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 883
+        width: 84
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adf12e8d0ba5a40d0800000000000000
+      internalID: -3437835649944510502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_37
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 854
+        width: 37
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: acd53b8467d61ec60800000000000000
+      internalID: 7845672380649397706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_38
+      rect:
+        serializedVersion: 2
+        x: 714
+        y: 783
+        width: 104
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e6d5cac8bf1837e0800000000000000
+      internalID: -1785642373715994903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_39
+      rect:
+        serializedVersion: 2
+        x: 775
+        y: 852
+        width: 37
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 461b89e183511d5c0800000000000000
+      internalID: -4192546447329545884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_40
+      rect:
+        serializedVersion: 2
+        x: 662
+        y: 803
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0adabc1ddef251ef0800000000000000
+      internalID: -138151515091391072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_41
+      rect:
+        serializedVersion: 2
+        x: 469
+        y: 763
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3105ae9d666662490800000000000000
+      internalID: -7771411515052503021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_42
+      rect:
+        serializedVersion: 2
+        x: 845
+        y: 751
+        width: 64
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65dbce6c3a8b0f5a0800000000000000
+      internalID: -6489484049484300970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_43
+      rect:
+        serializedVersion: 2
+        x: 565
+        y: 737
+        width: 8
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90e3c6c27d22eee10800000000000000
+      internalID: 2228757173153578505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_44
+      rect:
+        serializedVersion: 2
+        x: 712
+        y: 746
+        width: 15
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a1aeaca6457be830800000000000000
+      internalID: 4101500832056254884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_45
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 698
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ede86dca9d2faaa0800000000000000
+      internalID: -6147644823443018269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_46
+      rect:
+        serializedVersion: 2
+        x: 656
+        y: 673
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fff5f7aa2c21c8a50800000000000000
+      internalID: 6524610587446435839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_47
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 513
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76198944beeaf8a10800000000000000
+      internalID: 1913940692147147111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_48
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 463
+        width: 12
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f604c02c8c8206ee0800000000000000
+      internalID: -1269970252204326801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_49
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 464
+        width: 36
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 730e224936278cf70800000000000000
+      internalID: 9207735210171621431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_50
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 330
+        width: 100
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a65034d18e450e70800000000000000
+      internalID: 9080750543180158625
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_51
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 379
+        width: 75
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61d5dc6d80ed87830800000000000000
+      internalID: 4069246392874130710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_52
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 327
+        width: 50
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa68ded4d2a3de880800000000000000
+      internalID: -8580137748815575382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_53
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 281
+        width: 5
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23ea7d3050a552400800000000000000
+      internalID: 298743927875808818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_54
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 183
+        width: 14
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfc0716bbb5208ca0800000000000000
+      internalID: -6016767614022906628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_55
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 207
+        width: 17
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33d6af4719efa1290800000000000000
+      internalID: -7918737094091313869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_56
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 140
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc04aed35e51ee2c0800000000000000
+      internalID: -4400555711563939637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_57
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 126
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71553ff60c88c2390800000000000000
+      internalID: -7841742491065559785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_58
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 107
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1cd1323b12f9112a0800000000000000
+      internalID: -6768453797872984639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_59
+      rect:
+        serializedVersion: 2
+        x: 939
+        y: 45
+        width: 94
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2356fce04285f3d0800000000000000
+      internalID: -3173487147047562451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_60
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 47
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 273614da168638bf0800000000000000
+      internalID: -323299979512683662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_61
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 29
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: addc5d03b34a74760800000000000000
+      internalID: 7442097483382377946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Overlay 1_62
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 0
+        width: 22
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9842026ee26197080800000000000000
+      internalID: -9189289173987613559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Overlay 1_0: 1940767847188164460
+      Overlay 1_1: -8029346220246675625
+      Overlay 1_10: -3709468647934630150
+      Overlay 1_11: 8610224476517050139
+      Overlay 1_12: 7321610949978900586
+      Overlay 1_13: -6710746941784296960
+      Overlay 1_14: 9043817485523345532
+      Overlay 1_15: -2333319963727641404
+      Overlay 1_16: -6599098110461770603
+      Overlay 1_17: -1752204012614333431
+      Overlay 1_18: -6313625435554517886
+      Overlay 1_19: -6393213603294279215
+      Overlay 1_2: 4460460753181106511
+      Overlay 1_20: -9036533320688065453
+      Overlay 1_21: -9056641494871146606
+      Overlay 1_22: -246097799354029809
+      Overlay 1_23: -6528182764087030422
+      Overlay 1_24: 7943125128103272135
+      Overlay 1_25: 520590067243513985
+      Overlay 1_26: 4918444865917852412
+      Overlay 1_27: 7288733319345103165
+      Overlay 1_28: -1015144122915454108
+      Overlay 1_29: -7866665163243479587
+      Overlay 1_3: 4901948626554667946
+      Overlay 1_30: -1378484774450013903
+      Overlay 1_31: -4992464729208342378
+      Overlay 1_32: 8098084609282069391
+      Overlay 1_33: -6601132429257429732
+      Overlay 1_34: -5552710348071054075
+      Overlay 1_35: -8365127842894390402
+      Overlay 1_36: -3437835649944510502
+      Overlay 1_37: 7845672380649397706
+      Overlay 1_38: -1785642373715994903
+      Overlay 1_39: -4192546447329545884
+      Overlay 1_4: -4463618440286272410
+      Overlay 1_40: -138151515091391072
+      Overlay 1_41: -7771411515052503021
+      Overlay 1_42: -6489484049484300970
+      Overlay 1_43: 2228757173153578505
+      Overlay 1_44: 4101500832056254884
+      Overlay 1_45: -6147644823443018269
+      Overlay 1_46: 6524610587446435839
+      Overlay 1_47: 1913940692147147111
+      Overlay 1_48: -1269970252204326801
+      Overlay 1_49: 9207735210171621431
+      Overlay 1_5: 2623549696207358781
+      Overlay 1_50: 9080750543180158625
+      Overlay 1_51: 4069246392874130710
+      Overlay 1_52: -8580137748815575382
+      Overlay 1_53: 298743927875808818
+      Overlay 1_54: -6016767614022906628
+      Overlay 1_55: -7918737094091313869
+      Overlay 1_56: -4400555711563939637
+      Overlay 1_57: -7841742491065559785
+      Overlay 1_58: -6768453797872984639
+      Overlay 1_59: -3173487147047562451
+      Overlay 1_6: -5542210659742047281
+      Overlay 1_60: -323299979512683662
+      Overlay 1_61: 7442097483382377946
+      Overlay 1_62: -9189289173987613559
+      Overlay 1_7: 8281469009379448538
+      Overlay 1_8: 5958612405095712629
+      Overlay 1_9: -3811165852738045293
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
