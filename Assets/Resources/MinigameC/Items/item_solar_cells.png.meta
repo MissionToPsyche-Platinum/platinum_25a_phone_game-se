@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      item_solar_cells_0: -5103957980754895200
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

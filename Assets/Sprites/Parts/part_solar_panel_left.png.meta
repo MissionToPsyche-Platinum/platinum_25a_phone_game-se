@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      part_solar_panel_left_0: 1469743166852900383
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

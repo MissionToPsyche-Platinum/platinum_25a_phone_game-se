@@ -188,7 +188,10 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      part_propulsion_0: 3837328454271903196
+      part_propulsion_1: -8698378043199106467
+      part_propulsion_2: -3200256792585414272
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

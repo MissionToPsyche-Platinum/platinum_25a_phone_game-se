@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      item_battery_0: 146866418027078749
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

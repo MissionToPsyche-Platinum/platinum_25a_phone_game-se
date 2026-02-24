@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      part_radio_antenna_0: 7788806918861432236
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
