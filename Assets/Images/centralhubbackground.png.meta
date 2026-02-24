@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      centralhubbackground_0: 2074467903930810563
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
