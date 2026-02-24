@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      part_battery_pack_0: -6868999900930441092
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      item_magnetometer_parts_0: 551121759747247011
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

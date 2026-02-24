@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      part_spectrometer_0: 7477815448642722321
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
