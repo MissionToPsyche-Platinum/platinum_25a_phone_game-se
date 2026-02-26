@@ -29,6 +29,7 @@ public static class PhaseCUITheme
     public static readonly Color TextBody = new Color(0.88f, 0.88f, 0.9f, 1f);
     public static readonly Color TextPrimary = new Color(0.95f, 0.94f, 0.9f, 1f);
     public static readonly Color TextSecondary = new Color(0.75f, 0.78f, 0.82f, 1f);
+    public static readonly Color TextError = new Color(1f, 0.35f, 0.35f, 1f);
 
     // ---- Colors: step states ----
     public static readonly Color StepDone = new Color(0.4f, 0.7f, 0.45f, 1f);

@@ -146,7 +146,7 @@ public class PhaseCInventoryUI : MonoBehaviour
         float gridHeight = (SlotSize * rowCount) + (SlotSpacing * (rowCount - 1));
         float panelPadding = 24f;
         float titleHeight = 40f;
-        float statusHeight = 24f;
+        float statusHeight = 28f;
         float hintHeight = 28f;
         float panelWidth = gridWidth + panelPadding * 2;
         float panelHeight = titleHeight + gridHeight + statusHeight + hintHeight + panelPadding * 2;
@@ -185,7 +185,7 @@ public class PhaseCInventoryUI : MonoBehaviour
         Text titleText = titleGo.AddComponent<Text>();
         titleText.text = "INVENTORY";
         titleText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        titleText.fontSize = 20;
+        titleText.fontSize = (int)PhaseCUITheme.GuideStepTitleSize;
         titleText.fontStyle = FontStyle.Bold;
         titleText.color = PhaseCUITheme.AccentGold;
         titleText.alignment = TextAnchor.MiddleCenter;
@@ -219,9 +219,9 @@ public class PhaseCInventoryUI : MonoBehaviour
         statusText = statusGo.AddComponent<Text>();
         statusText.text = "";
         statusText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        statusText.fontSize = 13;
+        statusText.fontSize = (int)PhaseCUITheme.GuideCaptionSize;
         statusText.fontStyle = FontStyle.Bold;
-        statusText.color = new Color(1f, 0.35f, 0.35f, 1f);
+        statusText.color = PhaseCUITheme.TextError;
         statusText.alignment = TextAnchor.MiddleCenter;
         statusText.raycastTarget = false;
         RectTransform statusRect = statusGo.GetComponent<RectTransform>();
@@ -237,7 +237,7 @@ public class PhaseCInventoryUI : MonoBehaviour
         Text hintText = hintGo.AddComponent<Text>();
         hintText.text = "Press I to close  |  Press 1-4 to drop item";
         hintText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        hintText.fontSize = 12;
+        hintText.fontSize = (int)PhaseCUITheme.FontSizeBadge;
         hintText.color = PhaseCUITheme.TextSecondary;
         hintText.alignment = TextAnchor.MiddleCenter;
         hintText.raycastTarget = false;
@@ -276,7 +276,7 @@ public class PhaseCInventoryUI : MonoBehaviour
         GameObject innerBorderGo = new GameObject("InnerBorder");
         innerBorderGo.transform.SetParent(slotGo.transform, false);
         Image innerBorder = innerBorderGo.AddComponent<Image>();
-        innerBorder.color = new Color(0.3f, 0.4f, 0.5f, 0.4f);
+        innerBorder.color = new Color(PhaseCUITheme.PanelBorder.r, PhaseCUITheme.PanelBorder.g, PhaseCUITheme.PanelBorder.b, 0.4f);
         innerBorder.raycastTarget = false;
         RectTransform innerRect = innerBorderGo.GetComponent<RectTransform>();
         innerRect.anchorMin = Vector2.zero;
@@ -290,7 +290,7 @@ public class PhaseCInventoryUI : MonoBehaviour
         Text numText = numGo.AddComponent<Text>();
         numText.text = (index + 1).ToString();
         numText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        numText.fontSize = 11;
+        numText.fontSize = 12;
         numText.color = new Color(0.4f, 0.45f, 0.55f, 0.5f);
         numText.alignment = TextAnchor.LowerRight;
         numText.raycastTarget = false;
@@ -428,7 +428,7 @@ public class PhaseCInventoryUI : MonoBehaviour
         itemIcon.raycastTarget = false;
         itemIcon.preserveAspect = true;
         RectTransform iconRect = iconGo.GetComponent<RectTransform>();
-        iconRect.anchorMin = new Vector2(0f, 0.22f);
+        iconRect.anchorMin = new Vector2(0f, 0.25f);
         iconRect.anchorMax = new Vector2(1f, 1f);
         iconRect.offsetMin = new Vector2(6f, 0f);
         iconRect.offsetMax = new Vector2(-6f, -6f);
@@ -478,7 +478,7 @@ public class PhaseCInventoryUI : MonoBehaviour
             Text badgeText = badgeTextGo.AddComponent<Text>();
             badgeText.text = "x" + count;
             badgeText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            badgeText.fontSize = 12;
+            badgeText.fontSize = (int)PhaseCUITheme.FontSizeBadge;
             badgeText.fontStyle = FontStyle.Bold;
             badgeText.color = Color.white;
             badgeText.alignment = TextAnchor.MiddleCenter;
@@ -496,14 +496,14 @@ public class PhaseCInventoryUI : MonoBehaviour
         Text labelText = labelGo.AddComponent<Text>();
         labelText.text = GetShortItemName(item);
         labelText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        labelText.fontSize = 10;
+        labelText.fontSize = (int)PhaseCUITheme.FontSizeBadge;
         labelText.color = PhaseCUITheme.TextPrimary;
         labelText.alignment = TextAnchor.MiddleCenter;
         labelText.raycastTarget = false;
         labelText.horizontalOverflow = HorizontalWrapMode.Overflow;
         RectTransform labelRect = labelGo.GetComponent<RectTransform>();
         labelRect.anchorMin = new Vector2(0f, 0f);
-        labelRect.anchorMax = new Vector2(1f, 0.22f);
+        labelRect.anchorMax = new Vector2(1f, 0.25f);
         labelRect.offsetMin = Vector2.zero;
         labelRect.offsetMax = Vector2.zero;
 
