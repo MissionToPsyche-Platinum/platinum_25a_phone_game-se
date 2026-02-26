@@ -34,6 +34,9 @@ public class PhaseCInventoryUI : MonoBehaviour
     private GameObject[] slotItemObjects = new GameObject[SlotCount];
     private int[] slotItemCounts = new int[SlotCount]; // Track quantity for stacked items
 
+    // Dirty-check cache: avoids rebuilding UI every frame when nothing changed
+    private Dictionary<int, int> _lastSyncedCounts = new Dictionary<int, int>();
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void EnsureInventoryUI()
     {
@@ -210,7 +213,7 @@ public class PhaseCInventoryUI : MonoBehaviour
             CreateSlot(i, gridWidth, gridHeight);
         }
 
-        // Status text — shown in red when inventory is full
+        // Status text - shown in red when inventory is full
         GameObject statusGo = new GameObject("StatusText");
         statusGo.transform.SetParent(panelObject.transform, false);
         statusText = statusGo.AddComponent<Text>();
@@ -306,7 +309,30 @@ public class PhaseCInventoryUI : MonoBehaviour
         if (!initialized) return;
         if (canvasObject == null || !canvasObject.activeSelf) return;
 
-        SyncFromLegacyInventory();
+        if (HasInventoryChanged())
+            SyncFromLegacyInventory();
+    }
+
+    /// <summary>Returns true if the legacy inventory contents differ from the last synced state.</summary>
+    private bool HasInventoryChanged()
+    {
+        if (legacyController == null || legacyController.inventoryPanel == null) return false;
+
+        var current = new Dictionary<int, int>();
+        foreach (Transform slotTransform in legacyController.inventoryPanel.transform)
+        {
+            Slot s = slotTransform.GetComponent<Slot>();
+            if (s == null || s.currentItem == null) continue;
+            Item it = s.currentItem.GetComponent<Item>();
+            if (it == null) continue;
+            current.TryGetValue(it.ID, out int c);
+            current[it.ID] = c + 1;
+        }
+
+        if (current.Count != _lastSyncedCounts.Count) return true;
+        foreach (var kv in current)
+            if (!_lastSyncedCounts.TryGetValue(kv.Key, out int prev) || prev != kv.Value) return true;
+        return false;
     }
 
     private void SyncFromLegacyInventory()
@@ -370,9 +396,14 @@ public class PhaseCInventoryUI : MonoBehaviour
         if (statusText != null && legacyController != null)
         {
             statusText.text = legacyController.IsInventoryFull()
-                ? "INVENTORY FULL — Only 4 unique items allowed"
+                ? "INVENTORY FULL - Only 4 unique items allowed"
                 : "";
         }
+
+        // Cache current state so LateUpdate can skip redundant rebuilds
+        _lastSyncedCounts.Clear();
+        foreach (var kv in itemCounts)
+            _lastSyncedCounts[kv.Key] = kv.Value;
     }
 
     private void CreateItemDisplay(int slotIndex, Item item, int count = 1)
@@ -416,30 +447,42 @@ public class PhaseCInventoryUI : MonoBehaviour
         // Quantity badge (top-right corner, shown if count > 1)
         if (count > 1)
         {
+            // Dark drop-shadow backing for readability against any background
+            GameObject shadowGo = new GameObject("QuantityBadgeShadow");
+            shadowGo.transform.SetParent(containerGo.transform, false);
+            Image shadowBg = shadowGo.AddComponent<Image>();
+            shadowBg.color = new Color(0f, 0f, 0f, 0.55f);
+            shadowBg.raycastTarget = false;
+            RectTransform shadowRect = shadowGo.GetComponent<RectTransform>();
+            shadowRect.anchorMin = new Vector2(1f, 1f);
+            shadowRect.anchorMax = new Vector2(1f, 1f);
+            shadowRect.pivot = new Vector2(1f, 1f);
+            shadowRect.sizeDelta = new Vector2(28f, 20f);
+            shadowRect.anchoredPosition = new Vector2(-1f, -1f);
+
+            // Main badge
             GameObject badgeGo = new GameObject("QuantityBadge");
             badgeGo.transform.SetParent(containerGo.transform, false);
             Image badgeBg = badgeGo.AddComponent<Image>();
-            badgeBg.color = new Color(0.9f, 0.3f, 0.3f, 0.9f);
+            badgeBg.color = new Color(0.9f, 0.3f, 0.3f, 0.95f);
             badgeBg.raycastTarget = false;
-            
             RectTransform badgeRect = badgeGo.GetComponent<RectTransform>();
             badgeRect.anchorMin = new Vector2(1f, 1f);
             badgeRect.anchorMax = new Vector2(1f, 1f);
             badgeRect.pivot = new Vector2(1f, 1f);
-            badgeRect.sizeDelta = new Vector2(22f, 18f);
-            badgeRect.anchoredPosition = new Vector2(-2f, -2f);
+            badgeRect.sizeDelta = new Vector2(26f, 18f);
+            badgeRect.anchoredPosition = new Vector2(-3f, -3f);
 
             GameObject badgeTextGo = new GameObject("QuantityText");
             badgeTextGo.transform.SetParent(badgeGo.transform, false);
             Text badgeText = badgeTextGo.AddComponent<Text>();
             badgeText.text = "x" + count;
             badgeText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            badgeText.fontSize = 11;
+            badgeText.fontSize = 12;
             badgeText.fontStyle = FontStyle.Bold;
             badgeText.color = Color.white;
             badgeText.alignment = TextAnchor.MiddleCenter;
             badgeText.raycastTarget = false;
-            
             RectTransform badgeTextRect = badgeTextGo.GetComponent<RectTransform>();
             badgeTextRect.anchorMin = Vector2.zero;
             badgeTextRect.anchorMax = Vector2.one;

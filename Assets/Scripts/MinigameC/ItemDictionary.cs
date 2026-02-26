@@ -128,7 +128,7 @@ public class ItemDictionary : MonoBehaviour
         {
             if (itemDictionary.ContainsKey(def.id)) continue;
 
-            // Clone template — inherits ItemDragHandler, collider, sorting layer, etc.
+            // Clone template - inherits ItemDragHandler, collider, sorting layer, etc.
             GameObject itemGo = Instantiate(template.gameObject);
             itemGo.name = def.name;
             itemGo.SetActive(false);

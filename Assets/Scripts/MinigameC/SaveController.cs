@@ -76,7 +76,7 @@ public class SaveController : MonoBehaviour
         }
         else
         {
-            // No save file yet — create empty slots then save initial state.
+            // No save file yet - create empty slots then save initial state.
             if (inventoryController != null)
                 inventoryController.SetInventoryItems(new List<InventorySaveData>());
             SaveGame();
