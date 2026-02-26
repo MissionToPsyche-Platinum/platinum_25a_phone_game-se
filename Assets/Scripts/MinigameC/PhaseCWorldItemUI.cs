@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 ///   • ItemDictionary.ApplySprites() assigns a small 48×48 colored disc (PPU=48)
 ///     to the item's SpriteRenderer, giving a natural world size of 1×1 unit.
 ///   • This component scales every world item to worldScale (default 0.5) so items
-///     appear as 0.5×0.5 world-unit discs — consistent regardless of original art.
+///     appear as 0.5×0.5 world-unit discs - consistent regardless of original art.
 ///   • A matching collider is resized so pickup works reliably at the displayed size.
 ///   • Glow halo, pulse, bob, and floating name label complete the look.
 ///
@@ -70,6 +70,14 @@ public class PhaseCWorldItemUI : MonoBehaviour
 
         timeOffset   = Random.value * Mathf.PI * 2f;
         basePosition = transform.position;
+
+        // Disable the UI Image - world items render via SpriteRenderer only.
+        // The Image is used exclusively when the item is inside a Canvas inventory slot.
+        UnityEngine.UI.Image img = GetComponent<UnityEngine.UI.Image>();
+        if (img != null) img.enabled = false;
+
+        // Ensure SpriteRenderer is on for world display
+        if (mainRenderer != null) mainRenderer.enabled = true;
 
         // Compute scaleFactor so the sprite renders at exactly worldScale world units,
         // regardless of its original PPU or texture resolution.

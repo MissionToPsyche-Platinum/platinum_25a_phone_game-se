@@ -8,7 +8,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Mission timer for Minigame C. Counts down from 5 minutes (60 s for testing).
 /// On expiry: inventory is cleared, all step progress resets to Step 1, and a small
-/// "Time's Up" popup is shown. The player dismisses it and continues — no scene reload,
+/// "Time's Up" popup is shown. The player dismisses it and continues - no scene reload,
 /// no game-over screen.
 /// </summary>
 public class MissionTimer : MonoBehaviour
@@ -18,7 +18,7 @@ public class MissionTimer : MonoBehaviour
     private const string TargetSceneName = "MinigameC";
 
     [Header("Timer")]
-    [SerializeField] private float startingTimeSeconds = 60f; // set back to 300 for production
+    [SerializeField] private float startingTimeSeconds = 300f;
     [SerializeField] private float warningThresholdSeconds  = 60f;  // yellow below 1 min
     [SerializeField] private float criticalThresholdSeconds = 30f;  // red + pulse below 30 s
 
@@ -396,7 +396,7 @@ public class MissionTimer : MonoBehaviour
 
         timeUpGroup = timeUpRoot.AddComponent<CanvasGroup>();
 
-        // Popup panel — centred, reasonably compact
+        // Popup panel - centred, reasonably compact
         var panelGo = new GameObject("PopupPanel");
         panelGo.transform.SetParent(timeUpRoot.transform, false);
         panelGo.AddComponent<Image>().color = PhaseCUITheme.PanelBg;
@@ -415,7 +415,7 @@ public class MissionTimer : MonoBehaviour
 
         // Message
         MakeText(panelGo.transform, "Message",
-            "All collected items and step progress have been reset.\nYou have another chance — keep going!",
+            "All collected items and step progress have been reset.\nPlease try again!",
             PhaseCUITheme.FontSizeBody, PhaseCUITheme.TextBody, TextAlignmentOptions.Center, false,
             new Vector2(0f, -90f), new Vector2(480f, 90f));
 

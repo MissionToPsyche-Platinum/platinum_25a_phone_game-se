@@ -171,7 +171,17 @@ public class InventoryController : MonoBehaviour
 
                 // Reset scale to (1,1,1) to ensure inventory items are not affected by scene item scaling
                 newItem.transform.localScale = Vector3.one;
-                
+
+                // Disable SpriteRenderer - inside a Canvas the Image component handles display;
+                // the SpriteRenderer would otherwise render the full-resolution art sprite at
+                // its natural world size (e.g. 20+ units), appearing as a giant image in the scene.
+                SpriteRenderer sr = newItem.GetComponent<SpriteRenderer>();
+                if (sr != null) sr.enabled = false;
+
+                // Disable world-item effects added by PhaseCWorldItemUI (glow, bobbing, label)
+                PhaseCWorldItemUI worldUI = newItem.GetComponent<PhaseCWorldItemUI>();
+                if (worldUI != null) worldUI.enabled = false;
+
                 RectTransform rectTransform = newItem.GetComponent<RectTransform>();
                 if (rectTransform != null)
                 {
@@ -181,14 +191,14 @@ public class InventoryController : MonoBehaviour
                 {
                     Debug.LogWarning("InventoryController.AddItem: Item prefab doesn't have RectTransform component");
                 }
-                
+
                 slot.currentItem = newItem;
                 Debug.Log($"InventoryController.AddItem: Item successfully added to slot {slotTransform.name}");
                 return true;
             }
         }
         
-        // No empty slot found — create one dynamically so quantities are unlimited
+        // No empty slot found - create one dynamically so quantities are unlimited
         Debug.Log("InventoryController.AddItem: No empty slot found, creating dynamic slot");
         GameObject newSlotObj;
         if (slotPrefab != null)
@@ -207,6 +217,10 @@ public class InventoryController : MonoBehaviour
             GameObject newItem = Instantiate(itemPrefab, dynamicSlot.transform);
             newItem.SetActive(true);
             newItem.transform.localScale = Vector3.one;
+            SpriteRenderer dynSr = newItem.GetComponent<SpriteRenderer>();
+            if (dynSr != null) dynSr.enabled = false;
+            PhaseCWorldItemUI dynWorldUI = newItem.GetComponent<PhaseCWorldItemUI>();
+            if (dynWorldUI != null) dynWorldUI.enabled = false;
             RectTransform dynRect = newItem.GetComponent<RectTransform>();
             if (dynRect != null) dynRect.anchoredPosition = Vector2.zero;
             dynamicSlot.currentItem = newItem;
@@ -339,6 +353,9 @@ public class InventoryController : MonoBehaviour
                             if (itemPrefab != null)
                             {
                                 GameObject item = Instantiate(itemPrefab, slot.transform);
+                                item.transform.localScale = Vector3.one;
+                                SpriteRenderer loadSr = item.GetComponent<SpriteRenderer>();
+                                if (loadSr != null) loadSr.enabled = false;
                                 item.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
                                 slot.currentItem = item;
                             }
