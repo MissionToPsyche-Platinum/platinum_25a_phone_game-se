@@ -1,8 +1,14 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scripts/MinigameE.meta
 guid: 74f0bf0cf30197a42a8aff21f05d53eb
 folderAsset: yes
 DefaultImporter:
+========
+guid: 3b2056b9513d0774494e6cefd17d4767
+NativeFormatImporter:
+>>>>>>>> Minigame-B-Wire-Color-Link:Assets/Fonts/HelveticaNeueLight.asset.meta
   externalObjects: {}
+  mainObjectFileID: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

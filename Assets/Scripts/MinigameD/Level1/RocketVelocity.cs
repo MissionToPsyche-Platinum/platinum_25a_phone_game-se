@@ -121,10 +121,10 @@ public class RocketVelocity : MonoBehaviour
         currentVelocity = initialVelocity;
     }
 
-    // penalty ring: decrease velocity by 25%
+    // penalty ring: decrease velocity by 20%
     public void decreaseVelocity()
     {
-        currentVelocity = currentVelocity * (float)0.75;
+        currentVelocity = currentVelocity * (float)0.80;
     }
 
     // jump ring: double velocity + start invulnerability

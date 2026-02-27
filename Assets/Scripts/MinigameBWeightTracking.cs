@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class MinigameBWeightTracking : MonoBehaviour
 {
+    [SerializeField] private AudioClipManager audioClipManager;
+
     [SerializeField] private TextMeshProUGUI goalWeight;
     [SerializeField] private MinigameBScaleWeightTracker scaleArea;
     [SerializeField] private TextMeshProUGUI currentWeight;
@@ -17,11 +19,22 @@ public class MinigameBWeightTracking : MonoBehaviour
 
     private bool won = false;
 
+    [SerializeField] private GameObject tutorialPanel;
     [SerializeField] private GameObject winPanel;
+    [SerializeField] private GameObject backButton;
 
     // Start is called before the first frame update
     void Start()
     {
+        Random.InitState(System.DateTime.Now.Millisecond);
+        int lightWeight = Random.Range(2, 5); // 2-4
+        int orangeWeight = Random.Range(4, 9); // 4-8
+        int darkWeight = Random.Range(9, 13); // 9-12
+        lightCoin.GetComponent<MinigameBCoinScript>().CoinWeight = lightWeight;
+        orangeCoin.GetComponent<MinigameBCoinScript>().CoinWeight = orangeWeight;
+        darkCoin.GetComponent<MinigameBCoinScript>().CoinWeight = darkWeight;
+        goalWeightInt = Random.Range(0, 6) * lightWeight + Random.Range(0, 6) * orangeWeight + Random.Range(0, 6) * darkWeight;
+        goalWeight.text = goalWeightInt.ToString();
         // this is where we'll generate randomness later.
     }
 
@@ -33,7 +46,15 @@ public class MinigameBWeightTracking : MonoBehaviour
         if (!won && goalWeightInt == currentWeightInt)
         {
             winPanel.SetActive(true);
+            winPanel.transform.SetAsLastSibling();
+            backButton.transform.SetAsLastSibling();
+            audioClipManager.PlayCongrats();
             won = true;
         }
+    }
+
+    public void closeTutorial()
+    {
+        tutorialPanel.SetActive(false);
     }
 }

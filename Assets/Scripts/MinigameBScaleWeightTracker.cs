@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MinigameBScaleWeightTracker : MonoBehaviour
 {
+    [SerializeField] private AudioClipManager audioClipManager;
+
     private HashSet<Collider2D> colliders = new HashSet<Collider2D>();
     private int weight = 0;
 
@@ -15,6 +17,7 @@ public class MinigameBScaleWeightTracker : MonoBehaviour
         }
         try
         {
+            audioClipManager.PlayCoinDrop();
             MinigameBCoinScript coin = collision.GetComponent<MinigameBCoinScript>();
             if (coin != null)
             {
