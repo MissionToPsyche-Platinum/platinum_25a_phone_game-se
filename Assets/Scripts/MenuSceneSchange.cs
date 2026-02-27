@@ -1,13 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuSceneSchange : MonoBehaviour
 {
     [SerializeField] private GameObject UnavailableScreen;
-    [SerializeField] private float sceneLoadDelay = 0.15f;
+    [SerializeField] private float sceneLoadDelay = 0f;
 
     public void SwitchToSceneMinigameA()
     {
@@ -19,14 +17,18 @@ public class MenuSceneSchange : MonoBehaviour
     {
         Debug.Log("Switching to Minigame B");
         Random.InitState(System.DateTime.Now.Millisecond);
-        int rand = Random.Range(0, 2);
+        int rand = Random.Range(0, 3);
         if (rand == 0)
         {
             StartCoroutine(LoadSceneWithDelay("MinigameBMetalWeights"));
         }
-        else
+        else if (rand == 1)
         {
             StartCoroutine(LoadSceneWithDelay("MinigameBPowerBalance"));
+        }
+        else if (rand == 2)
+        {
+            StartCoroutine(LoadSceneWithDelay("MinigameBWireColorLink"));
         }
     }
 
@@ -52,7 +54,19 @@ public class MenuSceneSchange : MonoBehaviour
     public void SwitchToSceneMinigameF()
     {
         Debug.Log("Switching to Minigame F");
-        UnavailableScreen.SetActive(true);
+        StartCoroutine(LoadSceneWithDelay("MinigameF"));
+    }
+
+    public void SwitchToSceneMinigameF_Start()
+    {
+        Debug.Log("Switching to Minigame F start page");
+        StartCoroutine(LoadSceneWithDelay("MinigameF_Start"));
+    }
+
+    public void SwitchToCentralHub()
+    {
+        Debug.Log("Switching to Central Hub");
+        StartCoroutine(LoadSceneWithDelay("CentralHub"));
     }
 
     public void CloseUnavailableScreen()
@@ -64,5 +78,6 @@ public class MenuSceneSchange : MonoBehaviour
     {
         yield return new WaitForSeconds(sceneLoadDelay);
         SceneManager.LoadScene(sceneName);
+        Debug.Log("Finished switching");
     }
 }

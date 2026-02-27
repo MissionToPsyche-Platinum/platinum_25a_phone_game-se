@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a9f85ce9390090a439f46a90f7c2af08
+guid: 2ade3f45098c7b84dbfdfbd4ded4eb52
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2074467903930810563
-    second: centralhubbackground_0
+      213: -6354616222474237749
+    second: IMG_2188_0
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: centralhubbackground_0
+      name: IMG_2188_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1536
-        height: 1024
+        width: 1640
+        height: 1640
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3c0cebf419df9cc10800000000000000
-      internalID: 2074467903930810563
+      spriteID: bc80d7fb63edfc7a0800000000000000
+      internalID: -6354616222474237749
       vertices: []
       indices: 
       edges: []
@@ -141,7 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      centralhubbackground_0: 2074467903930810563
+      IMG_2188_0: -6354616222474237749
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
