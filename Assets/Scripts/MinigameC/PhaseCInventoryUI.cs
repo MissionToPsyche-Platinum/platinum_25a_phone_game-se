@@ -92,7 +92,18 @@ public class PhaseCInventoryUI : MonoBehaviour
             {
                 if (Input.GetKeyDown(DropKeys[i]) && slotItemIds[i] != 0)
                 {
-                    legacyController.DropItem(slotItemIds[i]);
+                    int droppedId = slotItemIds[i];
+                    bool dropped = legacyController.DropItem(droppedId);
+                    if (dropped)
+                    {
+                        string dropName = itemDictionary != null
+                            ? itemDictionary.GetDisplayName(droppedId)
+                            : $"Item {droppedId}";
+                        Color dropColor = itemDictionary != null
+                            ? itemDictionary.GetItemColor(droppedId)
+                            : PhaseCUITheme.AccentGold;
+                        PhaseCItemFeedbackUI.ShowDrop(dropName, dropColor);
+                    }
                 }
             }
         }

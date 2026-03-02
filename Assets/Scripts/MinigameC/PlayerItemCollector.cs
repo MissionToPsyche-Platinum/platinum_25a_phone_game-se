@@ -62,6 +62,8 @@ public class PlayerItemCollector : MonoBehaviour
                 if (itemAdded)
                 {
                     Debug.Log($"PlayerItemCollector: Item {item.ID} successfully added to inventory!");
+                    Color itemColor = itemDictionary.GetItemColor(item.ID);
+                    PhaseCItemFeedbackUI.ShowPickup(item.displayName, itemColor);
                     Destroy(collision.gameObject);
                 }
                 else
