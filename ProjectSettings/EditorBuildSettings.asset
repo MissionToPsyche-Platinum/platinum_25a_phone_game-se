@@ -9,24 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/CentralHub.unity
     guid: 548976b44853d704e83e8e27743cdad2
   - enabled: 1
-    path: Assets/Scenes/MinigameA.unity
-    guid: 65dbad7421a212d479c898fd61345eb3
-  - enabled: 1
-    path: Assets/Scenes/MinigameBMetalWeights.unity
-    guid: eb2e77f2622ca084ab3b07001ef3a8ae
-  - enabled: 1
-    path: Assets/Scenes/MinigameBPowerBalance.unity
-    guid: ba96964f1aa62db498f0b98384dc66ec
-  - enabled: 1
-    path: Assets/Scenes/MinigameBWireColorLink.unity
-    guid: e96a84da2571fa5458f00da5f6ec2a34
-  - enabled: 1
-    path: Assets/Scenes/MinigameD-Game-Lost.unity
-    guid: 4843230532822474c8eaf71a52034e61
-  - enabled: 1
-    path: Assets/Scenes/MinigameD-Game-Won.unity
-    guid: 7e1044cf50819054cbf523a670faccb9
-  - enabled: 1
     path: Assets/Scenes/MinigameD-Level1.unity
     guid: 8ba86c7c01b10044b9c41d3bcdce6e37
   - enabled: 1
@@ -39,11 +21,35 @@ EditorBuildSettings:
     path: Assets/Scenes/MinigameD-Tutorial.unity
     guid: c8333f06237a84140a30f6a23b2a7a9b
   - enabled: 1
+    path: Assets/Scenes/MinigameD-Game-Won.unity
+    guid: 7e1044cf50819054cbf523a670faccb9
+  - enabled: 1
+    path: Assets/Scenes/MinigameD-Game-Lost.unity
+    guid: 4843230532822474c8eaf71a52034e61
+  - enabled: 1
     path: Assets/Scenes/GravityAssist.unity
     guid: 9d2e520ea27108b42b6f28f71ad7c408
   - enabled: 1
+    path: Assets/Scenes/MinigameA.unity
+    guid: 65dbad7421a212d479c898fd61345eb3
+  - enabled: 1
+    path: Assets/Scenes/MinigameBMetalWeights.unity
+    guid: eb2e77f2622ca084ab3b07001ef3a8ae
+  - enabled: 1
+    path: Assets/Scenes/MinigameBPowerBalance.unity
+    guid: ba96964f1aa62db498f0b98384dc66ec
+  - enabled: 1
+    path: Assets/Scenes/MinigameBWireColorLink.unity
+    guid: e96a84da2571fa5458f00da5f6ec2a34
+  - enabled: 1
+    path: Assets/Scenes/MinigameF_Start.unity
+    guid: 4795f971b34282b4b9f5114599daacff
+  - enabled: 1
     path: Assets/Scenes/MiniGameF.unity
     guid: 9e762bbba7432d141b5624509509135b
+  - enabled: 1
+    path: Assets/Scenes/MinigameC.unity
+    guid: 4a736554761473c4dbcc90491e05eb97
   - enabled: 1
     path: Assets/Scenes/MinigameF_Start.unity
     guid: 4795f971b34282b4b9f5114599daacff
