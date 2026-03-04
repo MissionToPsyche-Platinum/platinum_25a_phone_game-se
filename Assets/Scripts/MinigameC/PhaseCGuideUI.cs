@@ -20,6 +20,7 @@ public class PhaseCGuideUI : MonoBehaviour
     private TMP_Text talkToText;
     private TMP_Text controlsText;
     private List<Image> stepDots;
+    private List<TMP_Text> stepDotLabels;
     private int lastStepNumber = -1;
     private Coroutine stepCompleteRoutine;
 
@@ -151,7 +152,7 @@ public class PhaseCGuideUI : MonoBehaviour
         panelRect.anchoredPosition = Vector2.zero;
         panelRect.offsetMin = new Vector2(0f, 0f);
         panelRect.offsetMax = new Vector2(0f, 0f);
-        panelRect.sizeDelta = new Vector2(0f, 220f);
+        panelRect.sizeDelta = new Vector2(0f, 236f);
 
         // Accent bar at top
         GameObject accent = new GameObject("AccentBar");
@@ -175,11 +176,14 @@ public class PhaseCGuideUI : MonoBehaviour
         dotsRect.anchorMax = new Vector2(0.5f, 1f);
         dotsRect.pivot = new Vector2(0.5f, 1f);
         dotsRect.anchoredPosition = new Vector2(0f, -32f);
-        dotsRect.sizeDelta = new Vector2(stepCount * PhaseCUITheme.GuideDotSpacing + 8f, 28f);
+        dotsRect.sizeDelta = new Vector2(stepCount * PhaseCUITheme.GuideDotSpacing + 8f, 44f);
 
         stepDots = new List<Image>();
+        stepDotLabels = new List<TMP_Text>();
         for (int i = 0; i < stepCount; i++)
         {
+            float dotX = -0.5f * (stepCount - 1) * PhaseCUITheme.GuideDotSpacing + i * PhaseCUITheme.GuideDotSpacing;
+
             GameObject dot = new GameObject("Dot" + i);
             dot.transform.SetParent(dotsContainer.transform, false);
             Image dotImg = dot.AddComponent<Image>();
@@ -188,9 +192,25 @@ public class PhaseCGuideUI : MonoBehaviour
             dotRect.anchorMin = new Vector2(0.5f, 0.5f);
             dotRect.anchorMax = new Vector2(0.5f, 0.5f);
             dotRect.pivot = new Vector2(0.5f, 0.5f);
-            dotRect.anchoredPosition = new Vector2(-0.5f * (stepCount - 1) * PhaseCUITheme.GuideDotSpacing + i * PhaseCUITheme.GuideDotSpacing, 0f);
+            dotRect.anchoredPosition = new Vector2(dotX, 7f);
             dotRect.sizeDelta = new Vector2(PhaseCUITheme.GuideDotSize, PhaseCUITheme.GuideDotSize);
             stepDots.Add(dotImg);
+
+            // Step number label below dot for clear step identification
+            GameObject numGo = new GameObject("DotNum" + i);
+            numGo.transform.SetParent(dotsContainer.transform, false);
+            TMP_Text numText = numGo.AddComponent<TextMeshProUGUI>();
+            numText.text = (i + 1).ToString();
+            numText.fontSize = 9f;
+            numText.alignment = TextAlignmentOptions.Center;
+            numText.color = PhaseCUITheme.TextSecondary;
+            RectTransform numRect = numGo.GetComponent<RectTransform>();
+            numRect.anchorMin = new Vector2(0.5f, 0.5f);
+            numRect.anchorMax = new Vector2(0.5f, 0.5f);
+            numRect.pivot = new Vector2(0.5f, 0.5f);
+            numRect.anchoredPosition = new Vector2(dotX, -10f);
+            numRect.sizeDelta = new Vector2(24f, 14f);
+            stepDotLabels.Add(numText);
         }
 
         // Step title (e.g. "Step 1 of 5: Instrument Build")
@@ -199,9 +219,9 @@ public class PhaseCGuideUI : MonoBehaviour
         stepTitleRect.anchorMin = new Vector2(0f, 1f);
         stepTitleRect.anchorMax = new Vector2(1f, 1f);
         stepTitleRect.pivot = new Vector2(0f, 1f);
-        stepTitleRect.anchoredPosition = new Vector2(0f, -60f);
-        stepTitleRect.offsetMin = new Vector2(PhaseCUITheme.PaddingTight, -96f);
-        stepTitleRect.offsetMax = new Vector2(-PhaseCUITheme.PaddingTight, -60f);
+        stepTitleRect.anchoredPosition = new Vector2(0f, -76f);
+        stepTitleRect.offsetMin = new Vector2(PhaseCUITheme.PaddingTight, -112f);
+        stepTitleRect.offsetMax = new Vector2(-PhaseCUITheme.PaddingTight, -76f);
         stepTitleText.color = PhaseCUITheme.AccentCyan;
 
         // Objective (summary)
@@ -210,9 +230,9 @@ public class PhaseCGuideUI : MonoBehaviour
         objectiveRect.anchorMin = new Vector2(0f, 1f);
         objectiveRect.anchorMax = new Vector2(1f, 1f);
         objectiveRect.pivot = new Vector2(0f, 1f);
-        objectiveRect.anchoredPosition = new Vector2(0f, -102f);
-        objectiveRect.offsetMin = new Vector2(PhaseCUITheme.PaddingTight, -142f);
-        objectiveRect.offsetMax = new Vector2(-PhaseCUITheme.PaddingTight, -96f);
+        objectiveRect.anchoredPosition = new Vector2(0f, -118f);
+        objectiveRect.offsetMin = new Vector2(PhaseCUITheme.PaddingTight, -158f);
+        objectiveRect.offsetMax = new Vector2(-PhaseCUITheme.PaddingTight, -112f);
         objectiveText.color = PhaseCUITheme.TextPrimary;
 
         // Talk to: [NPC name]
@@ -221,9 +241,9 @@ public class PhaseCGuideUI : MonoBehaviour
         talkToRect.anchorMin = new Vector2(0f, 1f);
         talkToRect.anchorMax = new Vector2(0.58f, 1f);
         talkToRect.pivot = new Vector2(0f, 1f);
-        talkToRect.anchoredPosition = new Vector2(0f, -148f);
-        talkToRect.offsetMin = new Vector2(PhaseCUITheme.PaddingTight, -182f);
-        talkToRect.offsetMax = new Vector2(-PhaseCUITheme.PaddingTight, -142f);
+        talkToRect.anchoredPosition = new Vector2(0f, -164f);
+        talkToRect.offsetMin = new Vector2(PhaseCUITheme.PaddingTight, -198f);
+        talkToRect.offsetMax = new Vector2(-PhaseCUITheme.PaddingTight, -158f);
         talkToText.color = PhaseCUITheme.StepCurrent;
 
         // Controls hint
@@ -232,9 +252,9 @@ public class PhaseCGuideUI : MonoBehaviour
         controlsRect.anchorMin = new Vector2(0.58f, 1f);
         controlsRect.anchorMax = new Vector2(1f, 1f);
         controlsRect.pivot = new Vector2(1f, 1f);
-        controlsRect.anchoredPosition = new Vector2(0f, -148f);
-        controlsRect.offsetMin = new Vector2(PhaseCUITheme.PaddingTight, -182f);
-        controlsRect.offsetMax = new Vector2(-PhaseCUITheme.PaddingTight, -142f);
+        controlsRect.anchoredPosition = new Vector2(0f, -164f);
+        controlsRect.offsetMin = new Vector2(PhaseCUITheme.PaddingTight, -198f);
+        controlsRect.offsetMax = new Vector2(-PhaseCUITheme.PaddingTight, -158f);
         controlsText.alignment = TextAlignmentOptions.Right;
         controlsText.color = PhaseCUITheme.TextSecondary;
     }
@@ -426,7 +446,11 @@ public class PhaseCGuideUI : MonoBehaviour
             if (stepDots != null)
             {
                 for (int i = 0; i < stepDots.Count; i++)
+                {
                     stepDots[i].color = PhaseCUITheme.StepDone;
+                    if (stepDotLabels != null && i < stepDotLabels.Count && stepDotLabels[i] != null)
+                        stepDotLabels[i].color = PhaseCUITheme.StepDone;
+                }
             }
             return;
         }
@@ -441,12 +465,18 @@ public class PhaseCGuideUI : MonoBehaviour
             for (int i = 0; i < stepDots.Count; i++)
             {
                 int oneBased = i + 1;
+                Color dotColor;
                 if (oneBased < stepInfo.StepNumber)
-                    stepDots[i].color = PhaseCUITheme.StepDone;
+                    dotColor = PhaseCUITheme.StepDone;
                 else if (oneBased == stepInfo.StepNumber)
-                    stepDots[i].color = PhaseCUITheme.StepCurrent;
+                    dotColor = PhaseCUITheme.StepCurrent;
                 else
-                    stepDots[i].color = PhaseCUITheme.StepPending;
+                    dotColor = PhaseCUITheme.StepPending;
+
+                stepDots[i].color = dotColor;
+
+                if (stepDotLabels != null && i < stepDotLabels.Count && stepDotLabels[i] != null)
+                    stepDotLabels[i].color = dotColor;
             }
         }
     }
