@@ -31,6 +31,7 @@ public class MinigameATextCrossout : MonoBehaviour
         if (isCrossedOut)
         {
             textComponent.text = "<s>" + textComponent.text + "</s>";
+            textComponent.color = Color.gray; // Optional: Change color to indicate it's crossed out
         }
         else
         {

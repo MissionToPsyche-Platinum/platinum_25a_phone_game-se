@@ -2494,8 +2494,8 @@ MonoBehaviour:
   settingsButton: {fileID: 1618981159}
   volumeSlider: {fileID: 658689751}
   volumePercentText: {fileID: 1183319092}
-  tutorialToggle: {fileID: 0}
-  fontToggle: {fileID: 0}
+  tutorialToggle: {fileID: 906866701}
+  fontToggle: {fileID: 2068754867}
   audioManager: {fileID: 164605540}
   defaultVolume: 0.1
   defaultTutorial: 1
@@ -4823,7 +4823,7 @@ GameObject:
   - component: {fileID: 2068754866}
   - component: {fileID: 2068754867}
   m_Layer: 5
-  m_Name: TutorialToggle
+  m_Name: FontToggle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -36,6 +36,9 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
 
     private bool dragging = false;
 
+
+    private const string PREF_TUT_KEY = "TutorialsOn";
+
     private bool safeIndex(int index)
     {
         return (index >= 0 && index < 36 && !wire1.Contains(index) && !wire2.Contains(index) && !wire3.Contains(index));
@@ -48,6 +51,16 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
 
     void Start()
     {
+        bool showTutorial = PlayerPrefs.GetInt(PREF_TUT_KEY, 1) == 1;
+        if (showTutorial)
+        {
+            tutorialScreen.SetActive(true);
+        }
+        else
+        {
+            tutorialScreen.SetActive(false);
+        }
+
         for (int i = 0; i < minigameBgrid.Length; i++)
         {
             grid[i] = 0;

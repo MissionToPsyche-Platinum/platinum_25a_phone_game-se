@@ -43,9 +43,21 @@ public class MinigameBPowerBalance : MonoBehaviour
     private float MiddleSinkCurrentValue = 0;
     private float RightSinkCurrentValue = 0;
 
+    private const string PREF_TUT_KEY = "TutorialsOn";
+
     // Start is called before the first frame update
     void Start()
     {
+        bool showTutorial = PlayerPrefs.GetInt(PREF_TUT_KEY, 1) == 1;
+        if (showTutorial)
+        {
+            TutorialScreen.SetActive(true);
+        }
+        else
+        {
+            TutorialScreen.SetActive(false);
+        }
+
         Random.InitState(System.DateTime.Now.Millisecond);
         LeftSourceValue = Random.Range(5, 16) * 3;
         MiddleSourceValue = Random.Range(5, 16) * 3;

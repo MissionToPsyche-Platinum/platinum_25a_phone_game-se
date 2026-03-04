@@ -51,13 +51,11 @@ public class CentralHubSettingPanel : MonoBehaviour
         if (tutorialToggle != null)
         {
             tutorialToggle.isOn = savedTutorial;
-            tutorialToggle.onValueChanged.AddListener(delegate { toggleTutorials(); });
         }
         bool savedFont = PlayerPrefs.GetInt(PREF_FONT_KEY, defaultFont ? 1 : 0) == 1;
         if (fontToggle != null)
         {
             fontToggle.isOn = savedFont;
-            fontToggle.onValueChanged.AddListener(delegate { toggleFont(); });
         }
 
         ApplyVolume(saved);
