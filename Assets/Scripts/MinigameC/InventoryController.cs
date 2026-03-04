@@ -148,7 +148,7 @@ public class InventoryController : MonoBehaviour
             }
             if (!typeAlreadyPresent && typesInInventory.Count >= maxUniqueItemTypes)
             {
-                Debug.Log($"InventoryController.AddItem: Rejected – inventory already has {maxUniqueItemTypes} different item types.");
+                Debug.Log($"InventoryController.AddItem: Rejected - inventory already has {maxUniqueItemTypes} different item types.");
                 return false;
             }
         }

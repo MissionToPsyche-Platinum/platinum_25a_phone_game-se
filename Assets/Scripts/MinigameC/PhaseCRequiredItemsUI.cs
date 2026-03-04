@@ -25,14 +25,15 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
     private List<int> lastRequiredIds = new List<int>();
     private List<GameObject> itemRows = new List<GameObject>();
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void EnsureUI()
     {
-        if (SceneManager.GetActiveScene().name != TargetSceneName) return;
-        if (FindFirstObjectByType<PhaseCRequiredItemsUI>() != null) return;
-
-        GameObject go = new GameObject("PhaseCRequiredItemsUI");
-        go.AddComponent<PhaseCRequiredItemsUI>();
+        SceneManager.sceneLoaded += (scene, _) =>
+        {
+            if (scene.name != TargetSceneName) return;
+            if (FindFirstObjectByType<PhaseCRequiredItemsUI>() != null) return;
+            new GameObject("PhaseCRequiredItemsUI").AddComponent<PhaseCRequiredItemsUI>();
+        };
     }
 
     private void Awake()

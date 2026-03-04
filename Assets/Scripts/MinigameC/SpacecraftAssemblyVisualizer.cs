@@ -37,12 +37,15 @@ public class SpacecraftAssemblyVisualizer : MonoBehaviour
 
     // ─── Bootstrap ───────────────────────────────────────────────────────────
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Boot()
     {
-        if (SceneManager.GetActiveScene().name != TargetScene) return;
-        new GameObject("SpacecraftAssemblyVisualizer")
-            .AddComponent<SpacecraftAssemblyVisualizer>();
+        SceneManager.sceneLoaded += (scene, _) =>
+        {
+            if (scene.name != TargetScene) return;
+            new GameObject("SpacecraftAssemblyVisualizer")
+                .AddComponent<SpacecraftAssemblyVisualizer>();
+        };
     }
 
     // ─── Lifecycle ───────────────────────────────────────────────────────────

@@ -17,14 +17,15 @@ public class PhaseCSaveUI : MonoBehaviour
     private TMP_Text statusText;
     private bool initialized;
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void EnsureSaveUI()
     {
-        if (SceneManager.GetActiveScene().name != TargetSceneName) return;
-        if (FindFirstObjectByType<PhaseCSaveUI>() != null) return;
-
-        GameObject go = new GameObject("PhaseCSaveUI");
-        go.AddComponent<PhaseCSaveUI>();
+        SceneManager.sceneLoaded += (scene, _) =>
+        {
+            if (scene.name != TargetSceneName) return;
+            if (FindFirstObjectByType<PhaseCSaveUI>() != null) return;
+            new GameObject("PhaseCSaveUI").AddComponent<PhaseCSaveUI>();
+        };
     }
 
     private void Awake()

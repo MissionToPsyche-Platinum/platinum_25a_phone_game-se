@@ -35,14 +35,15 @@ public class PhaseCPersistentHintUI : MonoBehaviour
 
     private PhaseCAssemblyController.StepInfo currentStepInfo;
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void EnsureHintUI()
     {
-        if (SceneManager.GetActiveScene().name != TargetSceneName) return;
-        if (FindFirstObjectByType<PhaseCPersistentHintUI>() != null) return;
-
-        GameObject go = new GameObject("PhaseCPersistentHintUI");
-        go.AddComponent<PhaseCPersistentHintUI>();
+        SceneManager.sceneLoaded += (scene, _) =>
+        {
+            if (scene.name != TargetSceneName) return;
+            if (FindFirstObjectByType<PhaseCPersistentHintUI>() != null) return;
+            new GameObject("PhaseCPersistentHintUI").AddComponent<PhaseCPersistentHintUI>();
+        };
     }
 
     private void Awake()

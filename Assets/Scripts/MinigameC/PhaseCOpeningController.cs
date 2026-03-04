@@ -37,18 +37,17 @@ public class PhaseCOpeningController : MonoBehaviour
     private readonly List<(string title, string body)> panels = new List<(string, string)>();
     private Texture2D gradientTexture;
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void EnsureController()
     {
-        Scene activeScene = SceneManager.GetActiveScene();
-        if (activeScene.name != TargetSceneName)
-            return;
-
-        if (FindFirstObjectByType<PhaseCOpeningController>() == null)
+        SceneManager.sceneLoaded += (scene, _) =>
         {
-            GameObject go = new GameObject("PhaseCOpeningController");
-            go.AddComponent<PhaseCOpeningController>();
-        }
+            if (scene.name != TargetSceneName) return;
+            if (FindFirstObjectByType<PhaseCOpeningController>() == null)
+            {
+                new GameObject("PhaseCOpeningController").AddComponent<PhaseCOpeningController>();
+            }
+        };
     }
 
     private void Awake()

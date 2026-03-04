@@ -46,11 +46,14 @@ public class PhaseCWorldItemUI : MonoBehaviour
 
     // ─── Bootstrap ───────────────────────────────────────────────────────────
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void BootEnhancer()
     {
-        if (SceneManager.GetActiveScene().name != TargetScene) return;
-        new GameObject("WorldItemEnhancer").AddComponent<WorldItemEnhancerManager>();
+        SceneManager.sceneLoaded += (scene, _) =>
+        {
+            if (scene.name != TargetScene) return;
+            new GameObject("WorldItemEnhancer").AddComponent<WorldItemEnhancerManager>();
+        };
     }
 
     // ─── Initialization ──────────────────────────────────────────────────────

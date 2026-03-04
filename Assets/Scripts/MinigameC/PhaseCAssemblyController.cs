@@ -53,20 +53,18 @@ public class PhaseCAssemblyController : MonoBehaviour
     /// <summary>Fired when the  player completes the final step (KDP-D) and Phase C is complete.</summary>
     public event Action PhaseCComplete;
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void EnsureController()
     {
-        Scene activeScene = SceneManager.GetActiveScene();
-        if (activeScene.name != TargetSceneName)
+        SceneManager.sceneLoaded += (scene, _) =>
         {
-            return;
-        }
-
-        if (FindFirstObjectByType<PhaseCAssemblyController>() == null)
-        {
-            GameObject controllerObject = new GameObject("PhaseCAssemblyController");
-            controllerObject.AddComponent<PhaseCAssemblyController>();
-        }
+            if (scene.name != TargetSceneName) return;
+            if (FindFirstObjectByType<PhaseCAssemblyController>() == null)
+            {
+                GameObject controllerObject = new GameObject("PhaseCAssemblyController");
+                controllerObject.AddComponent<PhaseCAssemblyController>();
+            }
+        };
     }
 
     private void Awake()

@@ -37,14 +37,15 @@ public class PhaseCInventoryUI : MonoBehaviour
     // Dirty-check cache: avoids rebuilding UI every frame when nothing changed
     private Dictionary<int, int> _lastSyncedCounts = new Dictionary<int, int>();
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void EnsureInventoryUI()
     {
-        if (SceneManager.GetActiveScene().name != TargetSceneName) return;
-        if (FindFirstObjectByType<PhaseCInventoryUI>() != null) return;
-
-        GameObject go = new GameObject("PhaseCInventoryUI");
-        go.AddComponent<PhaseCInventoryUI>();
+        SceneManager.sceneLoaded += (scene, _) =>
+        {
+            if (scene.name != TargetSceneName) return;
+            if (FindFirstObjectByType<PhaseCInventoryUI>() != null) return;
+            new GameObject("PhaseCInventoryUI").AddComponent<PhaseCInventoryUI>();
+        };
     }
 
     private void Awake()

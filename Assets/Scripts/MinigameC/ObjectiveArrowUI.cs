@@ -32,14 +32,16 @@ public class ObjectiveArrowUI : MonoBehaviour
     private Vector2 arrowCurrentPos;
     private float arrowCurrentAngleDeg;
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void EnsureArrow()
     {
-        Scene s = SceneManager.GetActiveScene();
-        if (s.name != TargetSceneName) return;
-        if (FindFirstObjectByType<ObjectiveArrowUI>() != null) return;
-        var go = new GameObject("ObjectiveArrowUI");
-        go.AddComponent<ObjectiveArrowUI>();
+        SceneManager.sceneLoaded += (scene, _) =>
+        {
+            if (scene.name != TargetSceneName) return;
+            if (FindFirstObjectByType<ObjectiveArrowUI>() != null) return;
+            var go = new GameObject("ObjectiveArrowUI");
+            go.AddComponent<ObjectiveArrowUI>();
+        };
     }
 
     private void Awake()

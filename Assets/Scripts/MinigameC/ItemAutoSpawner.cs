@@ -23,20 +23,18 @@ public class ItemAutoSpawner : MonoBehaviour
     private ItemDictionary itemDictionary;
     private GameObject player;
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void EnsureSpawner()
     {
-        Scene activeScene = SceneManager.GetActiveScene();
-        if (activeScene.name != TargetSceneName)
+        SceneManager.sceneLoaded += (scene, _) =>
         {
-            return;
-        }
-
-        if (FindFirstObjectByType<ItemAutoSpawner>() == null)
-        {
-            GameObject spawner = new GameObject("ItemAutoSpawner");
-            spawner.AddComponent<ItemAutoSpawner>();
-        }
+            if (scene.name != TargetSceneName) return;
+            if (FindFirstObjectByType<ItemAutoSpawner>() == null)
+            {
+                GameObject spawner = new GameObject("ItemAutoSpawner");
+                spawner.AddComponent<ItemAutoSpawner>();
+            }
+        };
     }
 
     private void Start()

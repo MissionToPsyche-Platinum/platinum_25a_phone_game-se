@@ -28,7 +28,7 @@ public class PopupUI : MonoBehaviour
 
         if(popupTitle != null)
         {
-            popupTitle.text = "Orbit Achieved!";
+            popupTitle.text = "Gravity Assist Achieved!";
         }
 
         if(popupMessage != null)
@@ -50,7 +50,7 @@ public class PopupUI : MonoBehaviour
 
         if (popupTitle != null)
         {
-            popupTitle.text = "Orbit Missed!";
+            popupTitle.text = "Orbit Missed - No Gravity Assist!";
         }
 
         if (popupMessage != null)

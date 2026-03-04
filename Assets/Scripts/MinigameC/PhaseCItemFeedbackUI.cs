@@ -43,12 +43,15 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
 
     // Bootstrap
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void EnsureFeedbackUI()
     {
-        if (SceneManager.GetActiveScene().name != TargetSceneName) return;
-        if (FindFirstObjectByType<PhaseCItemFeedbackUI>() != null) return;
-        new GameObject("PhaseCItemFeedbackUI").AddComponent<PhaseCItemFeedbackUI>();
+        SceneManager.sceneLoaded += (scene, _) =>
+        {
+            if (scene.name != TargetSceneName) return;
+            if (FindFirstObjectByType<PhaseCItemFeedbackUI>() != null) return;
+            new GameObject("PhaseCItemFeedbackUI").AddComponent<PhaseCItemFeedbackUI>();
+        };
     }
 
     private void Awake()

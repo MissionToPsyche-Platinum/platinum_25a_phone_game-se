@@ -75,12 +75,15 @@ public class AssemblyCutsceneController : MonoBehaviour
         )
     };
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Boot()
     {
-        if (SceneManager.GetActiveScene().name != TargetSceneName) return;
-        if (FindFirstObjectByType<AssemblyCutsceneController>() == null)
-            new GameObject("AssemblyCutsceneController").AddComponent<AssemblyCutsceneController>();
+        SceneManager.sceneLoaded += (scene, _) =>
+        {
+            if (scene.name != TargetSceneName) return;
+            if (FindFirstObjectByType<AssemblyCutsceneController>() == null)
+                new GameObject("AssemblyCutsceneController").AddComponent<AssemblyCutsceneController>();
+        };
     }
 
     private void Awake()

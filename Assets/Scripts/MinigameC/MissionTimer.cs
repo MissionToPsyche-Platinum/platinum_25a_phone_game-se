@@ -47,13 +47,16 @@ public class MissionTimer : MonoBehaviour
     /// <summary>Fired each time the timer reaches zero (can happen multiple times if player keeps playing).</summary>
     public event Action TimeExpired;
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void EnsureTimer()
     {
-        if (SceneManager.GetActiveScene().name != TargetSceneName) return;
-        if (FindFirstObjectByType<MissionTimer>() != null) return;
-        var go = new GameObject("MissionTimer");
-        go.AddComponent<MissionTimer>();
+        SceneManager.sceneLoaded += (scene, _) =>
+        {
+            if (scene.name != TargetSceneName) return;
+            if (FindFirstObjectByType<MissionTimer>() != null) return;
+            var go = new GameObject("MissionTimer");
+            go.AddComponent<MissionTimer>();
+        };
     }
 
     private void Awake()
