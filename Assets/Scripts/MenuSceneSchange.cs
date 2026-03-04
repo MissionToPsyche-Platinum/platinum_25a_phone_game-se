@@ -1,67 +1,83 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MenuSceneSchange : MonoBehaviour
 {
+    [SerializeField] private GameObject UnavailableScreen;
+    [SerializeField] private float sceneLoadDelay = 0f;
+
     public void SwitchToSceneMinigameA()
     {
         Debug.Log("Switching to Minigame A");
-        SceneManager.LoadScene("MinigameA");
+        StartCoroutine(LoadSceneWithDelay("MinigameA"));
     }
 
     public void SwitchToSceneMinigameB()
     {
         Debug.Log("Switching to Minigame B");
+        Random.InitState(System.DateTime.Now.Millisecond);
         int rand = Random.Range(0, 3);
         if (rand == 0)
         {
-            SceneManager.LoadScene("MinigameBMetalWeights");
+            StartCoroutine(LoadSceneWithDelay("MinigameBMetalWeights"));
         }
         else if (rand == 1)
         {
-            SceneManager.LoadScene("MinigameBPowerBalance");
+            StartCoroutine(LoadSceneWithDelay("MinigameBPowerBalance"));
         }
-        else
+        else if (rand == 2)
         {
-            SceneManager.LoadScene("MinigameBWireColorLink");
+            StartCoroutine(LoadSceneWithDelay("MinigameBWireColorLink"));
         }
     }
 
     public void SwitchToSceneMinigameC()
     {
-
+        Debug.Log("Switching to Minigame C");
+        UnavailableScreen.SetActive(true);
     }
 
     public void SwitchToSceneMinigameD()
     {
         Debug.Log("Switching to Minigame D");
-        SceneManager.LoadScene("MinigameD-Level1");
+        StartCoroutine(LoadSceneWithDelay("MinigameD-Tutorial"));
     }
 
     public void SwitchToSceneMinigameE()
     {
+        // Scene Loading for Minigame E
         Debug.Log("Switching to Minigame E");
-        SceneManager.LoadScene("GravityAssist");
-    }
-    
-    public void SwitchToSceneMinigameFstart()
-    {
-        Debug.Log("Switching to Minigame F start screen");
-        SceneManager.LoadScene("MinigameF_Start");
-
+        StartCoroutine(LoadSceneWithDelay("GravityAssist"));
     }
 
     public void SwitchToSceneMinigameF()
     {
         Debug.Log("Switching to Minigame F");
-        SceneManager.LoadScene("MinigameF");
+        StartCoroutine(LoadSceneWithDelay("MinigameF"));
+    }
+
+    public void SwitchToSceneMinigameF_Start()
+    {
+        Debug.Log("Switching to Minigame F start page");
+        StartCoroutine(LoadSceneWithDelay("MinigameF_Start"));
     }
 
     public void SwitchToCentralHub()
     {
-        Debug.Log("Switching to CentralHub");
-        SceneManager.LoadScene("CentralHub");
+        Debug.Log("Switching to Central Hub");
+        StartCoroutine(LoadSceneWithDelay("CentralHub"));
+    }
+
+    public void CloseUnavailableScreen()
+    {
+        UnavailableScreen.SetActive(false);
+    }
+
+    private IEnumerator LoadSceneWithDelay(string sceneName)
+    {
+        yield return new WaitForSeconds(sceneLoadDelay);
+        SceneManager.LoadScene(sceneName);
+        Debug.Log("Finished switching");
     }
 }

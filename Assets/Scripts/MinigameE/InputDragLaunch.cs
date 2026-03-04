@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using NUnit.Framework;
 
 public class InputDragLaunch : MonoBehaviour
 {
@@ -32,6 +31,18 @@ public class InputDragLaunch : MonoBehaviour
     private float lastLaunchPower = 0f;
 
 
+    // --------------------------------
+    // variables added for measuring angle and speed
+    // --------------------------------
+
+    private Vector2 currentAimVelocity = Vector2.zero;
+    private float currentAimSpeed = 0f;
+    private float currentAimAngleDeg = 0f;
+    private bool hasLastShot = false;
+    public float CurrentAimSpeed => currentAimSpeed;
+    public float CurrentAimAngleDeg => currentAimAngleDeg;
+    public bool IsDragging => dragging;
+    public bool HasLastShot => hasLastShot;
 
     void Awake()
     {
@@ -60,6 +71,12 @@ public class InputDragLaunch : MonoBehaviour
         {
                  Debug.Log("model is open");
             dragging = false;
+
+            // Rest AIM VALUES FOR HUD
+            currentAimVelocity = Vector2.zero;
+            currentAimSpeed = 0f;
+            currentAimAngleDeg = 0f;
+            
             if (powerBarFill) powerBarFill.fillAmount = 0f;
             if (powerBarRoot) powerBarRoot.SetActive(false);
             if (preview) preview.Clear();
@@ -99,6 +116,7 @@ public class InputDragLaunch : MonoBehaviour
             if (Vector2.Distance(world, spacecraftRb.position) <= clickRadius)
             {
                 dragging = true;
+                hasLastShot = false;
                 dragStart = world;
 
                 // Show power UI when dragging starts
@@ -119,6 +137,10 @@ public class InputDragLaunch : MonoBehaviour
             // preview velocity (direction of drag, scaled)
             Vector2 initialVelocity = dragVec.normalized * (dist * dragToSpeed);
             preview.ShowPreview(spacecraftRb.position, initialVelocity);
+
+            currentAimVelocity = initialVelocity;
+            currentAimSpeed = initialVelocity.magnitude;
+            currentAimAngleDeg = Mathf.Atan2(initialVelocity.y, initialVelocity.x) * Mathf.Rad2Deg;
 
             // Ui power bar
             if (powerBarFill) powerBarFill.fillAmount = dist / maxDragDistance;
@@ -162,6 +184,7 @@ public class InputDragLaunch : MonoBehaviour
                 if (Vector2.Distance(world, spacecraftRb.position) <= clickRadius)
                 {
                     dragging = true;
+                    hasLastShot = false;
                     dragStart = world;
 
                     // show power UI when dragging starts
@@ -180,6 +203,10 @@ public class InputDragLaunch : MonoBehaviour
                 // preview velocity (direction of drag, scaled)
                 Vector2 initialVelocity = dragVec.normalized * (dist * dragToSpeed);
                 preview.ShowPreview(spacecraftRb.position, initialVelocity);
+
+            currentAimVelocity = initialVelocity;
+            currentAimSpeed = initialVelocity.magnitude;
+            currentAimAngleDeg = Mathf.Atan2(initialVelocity.y, initialVelocity.x) * Mathf.Rad2Deg;
 
                 // Ui power bar
                 if (powerBarFill) powerBarFill.fillAmount = dist / maxDragDistance;
@@ -214,6 +241,9 @@ public class InputDragLaunch : MonoBehaviour
 
         // normalized power (0 to 1)
         lastLaunchPower = dist / maxDragDistance;
+
+        // freeze last shot flag
+        hasLastShot = true;
 
         // calculate force
         Vector2 launchForce = dragVec.normalized * (dist * dragToSpeed);
@@ -267,6 +297,9 @@ public class InputDragLaunch : MonoBehaviour
         || (confirmationPanel != null && confirmationPanel.activeInHierarchy)
         || (developmentInfoPanel != null && developmentInfoPanel.activeInHierarchy);
     }
+
+
+
 
 
 
