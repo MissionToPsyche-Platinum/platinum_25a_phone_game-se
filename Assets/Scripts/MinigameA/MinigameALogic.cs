@@ -32,6 +32,8 @@ public class MinigameALogic : MonoBehaviour
     [SerializeField] private TextMeshProUGUI clues3;
     [SerializeField] private TextMeshProUGUI clues4;
 
+    private const string PREF_TUT_KEY = "TutorialsOn";
+
     private int[] generateRandomChecks(int total, int max)
     {
         int[] randoms = new int[total];
@@ -91,6 +93,16 @@ public class MinigameALogic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        bool tutorialOn = PlayerPrefs.GetInt(PREF_TUT_KEY, 1) == 1;
+        if (tutorialOn)
+        {
+            tutorial.SetActive(true);
+        }
+        else
+        {
+            tutorial.SetActive(false);
+        }
+
         checks = new int[5];
         Random.InitState(DateTime.Now.Millisecond);
         int max = MinigameAPremises.premises.Count;

@@ -23,9 +23,21 @@ public class MinigameBWeightTracking : MonoBehaviour
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject backButton;
 
+    private const string PREF_TUT_KEY = "TutorialsOn";
+
     // Start is called before the first frame update
     void Start()
     {
+        bool showTutorial = PlayerPrefs.GetInt(PREF_TUT_KEY, 1) == 1;
+        if (showTutorial)
+        {
+            tutorialPanel.SetActive(true);
+        }
+        else
+        {
+            tutorialPanel.SetActive(false);
+        }
+
         Random.InitState(System.DateTime.Now.Millisecond);
         int lightWeight = Random.Range(2, 5); // 2-4
         int orangeWeight = Random.Range(4, 9); // 4-8
