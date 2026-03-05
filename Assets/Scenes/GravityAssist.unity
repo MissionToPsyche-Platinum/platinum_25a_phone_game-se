@@ -7729,6 +7729,22 @@ PrefabInstance:
       propertyPath: m_PreviewTimeScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1986863773367050512, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
+      propertyPath: m_Size.x
+      value: 7.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986863773367050512, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
+      propertyPath: m_Size.y
+      value: 6.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986863773367050512, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2060402230751909666, guid: 5f4ffc5078cecf44e8609cb4d3b2fe45, type: 3}
+    - target: {fileID: 1986863773367050512, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4559439904716824478, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
       propertyPath: m_Name
       value: Spacecraft
