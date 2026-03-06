@@ -1016,7 +1016,7 @@ GameObject:
   - component: {fileID: 252053825}
   - component: {fileID: 252053824}
   m_Layer: 5
-  m_Name: Label
+  m_Name: LabelCLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1631,7 +1631,7 @@ GameObject:
   - component: {fileID: 363372385}
   - component: {fileID: 363372384}
   m_Layer: 5
-  m_Name: Label
+  m_Name: LabelAMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2805,7 +2805,7 @@ GameObject:
   - component: {fileID: 806762762}
   - component: {fileID: 806762761}
   m_Layer: 5
-  m_Name: Label
+  m_Name: LabelALeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2939,7 +2939,7 @@ GameObject:
   - component: {fileID: 808085705}
   - component: {fileID: 808085704}
   m_Layer: 5
-  m_Name: Label
+  m_Name: LabelARight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3061,6 +3061,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 808085702}
   m_CullTransparentMesh: 1
+--- !u!1 &914631253
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 914631254}
+  - component: {fileID: 914631255}
+  m_Layer: 0
+  m_Name: FontManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &914631254
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914631253}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1630.3912, y: -677.9089, z: -8.844399}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2138657813}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &914631255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 914631253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28bc3ff8bb0b16f489ea66053953717d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultFont: {fileID: 11400000, guid: dab4b3b2860315e42b995d3d9fbb0b8b, type: 2}
+  accessibleFont: {fileID: 11400000, guid: 4e96204ea12462b449d0069ecc387f92, type: 2}
+  textElements:
+  - {fileID: 122880836}
+  - {fileID: 450367389}
+  - {fileID: 802735995}
+  - {fileID: 1425393220}
+  - {fileID: 1797181709}
+  - {fileID: 640835827}
+  - {fileID: 133018186}
+  - {fileID: 1978896679}
+  - {fileID: 1109927825}
+  - {fileID: 806762761}
+  - {fileID: 968547916}
+  - {fileID: 252053824}
+  - {fileID: 363372384}
+  - {fileID: 2095672099}
+  - {fileID: 1513702836}
+  - {fileID: 808085704}
+  - {fileID: 2108062624}
+  - {fileID: 1266459777}
+  - {fileID: 272184850}
+  - {fileID: 580506989}
+  - {fileID: 1465618197}
+  fontSizeDifference: 12
 --- !u!1 &939642236
 GameObject:
   m_ObjectHideFlags: 0
@@ -3193,7 +3262,7 @@ GameObject:
   - component: {fileID: 968547917}
   - component: {fileID: 968547916}
   m_Layer: 5
-  m_Name: Label
+  m_Name: LabelBLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3538,7 +3607,7 @@ GameObject:
   - component: {fileID: 1266459778}
   - component: {fileID: 1266459777}
   m_Layer: 5
-  m_Name: Label
+  m_Name: LabelCRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3944,7 +4013,7 @@ GameObject:
   - component: {fileID: 1513702837}
   - component: {fileID: 1513702836}
   m_Layer: 5
-  m_Name: Label
+  m_Name: LabelCMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4110,13 +4179,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1659196049}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1246.4441, y: 644.1003, z: 6.0273304}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -399.43555, y: -32.38269, z: -4.869913}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 27078412}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2138657813}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1748631164
 GameObject:
@@ -4732,7 +4801,7 @@ GameObject:
   - component: {fileID: 2095672100}
   - component: {fileID: 2095672099}
   m_Layer: 5
-  m_Name: Label
+  m_Name: LabelBMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4984,7 +5053,7 @@ GameObject:
   - component: {fileID: 2108062625}
   - component: {fileID: 2108062624}
   m_Layer: 5
-  m_Name: Label
+  m_Name: LabelBRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5106,6 +5175,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2108062622}
   m_CullTransparentMesh: 1
+--- !u!1 &2138657812
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2138657813}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2138657813
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138657812}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1645.8796, y: 676.483, z: 10.8972435}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1659196051}
+  - {fileID: 914631254}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -5113,4 +5215,4 @@ SceneRoots:
   - {fileID: 2020867441}
   - {fileID: 322772348}
   - {fileID: 11009655}
-  - {fileID: 1659196051}
+  - {fileID: 2138657813}
