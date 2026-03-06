@@ -6,6 +6,8 @@ using UnityEngine;
 public class Spawn_test : MonoBehaviour
 {
     [SerializeField] MeshRenderer pointMR;
+    [SerializeField] ParticleSystem clickParticles;
+   // [SerializeField] AudioSource audio;
     [SerializeField] Material red;
     [SerializeField] Material blue;
     [SerializeField] Material green;
@@ -47,9 +49,12 @@ public class Spawn_test : MonoBehaviour
     }
 
     private void OnMouseDown()
-    {        
+    {                
+        clickParticles.transform.position = transform.position;
+        clickParticles.Play();
+        //audio.Play();
         pointMR.enabled = false;
-        
+
     }
 
     private void colorGenerator()
