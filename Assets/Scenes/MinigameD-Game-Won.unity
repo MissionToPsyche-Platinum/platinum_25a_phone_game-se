@@ -961,6 +961,8 @@ GameObject:
   - component: {fileID: 761750579}
   - component: {fileID: 761750578}
   - component: {fileID: 761750581}
+  - component: {fileID: 761750583}
+  - component: {fileID: 761750582}
   m_Layer: 5
   m_Name: Quit
   m_TagString: Untagged
@@ -1095,6 +1097,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: CentralHub
+--- !u!114 &761750582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761750576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c7a358daaaaf5b45969372cb16f70d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  component: {fileID: 761750583}
+  delay: 7
+  duration: 1
+--- !u!225 &761750583
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761750576}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &853404936
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,6 +1285,8 @@ GameObject:
   - component: {fileID: 1025772594}
   - component: {fileID: 1025772596}
   - component: {fileID: 1025772595}
+  - component: {fileID: 1025772598}
+  - component: {fileID: 1025772597}
   m_Layer: 5
   m_Name: You-Win
   m_TagString: Untagged
@@ -1379,6 +1410,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1025772593}
   m_CullTransparentMesh: 1
+--- !u!114 &1025772597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025772593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c7a358daaaaf5b45969372cb16f70d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  component: {fileID: 1025772598}
+  delay: 5
+  duration: 2
+--- !u!225 &1025772598
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025772593}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1321526056
 GameObject:
   m_ObjectHideFlags: 0
@@ -1392,6 +1450,8 @@ GameObject:
   - component: {fileID: 1321526059}
   - component: {fileID: 1321526058}
   - component: {fileID: 1321526061}
+  - component: {fileID: 1321526063}
+  - component: {fileID: 1321526062}
   m_Layer: 5
   m_Name: Replay
   m_TagString: Untagged
@@ -1526,6 +1586,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: MinigameD-Level1
+--- !u!114 &1321526062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321526056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c7a358daaaaf5b45969372cb16f70d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  component: {fileID: 1321526063}
+  delay: 7
+  duration: 1
+--- !u!225 &1321526063
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1321526056}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1899063033
 GameObject:
   m_ObjectHideFlags: 0
@@ -1537,6 +1624,8 @@ GameObject:
   - component: {fileID: 1899063034}
   - component: {fileID: 1899063036}
   - component: {fileID: 1899063037}
+  - component: {fileID: 1899063039}
+  - component: {fileID: 1899063038}
   m_Layer: 5
   m_Name: Game-Won
   m_TagString: Untagged
@@ -1601,6 +1690,33 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1899063038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899063033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c7a358daaaaf5b45969372cb16f70d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  component: {fileID: 1899063039}
+  delay: 3
+  duration: 3
+--- !u!225 &1899063039
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1899063033}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1958300052
 GameObject:
   m_ObjectHideFlags: 0
@@ -1810,6 +1926,8 @@ GameObject:
   - component: {fileID: 2112664605}
   - component: {fileID: 2112664607}
   - component: {fileID: 2112664606}
+  - component: {fileID: 2112664609}
+  - component: {fileID: 2112664608}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -1849,16 +1967,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 56e62feb22cc1bb45a1f503b0dffde8e, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -1874,6 +1992,33 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2112664604}
   m_CullTransparentMesh: 1
+--- !u!114 &2112664608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112664604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c7a358daaaaf5b45969372cb16f70d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  component: {fileID: 2112664609}
+  delay: 0
+  duration: 2
+--- !u!225 &2112664609
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112664604}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2124906995
 GameObject:
   m_ObjectHideFlags: 0
