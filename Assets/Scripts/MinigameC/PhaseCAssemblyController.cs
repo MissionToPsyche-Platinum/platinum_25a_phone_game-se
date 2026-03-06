@@ -14,6 +14,11 @@ public class PhaseCAssemblyController : MonoBehaviour
     private const string NpcReview = "Dr. Priya Patel";
     private const string NpcIntegration = "Dr. James Thompson";
 
+    // Assembled component names shown in delivery confirmation (order matches recipe index)
+    private static readonly string[] InstrumentAssembledNames = { "Magnetometer", "Multispectral Imager", "Gamma-Ray Spectrometer" };
+    private static readonly string[] CommsAssembledNames = { "X-Band Radio System", "Laser Communication System" };
+    private static readonly string[] BusAssembledNames = { "Spacecraft Bus Frame", "Power System" };
+
     // Item IDs (1-based; must match ItemDictionary prefab list order)
     private static readonly int IdMagnetometerParts = 1;
     private static readonly int IdWiring = 2;
@@ -316,7 +321,9 @@ public class PhaseCAssemblyController : MonoBehaviour
         int[] nextRecipe = recipes[instrumentsBuilt];
         if (inventoryController.HasAllItems(nextRecipe) && inventoryController.RemoveItems(nextRecipe))
         {
+            string assembled = instrumentsBuilt < InstrumentAssembledNames.Length ? InstrumentAssembledNames[instrumentsBuilt] : "Instrument";
             instrumentsBuilt++;
+            PhaseCItemFeedbackUI.ShowDelivery(assembled, NpcInstruments);
             NotifyStepChanged();
         }
     }
@@ -371,7 +378,9 @@ public class PhaseCAssemblyController : MonoBehaviour
         int[] nextRecipe = recipes[commsBuilt];
         if (inventoryController.HasAllItems(nextRecipe) && inventoryController.RemoveItems(nextRecipe))
         {
+            string assembled = commsBuilt < CommsAssembledNames.Length ? CommsAssembledNames[commsBuilt] : "System";
             commsBuilt++;
+            PhaseCItemFeedbackUI.ShowDelivery(assembled, NpcReview);
             NotifyStepChanged();
         }
     }
@@ -415,7 +424,9 @@ public class PhaseCAssemblyController : MonoBehaviour
         int[] nextRecipe = recipes[busBuilt];
         if (inventoryController.HasAllItems(nextRecipe) && inventoryController.RemoveItems(nextRecipe))
         {
+            string assembled = busBuilt < BusAssembledNames.Length ? BusAssembledNames[busBuilt] : "Component";
             busBuilt++;
+            PhaseCItemFeedbackUI.ShowDelivery(assembled, NpcBus);
             NotifyStepChanged();
         }
     }
@@ -458,6 +469,7 @@ public class PhaseCAssemblyController : MonoBehaviour
         if (inventoryController.HasAllItems(recipe) && inventoryController.RemoveItems(recipe))
         {
             propulsionDelivered++;
+            PhaseCItemFeedbackUI.ShowDelivery("Propulsion System", NpcIntegration);
             NotifyStepChanged();
         }
     }
