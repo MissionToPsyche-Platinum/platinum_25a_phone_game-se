@@ -1,27 +1,101 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEngine;
 
 public class Spawn_test : MonoBehaviour
 {
-    [SerializeField] SpriteRenderer pointSR;
+    [SerializeField] MeshRenderer pointMR;
+    [SerializeField] Material red;
+    [SerializeField] Material blue;
+    [SerializeField] Material green;
+    [SerializeField] Material gold;
+
+    private int Red = 25;
+    private int Blue = 50;
+    private int Green = 75;
+    private int Gold = 100;
+
+    private float time = 2f;
+    private int points = 0;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        pointSR.enabled = true;
-        pointSR.color = Color.red;
+        pointMR.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (pointMR.enabled == false)
+        {            
+            if(time <= 0)
+            {
+                colorGenerator();
+            }
+            time -= Time.deltaTime;
+            
+        }else if(pointMR.enabled == true)
+        {
+            time -= Time.deltaTime;
+            timeKeeper();
+        }
+
         
     }
 
     private void OnMouseDown()
-    {
-        pointSR.color = Color.blue;
+    {        
+        pointMR.enabled = false;
         
     }
+
+    private void colorGenerator()
+    {
+        int x = UnityEngine.Random.Range(0, 100);
+        
+
+        if (x <= Red)
+        {
+            pointMR.enabled = true;
+            pointMR.material = red;
+            time = 10f;
+            points = 1;
+            
+        }
+        else if (x > Red && x <= Blue)
+        {
+            pointMR.enabled = true;
+            pointMR.material = blue;
+            time = 7.5f;
+            points = 2;
+
+        }else if (x > Blue && x <= Green)
+        {
+            pointMR.enabled = true;
+            pointMR.material = green;
+            time = 5f;
+            points = 3;
+
+        }else if (x > Green && x <= Gold)
+        {
+            pointMR.enabled = true;
+            pointMR.material = gold;
+            time = 0.5f;
+            points = 15;
+        }
+    }
+
+    private void timeKeeper()
+    {
+        if (time <= 0)
+        {
+            pointMR.enabled = false;
+            time = 3f;
+        }
+    }
+
+
 }
