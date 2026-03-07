@@ -13,13 +13,15 @@ public class Spawn_test : MonoBehaviour
     [SerializeField] Material green;
     [SerializeField] Material gold;
 
+    [SerializeField] displayScore score;
+
     private int Red = 25;
     private int Blue = 50;
     private int Green = 75;
     private int Gold = 100;
 
     private float time = 2f;
-    private int points = 0;
+    
 
 
     // Start is called before the first frame update
@@ -50,10 +52,13 @@ public class Spawn_test : MonoBehaviour
 
     private void OnMouseDown()
     {                
-        clickParticles.transform.position = transform.position;
-        clickParticles.Play();
-        //audio.Play();
-        pointMR.enabled = false;
+        if(pointMR.enabled == true)
+        {
+            clickParticles.transform.position = transform.position;
+            clickParticles.Play();
+            //audio.Play();
+            pointMR.enabled = false;
+        }
 
     }
 
@@ -67,7 +72,7 @@ public class Spawn_test : MonoBehaviour
             pointMR.enabled = true;
             pointMR.material = red;
             time = 10f;
-            points = 1;
+            score.addScore(1);
             
         }
         else if (x > Red && x <= Blue)
@@ -75,21 +80,23 @@ public class Spawn_test : MonoBehaviour
             pointMR.enabled = true;
             pointMR.material = blue;
             time = 7.5f;
-            points = 2;
+            score.addScore(2);
 
-        }else if (x > Blue && x <= Green)
+        }
+        else if (x > Blue && x <= Green)
         {
             pointMR.enabled = true;
             pointMR.material = green;
             time = 5f;
-            points = 3;
+            score.addScore(3);
 
-        }else if (x > Green && x <= Gold)
+        }
+        else if (x > Green && x <= Gold)
         {
             pointMR.enabled = true;
             pointMR.material = gold;
             time = 0.5f;
-            points = 15;
+            score.addScore(15);
         }
     }
 

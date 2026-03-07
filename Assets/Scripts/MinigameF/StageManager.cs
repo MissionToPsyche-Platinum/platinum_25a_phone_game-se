@@ -21,10 +21,9 @@ public class StageManager : MonoBehaviour
     private int stage = 0;
     private float stageTime = 30f;
 
-
-    public string SceneName;
+    
     [SerializeField] private Transform obj;
-    [SerializeField] private SpawnBubble bubble;
+    
     
 
 
@@ -70,7 +69,7 @@ public class StageManager : MonoBehaviour
         else if (stage == 1)
         {
             
-            StartCoroutine(scaleOverTime(7.5f, 7.5f));
+            StartCoroutine(scaleOverTime(7.5f, 1.15f));
             
             diff.setStage(1);
             speed.setSpeed(-0.5f);
@@ -80,7 +79,7 @@ public class StageManager : MonoBehaviour
         else if (stage == 2)
         {
 
-            StartCoroutine(scaleOverTime(7.5f, 10f));
+            StartCoroutine(scaleOverTime(7.5f, 1.33f));
             
             diff.setStage(2);
             speed.setSpeed(-1f);
@@ -116,7 +115,7 @@ public class StageManager : MonoBehaviour
         }
         Debug.Log("Check");
 
-        bubble.setRadius(((scale + 1) / 2) - 0.05f);
+        
         transform.localScale = endScale;        
         
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class clickpenalty : MonoBehaviour
 {
 
-    [SerializeField] public PointTracker pt;
+    [SerializeField] displayScore score;
     [SerializeField] ParticleSystem clickParticles;
     [SerializeField] AudioSource audio;
 
@@ -24,7 +24,7 @@ public class clickpenalty : MonoBehaviour
     private void OnMouseDown()
     {
         int penalty = -2;
-        pt.addPoints(penalty);
+        score.addScore(penalty);
 
         if (Time.timeScale == 1)
         {
