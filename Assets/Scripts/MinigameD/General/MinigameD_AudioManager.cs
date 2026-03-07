@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -34,12 +35,20 @@ public class MinigameD_AudioManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // play background music on levels 1-3 & game over scenes
-        if (scene.name == "MinigameD-Level1" || scene.name == "MinigameD-Level2" || scene.name == "MinigameD-Level3" 
-            || scene.name == "MinigameD-Game-Lost" || scene.name == "MinigameD-Game-Won")
+        // play background music on levels 1-3
+        if (scene.name == "MinigameD-Level1" || scene.name == "MinigameD-Level2" || scene.name == "MinigameD-Level3")
         {
             playBackground();
-        } else
+        }
+        else if (scene.name == "MinigameD-Game-Lost") 
+        {
+            StartCoroutine(fadeOut(backgroundMusic, 1));
+        } 
+        else if (scene.name == "MinigameD-Game-Won")
+        {
+            StartCoroutine(fadeOut(backgroundMusic, 3));
+        }
+        else
         {
             stopBackground();
         }
@@ -50,8 +59,31 @@ public class MinigameD_AudioManager : MonoBehaviour
         }
         if (scene.name == "MinigameD-Game-Won")
         {
-            MinigameD_AudioManager.Instance.playGameWon();
+            StartCoroutine(delayCall(3));
         }
+    }
+
+    private IEnumerator delayCall(float duration)
+    {
+        yield return new WaitForSeconds(duration); 
+        MinigameD_AudioManager.Instance.playGameWon();
+    }
+
+    private IEnumerator fadeOut(AudioSource audio, float duration)
+    {
+        float startVolume = audio.volume;
+
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            audio.volume = Mathf.Lerp(startVolume, 0f, elapsed / duration);
+            yield return null;
+        }
+
+        audio.volume = 0f;
+        audio.Stop();
+        audio.volume = startVolume;
     }
 
     public void buttonClick()
