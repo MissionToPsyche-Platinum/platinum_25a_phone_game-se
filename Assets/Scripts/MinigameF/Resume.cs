@@ -10,13 +10,20 @@ public class Resume : MonoBehaviour
     void Start()
     {
         Time.timeScale = 1;
-        space.enabled = true;
+        if(space.enabled == false)
+        {
+            space.enabled = true;
+        }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         Time.timeScale = 1;
-        space.enabled = true;
+        if (space.enabled == false)
+        {
+            space.enabled = true;
+        }
     }
 }

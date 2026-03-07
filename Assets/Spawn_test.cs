@@ -19,6 +19,7 @@ public class Spawn_test : MonoBehaviour
     private int Blue = 50;
     private int Green = 75;
     private int Gold = 100;
+    private int points = 0;
 
     private float time = 2f;
     
@@ -57,6 +58,7 @@ public class Spawn_test : MonoBehaviour
             clickParticles.transform.position = transform.position;
             clickParticles.Play();
             //audio.Play();
+            score.addScore(points);
             pointMR.enabled = false;
         }
 
@@ -64,7 +66,7 @@ public class Spawn_test : MonoBehaviour
 
     private void colorGenerator()
     {
-        int x = UnityEngine.Random.Range(0, 100);
+        int x = UnityEngine.Random.Range(0, 200);
         
 
         if (x <= Red)
@@ -72,7 +74,7 @@ public class Spawn_test : MonoBehaviour
             pointMR.enabled = true;
             pointMR.material = red;
             time = 10f;
-            score.addScore(1);
+            points = 1;
             
         }
         else if (x > Red && x <= Blue)
@@ -80,7 +82,7 @@ public class Spawn_test : MonoBehaviour
             pointMR.enabled = true;
             pointMR.material = blue;
             time = 7.5f;
-            score.addScore(2);
+            points = 2;
 
         }
         else if (x > Blue && x <= Green)
@@ -88,15 +90,18 @@ public class Spawn_test : MonoBehaviour
             pointMR.enabled = true;
             pointMR.material = green;
             time = 5f;
-            score.addScore(3);
-
+            points = 3;
         }
         else if (x > Green && x <= Gold)
         {
             pointMR.enabled = true;
             pointMR.material = gold;
             time = 0.5f;
-            score.addScore(15);
+            points = 15;
+        }
+        else
+        {
+            time = 3f;
         }
     }
 
@@ -106,6 +111,7 @@ public class Spawn_test : MonoBehaviour
         {
             pointMR.enabled = false;
             time = 3f;
+            points = 0;
         }
     }
 
