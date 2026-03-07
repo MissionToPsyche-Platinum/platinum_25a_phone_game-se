@@ -5,24 +5,44 @@ public class ProgressMeter : MonoBehaviour
 {
     public Image fillImage;
     public Transform miniRocket;
-    public Transform targetObject;
+    public Transform rocket;
     public float maxHeight = 875f;
-    public float minX = -2.326f;
-    public float maxX = 2.888f;
+
+    private float startX;
+    private float endX;
+    private Vector3 initialMiniPos; // initial position of rocket icon
+
+    void Start()
+    {
+        initialMiniPos = miniRocket.localPosition;
+
+        RectTransform fillRect = fillImage.GetComponent<RectTransform>();
+        Vector3[] corners = new Vector3[4];
+        fillRect.GetWorldCorners(corners);
+
+        Transform parentTransform = miniRocket.parent;
+        Vector3 localStart = parentTransform.InverseTransformPoint(corners[0]);
+        Vector3 localEnd = parentTransform.InverseTransformPoint(corners[2]);
+
+        startX = localStart.x + 50; // add 50 to account for grid padding
+        endX = localEnd.x + 25; // add 25 to smooth animation
+    }
 
     void Update()
     {
-        float currentHeight = targetObject.localPosition.y;
+        float currentHeight = rocket.localPosition.y;
         float clampedHeight = Mathf.Clamp(currentHeight, 0, maxHeight);
         float fillPercent = clampedHeight / maxHeight;
 
         fillImage.fillAmount = fillPercent;
 
-        float markerX = Mathf.Lerp(minX, maxX, fillPercent);
-        miniRocket.localPosition = new Vector3(
-            markerX,
-            miniRocket.localPosition.y,
-            miniRocket.localPosition.z
-        );
+        float fillRange = endX - startX;
+
+        float targetX = startX + fillRange * fillPercent;
+
+        Vector3 newLocalPos = miniRocket.localPosition;
+        newLocalPos.x = targetX;
+
+        miniRocket.localPosition = newLocalPos;
     }
 }
