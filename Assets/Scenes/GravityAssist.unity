@@ -7433,6 +7433,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1845658616}
     m_Modifications:
+    - target: {fileID: 1815018451377158207, guid: e2b8f73c1c0f17b488335a0f1d91af70, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 3310574565823550742, guid: e2b8f73c1c0f17b488335a0f1d91af70, type: 3}
       propertyPath: m_Name
       value: Trajectory
@@ -7726,7 +7730,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1539947096651949091, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
+      propertyPath: m_Emitting
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1539947096651949091, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
       propertyPath: m_PreviewTimeScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1539947096651949091, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
+      propertyPath: m_ApplyActiveColorSpace
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1986863773367050512, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
