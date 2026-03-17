@@ -10,7 +10,7 @@ public class collectPoints : MonoBehaviour
     public float pointsAdded = 1f;
     public ParticleSystem clickParticles;
     [SerializeField] public PointTracker pt;
-    [SerializeField] AudioSource audio;
+    [SerializeField] AudioSource audioSource;
 
     [SerializeField] GameObject asteroid;
     GameObject test;
@@ -54,7 +54,7 @@ public class collectPoints : MonoBehaviour
                 {
                     clickParticles.transform.position = transform.position;
                     clickParticles.Play();
-                    audio.Play();
+                    audioSource.Play();
                 }
 
 

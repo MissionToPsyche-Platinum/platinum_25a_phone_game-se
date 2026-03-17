@@ -18,7 +18,7 @@ public class SpawnBubble : MonoBehaviour
     private int spawnTimer = 250;
     private bool spawn = true;
 
-    private bool collide = false;
+    //private bool collide = false;
     
     
     bool spawned = false;
