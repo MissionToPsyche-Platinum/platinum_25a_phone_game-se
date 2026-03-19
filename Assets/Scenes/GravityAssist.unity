@@ -3232,6 +3232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 713586242}
   - component: {fileID: 713586243}
+  - component: {fileID: 713586244}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3266,7 +3267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d682a6c770acf134f9252938c3480253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupUI: {fileID: 741719198}
+  popupUI: {fileID: 713586244}
   messageText: {fileID: 1221965539}
   dragLaunch: {fileID: 1076929025}
   introOverlayPanel: {fileID: 1635890997}
@@ -3279,6 +3280,21 @@ MonoBehaviour:
   fuelWeight: 0.3
   maxOrbitError: 5
   maxLaunchPower: 10
+--- !u!114 &713586244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713586241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7013db757212f954793299bb47bf2fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupPanel: {fileID: 741719196}
+  popupTitle: {fileID: 72260416}
+  popupMessage: {fileID: 1221965539}
 --- !u!4 &732825114 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5978145600800788367, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
@@ -3300,7 +3316,6 @@ GameObject:
   - component: {fileID: 741719197}
   - component: {fileID: 741719200}
   - component: {fileID: 741719199}
-  - component: {fileID: 741719198}
   - component: {fileID: 741719201}
   m_Layer: 0
   m_Name: PopupPanel
@@ -3308,7 +3323,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &741719197
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3332,21 +3347,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -300, y: -300}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &741719198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741719196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7013db757212f954793299bb47bf2fb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  popupPanel: {fileID: 741719196}
-  popupTitle: {fileID: 72260416}
-  popupMessage: {fileID: 1221965539}
 --- !u!114 &741719199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4016,7 +4016,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 741719198}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PopupUI, Assembly-CSharp
         m_MethodName: HidePopup
         m_Mode: 1
@@ -4124,7 +4124,6 @@ MonoBehaviour:
   maxDragDistance: 4
   dragToSpeed: 2.5
   clickRadius: 1.5
-  popupPanel: {fileID: 741719196}
   educationPopupPanel: {fileID: 553344303}
   introOverlayPanel: {fileID: 1635890997}
   confirmationPanel: {fileID: 1196882190}

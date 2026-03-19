@@ -282,7 +282,6 @@ public class InputDragLaunch : MonoBehaviour
     
     // remove this in sprint 6
     [Header("Modal Blocking")]
-    [SerializeField] private GameObject popupPanel;
     [SerializeField] private GameObject educationPopupPanel;
     [SerializeField] private GameObject introOverlayPanel;
     [SerializeField] private GameObject confirmationPanel;
@@ -291,8 +290,8 @@ public class InputDragLaunch : MonoBehaviour
 
     private bool IsAnyModalActive()
     {
-        return (popupPanel != null && popupPanel.activeInHierarchy) 
-        || (educationPopupPanel != null && educationPopupPanel.activeInHierarchy) 
+        return 
+        (educationPopupPanel != null && educationPopupPanel.activeInHierarchy) 
         || (introOverlayPanel != null && introOverlayPanel.activeInHierarchy) 
         || (confirmationPanel != null && confirmationPanel.activeInHierarchy)
         || (developmentInfoPanel != null && developmentInfoPanel.activeInHierarchy);

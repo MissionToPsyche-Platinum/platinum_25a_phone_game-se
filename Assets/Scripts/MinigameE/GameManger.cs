@@ -55,6 +55,7 @@ public class GameManger : MonoBehaviour
     public void OrbitSuccess()
     {
         if (gameEnded) return;
+       
         gameEnded = true;
 
         // Force stop any ongoing drag/thrust sounds
@@ -78,6 +79,7 @@ public class GameManger : MonoBehaviour
     public void OrbitSuccess(float orbitError, float launchPower)
     {
         if (gameEnded) return;
+         Debug.Log("game manager received orbit success event");
         gameEnded = true;
 
         // Force stop any ongoing drag/thrust sounds
@@ -113,6 +115,7 @@ public class GameManger : MonoBehaviour
     public void MissedOrbit()
     {
         if (gameEnded) return;
+            Debug.Log("game manager received missed orbit event");
         gameEnded = true;
 
         // Force stop any ongoing drag/thrust sounds
