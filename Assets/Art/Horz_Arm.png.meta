@@ -152,7 +152,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Horz_Arm_0: 3625260956656175210
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

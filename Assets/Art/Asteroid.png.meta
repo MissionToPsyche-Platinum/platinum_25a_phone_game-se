@@ -152,7 +152,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Asteroid_0: -1839377291145181718
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
