@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 1539947096651949091}
   - component: {fileID: 622460513901899026}
   - component: {fileID: 8864747234314317723}
-  - component: {fileID: 8591347124287625144}
   m_Layer: 0
   m_Name: Spacecraft
   m_TagString: Untagged
@@ -272,17 +271,3 @@ MonoBehaviour:
   massPlanet: 1000
   planet: {fileID: 0}
   spacecraft: {fileID: 0}
---- !u!114 &8591347124287625144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4559439904716824478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a4d8f84fdbfa304d8a939b46c3dfd5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spacecraft: {fileID: 0}
-  launchForce: 10

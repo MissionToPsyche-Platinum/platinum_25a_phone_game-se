@@ -10,7 +10,7 @@ public class collectBlueScience : MonoBehaviour
     float releaseClick = 0f;
 
     [SerializeField] public PointTracker pt;
-    [SerializeField] AudioSource audio;
+    [SerializeField] AudioSource audioSource;
 
     public ParticleSystem clickParticles;
 
@@ -52,7 +52,7 @@ public class collectBlueScience : MonoBehaviour
             {
                 clickParticles.transform.position = transform.position;
                 clickParticles.Play();
-                audio.Play();
+                audioSource.Play();
 
             }
 
