@@ -18,6 +18,9 @@ public class GameManger : MonoBehaviour
     [SerializeField] private GameObject introOverlayPanel;
     [SerializeField] private float introDuration = 3f;
 
+    [Header("Eduational Popup")]
+    [SerializeField] private EducationalPopupController educationalPopupController;
+
     [Header ("Confirm Exit Modal")]
     [SerializeField] private GameObject confirmExitPanel;
     [SerializeField] private UnityEngine.UI.Button confirmExitYesButton;
@@ -280,6 +283,18 @@ public class GameManger : MonoBehaviour
         }
     }
 
+    // --------------------------------
+    // Educational Popup Handling
+    // --------------------------------
+    private void ShowEduationalPopup()
+    {
+        if (educationalPopupController != null)
+        {
+            educationalPopupController.ShowEducationalPopup();
+           
+        }
+    }
+
     private void Start()
     {
         // Start background space ambience
@@ -291,7 +306,8 @@ public class GameManger : MonoBehaviour
             skipIntroNextLoad = false;
             if(introOverlayPanel != null)
                 introOverlayPanel.SetActive(false);
-            EnableControl();
+            
+            ShowEduationalPopup(); // show educational popup 
             return;
         }
         // Normal entry from hub -> show intro
@@ -325,16 +341,6 @@ public class GameManger : MonoBehaviour
         HideIntro();
     }
 
-    // --------------------------------
-    // Intro overlay handling
-    // --------------------------------
-    private void EnableControl()
-    {
-        if (dragLaunch != null)
-        {
-            dragLaunch.enabled = true;
-        }
-    }
 
     private void ShowIntro() 
     {
@@ -352,13 +358,8 @@ public class GameManger : MonoBehaviour
         {
             introOverlayPanel.SetActive(false);
         }
-        StartCoroutine(EnableControlNextFrame());
+        ShowEduationalPopup(); // show educational popup after intro
+      
     }
 
-
-    private System.Collections.IEnumerator EnableControlNextFrame()
-    {
-        yield return null; // wait one frame
-        EnableControl();
-    }
 }

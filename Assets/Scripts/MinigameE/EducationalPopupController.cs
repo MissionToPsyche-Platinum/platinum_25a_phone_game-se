@@ -11,7 +11,6 @@ public class EducationalPopupController : MonoBehaviour
     [SerializeField] private InputDragLaunch dragLaunch;
 
     private string[] facts;
-    private bool hasShownPopup = false;
 
     private void Awake()
     {
@@ -31,19 +30,11 @@ public class EducationalPopupController : MonoBehaviour
         };
     }
 
-    private void Start()
-    {
-        ShowRandomFact();  
-    }
-
     // ---------------------------------------------------------
     // Show a random educational message
     // ---------------------------------------------------------
-    private void ShowRandomFact()
+    public void ShowEducationalPopup()
     {
-        if (hasShownPopup) return; // don’t show twice after reset
-
-        hasShownPopup = true;
 
         if (dragLaunch != null)
             dragLaunch.enabled = false;
