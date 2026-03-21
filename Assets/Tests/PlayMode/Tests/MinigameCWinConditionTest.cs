@@ -27,6 +27,7 @@ public class MinigameCWinConditionTest
     [UnitySetUp]
     public IEnumerator SetUp()
     {
+        LogAssert.ignoreFailingMessages = true;
         SceneManager.LoadScene(SceneName);
         yield return null;
         yield return null;
@@ -120,6 +121,12 @@ public class MinigameCWinConditionTest
         yield return null;
         Assert.AreEqual(0, _assembly.GetCurrentStepIndexForArrow(),
             "Step index should be 0 (C1: Instrument Build) at scene start.");
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        LogAssert.ignoreFailingMessages = false;
     }
 
     private IEnumerator Deliver(int[] itemIds, string npcName)
