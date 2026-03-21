@@ -14,21 +14,14 @@ public class PopupUI : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("PopupUI Awake called");
        HidePopup(); 
     }
 
     public void ShowSuccessPopup(float totalScore)
     {
-        Debug.Log("Showing success popup");
        if(popupPanel != null)
         {
             popupPanel.SetActive(true);
-            Debug.Log("Popup panel activated");
-        }
-        else    
-        {
-            Debug.LogError("Popup panel reference is missing!");
         }
         AudioManager.Instance.StopAllGameplaySounds();
         AudioManager.Instance.PlaySuccess();
@@ -47,15 +40,9 @@ public class PopupUI : MonoBehaviour
 
     public void ShowFailurePopup()
     {
-        Debug.Log("Showing failure popup");
         if (popupPanel != null)
         {
             popupPanel.SetActive(true);
-            Debug.Log("Popup panel activated for failure");
-        }
-        else   
-        {
-            Debug.LogError("Popup panel reference is missing for failure popup!");
         }
 
         AudioManager.Instance.StopAllGameplaySounds();
@@ -75,11 +62,8 @@ public class PopupUI : MonoBehaviour
     {
        // AudioManager.Instance.PlayBackground();
         if(popupPanel != null)
-            { popupPanel.SetActive(false);
-            Debug.Log("Popup panel deactivated"); }
-            else {
-        Debug.LogError("Popup panel reference is missing when trying to hide!");
-    }
+             popupPanel.SetActive(false);
+
     }
     
 }

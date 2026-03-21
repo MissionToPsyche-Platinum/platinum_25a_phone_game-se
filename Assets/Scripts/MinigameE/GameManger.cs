@@ -49,40 +49,12 @@ public class GameManger : MonoBehaviour
     [SerializeField] private float maxLaunchPower = 10f; // max drag power used for normalization  
 
     // --------------------------------
-    // Game Event Handlers
-    // --------------------------------
-
-    // --------------------------------
-    // OLD EVENt (no score)
-    // --------------------------------
-    public void OrbitSuccess()
-    {
-        if (gameEnded) return;
-       
-        gameEnded = true;
-
-        // Force stop any ongoing drag/thrust sounds
-        if(dragLaunch != null)
-        {
-            AudioManager.Instance.StopAllGameplaySounds();
-        }
-        // stop background sound if needed
-        AudioManager.Instance.StopBackground();
-        // audio
-        AudioManager.Instance.PlaySuccess();
-
-        ShowMessage("Orbit Achieved!");
-        DisableControl();
-    }
-
-    // --------------------------------
     // Main Success Event with Scoring
     // --------------------------------
 
     public void OrbitSuccess(float orbitError, float launchPower)
     {
         if (gameEnded) return;
-         Debug.Log("game manager received orbit success event");
         gameEnded = true;
 
         // Force stop any ongoing drag/thrust sounds
@@ -118,7 +90,6 @@ public class GameManger : MonoBehaviour
     public void MissedOrbit()
     {
         if (gameEnded) return;
-            Debug.Log("game manager received missed orbit event");
         gameEnded = true;
 
         // Force stop any ongoing drag/thrust sounds
