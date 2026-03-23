@@ -413,7 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a87d127cd9d1f479def5934dc7a2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: CentralHub
+  sceneName: MinigameD-Start-Menu
 --- !u!1 &209709498
 GameObject:
   m_ObjectHideFlags: 0

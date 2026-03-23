@@ -53,5 +53,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MinigameF_Start.unity
     guid: 4795f971b34282b4b9f5114599daacff
+  - enabled: 1
+    path: Assets/Scenes/MinigameD-Start-Menu.unity
+    guid: 35932b216c30ff44e93109c978bf5579
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
