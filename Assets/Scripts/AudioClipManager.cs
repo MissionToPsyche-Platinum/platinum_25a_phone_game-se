@@ -56,4 +56,9 @@ public class AudioClipManager : MonoBehaviour
         audioSource.volume = 0.2f * currentVolume;
         audioSource.PlayOneShot(congrats);
     }
+
+    public void UpdateVolume()
+    {
+        currentVolume = PlayerPrefs.GetFloat(PREF_KEY, currentVolume);
+    }
 }
