@@ -3177,14 +3177,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   popupUI: {fileID: 713586244}
   messageText: {fileID: 1221965539}
+  modalManager: {fileID: 713586245}
   dragLaunch: {fileID: 1076929025}
   introOverlayPanel: {fileID: 1635890997}
   introDuration: 3
   educationalPopupController: {fileID: 875620229}
-  confirmExitPanel: {fileID: 1196882190}
-  confirmExitYesButton: {fileID: 359882310}
-  confirmExitNoButton: {fileID: 1576770651}
-  developerInfoPanel: {fileID: 936109957}
   accuracyWeight: 0.7
   fuelWeight: 0.3
   maxOrbitError: 5
@@ -3213,13 +3210,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 713586241}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 402a58222c1d38746ae5fcf2d106f61f, type: 3}
+  m_Script: {fileID: 11500000, guid: 8cd68d1b0bf45b04cab4d0b44597fc9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panel: {fileID: 553344303}
-  titleText: {fileID: 1619967127}
-  bodyText: {fileID: 2075726038}
-  canvasGroup: {fileID: 553344308}
+  introOverlayPanel: {fileID: 1635890997}
+  educationPopupPanel: {fileID: 553344303}
+  confirmExitPanel: {fileID: 1196882190}
+  developerInfoPanel: {fileID: 936109957}
+  settingsOverlay: {fileID: 884664711}
+  eduationTitleText: {fileID: 1619967127}
+  educationBodyText: {fileID: 2075726038}
+  educationCanvasGroup: {fileID: 553344308}
 --- !u!4 &732825114 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5978145600800788367, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
@@ -3504,7 +3505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea8893037aa9ec744b75a108f30c3c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupUI: {fileID: 713586245}
+  modalManager: {fileID: 713586245}
   dragLaunch: {fileID: 1076929025}
 --- !u!1 &884664711
 GameObject:

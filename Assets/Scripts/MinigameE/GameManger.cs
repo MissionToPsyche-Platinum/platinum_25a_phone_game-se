@@ -9,6 +9,7 @@ public class GameManger : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private PopupUI popupUI;
     [SerializeField] private TMP_Text messageText;
+    [SerializeField] private ModalManager modalManager;
    
 
     [Header("Controls")]
@@ -21,15 +22,6 @@ public class GameManger : MonoBehaviour
     [Header("Eduational Popup")]
     [SerializeField] private EducationalPopupController educationalPopupController;
 
-    [Header ("Confirm Exit Modal")]
-    [SerializeField] private GameObject confirmExitPanel;
-    [SerializeField] private UnityEngine.UI.Button confirmExitYesButton;
-    [SerializeField] private UnityEngine.UI.Button confirmExitNoButton;
-
-    [Header ("Info Panel")]
-    [SerializeField] private GameObject developerInfoPanel;
-
-    //Static flag: lets us skip intro after reset reloads the scene
     private static bool skipIntroNextLoad = false;
 
     private bool gameEnded = false;
@@ -207,17 +199,17 @@ public class GameManger : MonoBehaviour
     public void ShowConfirmExit()
     {
         AudioManager.Instance.PlayButtonClick();
-        if (confirmExitPanel != null)
+        if (modalManager != null)
         {
-            confirmExitPanel.SetActive(true);
-        }
+            modalManager.ShowConfirmExit(); 
+         }
     }
 
     public void HideConfirmExit()
     {
-        if (confirmExitPanel != null)
+        if (modalManager != null)
         {
-            confirmExitPanel.SetActive(false);
+            modalManager.HideConfirmExit();
         }
     }
 
@@ -239,18 +231,18 @@ public class GameManger : MonoBehaviour
     public void ShowDeveloperInfo()
     {
         AudioManager.Instance.PlayButtonClick();
-        if (developerInfoPanel != null)
+        if (modalManager != null)
         {
-            developerInfoPanel.SetActive(true);
+            modalManager.ShowDeveloperInfo();
         }
     }
 
     public void HideDeveloperInfo()
     {
         AudioManager.Instance.PlayButtonClick();
-        if (developerInfoPanel != null)
+        if (modalManager != null)
         {
-            developerInfoPanel.SetActive(false);
+            modalManager.HideDeveloperInfo();
         }
     }
 
@@ -275,8 +267,8 @@ public class GameManger : MonoBehaviour
         if (skipIntroNextLoad)
         {
             skipIntroNextLoad = false;
-            if(introOverlayPanel != null)
-                introOverlayPanel.SetActive(false);
+            if (modalManager != null)
+                modalManager.HideIntro();
             
             ShowEduationalPopup(); // show educational popup 
             return;
@@ -315,9 +307,9 @@ public class GameManger : MonoBehaviour
 
     private void ShowIntro() 
     {
-        if (introOverlayPanel != null)
+        if (modalManager != null)
         {
-            introOverlayPanel.SetActive(true);
+            modalManager.ShowIntro();
         }
         DisableControl();
         
@@ -325,9 +317,9 @@ public class GameManger : MonoBehaviour
 
     private void HideIntro() 
     {
-        if (introOverlayPanel != null)
+        if (modalManager != null)
         {
-            introOverlayPanel.SetActive(false);
+            modalManager.HideIntro();
         }
         ShowEduationalPopup(); // show educational popup after intro
       
