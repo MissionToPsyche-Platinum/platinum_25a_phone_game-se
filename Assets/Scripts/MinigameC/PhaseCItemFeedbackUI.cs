@@ -35,7 +35,6 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
     private Text _deliverySub;
     private Coroutine _deliveryRoutine;
 
-    private const float NotifWidth = 310f;
     private const float NotifHeight = 50f;
     private const float BottomOffset = 52f;
     private const float SlideDistance = 10f;
@@ -43,9 +42,7 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
     private const float HoldDuration = 1.1f;
     private const float AnimOutDuration = 0.22f;
 
-    private const float DeliveryWidth = 480f;
     private const float DeliveryHeight = 86f;
-    private const float DeliveryTopOffset = -250f;
     private const float DeliverySlideIn = 12f;
     private const float DeliveryInDuration = 0.2f;
     private const float DeliveryHoldDuration = 2.4f;
@@ -153,16 +150,17 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
         _deliveryPanel.SetActive(true);
         RectTransform rt = _deliveryPanel.GetComponent<RectTransform>();
 
-        float fromY = DeliveryTopOffset - DeliverySlideIn;
+        float deliveryTopOffset = PhaseCUITheme.GetDeliveryTopOffset();
+        float fromY = deliveryTopOffset - DeliverySlideIn;
         for (float t = 0f; t < DeliveryInDuration; t += Time.deltaTime)
         {
             float p = t / DeliveryInDuration;
             _deliveryCG.alpha = p;
-            rt.anchoredPosition = new Vector2(0f, Mathf.Lerp(fromY, DeliveryTopOffset, p));
+            rt.anchoredPosition = new Vector2(0f, Mathf.Lerp(fromY, deliveryTopOffset, p));
             yield return null;
         }
         _deliveryCG.alpha = 1f;
-        rt.anchoredPosition = new Vector2(0f, DeliveryTopOffset);
+        rt.anchoredPosition = new Vector2(0f, deliveryTopOffset);
 
         yield return new WaitForSeconds(DeliveryHoldDuration);
 
@@ -227,7 +225,7 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
         CanvasScaler scaler = canvasGo.AddComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(PhaseCUITheme.RefWidth, PhaseCUITheme.RefHeight);
-        scaler.matchWidthOrHeight = 0.5f;
+        scaler.matchWidthOrHeight = PhaseCUITheme.CanvasMatchWidthOrHeight;
 
         canvasGo.AddComponent<GraphicRaycaster>();
 
@@ -248,7 +246,7 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
         panelRect.anchorMin = new Vector2(0.5f, 0f);
         panelRect.anchorMax = new Vector2(0.5f, 0f);
         panelRect.pivot = new Vector2(0.5f, 0f);
-        panelRect.sizeDelta = new Vector2(NotifWidth, NotifHeight);
+        panelRect.sizeDelta = new Vector2(PhaseCUITheme.GetNotifWidth(), NotifHeight);
         panelRect.anchoredPosition = new Vector2(0f, BottomOffset);
 
         // Outer border
@@ -331,8 +329,8 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
         rt.anchorMin = new Vector2(0.5f, 1f);
         rt.anchorMax = new Vector2(0.5f, 1f);
         rt.pivot = new Vector2(0.5f, 1f);
-        rt.sizeDelta = new Vector2(DeliveryWidth, DeliveryHeight);
-        rt.anchoredPosition = new Vector2(0f, DeliveryTopOffset);
+        rt.sizeDelta = new Vector2(PhaseCUITheme.GetDeliveryWidth(), DeliveryHeight);
+        rt.anchoredPosition = new Vector2(0f, PhaseCUITheme.GetDeliveryTopOffset());
 
         // Border (subtle blue, matches other panels)
         GameObject borderGo = new GameObject("Border");

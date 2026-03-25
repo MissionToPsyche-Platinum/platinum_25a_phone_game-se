@@ -70,4 +70,56 @@ public static class PhaseCUITheme
     public const float GuideCaptionSize = 16f;
     public const float StoryMomentTitleSize = 32f;
     public const float StoryMomentBodySize = 24f;
+
+    // ---- Mobile responsive helpers ----
+
+    public static bool IsMobileScreen =>
+        Application.isMobilePlatform || Screen.width < 960;
+
+    public static bool IsPortrait => Screen.height > Screen.width;
+
+    // Portrait uses match-height so UI fills narrow screens without clipping.
+    // Landscape and desktop use the balanced 0.5f blend.
+    public static float CanvasMatchWidthOrHeight =>
+        IsPortrait ? 1f : 0.5f;
+
+    // Notification toast: capped at 85% of screen width on small screens.
+    public static float GetNotifWidth() =>
+        Mathf.Min(310f, Screen.width * 0.85f);
+
+    // Delivery panel: capped at 90% of screen width.
+    public static float GetDeliveryWidth() =>
+        Mathf.Min(480f, Screen.width * 0.9f);
+
+    // Delivery top offset: 25% down from the top edge regardless of resolution.
+    public static float GetDeliveryTopOffset() =>
+        -(Screen.height * 0.25f);
+
+    // Required items panel: capped at 45% of screen width on mobile.
+    public static float GetRequiredPanelWidth() =>
+        Mathf.Min(260f, Screen.width * 0.45f);
+
+    // Inventory slot size: larger touch targets on mobile.
+    public static float GetInventorySlotSize() =>
+        IsMobileScreen ? 90f : 80f;
+
+    // Hint strip: taller on mobile for easier reading and larger fonts.
+    public static float GetHintStripHeight() =>
+        IsMobileScreen ? 72f : 56f;
+
+    // Minimized hint strip: just enough for the toggle tab.
+    public static float GetHintStripMinimizedHeight() =>
+        IsMobileScreen ? 32f : 26f;
+
+    // Font size for the bottom hint strip text.
+    public static int GetHintFontSize() =>
+        IsMobileScreen ? 22 : 18;
+
+    // Font size for required-items panel rows.
+    public static int GetRequiredItemFontSize() =>
+        IsMobileScreen ? 17 : 14;
+
+    // Required items panel: wider on mobile so text is readable.
+    public static float GetRequiredPanelWidthExpanded() =>
+        IsMobileScreen ? Mathf.Min(300f, Screen.width * 0.55f) : Mathf.Min(260f, Screen.width * 0.45f);
 }

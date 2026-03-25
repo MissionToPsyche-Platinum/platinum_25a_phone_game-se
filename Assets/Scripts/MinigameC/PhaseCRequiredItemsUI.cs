@@ -6,21 +6,28 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Always-visible panel showing items required for the current step/sub-delivery.
 /// Displays item icon, name, and collected status. Auto-updates when step changes.
+/// Has a minimize toggle in the title bar: one click collapses to title only.
 /// </summary>
 public class PhaseCRequiredItemsUI : MonoBehaviour
 {
     private const string TargetSceneName = "MinigameC";
     private const string CanvasName = "PhaseCRequiredItemsCanvas";
+    private const float TitleBarHeight = 40f;
 
     private GameObject canvasObject;
     private GameObject panelObject;
     private GameObject contentContainer;
+    private GameObject bodyRoot;
     private Text titleText;
     private Text npcText;
+    private Text toggleLabel;
+    private RectTransform panelRect;
     private ItemDictionary itemDictionary;
     private InventoryController inventoryController;
     private PhaseCAssemblyController controller;
     private bool initialized;
+    private bool isPanelMinimized = false;
+    private float lastExpandedHeight = 200f;
 
     private List<int> lastRequiredIds = new List<int>();
     private List<GameObject> itemRows = new List<GameObject>();
@@ -62,8 +69,26 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
         if (controller == null)
             controller = PhaseCAssemblyController.Instance;
 
-        // Refresh every frame to keep collected status up to date
         RefreshDisplay();
+    }
+
+    // --- Minimize / expand ---
+
+    private void ToggleMinimize()
+    {
+        isPanelMinimized = !isPanelMinimized;
+
+        if (bodyRoot != null)
+            bodyRoot.SetActive(!isPanelMinimized);
+
+        if (panelRect != null)
+        {
+            float height = isPanelMinimized ? TitleBarHeight : lastExpandedHeight;
+            panelRect.sizeDelta = new Vector2(PhaseCUITheme.GetRequiredPanelWidthExpanded(), height);
+        }
+
+        if (toggleLabel != null)
+            toggleLabel.text = isPanelMinimized ? "+" : "-";
     }
 
     private void CreateCanvas()
@@ -80,23 +105,24 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
         CanvasScaler scaler = canvasGo.AddComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(PhaseCUITheme.RefWidth, PhaseCUITheme.RefHeight);
-        scaler.matchWidthOrHeight = 0.5f;
+        scaler.matchWidthOrHeight = PhaseCUITheme.CanvasMatchWidthOrHeight;
 
         canvasGo.AddComponent<GraphicRaycaster>();
 
-        // Panel on the right side of the screen
+        // Panel anchored to the right-center of screen
         panelObject = new GameObject("RequiredItemsPanel");
         panelObject.transform.SetParent(canvasGo.transform, false);
 
         Image panelBg = panelObject.AddComponent<Image>();
-        panelBg.color = new Color(0.07f, 0.09f, 0.16f, 0.85f);
+        panelBg.color = new Color(0.07f, 0.09f, 0.16f, 0.88f);
         panelBg.raycastTarget = false;
 
-        RectTransform panelRect = panelObject.GetComponent<RectTransform>();
+        panelRect = panelObject.GetComponent<RectTransform>();
         panelRect.anchorMin = new Vector2(1f, 0.5f);
         panelRect.anchorMax = new Vector2(1f, 0.5f);
         panelRect.pivot = new Vector2(1f, 0.5f);
-        panelRect.sizeDelta = new Vector2(260f, 200f); // Will resize dynamically
+        float panelWidth = PhaseCUITheme.GetRequiredPanelWidthExpanded();
+        panelRect.sizeDelta = new Vector2(panelWidth, 200f);
         panelRect.anchoredPosition = new Vector2(-16f, 0f);
 
         // Border
@@ -112,31 +138,69 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
         borderRect.offsetMax = new Vector2(1f, 1f);
         borderGo.transform.SetAsFirstSibling();
 
-        // Title
+        Font font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        int itemFontSize = PhaseCUITheme.GetRequiredItemFontSize();
+        int titleFontSize = itemFontSize + 3;
+
+        // Title bar: title text + toggle button side by side
+        GameObject titleRowGo = new GameObject("TitleRow");
+        titleRowGo.transform.SetParent(panelObject.transform, false);
+        RectTransform titleRowRect = titleRowGo.AddComponent<RectTransform>();
+        titleRowRect.anchorMin = new Vector2(0f, 1f);
+        titleRowRect.anchorMax = new Vector2(1f, 1f);
+        titleRowRect.pivot = new Vector2(0.5f, 1f);
+        titleRowRect.sizeDelta = new Vector2(0f, TitleBarHeight);
+        titleRowRect.anchoredPosition = new Vector2(0f, -2f);
+
+        // Title text (left side of title row)
         GameObject titleGo = new GameObject("Title");
-        titleGo.transform.SetParent(panelObject.transform, false);
+        titleGo.transform.SetParent(titleRowGo.transform, false);
         titleText = titleGo.AddComponent<Text>();
         titleText.text = "REQUIRED ITEMS";
-        titleText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        titleText.fontSize = 14;
+        titleText.font = font;
+        titleText.fontSize = titleFontSize;
         titleText.fontStyle = FontStyle.Bold;
         titleText.color = PhaseCUITheme.AccentGold;
         titleText.alignment = TextAnchor.MiddleCenter;
         titleText.raycastTarget = false;
         RectTransform titleRect = titleGo.GetComponent<RectTransform>();
-        titleRect.anchorMin = new Vector2(0f, 1f);
-        titleRect.anchorMax = new Vector2(1f, 1f);
-        titleRect.pivot = new Vector2(0.5f, 1f);
-        titleRect.sizeDelta = new Vector2(0f, 26f);
-        titleRect.anchoredPosition = new Vector2(0f, -6f);
+        titleRect.anchorMin = new Vector2(0f, 0f);
+        titleRect.anchorMax = new Vector2(0.8f, 1f);
+        titleRect.offsetMin = new Vector2(6f, 0f);
+        titleRect.offsetMax = new Vector2(0f, 0f);
+
+        // Toggle button (right side of title row)
+        AddPanelToggleButton(titleRowGo.transform, font, titleFontSize);
+
+        // Thin divider under title
+        GameObject divGo = new GameObject("TitleDiv");
+        divGo.transform.SetParent(panelObject.transform, false);
+        Image divImg = divGo.AddComponent<Image>();
+        divImg.color = new Color(PhaseCUITheme.PanelBorder.r, PhaseCUITheme.PanelBorder.g, PhaseCUITheme.PanelBorder.b, 0.4f);
+        divImg.raycastTarget = false;
+        RectTransform divRect = divGo.GetComponent<RectTransform>();
+        divRect.anchorMin = new Vector2(0f, 1f);
+        divRect.anchorMax = new Vector2(1f, 1f);
+        divRect.pivot = new Vector2(0.5f, 1f);
+        divRect.sizeDelta = new Vector2(-8f, 1f);
+        divRect.anchoredPosition = new Vector2(0f, -(TitleBarHeight + 2f));
+
+        // Body root: NPC hint + item rows (hidden when minimized)
+        bodyRoot = new GameObject("Body");
+        bodyRoot.transform.SetParent(panelObject.transform, false);
+        RectTransform bodyRootRect = bodyRoot.AddComponent<RectTransform>();
+        bodyRootRect.anchorMin = new Vector2(0f, 0f);
+        bodyRootRect.anchorMax = new Vector2(1f, 1f);
+        bodyRootRect.offsetMin = Vector2.zero;
+        bodyRootRect.offsetMax = Vector2.zero;
 
         // NPC text
         GameObject npcGo = new GameObject("NpcText");
-        npcGo.transform.SetParent(panelObject.transform, false);
+        npcGo.transform.SetParent(bodyRoot.transform, false);
         npcText = npcGo.AddComponent<Text>();
         npcText.text = "";
-        npcText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        npcText.fontSize = 12;
+        npcText.font = font;
+        npcText.fontSize = itemFontSize - 1;
         npcText.color = PhaseCUITheme.TextSecondary;
         npcText.alignment = TextAnchor.MiddleCenter;
         npcText.raycastTarget = false;
@@ -144,19 +208,58 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
         npcRect.anchorMin = new Vector2(0f, 1f);
         npcRect.anchorMax = new Vector2(1f, 1f);
         npcRect.pivot = new Vector2(0.5f, 1f);
-        npcRect.sizeDelta = new Vector2(0f, 18f);
-        npcRect.anchoredPosition = new Vector2(0f, -30f);
+        npcRect.sizeDelta = new Vector2(0f, 22f);
+        npcRect.anchoredPosition = new Vector2(0f, -(TitleBarHeight + 6f));
 
         // Content container for item rows
         GameObject contentGo = new GameObject("Content");
-        contentGo.transform.SetParent(panelObject.transform, false);
+        contentGo.transform.SetParent(bodyRoot.transform, false);
         contentContainer = contentGo;
         RectTransform contentRect = contentGo.AddComponent<RectTransform>();
         contentRect.anchorMin = new Vector2(0f, 1f);
         contentRect.anchorMax = new Vector2(1f, 1f);
         contentRect.pivot = new Vector2(0.5f, 1f);
         contentRect.sizeDelta = new Vector2(0f, 0f);
-        contentRect.anchoredPosition = new Vector2(0f, -52f);
+        contentRect.anchoredPosition = new Vector2(0f, -(TitleBarHeight + 30f));
+    }
+
+    private void AddPanelToggleButton(Transform parent, Font font, int fontSize)
+    {
+        GameObject btnGo = new GameObject("ToggleBtn");
+        btnGo.transform.SetParent(parent, false);
+
+        Image btnBg = btnGo.AddComponent<Image>();
+        btnBg.color = new Color(0.2f, 0.28f, 0.42f, 0.9f);
+
+        Button btn = btnGo.AddComponent<Button>();
+        btn.targetGraphic = btnBg;
+        ColorBlock cb = btn.colors;
+        cb.highlightedColor = new Color(0.35f, 0.5f, 0.7f, 1f);
+        cb.pressedColor = new Color(0.5f, 0.65f, 0.85f, 1f);
+        btn.colors = cb;
+        btn.onClick.AddListener(ToggleMinimize);
+
+        RectTransform btnRect = btnGo.GetComponent<RectTransform>();
+        btnRect.anchorMin = new Vector2(0.8f, 0.1f);
+        btnRect.anchorMax = new Vector2(1f, 0.9f);
+        btnRect.offsetMin = new Vector2(2f, 0f);
+        btnRect.offsetMax = new Vector2(-4f, 0f);
+
+        GameObject labelGo = new GameObject("Label");
+        labelGo.transform.SetParent(btnGo.transform, false);
+        toggleLabel = labelGo.AddComponent<Text>();
+        toggleLabel.text = "-";
+        toggleLabel.font = font;
+        toggleLabel.fontSize = fontSize;
+        toggleLabel.fontStyle = FontStyle.Bold;
+        toggleLabel.color = PhaseCUITheme.AccentCyan;
+        toggleLabel.alignment = TextAnchor.MiddleCenter;
+        toggleLabel.raycastTarget = false;
+        RectTransform labelRect = labelGo.GetComponent<RectTransform>();
+        labelRect.anchorMin = Vector2.zero;
+        labelRect.anchorMax = Vector2.one;
+        labelRect.offsetMin = Vector2.zero;
+        labelRect.offsetMax = Vector2.zero;
     }
 
     private void RefreshDisplay()
@@ -170,7 +273,6 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
         List<int> requiredIds = controller.GetCurrentStepRequiredItemIds();
         PhaseCAssemblyController.StepInfo stepInfo = controller.GetCurrentStepInfo();
 
-        // Hide panel if no items to collect
         if (requiredIds == null || requiredIds.Count == 0)
         {
             panelObject.SetActive(false);
@@ -179,16 +281,11 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
 
         panelObject.SetActive(true);
 
-        // Update NPC text
         if (npcText != null && !string.IsNullOrEmpty(stepInfo.CompletionNpc))
-        {
             npcText.text = "Bring to: " + stepInfo.CompletionNpc;
-        }
 
-        // Count how many of each item the player has in inventory
         Dictionary<int, int> inventoryCounts = GetInventoryCounts();
 
-        // Build required item count map (some items appear multiple times)
         Dictionary<int, int> requiredCounts = new Dictionary<int, int>();
         foreach (int id in requiredIds)
         {
@@ -196,15 +293,13 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
             requiredCounts[id] = c + 1;
         }
 
-        // Clear old rows
         foreach (GameObject row in itemRows)
         {
             if (row != null) Destroy(row);
         }
         itemRows.Clear();
 
-        // Create item rows
-        float rowHeight = 36f;
+        float rowHeight = 40f;
         float yOffset = 0f;
         int rowIndex = 0;
 
@@ -222,14 +317,18 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
             rowIndex++;
         }
 
-        // Resize panel to fit content
-        float panelHeight = 56f + (rowIndex * rowHeight) + 10f;
-        RectTransform panelRect = panelObject.GetComponent<RectTransform>();
-        panelRect.sizeDelta = new Vector2(260f, panelHeight);
+        // Resize panel to fit content (only apply when expanded)
+        float newHeight = TitleBarHeight + 34f + (rowIndex * rowHeight) + 12f;
+        lastExpandedHeight = newHeight;
+
+        if (!isPanelMinimized && panelRect != null)
+            panelRect.sizeDelta = new Vector2(PhaseCUITheme.GetRequiredPanelWidthExpanded(), newHeight);
     }
 
     private GameObject CreateItemRow(int itemId, int needed, int have, bool collected, float yOffset)
     {
+        int itemFontSize = PhaseCUITheme.GetRequiredItemFontSize();
+
         GameObject rowGo = new GameObject($"ItemRow_{itemId}");
         rowGo.transform.SetParent(contentContainer.transform, false);
 
@@ -237,7 +336,7 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
         rowRect.anchorMin = new Vector2(0f, 1f);
         rowRect.anchorMax = new Vector2(1f, 1f);
         rowRect.pivot = new Vector2(0.5f, 1f);
-        rowRect.sizeDelta = new Vector2(0f, 34f);
+        rowRect.sizeDelta = new Vector2(0f, 38f);
         rowRect.anchoredPosition = new Vector2(0f, yOffset);
 
         // Item icon background
@@ -252,10 +351,10 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
         iconBgRect.anchorMin = new Vector2(0f, 0.5f);
         iconBgRect.anchorMax = new Vector2(0f, 0.5f);
         iconBgRect.pivot = new Vector2(0f, 0.5f);
-        iconBgRect.sizeDelta = new Vector2(30f, 30f);
+        iconBgRect.sizeDelta = new Vector2(34f, 34f);
         iconBgRect.anchoredPosition = new Vector2(10f, 0f);
 
-        // Item icon (try to get sprite from prefab)
+        // Item icon
         GameObject iconGo = new GameObject("Icon");
         iconGo.transform.SetParent(iconBgGo.transform, false);
         Image iconImg = iconGo.AddComponent<Image>();
@@ -281,7 +380,7 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
         iconRect.offsetMin = new Vector2(3f, 3f);
         iconRect.offsetMax = new Vector2(-3f, -3f);
 
-        // Item name + count
+        // Item name + count + status
         string itemName = itemDictionary.GetDisplayName(itemId);
         string countStr = needed > 1 ? $" x{needed}" : "";
         string statusStr = collected ? "  [OK]" : $"  ({have}/{needed})";
@@ -291,18 +390,20 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
         Text nameText = nameGo.AddComponent<Text>();
         nameText.text = itemName + countStr + statusStr;
         nameText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        nameText.fontSize = 13;
+        nameText.fontSize = itemFontSize;
         nameText.color = collected
             ? new Color(0.5f, 0.8f, 0.55f, 0.8f)
             : PhaseCUITheme.TextPrimary;
         nameText.fontStyle = collected ? FontStyle.Italic : FontStyle.Normal;
         nameText.alignment = TextAnchor.MiddleLeft;
         nameText.raycastTarget = false;
-        nameText.horizontalOverflow = HorizontalWrapMode.Overflow;
+        nameText.horizontalOverflow = PhaseCUITheme.IsMobileScreen
+            ? HorizontalWrapMode.Wrap
+            : HorizontalWrapMode.Overflow;
         RectTransform nameRect = nameGo.GetComponent<RectTransform>();
         nameRect.anchorMin = new Vector2(0f, 0f);
         nameRect.anchorMax = new Vector2(1f, 1f);
-        nameRect.offsetMin = new Vector2(46f, 0f);
+        nameRect.offsetMin = new Vector2(50f, 0f);
         nameRect.offsetMax = new Vector2(-8f, 0f);
 
         // Checkmark for collected items
@@ -313,7 +414,7 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
             Text checkText = checkGo.AddComponent<Text>();
             checkText.text = "v";
             checkText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            checkText.fontSize = 16;
+            checkText.fontSize = itemFontSize + 2;
             checkText.fontStyle = FontStyle.Bold;
             checkText.color = new Color(0.3f, 0.9f, 0.4f, 1f);
             checkText.alignment = TextAnchor.MiddleCenter;
@@ -342,14 +443,13 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
             if (sr != null && sr.sprite != null) return sr.sprite;
         }
 
-        // Fallback: Load sprite directly from Resources using naming convention
         string itemName = itemDictionary.GetDisplayName(itemId).ToLower().Replace(" ", "_");
         string[] possibleNames = new string[]
         {
             $"MinigameC/Items/item_{itemName}_0",
             $"MinigameC/Items/item_{itemName}"
         };
-        
+
         foreach (string spritePath in possibleNames)
         {
             Sprite loadedSprite = Resources.Load<Sprite>(spritePath);

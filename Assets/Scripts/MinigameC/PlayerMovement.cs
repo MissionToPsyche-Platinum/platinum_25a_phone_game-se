@@ -17,8 +17,18 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        float horizontal, vertical;
+
+        if (PhaseCMobileInput.Active)
+        {
+            horizontal = PhaseCMobileInput.Horizontal;
+            vertical   = PhaseCMobileInput.Vertical;
+        }
+        else
+        {
+            horizontal = Input.GetAxis("Horizontal");
+            vertical   = Input.GetAxis("Vertical");
+        }
 
         animator.SetFloat("Xinput", horizontal);
         animator.SetFloat("Yinput", vertical);

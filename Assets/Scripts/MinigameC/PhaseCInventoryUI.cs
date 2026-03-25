@@ -13,7 +13,6 @@ public class PhaseCInventoryUI : MonoBehaviour
     private const string TargetSceneName = "MinigameC";
     private const string CanvasName = "PhaseCInventoryCanvas";
     private const int SlotCount = 4;
-    private const float SlotSize = 80f;
     private const float SlotSpacing = 10f;
     private const int SlotsPerRow = 4;
 
@@ -75,7 +74,20 @@ public class PhaseCInventoryUI : MonoBehaviour
     {
         if (!initialized) return;
 
-        if (Input.GetKeyDown(KeyCode.I))
+        bool toggleInventory = Input.GetKeyDown(KeyCode.I);
+
+        if (!toggleInventory && PhaseCUITheme.IsMobileScreen && Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            if (touch.phase == TouchPhase.Began && !canvasObject.activeSelf)
+            {
+                float tapZoneHeight = Screen.height * 0.12f;
+                if (touch.position.x < Screen.width * 0.35f && touch.position.y < tapZoneHeight)
+                    toggleInventory = true;
+            }
+        }
+
+        if (toggleInventory)
         {
             bool show = !canvasObject.activeSelf;
             canvasObject.SetActive(show);
@@ -136,7 +148,7 @@ public class PhaseCInventoryUI : MonoBehaviour
         CanvasScaler scaler = canvasGo.AddComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(PhaseCUITheme.RefWidth, PhaseCUITheme.RefHeight);
-        scaler.matchWidthOrHeight = 0.5f;
+        scaler.matchWidthOrHeight = PhaseCUITheme.CanvasMatchWidthOrHeight;
 
         canvasGo.AddComponent<GraphicRaycaster>();
 
@@ -152,10 +164,11 @@ public class PhaseCInventoryUI : MonoBehaviour
         overlayRect.offsetMin = Vector2.zero;
         overlayRect.offsetMax = Vector2.zero;
 
-        // Calculate panel size based on slots
-        float gridWidth = (SlotSize * SlotsPerRow) + (SlotSpacing * (SlotsPerRow - 1));
+        // Calculate panel size based on slots (slot size is larger on mobile for touch targets)
+        float slotSize = PhaseCUITheme.GetInventorySlotSize();
+        float gridWidth = (slotSize * SlotsPerRow) + (SlotSpacing * (SlotsPerRow - 1));
         int rowCount = Mathf.CeilToInt((float)SlotCount / SlotsPerRow);
-        float gridHeight = (SlotSize * rowCount) + (SlotSpacing * (rowCount - 1));
+        float gridHeight = (slotSize * rowCount) + (SlotSpacing * (rowCount - 1));
         float panelPadding = 24f;
         float titleHeight = 40f;
         float statusHeight = 28f;
@@ -247,7 +260,9 @@ public class PhaseCInventoryUI : MonoBehaviour
         GameObject hintGo = new GameObject("Hint");
         hintGo.transform.SetParent(panelObject.transform, false);
         Text hintText = hintGo.AddComponent<Text>();
-        hintText.text = "Press I to close  |  Press 1-4 to drop item";
+        hintText.text = PhaseCUITheme.IsMobileScreen
+            ? "Tap X to close  |  Tap slot to drop"
+            : "Press I to close  |  Press 1-4 to drop item";
         hintText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         hintText.fontSize = (int)PhaseCUITheme.FontSizeBadge;
         hintText.color = PhaseCUITheme.TextSecondary;
@@ -259,6 +274,46 @@ public class PhaseCInventoryUI : MonoBehaviour
         hintRect.pivot = new Vector2(0.5f, 0f);
         hintRect.sizeDelta = new Vector2(0f, hintHeight);
         hintRect.anchoredPosition = new Vector2(0f, 6f);
+
+        if (PhaseCUITheme.IsMobileScreen)
+            AddMobileCloseButton(panelObject.transform);
+    }
+
+    private void AddMobileCloseButton(Transform parent)
+    {
+        GameObject btnGo = new GameObject("CloseButton");
+        btnGo.transform.SetParent(parent, false);
+
+        Image btnBg = btnGo.AddComponent<Image>();
+        btnBg.color = new Color(0.6f, 0.2f, 0.2f, 0.9f);
+
+        UnityEngine.UI.Button btn = btnGo.AddComponent<UnityEngine.UI.Button>();
+        btn.targetGraphic = btnBg;
+
+        RectTransform btnRect = btnGo.GetComponent<RectTransform>();
+        btnRect.anchorMin = new Vector2(1f, 1f);
+        btnRect.anchorMax = new Vector2(1f, 1f);
+        btnRect.pivot = new Vector2(1f, 1f);
+        btnRect.sizeDelta = new Vector2(PhaseCUITheme.MinTouchHeight, PhaseCUITheme.MinTouchHeight);
+        btnRect.anchoredPosition = new Vector2(0f, 0f);
+
+        GameObject labelGo = new GameObject("Label");
+        labelGo.transform.SetParent(btnGo.transform, false);
+        Text label = labelGo.AddComponent<Text>();
+        label.text = "X";
+        label.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        label.fontSize = 20;
+        label.fontStyle = FontStyle.Bold;
+        label.color = Color.white;
+        label.alignment = TextAnchor.MiddleCenter;
+        label.raycastTarget = false;
+        RectTransform labelRect = labelGo.GetComponent<RectTransform>();
+        labelRect.anchorMin = Vector2.zero;
+        labelRect.anchorMax = Vector2.one;
+        labelRect.offsetMin = Vector2.zero;
+        labelRect.offsetMax = Vector2.zero;
+
+        btn.onClick.AddListener(() => canvasObject.SetActive(false));
     }
 
     private void CreateSlot(int index, float containerWidth, float containerHeight)
@@ -275,13 +330,14 @@ public class PhaseCInventoryUI : MonoBehaviour
         int col = index % SlotsPerRow;
 
         // Position slots from top-left of the container
-        float x = col * (SlotSize + SlotSpacing);
-        float y = -(row * (SlotSize + SlotSpacing));
+        float slotSize = PhaseCUITheme.GetInventorySlotSize();
+        float x = col * (slotSize + SlotSpacing);
+        float y = -(row * (slotSize + SlotSpacing));
 
         slotRect.anchorMin = new Vector2(0f, 1f);
         slotRect.anchorMax = new Vector2(0f, 1f);
         slotRect.pivot = new Vector2(0f, 1f);
-        slotRect.sizeDelta = new Vector2(SlotSize, SlotSize);
+        slotRect.sizeDelta = new Vector2(slotSize, slotSize);
         slotRect.anchoredPosition = new Vector2(x, y);
 
         // Inner border highlight
