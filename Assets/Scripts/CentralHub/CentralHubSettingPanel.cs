@@ -15,6 +15,7 @@ public class CentralHubSettingPanel : MonoBehaviour
     [SerializeField] private TMP_Text volumePercentText;
     [SerializeField] private Toggle tutorialToggle;
     [SerializeField] private Toggle fontToggle;
+    [SerializeField] private Toggle popupsToggle;
 
     [Header("Audio Manager")]
     [SerializeField] private CentralHubAudioManager audioManager;
@@ -24,10 +25,12 @@ public class CentralHubSettingPanel : MonoBehaviour
     [SerializeField] private float defaultVolume = 0.2f;
     [SerializeField] private bool defaultTutorial = true; 
     [SerializeField] private bool defaultFont = false;
+    [SerializeField] private bool defaultPopups = true;
 
     private const string PREF_KEY= "MasterVolume";
     private const string PREF_TUT_KEY= "TutorialsOn";
     private const string PREF_FONT_KEY= "AccessibleFont";
+    private const string PREF_POP_UP_KEY = "Pop-ups";
     private bool isOpen = false;
     private void Awake()
     {
@@ -47,15 +50,20 @@ public class CentralHubSettingPanel : MonoBehaviour
             volumeSlider.value = saved;
             volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
         }
-        bool savedTutorial = PlayerPrefs.GetInt(PREF_TUT_KEY, defaultTutorial ? 1 : 0) == 1;
+        defaultTutorial = PlayerPrefs.GetInt(PREF_TUT_KEY, defaultTutorial ? 1 : 0) == 1;
         if (tutorialToggle != null)
         {
-            tutorialToggle.isOn = savedTutorial;
+            tutorialToggle.isOn = defaultTutorial;
         }
-        bool savedFont = PlayerPrefs.GetInt(PREF_FONT_KEY, defaultFont ? 1 : 0) == 1;
+        defaultFont = PlayerPrefs.GetInt(PREF_FONT_KEY, defaultFont ? 1 : 0) == 1;
         if (fontToggle != null)
         {
-            fontToggle.isOn = savedFont;
+            fontToggle.isOn = defaultFont;
+        }
+        defaultPopups = PlayerPrefs.GetInt(PREF_POP_UP_KEY, defaultPopups ? 1 : 0) == 1;
+        if (popupsToggle != null)
+        {
+            popupsToggle.isOn = defaultPopups;
         }
 
         ApplyVolume(saved);
@@ -70,8 +78,6 @@ public class CentralHubSettingPanel : MonoBehaviour
         if (settingsButton != null)
             settingsButton.onClick.RemoveListener(Toggle);
     }
-
-
 
     public void Toggle()
     {
@@ -93,6 +99,13 @@ public class CentralHubSettingPanel : MonoBehaviour
     {
         defaultFont = !defaultFont;
         PlayerPrefs.SetInt(PREF_FONT_KEY, defaultFont ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    public void togglePopups()
+    {
+        defaultPopups = !defaultPopups;
+        PlayerPrefs.SetInt(PREF_POP_UP_KEY, defaultPopups ? 1 : 0);
         PlayerPrefs.Save();
     }
 
