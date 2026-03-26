@@ -12,9 +12,15 @@ public class StageManager : MonoBehaviour
     [SerializeField] pause asteroid;
     [SerializeField] GameObject endGame;
     [SerializeField] GameObject menu;
+    
+    [SerializeField] orbitPschye speed;
 
-    [SerializeField] spinDiff diff;
-    [SerializeField] orbitPschye speed;    
+    //first stage horizontal 2nd stage obstacle 1 both 
+    [SerializeField] moveVert obstacle1;
+    [SerializeField] moveVert obstacle2;
+    //first stage vertical 2nd stage obsacle 3 both
+    [SerializeField] moveHorz obstacle3;
+    [SerializeField] moveHorz obstacle4;
 
     public int difficulty = 0;
     
@@ -71,10 +77,11 @@ public class StageManager : MonoBehaviour
         else if (stage == 1)
         {
             
-            StartCoroutine(scaleOverTime(7.5f, 1.25f));
+            StartCoroutine(scaleOverTime(7.5f, 1.25f));           
             
-            diff.setStage(1);
             speed.setSpeed(-0.75f);
+            obstacle1.enabled = true;
+            obstacle3.enabled = true;
             
 
         }
@@ -83,8 +90,10 @@ public class StageManager : MonoBehaviour
 
             StartCoroutine(scaleOverTime(7.5f, 1.40f));
             
-            diff.setStage(2);
+            
             speed.setSpeed(-1f);
+            obstacle2.enabled = true;
+            obstacle4.enabled = true;
             
 
 
