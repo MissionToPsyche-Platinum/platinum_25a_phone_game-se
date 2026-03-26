@@ -12,13 +12,15 @@ public class Spawn_test : MonoBehaviour
     [SerializeField] Material blue;
     [SerializeField] Material green;
     [SerializeField] Material gold;
+    [SerializeField] Material purple;
 
     [SerializeField] displayScore score;
 
-    private int Red = 25;
-    private int Blue = 50;
-    private int Green = 75;
-    private int Gold = 100;
+    private int Purple = 50;
+    private int Blue = 85;
+    private int Green = 100;
+    private int Gold = 110;
+    private int Red = 135;
     private int points = 0;
 
     private float time = 2f;
@@ -66,14 +68,14 @@ public class Spawn_test : MonoBehaviour
 
     private void colorGenerator()
     {
-        int x = UnityEngine.Random.Range(0, 200);
+        int x = UnityEngine.Random.Range(0, 250);
         
 
-        if (x <= Red)
+        if (x <= Purple)
         {
             pointMR.enabled = true;
-            pointMR.material = red;
-            time = 10f;
+            pointMR.material = purple;
+            time = 5f;
             points = 1;
             
         }
@@ -81,7 +83,7 @@ public class Spawn_test : MonoBehaviour
         {
             pointMR.enabled = true;
             pointMR.material = blue;
-            time = 7.5f;
+            time = 3.5f;
             points = 2;
 
         }
@@ -89,15 +91,22 @@ public class Spawn_test : MonoBehaviour
         {
             pointMR.enabled = true;
             pointMR.material = green;
-            time = 5f;
+            time = 2.5f;
             points = 3;
         }
         else if (x > Green && x <= Gold)
         {
             pointMR.enabled = true;
             pointMR.material = gold;
-            time = 0.5f;
+            time = 1f;
             points = 15;
+        }
+        else if(x > Gold && x <= Red)
+        {
+            pointMR.enabled = true;
+            pointMR.material = red;
+            time = 2f;
+            points = -3;
         }
         else
         {
