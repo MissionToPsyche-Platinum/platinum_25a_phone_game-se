@@ -149,6 +149,7 @@ public class npc : MonoBehaviour, IInteractable
         portraitImage.sprite = dialogueData.npcPortrait;
         ApplyDialoguePanelStyle();
         dialoguePanel.SetActive(true);
+        PhaseCAnimationManager.TriggerDialogueStart();
         // Don't pause the game so player can move and dialogue auto-closes when they walk away
         // PauseController.SetPause(true);
         activeDialogueLines = ResolveDialogueLines();
@@ -216,6 +217,7 @@ public class npc : MonoBehaviour, IInteractable
         StopAllCoroutines();
         isTyping = false;
         dialogueText.SetText("");
+        PhaseCAnimationManager.TriggerDialogueEnd();
         dialoguePanel.SetActive(false);
         lastDialogueEndTime = Time.time;
 

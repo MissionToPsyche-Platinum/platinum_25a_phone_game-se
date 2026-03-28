@@ -64,6 +64,7 @@ public class PlayerItemCollector : MonoBehaviour
                     Debug.Log($"PlayerItemCollector: Item {item.ID} successfully added to inventory!");
                     Color itemColor = itemDictionary.GetItemColor(item.ID);
                     PhaseCItemFeedbackUI.ShowPickup(item.displayName, itemColor);
+                    PhaseCAnimationManager.TriggerItemPickup(transform.position, itemColor);
                     Destroy(collision.gameObject);
                 }
                 else

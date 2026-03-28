@@ -34,6 +34,8 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
     private Text _deliveryTitle;
     private Text _deliverySub;
     private Coroutine _deliveryRoutine;
+    private List<GameObject> _deliverySparkles = new List<GameObject>();
+    private Coroutine _sparkleRoutine;
 
     private const float NotifHeight = 50f;
     private const float BottomOffset = 52f;
@@ -149,20 +151,38 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
 
         _deliveryPanel.SetActive(true);
         RectTransform rt = _deliveryPanel.GetComponent<RectTransform>();
+        rt.localScale = Vector3.one;
 
         float deliveryTopOffset = PhaseCUITheme.GetDeliveryTopOffset();
-        float fromY = deliveryTopOffset - DeliverySlideIn;
-        for (float t = 0f; t < DeliveryInDuration; t += Time.deltaTime)
+        // Start fully off-screen above the top edge
+        float fromY = 0f;
+        const float InDuration = 0.3f;
+
+        for (float t = 0f; t < InDuration; t += Time.deltaTime)
         {
-            float p = t / DeliveryInDuration;
-            _deliveryCG.alpha = p;
-            rt.anchoredPosition = new Vector2(0f, Mathf.Lerp(fromY, deliveryTopOffset, p));
+            float p = t / InDuration;
+            float eased = EaseOutCubic(p);
+            // Scale bounce: 0.85 -> 1.08 in first 60%, then 1.08 -> 1.0 in last 40%
+            float scale = p < 0.6f
+                ? Mathf.Lerp(0.85f, 1.08f, p / 0.6f)
+                : Mathf.Lerp(1.08f, 1.0f, (p - 0.6f) / 0.4f);
+            _deliveryCG.alpha = Mathf.Min(1f, p / 0.4f);
+            rt.anchoredPosition = new Vector2(0f, Mathf.Lerp(fromY, deliveryTopOffset, eased));
+            rt.localScale = new Vector3(scale, scale, 1f);
             yield return null;
         }
         _deliveryCG.alpha = 1f;
         rt.anchoredPosition = new Vector2(0f, deliveryTopOffset);
+        rt.localScale = Vector3.one;
+
+        // Launch sparkles after panel lands
+        if (_sparkleRoutine != null) StopCoroutine(_sparkleRoutine);
+        _sparkleRoutine = StartCoroutine(AnimateDeliverySparkles(rt));
 
         yield return new WaitForSeconds(DeliveryHoldDuration);
+
+        // Kill sparkles before fading out
+        StopAndClearSparkles();
 
         for (float t = 0f; t < DeliveryOutDuration; t += Time.deltaTime)
         {
@@ -170,9 +190,94 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
             yield return null;
         }
         _deliveryCG.alpha = 0f;
+        rt.localScale = Vector3.one;
         _deliveryPanel.SetActive(false);
         _deliveryRoutine = null;
     }
+
+    private IEnumerator AnimateDeliverySparkles(RectTransform panelRect)
+    {
+        const int Count = 6;
+        float panelW = panelRect.sizeDelta.x;
+        float panelH = panelRect.sizeDelta.y;
+
+        // Reuse or create sparkle GameObjects
+        while (_deliverySparkles.Count < Count)
+        {
+            GameObject s = new GameObject("DeliverySparkle");
+            s.transform.SetParent(_deliveryPanel.transform, false);
+            Image img = s.AddComponent<Image>();
+            img.sprite = MakeDiscSprite();
+            img.raycastTarget = false;
+            RectTransform srt = s.GetComponent<RectTransform>();
+            srt.sizeDelta = new Vector2(8f, 8f);
+            srt.pivot = new Vector2(0.5f, 0.5f);
+            _deliverySparkles.Add(s);
+        }
+
+        Color[] sparkleColors = { PhaseCUITheme.AccentGold, PhaseCUITheme.AccentCyan, Color.white };
+        float[] lifetimes = new float[Count];
+        float[] velX = new float[Count];
+        float[] velY = new float[Count];
+        Vector2[] startPos = new Vector2[Count];
+
+        for (int i = 0; i < Count; i++)
+        {
+            float spawnX = Random.Range(-panelW * 0.4f, panelW * 0.4f);
+            float spawnY = Random.Range(-panelH * 0.3f, panelH * 0.3f);
+            startPos[i] = new Vector2(spawnX, spawnY);
+            lifetimes[i] = Random.Range(1.2f, 2.0f);
+            velX[i] = Random.Range(-30f, 30f);
+            velY[i] = Random.Range(40f, 90f);
+
+            RectTransform srt = _deliverySparkles[i].GetComponent<RectTransform>();
+            srt.anchorMin = new Vector2(0.5f, 0.5f);
+            srt.anchorMax = new Vector2(0.5f, 0.5f);
+            srt.anchoredPosition = startPos[i];
+
+            Image img = _deliverySparkles[i].GetComponent<Image>();
+            img.color = sparkleColors[i % sparkleColors.Length];
+            _deliverySparkles[i].SetActive(true);
+        }
+
+        float[] elapsed = new float[Count];
+        bool anyAlive = true;
+        while (anyAlive)
+        {
+            anyAlive = false;
+            for (int i = 0; i < Count; i++)
+            {
+                if (elapsed[i] >= lifetimes[i]) continue;
+                elapsed[i] += Time.deltaTime;
+                float p = elapsed[i] / lifetimes[i];
+                RectTransform srt = _deliverySparkles[i].GetComponent<RectTransform>();
+                srt.anchoredPosition = new Vector2(
+                    startPos[i].x + velX[i] * elapsed[i],
+                    startPos[i].y + velY[i] * elapsed[i]);
+                Image img = _deliverySparkles[i].GetComponent<Image>();
+                Color c = img.color;
+                img.color = new Color(c.r, c.g, c.b, 1f - p);
+                if (elapsed[i] < lifetimes[i]) anyAlive = true;
+            }
+            yield return null;
+        }
+
+        foreach (var s in _deliverySparkles) if (s != null) s.SetActive(false);
+        _sparkleRoutine = null;
+    }
+
+    private void StopAndClearSparkles()
+    {
+        if (_sparkleRoutine != null)
+        {
+            StopCoroutine(_sparkleRoutine);
+            _sparkleRoutine = null;
+        }
+        foreach (var s in _deliverySparkles)
+            if (s != null) s.SetActive(false);
+    }
+
+    private static float EaseOutCubic(float p) => 1f - (1f - p) * (1f - p) * (1f - p);
 
     private IEnumerator Animate(NotifData data)
     {
