@@ -298,8 +298,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This stage reflects part of the Psyche mission journey and helps the player
-    understand how that phase contributes to reaching and studying the asteroid.
+  m_text: Minigame Relation to Psyche Mission
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -433,8 +432,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This minigame gives the player a short introduction to the selected phase
-    and explains what the challenge represents.
+  m_text: Minigame Description
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1257,7 +1255,7 @@ PrefabInstance:
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 25287897}
+      objectReference: {fileID: 1123091241}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -1272,7 +1270,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SwitchToSceneMinigameB
+      value: OpenDesignModal
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -1280,7 +1278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MenuSceneSchange, Assembly-CSharp
+      value: MinigameDescriptionModalController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -1632,7 +1630,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &517450832
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1724,6 +1722,7 @@ Transform:
   - {fileID: 1055675260}
   - {fileID: 1362895620}
   - {fileID: 1629675985}
+  - {fileID: 1123091240}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &522942422
@@ -2311,7 +2310,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -250}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 400, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &799976109
 MonoBehaviour:
@@ -2926,7 +2925,7 @@ PrefabInstance:
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 25287897}
+      objectReference: {fileID: 1123091241}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -2941,7 +2940,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SwitchToSceneMinigameD
+      value: OpenLaunchModal
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -2949,7 +2948,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MenuSceneSchange, Assembly-CSharp
+      value: MinigameDescriptionModalController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -3140,6 +3139,54 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &1123091239
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1123091240}
+  - component: {fileID: 1123091241}
+  m_Layer: 0
+  m_Name: MinigameDescriptionModalController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1123091240
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123091239}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 521507042}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1123091241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123091239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5df5c1545e3d82a43a3d0308d1d8da5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minigameDescriptionOverlay: {fileID: 517450831}
+  titleText: {fileID: 1559329186}
+  descriptionText: {fileID: 105930805}
+  relationText: {fileID: 84349810}
 --- !u!1 &1153198292
 GameObject:
   m_ObjectHideFlags: 0
@@ -3463,7 +3510,7 @@ PrefabInstance:
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 25287897}
+      objectReference: {fileID: 1123091241}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -3478,7 +3525,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SwitchToSceneMinigameE
+      value: OpenGravityModal
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -3486,7 +3533,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MenuSceneSchange, Assembly-CSharp
+      value: MinigameDescriptionModalController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -3712,9 +3759,9 @@ RectTransform:
   - {fileID: 621644604}
   m_Father: {fileID: 799976108}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 330, y: -140}
   m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1405040531
@@ -3950,7 +3997,7 @@ PrefabInstance:
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 25287897}
+      objectReference: {fileID: 1123091241}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -3965,7 +4012,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SwitchToSceneMinigameF_Start
+      value: OpenOrbitModal
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -3973,7 +4020,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MenuSceneSchange, Assembly-CSharp
+      value: MinigameDescriptionModalController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -4544,7 +4591,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -50}
-  m_SizeDelta: {x: 400, y: 100}
+  m_SizeDelta: {x: 800, y: 100}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1559329186
 MonoBehaviour:
@@ -4566,7 +4613,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Gravity Assist
+  m_text: Game Name
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5133,9 +5180,9 @@ RectTransform:
   - {fileID: 1516523901}
   m_Father: {fileID: 799976108}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 70, y: -140}
   m_SizeDelta: {x: 140, y: 140}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1714663687
@@ -5759,7 +5806,7 @@ PrefabInstance:
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 25287897}
+      objectReference: {fileID: 1123091241}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -5774,7 +5821,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SwitchToSceneMinigameC
+      value: OpenBuildModal
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -5782,7 +5829,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MenuSceneSchange, Assembly-CSharp
+      value: MinigameDescriptionModalController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
@@ -6849,7 +6896,7 @@ PrefabInstance:
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 25287897}
+      objectReference: {fileID: 1123091241}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -6864,7 +6911,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: SwitchToSceneMinigameA
+      value: OpenPlanModal
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -6872,7 +6919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: MenuSceneSchange, Assembly-CSharp
+      value: MinigameDescriptionModalController, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4885629246018871466, guid: 0a4343e981cb0d44fa721f5624d2bbf0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
