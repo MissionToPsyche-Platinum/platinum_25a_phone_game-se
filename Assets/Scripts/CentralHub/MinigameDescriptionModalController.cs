@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class MinigameDescriptionModalController : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class MinigameDescriptionModalController : MonoBehaviour
     [SerializeField] private TMP_Text titleText;
     [SerializeField] private TMP_Text descriptionText;
     [SerializeField] private TMP_Text relationText;
+
+    [Header("Scene Switching")]
+    [SerializeField] private MenuSceneSchange menuSceneSchange;
 
     private string selectedSceneName;
 
@@ -60,7 +64,7 @@ public class MinigameDescriptionModalController : MonoBehaviour
             "Design",
             "Desciption coming soon.",
             "Pysche mission connection coming soon.",
-            "MinigameBMetalWeights"
+            "MinigameB"
         );
     }
 
@@ -106,6 +110,41 @@ public class MinigameDescriptionModalController : MonoBehaviour
             "Pysche mission connection coming soon.",
             "MinigameF"
         );
+    }
+
+    public void PlaySelectedMinigame()
+    {
+       if (string.IsNullOrEmpty(selectedSceneName))
+        {
+            Debug.LogWarning("No minigame selected. Please select a minigame before trying to play.");
+            return;
+        }
+
+        // Special case for MinigameB
+        if(selectedSceneName == "MinigameB")
+        {
+            if(menuSceneSchange != null)
+            {
+            menuSceneSchange.SwitchToSceneMinigameB();
+            }
+            else
+            {
+                Debug.LogError("MenuSceneSchange reference is missing. Cannot switch to Minigame B.");
+            }
+            return;
+        }
+            // For other minigames, load the selected scene directly
+            SceneManager.LoadScene(selectedSceneName);
+        
+    }
+
+    public void CloseModal()
+    {
+        if (minigameDescriptionOverlay != null)
+        {
+            minigameDescriptionOverlay.SetActive(false);
+        }
+        selectedSceneName = null;
     }
 
     public string GetSelectedSceneName()

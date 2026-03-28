@@ -3187,6 +3187,7 @@ MonoBehaviour:
   titleText: {fileID: 1559329186}
   descriptionText: {fileID: 105930805}
   relationText: {fileID: 84349810}
+  menuSceneSchange: {fileID: 25287897}
 --- !u!1 &1153198292
 GameObject:
   m_ObjectHideFlags: 0
@@ -3807,7 +3808,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1405040532}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 164605540}
+        m_TargetAssemblyTypeName: CentralHubAudioManager, Assembly-CSharp
+        m_MethodName: PlayClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1123091241}
+        m_TargetAssemblyTypeName: MinigameDescriptionModalController, Assembly-CSharp
+        m_MethodName: CloseModal
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1405040532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5228,7 +5253,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1714663688}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 164605540}
+        m_TargetAssemblyTypeName: CentralHubAudioManager, Assembly-CSharp
+        m_MethodName: PlayClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1123091241}
+        m_TargetAssemblyTypeName: MinigameDescriptionModalController, Assembly-CSharp
+        m_MethodName: PlaySelectedMinigame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1714663688
 MonoBehaviour:
   m_ObjectHideFlags: 0
