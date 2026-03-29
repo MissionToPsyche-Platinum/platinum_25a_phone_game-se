@@ -267,8 +267,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Data obtained via Earth-based radar and optical telescopes...\n\n...suggest
-    that Psyche is comprised of rock and metal, with the latter comprising between
-    30-60% of its volume.\r"
+    that Psyche consists of rock and metal, with the latter comprising between 30-60%
+    of its volume.\r"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: dab4b3b2860315e42b995d3d9fbb0b8b, type: 2}
   m_sharedMaterial: {fileID: -8986810068392043786, guid: dab4b3b2860315e42b995d3d9fbb0b8b, type: 2}
