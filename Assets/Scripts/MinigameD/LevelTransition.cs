@@ -3,7 +3,8 @@ using UnityEngine;
 public class LevelTransition : MonoBehaviour
 {
     public float targetHeight = 875f; 
-    public string sceneToLoad; 
+    public string sceneToLoad;
+    public int key = 1;
     private bool hasTransitioned = false;
 
     public SceneTransitionManager transitionManager;
@@ -14,6 +15,8 @@ public class LevelTransition : MonoBehaviour
         {
             hasTransitioned = true;
             transitionManager.LoadScene(sceneToLoad);
+            PlayerPrefs.SetInt("MinigameD-TargetPage", key);
+            PlayerPrefs.Save();
         }
     }
 }

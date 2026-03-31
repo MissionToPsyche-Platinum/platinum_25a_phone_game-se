@@ -2261,7 +2261,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetHeight: 1550
-  sceneToLoad: MinigameD-Game-Won
+  sceneToLoad: MinigameD-Writing
+  key: 3
   transitionManager: {fileID: 1628373}
 --- !u!1001 &1487156645526582663
 PrefabInstance:
@@ -2750,7 +2751,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 506656060}
-  - {fileID: 2119888224}
   - {fileID: 5778903880883169197}
   - {fileID: 1487156645526582663}
   - {fileID: 4915594352105675311}
@@ -2758,6 +2758,7 @@ SceneRoots:
   - {fileID: 982676543}
   - {fileID: 4888463637257095334}
   - {fileID: 276450670}
+  - {fileID: 2119888224}
   - {fileID: 1887739960}
   - {fileID: 1628374}
   - {fileID: 1038711593}
