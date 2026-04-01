@@ -51,8 +51,8 @@ public class MinigameDescriptionModalController : MonoBehaviour
         Debug.Log("Opening Plan Modal");
         ShowModal(
             "Plan",
-            "Desciption coming soon.",
-            "Pysche mission connection coming soon.",
+            "Solve a zebra-style logic puzzle based on space-related clues to determine correct associations and relationships.",
+            "This minigame introduces players to the Psyche mission by building foundational knowledge about the asteroid and its characteristics, helping them understand why the mission is important.",
             "MinigameA"
         );
     }
@@ -62,8 +62,8 @@ public class MinigameDescriptionModalController : MonoBehaviour
         Debug.Log("Opening Design Modal");
         ShowModal(
             "Design",
-            "Desciption coming soon.",
-            "Pysche mission connection coming soon.",
+            "Complete a series of randomized math and logic-based puzzles that simulate problem-solving and decision-making challenges.",
+            "This phase reflects the design process of a space mission, where engineers analyze constraints and make critical decisions to ensure a successful spacecraft design.",
             "MinigameB"
         );
     }
@@ -73,8 +73,8 @@ public class MinigameDescriptionModalController : MonoBehaviour
         Debug.Log("Opening Build Modal");
         ShowModal(
             "Build",
-            "Desciption coming soon.",
-            "Pysche mission connection coming soon.",
+            "Collect and deliver components to the correct teams to assemble the Psyche spacecraft piece by piece, including, communication systems, and structural elements.",
+            "This minigame represents the build phase of the Psyche mission, where all spacecraft components are constructed and integrated before launch.",
             "MinigameC"
         );
     }
@@ -106,8 +106,8 @@ public class MinigameDescriptionModalController : MonoBehaviour
         Debug.Log("Opening Orbit Modal");
         ShowModal(
             "Orbit",
-            "Desciption coming soon.",
-            "Pysche mission connection coming soon.",
+            "Navigate through orbital paths around the Psyche asteroid, collecting scientific data while avoiding obstacles and harzards.",
+            "This phase represents the final stage of the Psyche mission, where the spacecraft orbits the asteroid to gather data about its surface, composition, gravity, and structure.",
             "MinigameF"
         );
     }
