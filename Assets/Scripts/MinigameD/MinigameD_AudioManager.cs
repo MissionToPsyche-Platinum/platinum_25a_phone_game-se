@@ -19,13 +19,30 @@ public class MinigameD_AudioManager : MonoBehaviour
 
     [SerializeField] private AudioSource backgroundMusic;
 
+    private float currentVolume = 0.2f;
+    private const string PREF_KEY = "MasterVolume";
+
+    private void Update()
+    {
+        currentVolume = PlayerPrefs.GetFloat(PREF_KEY, currentVolume);
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
@@ -86,37 +103,53 @@ public class MinigameD_AudioManager : MonoBehaviour
         audio.volume = startVolume;
     }
 
+    public static void playButtonSound()
+    {
+        if (Instance != null)
+        {
+            Instance.buttonClick();
+        }
+    }
+
     public void buttonClick()
     {
+        buttonSound.volume = 1f * currentVolume;
         if (buttonSound != null) buttonSound.Play();
     }
 
     public void playBoostRing()
     {
+        boostRingSound.volume = 1f * currentVolume;
         if (boostRingSound != null) boostRingSound.PlayOneShot(boostRingSound.clip);
     }
     public void playPenaltyRing()
     {
+        penaltyRingSound.volume = 1f * currentVolume;
         if (penaltyRingSound != null) penaltyRingSound.PlayOneShot(penaltyRingSound.clip);
     }
     public void playJumpRing()
     {
+        jumpRingSound.volume = 1f * currentVolume;
         if (jumpRingSound != null) jumpRingSound.PlayOneShot(jumpRingSound.clip);
     }
     public void playShieldRing()
     {
+        shieldRingSound.volume = 1f * currentVolume;
         if (shieldRingSound != null) shieldRingSound.PlayOneShot(shieldRingSound.clip);
     }
     public void playGameWon()
     {
+        gameWonSound.volume = 1f * currentVolume;
         if (gameWonSound != null && !gameWonSound.isPlaying) gameWonSound.PlayOneShot(gameWonSound.clip);
     }
     public void playGameLost()
     {
+        gameLostSound.volume = 1f * currentVolume;
         if (gameLostSound != null && !gameLostSound.isPlaying) gameLostSound.PlayOneShot(gameLostSound.clip);
     }
     public void playBackground()
     {
+        backgroundMusic.volume = 1f * currentVolume;
         if (backgroundMusic != null && !backgroundMusic.isPlaying) backgroundMusic.Play();
     }
 
