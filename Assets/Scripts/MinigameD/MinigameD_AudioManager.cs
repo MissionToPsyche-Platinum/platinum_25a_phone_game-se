@@ -52,8 +52,9 @@ public class MinigameD_AudioManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // play background music on levels 1-3
-        if (scene.name == "MinigameD-Level1" || scene.name == "MinigameD-Level2" || scene.name == "MinigameD-Level3")
+        // play background music on levels 1-3 & educational content
+        if (scene.name == "MinigameD-Level1" || scene.name == "MinigameD-Level2" || scene.name == "MinigameD-Level3" 
+            || scene.name == "MinigameD-Writing")
         {
             playBackground();
         }
