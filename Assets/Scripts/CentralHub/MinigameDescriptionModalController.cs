@@ -73,7 +73,7 @@ public class MinigameDescriptionModalController : MonoBehaviour
         Debug.Log("Opening Build Modal");
         ShowModal(
             "Build",
-            "Collect and deliver components to the correct teams to assemble the Psyche spacecraft piece by piece, including, communication systems, and structural elements.",
+            "Collect and deliver components to the correct teams to assemble the Psyche spacecraft piece by piece, including communication systems and structural elements.",
             "This minigame represents the build phase of the Psyche mission, where all spacecraft components are constructed and integrated before launch.",
             "MinigameC"
         );
@@ -84,7 +84,7 @@ public class MinigameDescriptionModalController : MonoBehaviour
         Debug.Log("Opening Launch Modal");
         ShowModal(
             "Launch",
-            "Guide the Pscyhe spacecraft through a three-level launch sequence.Navigate through target rings while avoiding obstcales to maintain speed and successfully reach the final ejection point.",
+            "Guide the Pscyhe spacecraft through a three-level launch sequence. Navigate through target rings while avoiding obstcales to maintain speed and successfully reach the final ejection point.",
             "This minigame represents the Launch phase of the Psyche mission, where a SpaceX Falcon heavy rocket carried the spacecraft beyond Earth's gravity and placed it on its journey towar the Psyche asteroid.",
             "MinigameD-Tutorial"
         );
