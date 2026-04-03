@@ -84,8 +84,8 @@ public class MinigameDescriptionModalController : MonoBehaviour
         Debug.Log("Opening Launch Modal");
         ShowModal(
             "Launch",
-            "Guide the Pscyhe spacecraft through a three-level launch sequence. Navigate through target rings while avoiding obstcales to maintain speed and successfully reach the final ejection point.",
-            "This minigame represents the Launch phase of the Psyche mission, where a SpaceX Falcon heavy rocket carried the spacecraft beyond Earth's gravity and placed it on its journey towar the Psyche asteroid.",
+            "Guide the Psyche spacecraft through a three-level launch sequence. Navigate through target rings while avoiding obstacles to maintain speed and successfully reach the final ejection point.",
+            "This minigame represents the Launch phase of the Psyche mission, where a SpaceX Falcon Heavy rocket carried the spacecraft beyond Earth's gravity and placed it on its journey toward the Psyche asteroid.",
             "MinigameD-Tutorial"
         );
     }
@@ -106,7 +106,7 @@ public class MinigameDescriptionModalController : MonoBehaviour
         Debug.Log("Opening Orbit Modal");
         ShowModal(
             "Orbit",
-            "Navigate through orbital paths around the Psyche asteroid, collecting scientific data while avoiding obstacles and harzards.",
+            "Navigate through orbital paths around the Psyche asteroid, collecting scientific data while avoiding obstacles and hazards.",
             "This phase represents the final stage of the Psyche mission, where the spacecraft orbits the asteroid to gather data about its surface, composition, gravity, and structure.",
             "MinigameF"
         );
