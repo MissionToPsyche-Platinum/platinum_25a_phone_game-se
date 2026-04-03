@@ -42,7 +42,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: cf227a348f51cf6409094d28d5830fb2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ClearCoatMap:
@@ -261,7 +261,7 @@ Material:
     - _Metallic2: 0
     - _Metallic3: 0
     - _Mode: 0
-    - _NormalMapKwToggle: 0
+    - _NormalMapKwToggle: 1
     - _NumLayersCount: 1
     - _OcclusionStrength: 1
     - _OldHueVarBehavior: 0
