@@ -60,8 +60,8 @@ public class PopupUI : MonoBehaviour
     }
     public void HidePopup()
     {
-        AudioManager.Instance.PlayBackground();
         if(popupPanel != null)
-            popupPanel.SetActive(false);
+             popupPanel.SetActive(false);
     }
+    
 }
