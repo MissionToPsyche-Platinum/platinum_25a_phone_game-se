@@ -24,15 +24,11 @@ public class PhaseCPersistentHintUI : MonoBehaviour
     private PhaseCAssemblyController assemblyController;
     private bool initialized;
 
-    private Text inventoryHintText;
     private Text actionHintText;
-    private Text taskHintText;
 
     // Dirty-check state to avoid per-frame Text writes
-    private int lastItemCount = -1;
     private string lastActionHint = null;
     private Color lastActionColor;
-    private bool lastInventoryFull = false;
 
     private PhaseCAssemblyController.StepInfo currentStepInfo;
 
@@ -89,47 +85,14 @@ public class PhaseCPersistentHintUI : MonoBehaviour
     private void OnStepChanged(PhaseCAssemblyController.StepInfo info)
     {
         currentStepInfo = info;
-        UpdateTaskHint(info);
         lastActionHint = null;
     }
 
     private void LateUpdate()
     {
         if (!initialized) return;
-
-        int count = GetInventoryCount();
         bool isFull = inventoryController != null && inventoryController.IsInventoryFull();
-
-        if (count != lastItemCount || isFull != lastInventoryFull)
-            UpdateInventoryHint(count, isFull);
-
         EvaluateActionHint(isFull);
-    }
-
-    // --- Inventory hint ---
-
-    private int GetInventoryCount()
-    {
-        if (inventoryController == null || inventoryController.inventoryPanel == null) return 0;
-        int count = 0;
-        foreach (Transform t in inventoryController.inventoryPanel.transform)
-        {
-            Slot s = t.GetComponent<Slot>();
-            if (s != null && s.currentItem != null) count++;
-        }
-        return count;
-    }
-
-    private void UpdateInventoryHint(int count, bool isFull)
-    {
-        lastItemCount = count;
-        lastInventoryFull = isFull;
-        if (inventoryHintText == null) return;
-
-        inventoryHintText.text = PhaseCUITheme.IsMobileScreen
-            ? (count > 0 ? $"Bag ({count})" : "Bag")
-            : (count > 0 ? $"[I] Inventory ({count})" : "[I] Inventory");
-        inventoryHintText.color = isFull ? PhaseCUITheme.TextError : PhaseCUITheme.AccentCyan;
     }
 
     // --- Action hint (contextual middle section) ---
@@ -179,30 +142,9 @@ public class PhaseCPersistentHintUI : MonoBehaviour
         actionHintText.color = color;
     }
 
-    // --- Task hint ---
-
-    private void UpdateTaskHint(PhaseCAssemblyController.StepInfo info)
-    {
-        if (taskHintText == null) return;
-        if (info.StepCount == 0)
-        {
-            taskHintText.text = "";
-            return;
-        }
-        if (info.StepNumber == 0)
-        {
-            taskHintText.text = !string.IsNullOrEmpty(info.Title) ? "Task: " + info.Title : "";
-            return;
-        }
-        taskHintText.text = $"Task: Step {info.StepNumber}/{info.StepCount} - {info.Title}";
-    }
-
     private void ForceRefresh()
     {
-        int count = GetInventoryCount();
         bool isFull = inventoryController != null && inventoryController.IsInventoryFull();
-        UpdateInventoryHint(count, isFull);
-        UpdateTaskHint(currentStepInfo);
         lastActionHint = null;
         EvaluateActionHint(isFull);
     }
@@ -291,26 +233,7 @@ public class PhaseCPersistentHintUI : MonoBehaviour
         Font font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         int fontSize = PhaseCUITheme.GetHintFontSize();
 
-        // Left section: Inventory hint (0 - 22% of content)
-        GameObject invGo = new GameObject("InventoryHint");
-        invGo.transform.SetParent(contentRoot.transform, false);
-        inventoryHintText = invGo.AddComponent<Text>();
-        inventoryHintText.text = "[I] Inventory";
-        inventoryHintText.font = font;
-        inventoryHintText.fontSize = fontSize;
-        inventoryHintText.fontStyle = FontStyle.Bold;
-        inventoryHintText.color = PhaseCUITheme.AccentCyan;
-        inventoryHintText.alignment = TextAnchor.MiddleLeft;
-        inventoryHintText.raycastTarget = false;
-        RectTransform invRect = invGo.GetComponent<RectTransform>();
-        invRect.anchorMin = new Vector2(0f, 0f);
-        invRect.anchorMax = new Vector2(0.24f, 1f);
-        invRect.offsetMin = new Vector2(padding, 0f);
-        invRect.offsetMax = new Vector2(0f, 0f);
-
-        AddSeparatorOnContent(contentRoot.transform, 0.24f);
-
-        // Middle section: contextual action hint (24% - 60%)
+        // Left section: contextual action hint (0 – split point)
         GameObject actionGo = new GameObject("ActionHint");
         actionGo.transform.SetParent(contentRoot.transform, false);
         actionHintText = actionGo.AddComponent<Text>();
@@ -321,31 +244,52 @@ public class PhaseCPersistentHintUI : MonoBehaviour
         actionHintText.alignment = TextAnchor.MiddleCenter;
         actionHintText.raycastTarget = false;
         RectTransform actionRect = actionGo.GetComponent<RectTransform>();
-        actionRect.anchorMin = new Vector2(0.24f, 0f);
-        actionRect.anchorMax = new Vector2(0.60f, 1f);
+        actionRect.anchorMin = new Vector2(0f, 0f);
+        actionRect.anchorMax = new Vector2(PhaseCUITheme.GetHintMiddleSectionEnd(), 1f);
         actionRect.offsetMin = new Vector2(padding, 0f);
         actionRect.offsetMax = new Vector2(-padding, 0f);
 
-        AddSeparatorOnContent(contentRoot.transform, 0.60f);
+        AddSeparatorOnContent(contentRoot.transform, PhaseCUITheme.GetHintMiddleSectionEnd());
 
-        // Right section: task hint (60% - 100%)
-        GameObject taskGo = new GameObject("TaskHint");
-        taskGo.transform.SetParent(contentRoot.transform, false);
-        taskHintText = taskGo.AddComponent<Text>();
-        taskHintText.text = "";
-        taskHintText.font = font;
-        taskHintText.fontSize = fontSize;
-        taskHintText.color = PhaseCUITheme.AccentGold;
-        taskHintText.alignment = TextAnchor.MiddleLeft;
-        taskHintText.raycastTarget = false;
-        taskHintText.horizontalOverflow = PhaseCUITheme.IsMobileScreen
-            ? HorizontalWrapMode.Wrap
-            : HorizontalWrapMode.Overflow;
-        RectTransform taskRect = taskGo.GetComponent<RectTransform>();
-        taskRect.anchorMin = new Vector2(0.60f, 0f);
-        taskRect.anchorMax = new Vector2(1f, 1f);
-        taskRect.offsetMin = new Vector2(padding, 0f);
-        taskRect.offsetMax = new Vector2(-padding, 0f);
+        // Right section: Go to Central Hub button
+        GameObject hubGo = new GameObject("HubBtn");
+        hubGo.transform.SetParent(contentRoot.transform, false);
+
+        Image hubBg = hubGo.AddComponent<Image>();
+        hubBg.color = new Color(0.10f, 0.14f, 0.24f, 0.0f);   // transparent bg
+
+        Button hubBtn = hubGo.AddComponent<Button>();
+        hubBtn.targetGraphic = hubBg;
+        ColorBlock hubColors = hubBtn.colors;
+        hubColors.highlightedColor = new Color(0.35f, 0.50f, 0.70f, 0.6f);
+        hubColors.pressedColor     = new Color(0.50f, 0.65f, 0.85f, 0.8f);
+        hubBtn.colors = hubColors;
+        hubBtn.onClick.AddListener(() =>
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene("CentralHub");
+        });
+
+        RectTransform hubRect = hubGo.GetComponent<RectTransform>();
+        hubRect.anchorMin = new Vector2(PhaseCUITheme.GetHintMiddleSectionEnd(), 0f);
+        hubRect.anchorMax = new Vector2(1f, 1f);
+        hubRect.offsetMin = new Vector2(padding, 4f);
+        hubRect.offsetMax = new Vector2(-padding, -4f);
+
+        GameObject hubLabelGo = new GameObject("Label");
+        hubLabelGo.transform.SetParent(hubGo.transform, false);
+        Text hubLabel = hubLabelGo.AddComponent<Text>();
+        hubLabel.text          = "< Go to Central Hub";
+        hubLabel.font          = font;
+        hubLabel.fontSize      = fontSize;
+        hubLabel.fontStyle     = FontStyle.Bold;
+        hubLabel.color         = PhaseCUITheme.AccentCyan;
+        hubLabel.alignment     = TextAnchor.MiddleCenter;
+        hubLabel.raycastTarget = false;
+        RectTransform hubLabelRect = hubLabelGo.GetComponent<RectTransform>();
+        hubLabelRect.anchorMin = Vector2.zero;
+        hubLabelRect.anchorMax = Vector2.one;
+        hubLabelRect.offsetMin = hubLabelRect.offsetMax = Vector2.zero;
     }
 
     private void AddToggleButton(Transform parent)

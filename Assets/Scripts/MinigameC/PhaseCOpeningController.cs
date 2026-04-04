@@ -148,7 +148,7 @@ public class PhaseCOpeningController : MonoBehaviour
         CanvasScaler scaler = openingRoot.AddComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(PhaseCUITheme.RefWidth, PhaseCUITheme.RefHeight);
-        scaler.matchWidthOrHeight = 0.5f;
+        scaler.matchWidthOrHeight = PhaseCUITheme.CanvasMatchWidthOrHeight;
 
         openingRoot.AddComponent<GraphicRaycaster>();
 
@@ -172,17 +172,17 @@ public class PhaseCOpeningController : MonoBehaviour
         badgeObject.transform.SetParent(openingRoot.transform, false);
         TMP_Text badgeText = badgeObject.AddComponent<TextMeshProUGUI>();
         badgeText.text = "NASA PSYCHE MISSION · PHASE C";
-        badgeText.fontSize = PhaseCUITheme.FontSizeBadge;
+        badgeText.fontSize = PhaseCUITheme.GetOpeningBadgeFontSize();
         badgeText.fontStyle = FontStyles.SmallCaps;
         badgeText.alignment = TextAlignmentOptions.Center;
         badgeText.color = PhaseCUITheme.AccentCyanMuted;
 
         RectTransform badgeRect = badgeObject.GetComponent<RectTransform>();
-        badgeRect.anchorMin = new Vector2(0.5f, 1f);
-        badgeRect.anchorMax = new Vector2(0.5f, 1f);
+        badgeRect.anchorMin = new Vector2(0.05f, 1f);
+        badgeRect.anchorMax = new Vector2(0.95f, 1f);
         badgeRect.pivot = new Vector2(0.5f, 1f);
-        badgeRect.anchoredPosition = new Vector2(0f, -24f);
-        badgeRect.sizeDelta = new Vector2(520f, 28f);
+        badgeRect.anchoredPosition = new Vector2(0f, -20f);
+        badgeRect.sizeDelta = new Vector2(0f, 34f);
 
         // Panel border (frame behind panel)
         GameObject panelBorderObj = new GameObject("PanelBorder");
@@ -225,25 +225,25 @@ public class PhaseCOpeningController : MonoBehaviour
         titleObject.transform.SetParent(panelObject.transform, false);
         titleText = titleObject.AddComponent<TextMeshProUGUI>();
         titleText.enableWordWrapping = true;
-        titleText.fontSize = PhaseCUITheme.FontSizeTitle;
+        titleText.fontSize = PhaseCUITheme.GetOpeningTitleFontSize();
         titleText.fontStyle = FontStyles.Bold;
         titleText.alignment = TextAlignmentOptions.Center;
         titleText.color = PhaseCUITheme.AccentGold;
         titleText.overflowMode = TextOverflowModes.Overflow;
 
         RectTransform titleRect = titleObject.GetComponent<RectTransform>();
-        titleRect.anchorMin = new Vector2(0.5f, 1f);
-        titleRect.anchorMax = new Vector2(0.5f, 1f);
+        titleRect.anchorMin = new Vector2(0.05f, 1f);
+        titleRect.anchorMax = new Vector2(0.95f, 1f);
         titleRect.pivot = new Vector2(0.5f, 1f);
-        titleRect.anchoredPosition = new Vector2(0f, -36f);
-        titleRect.sizeDelta = new Vector2(640f, 48f);
+        titleRect.anchoredPosition = new Vector2(0f, -PhaseCUITheme.PaddingTight);
+        titleRect.sizeDelta = new Vector2(0f, PhaseCUITheme.IsMobileScreen ? 68f : 56f);
 
         // Body text - fills middle area only, below title and above dots/button, centered
         GameObject bodyObject = new GameObject("OpeningBody");
         bodyObject.transform.SetParent(panelObject.transform, false);
         bodyText = bodyObject.AddComponent<TextMeshProUGUI>();
         bodyText.enableWordWrapping = true;
-        bodyText.fontSize = PhaseCUITheme.FontSizeBody;
+        bodyText.fontSize = PhaseCUITheme.GetOpeningBodyFontSize();
         bodyText.lineSpacing = PhaseCUITheme.LineSpacingBody;
         bodyText.alignment = TextAlignmentOptions.Center;
         bodyText.color = PhaseCUITheme.TextBody;
@@ -328,7 +328,7 @@ public class PhaseCOpeningController : MonoBehaviour
         labelObject.transform.SetParent(buttonObject.transform, false);
         buttonLabel = labelObject.AddComponent<TextMeshProUGUI>();
         buttonLabel.text = "Continue";
-        buttonLabel.fontSize = PhaseCUITheme.FontSizeButton;
+        buttonLabel.fontSize = PhaseCUITheme.GetOpeningButtonFontSize();
         buttonLabel.fontStyle = FontStyles.Bold;
         buttonLabel.alignment = TextAlignmentOptions.Center;
         buttonLabel.color = Color.white;

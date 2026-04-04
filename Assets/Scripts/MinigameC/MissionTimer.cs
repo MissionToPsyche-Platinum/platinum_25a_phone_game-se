@@ -234,7 +234,7 @@ public class MissionTimer : MonoBehaviour
         var scaler = canvasGo.AddComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(PhaseCUITheme.RefWidth, PhaseCUITheme.RefHeight);
-        scaler.matchWidthOrHeight = 0.5f;
+        scaler.matchWidthOrHeight = PhaseCUITheme.CanvasMatchWidthOrHeight;
         canvasGo.AddComponent<GraphicRaycaster>();
 
         BuildTimerWidget(canvasGo.transform);
@@ -253,7 +253,7 @@ public class MissionTimer : MonoBehaviour
         pr.anchorMin = new Vector2(1f, 1f);
         pr.anchorMax = new Vector2(1f, 1f);
         pr.pivot = new Vector2(1f, 1f);
-        pr.anchoredPosition = new Vector2(-PhaseCUITheme.PaddingTight, -PhaseCUITheme.PaddingTight);
+        pr.anchoredPosition = new Vector2(-PhaseCUITheme.PaddingTight, -(PhaseCUITheme.GetGuidePanelHeight() + 8f));
         pr.sizeDelta = new Vector2(220f, 90f);
 
         // Gold left accent bar

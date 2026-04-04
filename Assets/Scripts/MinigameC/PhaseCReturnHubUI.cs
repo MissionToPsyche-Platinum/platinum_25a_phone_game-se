@@ -13,13 +13,9 @@ public class PhaseCReturnHubUI : MonoBehaviour
     private const string HubSceneName = "CentralHub";
     private const string CanvasName = "PhaseCReturnHubCanvas";
 
-    // Sits above the bottom hint strip (38px)
-    private const float BottomPadding = 48f;
-    private const float RightPadding = 16f;
-    private const float ButtonWidth = 140f;
-    private const float ButtonHeight = 48f;
-
-    private const float TooltipWidth = 240f;
+    private const float RightPadding  = 16f;
+    private const float ButtonHeight  = 48f;
+    private const float TooltipWidth  = 280f;
     private const float TooltipHeight = 72f;
 
     private GameObject _tooltip;
@@ -51,95 +47,7 @@ public class PhaseCReturnHubUI : MonoBehaviour
 
     private void BuildCanvas()
     {
-        GameObject existing = GameObject.Find(CanvasName);
-        if (existing != null) Destroy(existing);
-
-        GameObject canvasGo = new GameObject(CanvasName);
-        Canvas canvas = canvasGo.AddComponent<Canvas>();
-        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = 15;
-
-        CanvasScaler scaler = canvasGo.AddComponent<CanvasScaler>();
-        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        scaler.referenceResolution = new Vector2(PhaseCUITheme.RefWidth, PhaseCUITheme.RefHeight);
-        scaler.matchWidthOrHeight = 0.5f;
-
-        canvasGo.AddComponent<GraphicRaycaster>();
-
-        Font font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-
-        // --- Tooltip (hidden by default, appears above button on hover) ---
-        _tooltip = BuildTooltip(canvasGo.transform, font);
-        _tooltip.SetActive(false);
-
-        // --- Button ---
-        GameObject btnGo = new GameObject("HubButton");
-        btnGo.transform.SetParent(canvasGo.transform, false);
-
-        Image btnImg = btnGo.AddComponent<Image>();
-        btnImg.color = new Color(0.07f, 0.10f, 0.20f, 0.95f);
-
-        Button btn = btnGo.AddComponent<Button>();
-        ColorBlock colors = btn.colors;
-        colors.normalColor = Color.white;
-        colors.highlightedColor = new Color(0.80f, 0.90f, 1f, 1f);
-        colors.pressedColor = new Color(0.55f, 0.72f, 0.92f, 1f);
-        btn.colors = colors;
-        btn.onClick.AddListener(ReturnToHub);
-
-        RectTransform btnRect = btnGo.GetComponent<RectTransform>();
-        btnRect.anchorMin = new Vector2(1f, 0f);
-        btnRect.anchorMax = new Vector2(1f, 0f);
-        btnRect.pivot = new Vector2(1f, 0f);
-        btnRect.sizeDelta = new Vector2(ButtonWidth, ButtonHeight);
-        btnRect.anchoredPosition = new Vector2(-RightPadding, BottomPadding);
-
-        // Border
-        GameObject borderGo = new GameObject("Border");
-        borderGo.transform.SetParent(btnGo.transform, false);
-        Image borderImg = borderGo.AddComponent<Image>();
-        borderImg.color = new Color(PhaseCUITheme.AccentCyan.r, PhaseCUITheme.AccentCyan.g, PhaseCUITheme.AccentCyan.b, 0.45f);
-        borderImg.raycastTarget = false;
-        RectTransform borderRect = borderGo.GetComponent<RectTransform>();
-        borderRect.anchorMin = Vector2.zero;
-        borderRect.anchorMax = Vector2.one;
-        borderRect.offsetMin = new Vector2(-1f, -1f);
-        borderRect.offsetMax = new Vector2(1f, 1f);
-        borderGo.transform.SetAsFirstSibling();
-
-        // Left accent bar
-        GameObject barGo = new GameObject("AccentBar");
-        barGo.transform.SetParent(btnGo.transform, false);
-        Image barImg = barGo.AddComponent<Image>();
-        barImg.color = PhaseCUITheme.AccentCyan;
-        barImg.raycastTarget = false;
-        RectTransform barRect = barGo.GetComponent<RectTransform>();
-        barRect.anchorMin = new Vector2(0f, 0f);
-        barRect.anchorMax = new Vector2(0f, 1f);
-        barRect.pivot = new Vector2(0f, 0.5f);
-        barRect.sizeDelta = new Vector2(4f, 0f);
-        barRect.anchoredPosition = Vector2.zero;
-
-        // Icon label (arrow + text)
-        GameObject labelGo = new GameObject("Label");
-        labelGo.transform.SetParent(btnGo.transform, false);
-        Text labelText = labelGo.AddComponent<Text>();
-        labelText.text = "< Central Hub";
-        labelText.font = font;
-        labelText.fontSize = 16;
-        labelText.fontStyle = FontStyle.Bold;
-        labelText.color = PhaseCUITheme.AccentCyan;
-        labelText.alignment = TextAnchor.MiddleCenter;
-        labelText.raycastTarget = false;
-        RectTransform labelRect = labelGo.GetComponent<RectTransform>();
-        labelRect.anchorMin = Vector2.zero;
-        labelRect.anchorMax = Vector2.one;
-        labelRect.offsetMin = new Vector2(8f, 0f);
-        labelRect.offsetMax = Vector2.zero;
-
-        // Hover handler
-        HubButtonHover hover = btnGo.AddComponent<HubButtonHover>();
-        hover.tooltip = _tooltip;
+        // "Go to Central Hub" is now embedded inside PhaseCRequiredItemsUI panel at the bottom.
     }
 
     private GameObject BuildTooltip(Transform parent, Font font)
@@ -157,7 +65,7 @@ public class PhaseCReturnHubUI : MonoBehaviour
         tipRect.pivot = new Vector2(1f, 0f);
         tipRect.sizeDelta = new Vector2(TooltipWidth, TooltipHeight);
         // Sits just above the button
-        tipRect.anchoredPosition = new Vector2(-RightPadding, BottomPadding + ButtonHeight + 6f);
+        tipRect.anchoredPosition = new Vector2(-RightPadding, PhaseCUITheme.GetHubBottomOffset() + ButtonHeight + 6f);
 
         // Border
         GameObject borderGo = new GameObject("Border");
@@ -189,9 +97,9 @@ public class PhaseCReturnHubUI : MonoBehaviour
         GameObject titleGo = new GameObject("Title");
         titleGo.transform.SetParent(tip.transform, false);
         Text titleText = titleGo.AddComponent<Text>();
-        titleText.text = "Return to Central Hub";
+        titleText.text = "Go back to Central Hub";
         titleText.font = font;
-        titleText.fontSize = 15;
+        titleText.fontSize = PhaseCUITheme.GetHubButtonFont();
         titleText.fontStyle = FontStyle.Bold;
         titleText.color = PhaseCUITheme.TextPrimary;
         titleText.alignment = TextAnchor.MiddleLeft;
@@ -208,7 +116,7 @@ public class PhaseCReturnHubUI : MonoBehaviour
         Text subText = subGo.AddComponent<Text>();
         subText.text = "Progress is saved automatically";
         subText.font = font;
-        subText.fontSize = 12;
+        subText.fontSize = PhaseCUITheme.GetHubButtonFont() - 4;
         subText.color = PhaseCUITheme.TextSecondary;
         subText.alignment = TextAnchor.MiddleLeft;
         subText.raycastTarget = false;

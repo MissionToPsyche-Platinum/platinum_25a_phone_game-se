@@ -348,7 +348,7 @@ public class PhaseCAnimationManager : MonoBehaviour
         _letterboxCG.interactable = false;
         _letterboxCG.blocksRaycasts = false;
 
-        RectTransform rootRect = _letterboxRoot.GetComponent<RectTransform>();
+        RectTransform rootRect = _letterboxRoot.AddComponent<RectTransform>();
         rootRect.anchorMin = Vector2.zero;
         rootRect.anchorMax = Vector2.one;
         rootRect.offsetMin = Vector2.zero;
@@ -383,7 +383,9 @@ public class PhaseCAnimationManager : MonoBehaviour
 
     private void BuildStepBanner(Transform parent)
     {
-        _bannerWidth = Mathf.Min(500f, PhaseCUITheme.RefWidth * 0.35f);
+        _bannerWidth = PhaseCUITheme.IsMobileScreen
+            ? Mathf.Min(600f, PhaseCUITheme.RefWidth * 0.55f)
+            : Mathf.Min(500f, PhaseCUITheme.RefWidth * 0.35f);
 
         _bannerPanel = new GameObject("StepBannerPanel");
         _bannerPanel.transform.SetParent(parent, false);
@@ -401,7 +403,8 @@ public class PhaseCAnimationManager : MonoBehaviour
         _bannerRect.anchorMin = new Vector2(0f, 0.5f);
         _bannerRect.anchorMax = new Vector2(0f, 0.5f);
         _bannerRect.pivot = new Vector2(0f, 0.5f);
-        _bannerRect.sizeDelta = new Vector2(_bannerWidth, 80f);
+        float bannerH = PhaseCUITheme.IsMobileScreen ? 110f : 80f;
+        _bannerRect.sizeDelta = new Vector2(_bannerWidth, bannerH);
         _bannerRect.anchoredPosition = new Vector2(-(_bannerWidth + 20f), 0f);
 
         // Gold left accent bar

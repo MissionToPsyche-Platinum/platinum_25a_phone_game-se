@@ -12,7 +12,7 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
 {
     private const string TargetSceneName = "MinigameC";
     private const string CanvasName = "PhaseCRequiredItemsCanvas";
-    private const float TitleBarHeight = 40f;
+    private float TitleBarHeight => PhaseCUITheme.GetRequiredTitleBarHeight();
 
     private GameObject canvasObject;
     private GameObject panelObject;
@@ -118,12 +118,13 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
         panelBg.raycastTarget = false;
 
         panelRect = panelObject.GetComponent<RectTransform>();
-        panelRect.anchorMin = new Vector2(1f, 0.5f);
-        panelRect.anchorMax = new Vector2(1f, 0.5f);
-        panelRect.pivot = new Vector2(1f, 0.5f);
+        panelRect.anchorMin = new Vector2(1f, 0f);
+        panelRect.anchorMax = new Vector2(1f, 0f);
+        panelRect.pivot = new Vector2(1f, 0f);
         float panelWidth = PhaseCUITheme.GetRequiredPanelWidthExpanded();
-        panelRect.sizeDelta = new Vector2(panelWidth, 200f);
-        panelRect.anchoredPosition = new Vector2(-16f, 0f);
+        panelRect.sizeDelta = new Vector2(panelWidth, PhaseCUITheme.GetSidePanelHeight());
+        float bottomOffset = PhaseCUITheme.GetHintStripHeight() + 8f;
+        panelRect.anchoredPosition = new Vector2(-16f, bottomOffset);
 
         // Border
         GameObject borderGo = new GameObject("Border");
@@ -139,8 +140,9 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
         borderGo.transform.SetAsFirstSibling();
 
         Font font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        int itemFontSize = PhaseCUITheme.GetRequiredItemFontSize();
-        int titleFontSize = itemFontSize + 3;
+        int titleFontSize = PhaseCUITheme.GetRequiredTitleFontSize();
+        int itemFontSize  = PhaseCUITheme.GetRequiredItemFontSize();
+        int subtitleSize  = PhaseCUITheme.GetRequiredSubtitleFontSize();
 
         // Title bar: title text + toggle button side by side
         GameObject titleRowGo = new GameObject("TitleRow");
@@ -200,7 +202,7 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
         npcText = npcGo.AddComponent<Text>();
         npcText.text = "";
         npcText.font = font;
-        npcText.fontSize = itemFontSize - 1;
+        npcText.fontSize = subtitleSize;
         npcText.color = PhaseCUITheme.TextSecondary;
         npcText.alignment = TextAnchor.MiddleCenter;
         npcText.raycastTarget = false;
@@ -208,7 +210,7 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
         npcRect.anchorMin = new Vector2(0f, 1f);
         npcRect.anchorMax = new Vector2(1f, 1f);
         npcRect.pivot = new Vector2(0.5f, 1f);
-        npcRect.sizeDelta = new Vector2(0f, 22f);
+        npcRect.sizeDelta = new Vector2(0f, PhaseCUITheme.GetRequiredNpcTextHeight());
         npcRect.anchoredPosition = new Vector2(0f, -(TitleBarHeight + 6f));
 
         // Content container for item rows
@@ -299,7 +301,7 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
         }
         itemRows.Clear();
 
-        float rowHeight = 40f;
+        float rowHeight = PhaseCUITheme.GetRequiredItemRowHeight();
         float yOffset = 0f;
         int rowIndex = 0;
 
@@ -317,12 +319,12 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
             rowIndex++;
         }
 
-        // Resize panel to fit content (only apply when expanded)
-        float newHeight = TitleBarHeight + 34f + (rowIndex * rowHeight) + 12f;
-        lastExpandedHeight = newHeight;
+        // Always use the shared side-panel height so it matches the Assembly panel
+        lastExpandedHeight = PhaseCUITheme.GetSidePanelHeight();
 
         if (!isPanelMinimized && panelRect != null)
-            panelRect.sizeDelta = new Vector2(PhaseCUITheme.GetRequiredPanelWidthExpanded(), newHeight);
+            panelRect.sizeDelta = new Vector2(PhaseCUITheme.GetRequiredPanelWidthExpanded(),
+                                              PhaseCUITheme.GetSidePanelHeight());
     }
 
     private GameObject CreateItemRow(int itemId, int needed, int have, bool collected, float yOffset)
@@ -336,7 +338,7 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
         rowRect.anchorMin = new Vector2(0f, 1f);
         rowRect.anchorMax = new Vector2(1f, 1f);
         rowRect.pivot = new Vector2(0.5f, 1f);
-        rowRect.sizeDelta = new Vector2(0f, 38f);
+        rowRect.sizeDelta = new Vector2(0f, PhaseCUITheme.GetRequiredItemRowHeight() - 2f);
         rowRect.anchoredPosition = new Vector2(0f, yOffset);
 
         // Item icon background
@@ -351,7 +353,7 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
         iconBgRect.anchorMin = new Vector2(0f, 0.5f);
         iconBgRect.anchorMax = new Vector2(0f, 0.5f);
         iconBgRect.pivot = new Vector2(0f, 0.5f);
-        iconBgRect.sizeDelta = new Vector2(34f, 34f);
+        iconBgRect.sizeDelta = new Vector2(PhaseCUITheme.GetRequiredIconSize(), PhaseCUITheme.GetRequiredIconSize());
         iconBgRect.anchoredPosition = new Vector2(10f, 0f);
 
         // Item icon
@@ -403,7 +405,7 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
         RectTransform nameRect = nameGo.GetComponent<RectTransform>();
         nameRect.anchorMin = new Vector2(0f, 0f);
         nameRect.anchorMax = new Vector2(1f, 1f);
-        nameRect.offsetMin = new Vector2(50f, 0f);
+        nameRect.offsetMin = new Vector2(PhaseCUITheme.GetRequiredIconSize() + 16f, 0f);
         nameRect.offsetMax = new Vector2(-8f, 0f);
 
         // Checkmark for collected items

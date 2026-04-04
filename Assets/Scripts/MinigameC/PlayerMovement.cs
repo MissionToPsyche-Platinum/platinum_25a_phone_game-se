@@ -17,18 +17,19 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        float horizontal, vertical;
+        float horizontal = 0f, vertical = 0f;
 
         if (PhaseCMobileInput.Active)
         {
             horizontal = PhaseCMobileInput.Horizontal;
             vertical   = PhaseCMobileInput.Vertical;
         }
-        else
-        {
-            horizontal = Input.GetAxis("Horizontal");
-            vertical   = Input.GetAxis("Vertical");
-        }
+
+        // Keyboard/gamepad always supplements — covers editor testing and physical keyboards on mobile
+        float kh = Input.GetAxis("Horizontal");
+        float kv = Input.GetAxis("Vertical");
+        if (Mathf.Abs(kh) > Mathf.Abs(horizontal)) horizontal = kh;
+        if (Mathf.Abs(kv) > Mathf.Abs(vertical))   vertical   = kv;
 
         animator.SetFloat("Xinput", horizontal);
         animator.SetFloat("Yinput", vertical);

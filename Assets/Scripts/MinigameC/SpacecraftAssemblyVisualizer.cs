@@ -21,9 +21,7 @@ public class SpacecraftAssemblyVisualizer : MonoBehaviour
     private const string TargetScene = "MinigameC";
     private const string LibraryPath = "MinigameC/SpacecraftSpriteLibrary";
 
-    // HUD panel dimensions (in Canvas pixels)
-    private const float PanelWidth  = 160f;
-    private const float PanelHeight = 190f;
+    // HUD panel dimensions — responsive values pulled from PhaseCUITheme at runtime.
     private const float EdgeMargin  = 14f;
 
     private const float FadeDuration = 0.5f;
@@ -130,10 +128,14 @@ public class SpacecraftAssemblyVisualizer : MonoBehaviour
         CanvasScaler scaler = canvasGo.AddComponent<CanvasScaler>();
         scaler.uiScaleMode         = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(1920f, 1080f);
-        scaler.matchWidthOrHeight  = 0.5f;
+        scaler.matchWidthOrHeight  = PhaseCUITheme.CanvasMatchWidthOrHeight;
         canvasGo.AddComponent<GraphicRaycaster>();
 
-        // ── Background panel (top-right corner) ─────────────────────────────
+        // ── Background panel (bottom-left, above hint strip) ─────────────────
+        float panelW      = PhaseCUITheme.GetAssemblyPanelWidth();
+        float panelH      = PhaseCUITheme.GetAssemblyPanelHeight();
+        float bottomStart = PhaseCUITheme.GetHintStripHeight() + EdgeMargin;
+
         GameObject panelGo = new GameObject("SpacecraftPanel");
         panelGo.transform.SetParent(canvasGo.transform, false);
 
@@ -144,8 +146,8 @@ public class SpacecraftAssemblyVisualizer : MonoBehaviour
         panelRect.anchorMin        = new Vector2(0f, 0f);
         panelRect.anchorMax        = new Vector2(0f, 0f);
         panelRect.pivot            = new Vector2(0f, 0f);
-        panelRect.anchoredPosition = new Vector2(EdgeMargin, EdgeMargin);
-        panelRect.sizeDelta        = new Vector2(PanelWidth, PanelHeight);
+        panelRect.anchoredPosition = new Vector2(EdgeMargin, bottomStart);
+        panelRect.sizeDelta        = new Vector2(panelW, panelH);
 
         // ── Title ────────────────────────────────────────────────────────────
         GameObject titleGo = new GameObject("Title");
@@ -154,7 +156,7 @@ public class SpacecraftAssemblyVisualizer : MonoBehaviour
         Text title        = titleGo.AddComponent<Text>();
         title.text        = "ASSEMBLY";
         title.font        = builtinFont;
-        title.fontSize    = 13;
+        title.fontSize    = PhaseCUITheme.GetAssemblyTitleFont();
         title.fontStyle   = FontStyle.Bold;
         title.color       = new Color(0.9f, 0.85f, 0.4f);
         title.alignment   = TextAnchor.MiddleCenter;
@@ -186,7 +188,7 @@ public class SpacecraftAssemblyVisualizer : MonoBehaviour
         stepLabel           = stepGo.AddComponent<Text>();
         stepLabel.text      = "Step 1 / 6";
         stepLabel.font      = builtinFont;
-        stepLabel.fontSize  = 11;
+        stepLabel.fontSize  = PhaseCUITheme.GetAssemblyStepFont();
         stepLabel.color     = new Color(0.85f, 0.85f, 0.85f, 1f);
         stepLabel.alignment = TextAnchor.MiddleCenter;
 

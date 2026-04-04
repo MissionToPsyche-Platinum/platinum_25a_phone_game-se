@@ -169,10 +169,10 @@ public class PhaseCInventoryUI : MonoBehaviour
         float gridWidth = (slotSize * SlotsPerRow) + (SlotSpacing * (SlotsPerRow - 1));
         int rowCount = Mathf.CeilToInt((float)SlotCount / SlotsPerRow);
         float gridHeight = (slotSize * rowCount) + (SlotSpacing * (rowCount - 1));
-        float panelPadding = 24f;
-        float titleHeight = 40f;
-        float statusHeight = 28f;
-        float hintHeight = 28f;
+        float panelPadding = PhaseCUITheme.GetInventoryPadding();
+        float titleHeight  = PhaseCUITheme.GetInventoryTitleHeight();
+        float statusHeight = PhaseCUITheme.GetInventoryStatusHeight();
+        float hintHeight   = PhaseCUITheme.GetInventoryHintHeight();
         float panelWidth = gridWidth + panelPadding * 2;
         float panelHeight = titleHeight + gridHeight + statusHeight + hintHeight + panelPadding * 2;
 
@@ -210,7 +210,7 @@ public class PhaseCInventoryUI : MonoBehaviour
         Text titleText = titleGo.AddComponent<Text>();
         titleText.text = "INVENTORY";
         titleText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        titleText.fontSize = (int)PhaseCUITheme.GuideStepTitleSize;
+        titleText.fontSize = PhaseCUITheme.GetInventoryTitleFontSize();
         titleText.fontStyle = FontStyle.Bold;
         titleText.color = PhaseCUITheme.AccentGold;
         titleText.alignment = TextAnchor.MiddleCenter;
@@ -244,7 +244,7 @@ public class PhaseCInventoryUI : MonoBehaviour
         statusText = statusGo.AddComponent<Text>();
         statusText.text = "";
         statusText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        statusText.fontSize = (int)PhaseCUITheme.GuideCaptionSize;
+        statusText.fontSize = PhaseCUITheme.GetInventoryStatusFontSize();
         statusText.fontStyle = FontStyle.Bold;
         statusText.color = PhaseCUITheme.TextError;
         statusText.alignment = TextAnchor.MiddleCenter;
@@ -264,7 +264,7 @@ public class PhaseCInventoryUI : MonoBehaviour
             ? "Tap X to close  |  Tap slot to drop"
             : "Press I to close  |  Press 1-4 to drop item";
         hintText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        hintText.fontSize = (int)PhaseCUITheme.FontSizeBadge;
+        hintText.fontSize = PhaseCUITheme.GetInventoryHintFontSize();
         hintText.color = PhaseCUITheme.TextSecondary;
         hintText.alignment = TextAnchor.MiddleCenter;
         hintText.raycastTarget = false;
