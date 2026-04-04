@@ -22,6 +22,10 @@ public class GameManger : MonoBehaviour
     [Header("Eduational Popup")]
     [SerializeField] private EducationalPopupController educationalPopupController;
 
+    [Header("Orientation Overlay")]
+    [SerializeField] private GameObject orientationOverlayPanel;
+
+    private bool waitingForOrientationStart = false;
     private static bool skipIntroNextLoad = false;
 
     private bool gameEnded = false;
@@ -273,9 +277,30 @@ public class GameManger : MonoBehaviour
             ShowEduationalPopup(); // show educational popup 
             return;
         }
+
+        if (Screen.height > Screen.width)
+        {
+            ShowOrientationOverlay();
+            return;
+        }
         // Normal entry from hub -> show intro
         StartCoroutine(IntroRountine());
       
+    }
+
+    // --------------------------------
+    // Orientation Overlay Handling
+    // --------------------------------
+
+    private void ShowOrientationOverlay()
+    {
+        if (orientationOverlayPanel != null)
+        {
+            orientationOverlayPanel.SetActive(true);
+        }
+
+        waitingForOrientationStart = true;
+        DisableControl();
     }
 
     // --------------------------------
