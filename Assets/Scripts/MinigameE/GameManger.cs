@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
@@ -17,7 +16,7 @@ public class GameManger : MonoBehaviour
 
     [Header("Intro Overlay")]
     [SerializeField] private GameObject introOverlayPanel;
-    [SerializeField] private float introDuration = 3f;
+    [SerializeField] private float introDuration = 5f;
 
     [Header("Eduational Popup")]
     [SerializeField] private EducationalPopupController educationalPopupController;
@@ -301,6 +300,25 @@ public class GameManger : MonoBehaviour
 
         waitingForOrientationStart = true;
         DisableControl();
+    }
+
+    // --------------------------------
+    // Called by "Start" button on orientation overlay
+    // --------------------------------
+    public void StartGameFromOrientation()
+    {
+        AudioManager.Instance.PlayButtonClick();
+        if (orientationOverlayPanel != null)
+        {
+            orientationOverlayPanel.SetActive(false);
+        }
+        waitingForOrientationStart = false;
+        Screen.orientation = ScreenOrientation.AutoRotation;
+        Screen.autorotateToLandscapeLeft = true;
+        Screen.autorotateToLandscapeRight = true;
+        Screen.autorotateToPortrait = false;
+        Screen.autorotateToPortraitUpsideDown = false;
+        StartCoroutine(IntroRountine());
     }
 
     // --------------------------------
