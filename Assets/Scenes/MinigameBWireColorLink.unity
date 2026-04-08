@@ -10840,7 +10840,9 @@ MonoBehaviour:
   fullWire: {fileID: -6114852892434693154, guid: e447a6144b3b4ce49b8f3fbafa2fcdbf, type: 3}
   bentWire: {fileID: -4103484227915915264, guid: 9c416dc504379e14e901dd70c694c53e, type: 3}
   circle: {fileID: -6231044458718751821, guid: 36008cd434c339146a38b398bdf67145, type: 3}
-  block: {fileID: -1843197933104017171, guid: f79479006f3ef8449926006b5375f7ea, type: 3}
+  square: {fileID: 5075049686085735935, guid: 9c79004621f72ef4588bb1f3f3c32e55, type: 3}
+  squareCircle: {fileID: 698328987482455161, guid: 8ae8c75bebd712f42acde6d909cdd8cb, type: 3}
+  block: {fileID: -6354616222474237749, guid: 2ade3f45098c7b84dbfdfbd4ded4eb52, type: 3}
 --- !u!114 &1992365987
 MonoBehaviour:
   m_ObjectHideFlags: 0

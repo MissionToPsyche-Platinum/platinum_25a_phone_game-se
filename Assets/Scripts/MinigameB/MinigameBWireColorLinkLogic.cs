@@ -20,6 +20,8 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
     [SerializeField] private Sprite bentWire;
 
     [SerializeField] private Sprite circle;
+    [SerializeField] private Sprite square;
+    [SerializeField] private Sprite squareCircle;
     [SerializeField] private Sprite block;
 
     private int[] grid = new int[36];
@@ -159,7 +161,7 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
             wire1.Add(index);
         }
         grid[index] = 2;
-        minigameBgrid[index].GetComponent<Image>().sprite = circle;
+        minigameBgrid[index].GetComponent<Image>().sprite = square;
         minigameBgrid[index].GetComponent<Image>().color = new Color32(196, 192, 198, 255);
         wire2ends[0] = index;
         wire2.Add(index);
@@ -221,7 +223,7 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
             }
         }
         grid[index] = 2;
-        minigameBgrid[index].GetComponent<Image>().sprite = circle;
+        minigameBgrid[index].GetComponent<Image>().sprite = square;
         minigameBgrid[index].GetComponent<Image>().color = new Color32(196, 192, 198, 255);
         wire2ends[1] = index;
 
@@ -252,7 +254,7 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
             }
         }
         grid[index] = 3;
-        minigameBgrid[index].GetComponent<Image>().sprite = circle;
+        minigameBgrid[index].GetComponent<Image>().sprite = squareCircle;
         minigameBgrid[index].GetComponent<Image>().color = new Color32(136, 129, 142, 255);
         wire3ends[0] = index;
         wire3.Add(index);
@@ -314,7 +316,7 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
             }
         }
         grid[index] = 3;
-        minigameBgrid[index].GetComponent<Image>().sprite = circle;
+        minigameBgrid[index].GetComponent<Image>().sprite = squareCircle;
         minigameBgrid[index].GetComponent<Image>().color = new Color32(136, 129, 142, 255);
         wire3ends[1] = index;
 
