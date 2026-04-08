@@ -246,6 +246,7 @@ public class PhaseCAnimationManager : MonoBehaviour
         _bannerSubtitle.text = info.Title;
 
         _bannerPanel.SetActive(true);
+        MinigameCAudioManager.PlayStepComplete();
         float hiddenX = -(_bannerWidth + 20f);
         float visibleX = 20f;
         float exitX = PhaseCUITheme.RefWidth + 20f;

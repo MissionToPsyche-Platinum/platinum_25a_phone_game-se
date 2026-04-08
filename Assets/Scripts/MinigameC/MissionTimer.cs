@@ -132,6 +132,7 @@ public class MissionTimer : MonoBehaviour
         TimeExpired?.Invoke();
 
         // 4. Pause and show popup
+        MinigameCAudioManager.PlayTimerAlarm();
         Time.timeScale = 0f;
         ShowTimeUpPopup();
     }

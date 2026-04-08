@@ -150,6 +150,7 @@ public class npc : MonoBehaviour, IInteractable
         ApplyDialoguePanelStyle();
         dialoguePanel.SetActive(true);
         PhaseCAnimationManager.TriggerDialogueStart();
+        MinigameCAudioManager.PlayDialogueOpen();
         // Don't pause the game so player can move and dialogue auto-closes when they walk away
         // PauseController.SetPause(true);
         activeDialogueLines = ResolveDialogueLines();
@@ -218,6 +219,7 @@ public class npc : MonoBehaviour, IInteractable
         isTyping = false;
         dialogueText.SetText("");
         PhaseCAnimationManager.TriggerDialogueEnd();
+        MinigameCAudioManager.PlayDialogueClose();
         dialoguePanel.SetActive(false);
         lastDialogueEndTime = Time.time;
 

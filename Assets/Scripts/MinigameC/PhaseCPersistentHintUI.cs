@@ -154,6 +154,7 @@ public class PhaseCPersistentHintUI : MonoBehaviour
     private void ToggleMinimize()
     {
         isMinimized = !isMinimized;
+        MinigameCAudioManager.PlayHintToggle();
 
         if (contentRoot != null)
             contentRoot.SetActive(!isMinimized);

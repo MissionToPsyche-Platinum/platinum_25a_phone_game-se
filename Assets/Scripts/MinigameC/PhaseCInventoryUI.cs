@@ -94,7 +94,12 @@ public class PhaseCInventoryUI : MonoBehaviour
 
             if (show)
             {
+                MinigameCAudioManager.PlayInventoryOpen();
                 SyncFromLegacyInventory();
+            }
+            else
+            {
+                MinigameCAudioManager.PlayInventoryClose();
             }
         }
 
@@ -116,6 +121,7 @@ public class PhaseCInventoryUI : MonoBehaviour
                             ? itemDictionary.GetItemColor(droppedId)
                             : PhaseCUITheme.AccentGold;
                         PhaseCItemFeedbackUI.ShowDrop(dropName, dropColor);
+                        MinigameCAudioManager.PlayItemDrop();
                     }
                 }
             }
@@ -313,7 +319,11 @@ public class PhaseCInventoryUI : MonoBehaviour
         labelRect.offsetMin = Vector2.zero;
         labelRect.offsetMax = Vector2.zero;
 
-        btn.onClick.AddListener(() => canvasObject.SetActive(false));
+        btn.onClick.AddListener(() =>
+        {
+            MinigameCAudioManager.PlayInventoryClose();
+            canvasObject.SetActive(false);
+        });
     }
 
     private void CreateSlot(int index, float containerWidth, float containerHeight)
