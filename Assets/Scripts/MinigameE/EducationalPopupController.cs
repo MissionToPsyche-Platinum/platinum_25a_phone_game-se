@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class EducationalPopupController : MonoBehaviour
 {
-    [Header("UI Reference")]
-    [SerializeField] private EducationPopupUI popupUI;
+    [Header("Modal Manager")]
+    [SerializeField] private ModalManager modalManager;
 
     [Header("Gameplay Control")]
     [SerializeField] private InputDragLaunch dragLaunch;
 
     private string[] facts;
-    private bool hasShownPopup = false;
 
     private void Awake()
     {
@@ -31,26 +30,21 @@ public class EducationalPopupController : MonoBehaviour
         };
     }
 
-    private void Start()
-    {
-        ShowRandomFact();  
-    }
-
     // ---------------------------------------------------------
     // Show a random educational message
     // ---------------------------------------------------------
-    private void ShowRandomFact()
+    public void ShowEducationalPopup()
     {
-        if (hasShownPopup) return; // don’t show twice after reset
-
-        hasShownPopup = true;
 
         if (dragLaunch != null)
             dragLaunch.enabled = false;
 
         string fact = facts[Random.Range(0, facts.Length)];
 
-        popupUI.Show(fact);
+        if (modalManager != null)
+        {
+            modalManager.ShowEducation(fact);
+        }
     }
 
     // ---------------------------------------------------------
@@ -58,7 +52,10 @@ public class EducationalPopupController : MonoBehaviour
     // ---------------------------------------------------------
     public void CloseEducationalPopup()
     {
-        popupUI.Hide();
+        if (modalManager != null)
+        {
+            modalManager.HideEducation();
+        }
 
         if (dragLaunch != null)
             dragLaunch.enabled = true;

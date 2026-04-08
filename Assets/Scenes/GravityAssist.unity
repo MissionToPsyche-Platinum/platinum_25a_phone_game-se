@@ -200,10 +200,8 @@ RectTransform:
   m_Children:
   - {fileID: 1973510857}
   - {fileID: 532406811}
-  - {fileID: 497760344}
   - {fileID: 741719197}
   - {fileID: 553344304}
-  - {fileID: 875620228}
   - {fileID: 1635890998}
   - {fileID: 1196882191}
   - {fileID: 936109958}
@@ -500,6 +498,7 @@ Transform:
   - {fileID: 460712240}
   - {fileID: 1076929023}
   - {fileID: 466321302}
+  - {fileID: 875620228}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &196990281
@@ -2311,81 +2310,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 138289493}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &497760343
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 497760344}
-  - component: {fileID: 497760346}
-  - component: {fileID: 497760345}
-  m_Layer: 0
-  m_Name: InputBlocker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &497760344
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 497760343}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 38066560}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -1820, y: -980}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &497760345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 497760343}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &497760346
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 497760343}
-  m_CullTransparentMesh: 1
 --- !u!1 &502234344
 GameObject:
   m_ObjectHideFlags: 0
@@ -2678,7 +2602,6 @@ GameObject:
   - component: {fileID: 553344304}
   - component: {fileID: 553344306}
   - component: {fileID: 553344305}
-  - component: {fileID: 553344307}
   - component: {fileID: 553344308}
   m_Layer: 0
   m_Name: EducationPopupPanel
@@ -2686,7 +2609,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &553344304
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2748,22 +2671,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 553344303}
   m_CullTransparentMesh: 1
---- !u!114 &553344307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 553344303}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 402a58222c1d38746ae5fcf2d106f61f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 553344303}
-  titleText: {fileID: 1619967127}
-  bodyText: {fileID: 2075726038}
-  canvasGroup: {fileID: 553344308}
 --- !u!225 &553344308
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -3232,6 +3139,8 @@ GameObject:
   m_Component:
   - component: {fileID: 713586242}
   - component: {fileID: 713586243}
+  - component: {fileID: 713586244}
+  - component: {fileID: 713586245}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3266,19 +3175,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d682a6c770acf134f9252938c3480253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupUI: {fileID: 741719198}
+  popupUI: {fileID: 713586244}
   messageText: {fileID: 1221965539}
+  modalManager: {fileID: 713586245}
   dragLaunch: {fileID: 1076929025}
   introOverlayPanel: {fileID: 1635890997}
   introDuration: 3
-  confirmExitPanel: {fileID: 1196882190}
-  confirmExitYesButton: {fileID: 359882310}
-  confirmExitNoButton: {fileID: 1576770651}
-  developerInfoPanel: {fileID: 936109957}
+  educationalPopupController: {fileID: 875620229}
   accuracyWeight: 0.7
   fuelWeight: 0.3
   maxOrbitError: 5
   maxLaunchPower: 10
+--- !u!114 &713586244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713586241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7013db757212f954793299bb47bf2fb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupPanel: {fileID: 741719196}
+  popupTitle: {fileID: 72260416}
+  popupMessage: {fileID: 1221965539}
+--- !u!114 &713586245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 713586241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cd68d1b0bf45b04cab4d0b44597fc9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  introOverlayPanel: {fileID: 1635890997}
+  educationPopupPanel: {fileID: 553344303}
+  confirmExitPanel: {fileID: 1196882190}
+  developerInfoPanel: {fileID: 936109957}
+  settingsOverlay: {fileID: 884664711}
+  eduationTitleText: {fileID: 1619967127}
+  educationBodyText: {fileID: 2075726038}
+  educationCanvasGroup: {fileID: 553344308}
 --- !u!4 &732825114 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5978145600800788367, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
@@ -3300,7 +3242,6 @@ GameObject:
   - component: {fileID: 741719197}
   - component: {fileID: 741719200}
   - component: {fileID: 741719199}
-  - component: {fileID: 741719198}
   - component: {fileID: 741719201}
   m_Layer: 0
   m_Name: PopupPanel
@@ -3308,7 +3249,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &741719197
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3330,23 +3271,8 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -300, y: -300}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &741719198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741719196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7013db757212f954793299bb47bf2fb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  popupPanel: {fileID: 741719196}
-  popupTitle: {fileID: 72260416}
-  popupMessage: {fileID: 1221965539}
 --- !u!114 &741719199
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3360,7 +3286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 0.92156863}
+  m_Color: {r: 0.6226415, g: 0.5838733, b: 0.5838733, a: 0.38431373}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3555,16 +3481,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 875620227}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 3.0392995}
+  m_LocalScale: {x: 0.4389757, y: 0.4389757, z: 0.4389757}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 38066560}
+  m_Father: {fileID: 138289493}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -182.64282, y: 2.387848}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &875620229
@@ -3579,7 +3505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea8893037aa9ec744b75a108f30c3c2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupUI: {fileID: 553344307}
+  modalManager: {fileID: 713586245}
   dragLaunch: {fileID: 1076929025}
 --- !u!1 &884664711
 GameObject:
@@ -4016,7 +3942,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 741719198}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PopupUI, Assembly-CSharp
         m_MethodName: HidePopup
         m_Mode: 1
@@ -4124,12 +4050,6 @@ MonoBehaviour:
   maxDragDistance: 4
   dragToSpeed: 2.5
   clickRadius: 1.5
-  popupPanel: {fileID: 741719196}
-  educationPopupPanel: {fileID: 553344303}
-  introOverlayPanel: {fileID: 1635890997}
-  confirmationPanel: {fileID: 1196882190}
-  developmentInfoPanel: {fileID: 936109957}
-  inputBlocker: {fileID: 0}
 --- !u!114 &1076929026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6609,7 +6529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

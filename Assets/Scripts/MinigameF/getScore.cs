@@ -7,17 +7,17 @@ public class getScore : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    [SerializeField] public PointTracker pt;
+    [SerializeField] displayScore pt;
     [SerializeField] TMP_Text tm;
 
     void Start()
     {
-        tm.text = pt.score + "";
+        tm.text = pt.getScore() + "";
     }
 
     // Update is called once per frame
     void Update()
     {
-        tm.text = pt.score + "";
+        tm.text = pt.getScore() + "";
     }
 }
