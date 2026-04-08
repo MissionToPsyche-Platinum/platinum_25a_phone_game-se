@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 public class MinigameBWireColorLinkLogic : MonoBehaviour
 {
     [SerializeField] private AudioClipManager audioClipManager;
+    [SerializeField] private MusicManager musicManager;
 
     [SerializeField] private GameObject[] minigameBgrid;
     [SerializeField] private GameObject endScreen;
@@ -35,7 +36,7 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
     private int currentWire = -1;
 
     private bool dragging = false;
-
+    private bool congratsPlayed = false;
 
     private const string PREF_TUT_KEY = "TutorialsOn";
 
@@ -580,7 +581,12 @@ public class MinigameBWireColorLinkLogic : MonoBehaviour
             }
             if (wires >= 3)
             {
-                audioClipManager.PlayCongrats();
+                if (!congratsPlayed)
+                {
+                    musicManager.StopMusic();
+                    audioClipManager.PlayCongrats();
+                    congratsPlayed = true;
+                }
                 endScreen.SetActive(true);
             }
         }
