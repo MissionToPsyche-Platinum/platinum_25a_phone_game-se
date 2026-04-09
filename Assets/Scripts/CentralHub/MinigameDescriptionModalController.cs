@@ -86,7 +86,7 @@ public class MinigameDescriptionModalController : MonoBehaviour
             "Launch",
             "Guide the Psyche spacecraft through a three-level launch sequence. Navigate through target rings while avoiding obstacles to maintain speed and successfully reach the final ejection point.",
             "This minigame represents the Launch phase of the Psyche mission, where a SpaceX Falcon Heavy rocket carried the spacecraft beyond Earth's gravity and placed it on its journey toward the Psyche asteroid.",
-            "MinigameD-Tutorial"
+            "MinigameD-Start-Menu"
         );
     }
 
