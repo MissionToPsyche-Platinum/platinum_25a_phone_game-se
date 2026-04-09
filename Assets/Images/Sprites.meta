@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Images/Sprites.meta
 guid: 136605347acea5a43979352fb36b71dd
+========
+guid: 9079628e40fae2d43983512c49e2f96a
+>>>>>>>> origin/dev:Assets/Assets/Sprites.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

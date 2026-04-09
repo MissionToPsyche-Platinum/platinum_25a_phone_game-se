@@ -35,13 +35,13 @@ public class MenuSceneSchange : MonoBehaviour
     public void SwitchToSceneMinigameC()
     {
         Debug.Log("Switching to Minigame C");
-        UnavailableScreen.SetActive(true);
+        StartCoroutine(LoadSceneWithDelay("MinigameC"));
     }
 
     public void SwitchToSceneMinigameD()
     {
         Debug.Log("Switching to Minigame D");
-        StartCoroutine(LoadSceneWithDelay("MinigameD-Tutorial"));
+        StartCoroutine(LoadSceneWithDelay("MinigameD-Start-Menu"));
     }
 
     public void SwitchToSceneMinigameE()

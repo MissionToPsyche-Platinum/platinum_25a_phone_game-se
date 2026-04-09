@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,33 +12,37 @@ public class StageManager : MonoBehaviour
     [SerializeField] pause asteroid;
     [SerializeField] GameObject endGame;
     [SerializeField] GameObject menu;
+    
+    [SerializeField] orbitPschye speed;
 
-    [SerializeField] spinDiff diff;
-    [SerializeField] orbitPschye speed;    
+    //first stage horizontal 2nd stage obstacle 1 both 
+    [SerializeField] moveVert obstacle1;
+    [SerializeField] moveVert obstacle2;
+    //first stage vertical 2nd stage obsacle 3 both
+    [SerializeField] moveHorz obstacle3;
+    [SerializeField] moveHorz obstacle4;
 
     public int difficulty = 0;
     
-    private float time = 10f;
+    private float time = 60f;
     private int stage = 0;
-    private float stageTime = 30f;
+    private float stageTime = 60f;
 
-
-    public string SceneName;
+    
     [SerializeField] private Transform obj;
-    [SerializeField] private SpawnBubble bubble;
+    [SerializeField] private TMP_Text timer;
     
 
 
 
-
-
-    Vector3 scale = new Vector3(5,5,5);
+     
 
     // Start is called before the first frame update
     void Start()
     {
         difficulty = setDiff.Instance.getDiff();
         Debug.Log(difficulty);
+        timer.text = stageTime + "";
 
     }
 
@@ -45,6 +50,8 @@ public class StageManager : MonoBehaviour
     void Update()
     {
         stageTime -= Time.deltaTime;
+        timer.text = (int) stageTime + "";
+
         //Debug.Log("timer = " + stageTime);
 
         if (stageTime <= 0f)        {
@@ -70,20 +77,23 @@ public class StageManager : MonoBehaviour
         else if (stage == 1)
         {
             
-            StartCoroutine(scaleOverTime(7.5f, 7.5f));
+            StartCoroutine(scaleOverTime(7.5f, 1.25f));           
             
-            diff.setStage(1);
-            speed.setSpeed(-0.5f);
+            speed.setSpeed(-0.75f);
+            obstacle1.enabled = true;
+            obstacle3.enabled = true;
             
 
         }
         else if (stage == 2)
         {
 
-            StartCoroutine(scaleOverTime(7.5f, 10f));
+            StartCoroutine(scaleOverTime(7.5f, 1.40f));
             
-            diff.setStage(2);
+            
             speed.setSpeed(-1f);
+            obstacle2.enabled = true;
+            obstacle4.enabled = true;
             
 
 
@@ -104,6 +114,7 @@ public class StageManager : MonoBehaviour
         Vector3 startScale = transform.localScale;
         Vector3 endScale = Vector3.one * scale;
         float elapsed = 0f;
+        stageTime = 0;
 
         
         while (elapsed < duration)
@@ -116,8 +127,9 @@ public class StageManager : MonoBehaviour
         }
         Debug.Log("Check");
 
-        bubble.setRadius(((scale + 1) / 2) - 0.05f);
-        transform.localScale = endScale;        
+        
+        transform.localScale = endScale;
+        stageTime = 60;
         
 
     }

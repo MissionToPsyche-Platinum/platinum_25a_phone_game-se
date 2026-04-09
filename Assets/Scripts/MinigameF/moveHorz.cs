@@ -25,7 +25,7 @@ public class moveHorz : MonoBehaviour
             obj1direction = false;
         }
 
-        if (obj1.position.x <= -6)
+        if (obj1.position.x <= -8.5)
         {
             obj1direction = true;
         }

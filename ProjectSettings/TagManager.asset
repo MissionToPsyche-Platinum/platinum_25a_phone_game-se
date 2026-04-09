@@ -12,6 +12,7 @@ TagManager:
   - PenaltyRing
   - JumpRing
   - ShieldRing
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -61,4 +62,19 @@ TagManager:
     locked: 0
   - name: IntroPanel
     uniqueID: 3110812965
+    locked: 0
+  - name: surface
+    uniqueID: 2202501007
+    locked: 0
+  - name: envionment
+    uniqueID: 2239801743
+    locked: 0
+  - name: boundry
+    uniqueID: 3067450911
+    locked: 0
+  - name: npc
+    uniqueID: 4076950345
+    locked: 0
+  - name: player
+    uniqueID: 1287307621
     locked: 0
