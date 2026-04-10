@@ -8079,17 +8079,37 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1986863773367050512, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986863773367050512, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
+      propertyPath: m_FlipY
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986863773367050512, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
       propertyPath: m_Size.x
-      value: 7.46
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1986863773367050512, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
       propertyPath: m_Size.y
-      value: 6.29
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1986863773367050512, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: ad266032d2a05be439dd705de540c074, type: 3}
+      objectReference: {fileID: 751439714467398196, guid: ce9103e2fb976ac4e97822982a19d1c5, type: 3}
+    - target: {fileID: 1986863773367050512, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
+      propertyPath: m_DrawMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986863773367050512, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
+      propertyPath: m_MaskInteraction
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986863773367050512, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1986863773367050512, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -8103,12 +8123,20 @@ PrefabInstance:
       value: Spacecraft
       objectReference: {fileID: 0}
     - target: {fileID: 5978145600800788367, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.40268096
+      objectReference: {fileID: 0}
+    - target: {fileID: 5978145600800788367, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.3255962
+      objectReference: {fileID: 0}
+    - target: {fileID: 5978145600800788367, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 5978145600800788367, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 5978145600800788367, guid: 903034e375b3e1c41967e8c4c3ba93b5, type: 3}
       propertyPath: m_LocalPosition.z
