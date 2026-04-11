@@ -18,7 +18,6 @@ public class RingGenerator : MonoBehaviour
     private float tileHeight;
 
     private new Camera camera;
-
     void Start()
     {
         camera = Camera.main;

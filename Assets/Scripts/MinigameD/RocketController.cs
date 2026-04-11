@@ -1,10 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RocketController : MonoBehaviour
 {
     public Transform background;
+    private new Camera camera;
 
     public float moveSpeed = 7.5f;
     public float maxDragDistance = 200f; // drag sensitivity 
@@ -19,6 +18,11 @@ public class RocketController : MonoBehaviour
 
     void Start()
     {
+        camera = Camera.main;
+        float cameraWidth = camera.orthographicSize * 2 * camera.aspect;
+        float cameraMinX = camera.transform.position.x - cameraWidth / 2f;
+        float cameraMaxX = camera.transform.position.x + cameraWidth / 2f;
+
         if (background != null)
         {
             // get background bounds in world units
@@ -26,8 +30,8 @@ public class RocketController : MonoBehaviour
             float backgroundCenterX = background.position.x;
             float playerQuarterWidth = GetComponent<SpriteRenderer>().bounds.extents.x / 2;
 
-            minX = backgroundCenterX - backgroundHalfWidth + playerQuarterWidth;
-            maxX = backgroundCenterX + backgroundHalfWidth - playerQuarterWidth;
+            minX = Mathf.Max(backgroundCenterX - backgroundHalfWidth, cameraMinX) + playerQuarterWidth;
+            maxX = Mathf.Min(backgroundCenterX + backgroundHalfWidth, cameraMaxX) - playerQuarterWidth;
         }
         else
         {
