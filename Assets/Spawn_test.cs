@@ -7,8 +7,8 @@ public class Spawn_test : MonoBehaviour
 {
     [SerializeField] MeshRenderer pointMR;
     [SerializeField] ParticleSystem clickParticles;
-   // [SerializeField] AudioSource succaudio;
-   // [SerializeField] AudioSource failaudio;
+    [SerializeField] AudioSource succaudio;
+    [SerializeField] AudioSource failaudio;
     [SerializeField] Material red;    
 
     [SerializeField] SpriteRenderer circle;
@@ -65,8 +65,14 @@ public class Spawn_test : MonoBehaviour
         {
             clickParticles.transform.position = transform.position;
             clickParticles.Play();
-            //audio.Play();
-            score.addScore(points);
+            if(circle.enabled == true)
+            {
+                succaudio.Play();
+            }else if(pointMR.enabled == true)
+            {
+                failaudio.Play();
+            }                
+                score.addScore(points);
             circle.enabled = false;
             pointMR.enabled = false;
         }
