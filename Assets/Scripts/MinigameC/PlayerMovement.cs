@@ -11,7 +11,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        // Get SpriteRenderer component if not assigned
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
@@ -25,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
             vertical   = PhaseCMobileInput.Vertical;
         }
 
-        // Keyboard/gamepad always supplements — covers editor testing and physical keyboards on mobile
+        // Keyboard/gamepad always supplements - covers editor testing and physical keyboards on mobile
         float kh = Input.GetAxis("Horizontal");
         float kv = Input.GetAxis("Vertical");
         if (Mathf.Abs(kh) > Mathf.Abs(horizontal)) horizontal = kh;
@@ -34,17 +33,15 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("Xinput", horizontal);
         animator.SetFloat("Yinput", vertical);
         
-        // Flip sprite for left/right movement
         // Side sprites face left by default, so flip when moving right
         if (horizontal != 0 && spriteRenderer != null)
         {
             spriteRenderer.flipX = horizontal > 0;
         }
         
-        // Create movement vector and normalize to prevent faster diagonal movement
+        // Normalize to prevent faster diagonal movement
         Vector2 inputVector = new Vector2(horizontal, vertical);
-        
-        // Normalize to ensure consistent speed in all directions (including diagonals)
+
         if (inputVector.magnitude > 0.1f)
         {
             inputVector = inputVector.normalized;

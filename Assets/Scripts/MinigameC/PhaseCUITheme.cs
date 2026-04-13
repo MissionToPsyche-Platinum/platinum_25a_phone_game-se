@@ -3,7 +3,7 @@ using UnityEngine;
 /// <summary>
 /// Shared Phase C UI design tokens: colors, spacing, typography.
 /// Use for opening, guide bar, story moments, and any Phase C overlay for consistent UX.
-/// Mobile values are intentionally large — the primary target is phone screens.
+/// Mobile values are intentionally large - the primary target is phone screens.
 /// </summary>
 public static class PhaseCUITheme
 {
@@ -50,15 +50,15 @@ public static class PhaseCUITheme
     public const float PaddingTight    = 24f;
     public const float PaddingWide     = 48f;
     public const float AccentBarHeight = 5f;
-    public const float MinTouchHeight  = 56f;   // bump from 48 → 56 for phone fingers
-    public const float ButtonHeight    = 60f;   // bump from 52 → 60
-    public const float ButtonWidthMin  = 300f;  // bump from 280 → 300
+    public const float MinTouchHeight  = 56f;
+    public const float ButtonHeight    = 60f;
+    public const float ButtonWidthMin  = 300f;
     public const float DotSize         = 14f;
     public const float DotSpacing      = 32f;
     public const float GuideDotSize    = 14f;
     public const float GuideDotSpacing = 36f;
 
-    // ---- Typography (static constants — used by opening screen & story moments) ----
+    // ---- Typography (static constants - used by opening screen & story moments) ----
     public const float FontSizeBadge        = 13f;
     public const float FontSizeTitle        = 34f;
     public const float FontSizeBody         = 26f;
@@ -147,7 +147,7 @@ public static class PhaseCUITheme
     public static int   GetHubButtonFont()   => IsMobileScreen ?  20  :  15;
     public static float GetHubBottomOffset() => GetHintStripHeight() + 8f;
 
-    // ---- Guide panel (top strip — no step-dot row) ----
+    // ---- Guide panel (top strip - no step-dot row) ----
 
     public static float GetGuidePanelHeight()       => IsMobileScreen ? 220f : 150f;
     public static float GetGuideStepTitleFontSize() => IsMobileScreen ?  32f :  22f;

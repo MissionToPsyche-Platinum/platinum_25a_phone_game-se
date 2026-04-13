@@ -400,6 +400,6 @@ public class PhaseCGuideUI : MonoBehaviour
         stepTitleText.text = $"Step {stepInfo.StepNumber} of {stepInfo.StepCount}: {stepInfo.Title}";
         objectiveText.text = !string.IsNullOrEmpty(stepInfo.CollectObjective) ? stepInfo.CollectObjective : stepInfo.Summary;
         talkToText.text = $"Talk to: {stepInfo.CompletionNpc}";
-        controlsText.text = "E/Space: talk | I: inventory | P: save | Tab: menu";
+        controlsText.text = "E/Space: talk | I: inventory | P: save";
     }
 }

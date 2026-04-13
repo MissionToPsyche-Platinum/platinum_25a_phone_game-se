@@ -21,7 +21,7 @@ public class SpacecraftAssemblyVisualizer : MonoBehaviour
     private const string TargetScene = "MinigameC";
     private const string LibraryPath = "MinigameC/SpacecraftSpriteLibrary";
 
-    // HUD panel dimensions — responsive values pulled from PhaseCUITheme at runtime.
+    // HUD panel dimensions - responsive values pulled from PhaseCUITheme at runtime.
     private const float EdgeMargin  = 14f;
 
     private const float FadeDuration = 0.5f;
