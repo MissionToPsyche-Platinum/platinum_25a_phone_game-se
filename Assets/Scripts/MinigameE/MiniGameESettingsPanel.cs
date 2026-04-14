@@ -7,6 +7,7 @@ using TMPro;
 
 public class MiniGameESettingsPanel : MonoBehaviour
 {
+
     [Header("Settings Panel")]
     [SerializeField] private GameObject settingsOverlay;
     [SerializeField] private GameObject settingsCard;
@@ -17,11 +18,15 @@ public class MiniGameESettingsPanel : MonoBehaviour
     [SerializeField] private TMP_Text volumePercentText;
     [SerializeField] private AudioManager audioManager;
 
+    [Header("Educational Popup")]
+    [SerializeField] private Toggle disableEducationToggle;
+
     [Header("Default Volume")]
     [Range(0f, 1f)]
     [SerializeField] private float defaultVolume = 0.7f;
 
     private const string PREF_KEY= "MasterVolume";
+    private const string PREF_DISABLE_EDU = "MinigameE_DisableEducationalPopups";
 
     private bool isOpen = false;
     private void Awake()
@@ -43,6 +48,14 @@ public class MiniGameESettingsPanel : MonoBehaviour
 
         ApplyVolume(saved);
         UpdatePercentText(saved);
+
+        // Load educational popup preference
+        bool disableEducation = PlayerPrefs.GetInt(PREF_DISABLE_EDU, 0) == 1;
+        if (disableEducationToggle != null)
+        {
+            disableEducationToggle.isOn = disableEducation;
+            disableEducationToggle.onValueChanged.AddListener(OnDisableEducationChanged);
+        }
     }
 
     private void OnDestroy()
@@ -52,6 +65,9 @@ public class MiniGameESettingsPanel : MonoBehaviour
 
         if (SettingsButton != null)            
             SettingsButton.onClick.RemoveListener(Toggle);
+
+        if (disableEducationToggle != null)
+            disableEducationToggle.onValueChanged.RemoveListener(OnDisableEducationChanged);
     }
 
     public void Toggle()
@@ -132,4 +148,12 @@ public class MiniGameESettingsPanel : MonoBehaviour
         
     }
 
+    private void OnDisableEducationChanged(bool isDisabled)
+    {
+        if (audioManager != null)
+            audioManager.PlayButtonClick();
+
+        PlayerPrefs.SetInt(PREF_DISABLE_EDU, isDisabled ? 1 : 0);
+        PlayerPrefs.Save();
+    }
 }
