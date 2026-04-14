@@ -18,6 +18,7 @@ public class SettingsManager : MonoBehaviour
 
     [Header("Managers")]
     [SerializeField] private AudioClipManager audioClipManager;
+    [SerializeField] private MusicManager musicManager;
 
     [Header("Default")]
     [SerializeField] private float defaultVolume = 0.2f;
@@ -117,6 +118,10 @@ public class SettingsManager : MonoBehaviour
         if (audioClipManager != null)
         {
             audioClipManager.UpdateVolume();
+        }
+        if (musicManager != null)
+        {
+            musicManager.UpdateVolume();
         }
     }
 
