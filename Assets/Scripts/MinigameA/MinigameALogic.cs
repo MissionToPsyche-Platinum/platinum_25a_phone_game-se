@@ -21,6 +21,7 @@ public class MinigameALogic : MonoBehaviour
     [SerializeField] private Sprite xSprite;
 
     private int[] checks;
+    private bool congratsPlayed = false;
 
     [SerializeField] private GameObject tutorial;
 
@@ -31,6 +32,8 @@ public class MinigameALogic : MonoBehaviour
     [SerializeField] private TextMeshProUGUI clues2;
     [SerializeField] private TextMeshProUGUI clues3;
     [SerializeField] private TextMeshProUGUI clues4;
+
+    [SerializeField] private MusicManager musicManager;
 
     private const string PREF_TUT_KEY = "TutorialsOn";
 
@@ -173,7 +176,12 @@ public class MinigameALogic : MonoBehaviour
         }
         if (totalChecks >= 5) 
         {
-            audioClipManager.PlayCongrats();
+            if (!congratsPlayed)
+            {
+                musicManager.StopMusic();
+                audioClipManager.PlayCongrats();
+                congratsPlayed = true;
+            }
             endScreen.SetActive(true);
         }
     }

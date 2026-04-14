@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: square
+      name: Square
       rect:
         serializedVersion: 2
         x: 0
@@ -141,7 +141,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      square: -6354616222474237749
+      Square: -6354616222474237749
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
