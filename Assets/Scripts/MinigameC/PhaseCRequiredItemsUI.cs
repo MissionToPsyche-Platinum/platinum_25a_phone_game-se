@@ -275,13 +275,23 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
         List<int> requiredIds = controller.GetCurrentStepRequiredItemIds();
         PhaseCAssemblyController.StepInfo stepInfo = controller.GetCurrentStepInfo();
 
+        panelObject.SetActive(true);
+
         if (requiredIds == null || requiredIds.Count == 0)
         {
-            panelObject.SetActive(false);
+            // No items needed for this step - show a placeholder message
+            if (npcText != null)
+                npcText.text = string.IsNullOrEmpty(stepInfo.CompletionNpc)
+                    ? "No items needed"
+                    : $"See: {stepInfo.CompletionNpc}";
+            foreach (GameObject row in itemRows) { if (row != null) Destroy(row); }
+            itemRows.Clear();
+            lastExpandedHeight = PhaseCUITheme.GetSidePanelHeight();
+            if (!isPanelMinimized && panelRect != null)
+                panelRect.sizeDelta = new Vector2(PhaseCUITheme.GetRequiredPanelWidthExpanded(),
+                                                  PhaseCUITheme.GetSidePanelHeight());
             return;
         }
-
-        panelObject.SetActive(true);
 
         if (npcText != null && !string.IsNullOrEmpty(stepInfo.CompletionNpc))
             npcText.text = "Bring to: " + stepInfo.CompletionNpc;

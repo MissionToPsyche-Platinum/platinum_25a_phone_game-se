@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
-/// Permanent HUD panel (top-right corner) that shows the spacecraft being built
+/// Permanent HUD panel (bottom-left corner) that shows the spacecraft being built
 /// as the player completes Phase C steps.  Auto-created via RuntimeInitializeOnLoadMethod.
 ///
 /// State mapping (StepChanged.StepNumber is the NEXT/current step):
@@ -32,6 +32,12 @@ public class SpacecraftAssemblyVisualizer : MonoBehaviour
     private Text                    stepLabel;
     private int                     currentState;
     private Coroutine               transitionCoroutine;
+
+    // Minimize / expand state
+    private bool          _isMinimized;
+    private RectTransform _panelRect;
+    private GameObject    _bodyRoot;
+    private Text          _toggleLabel;
 
     // ─── Bootstrap ───────────────────────────────────────────────────────────
 
@@ -114,6 +120,27 @@ public class SpacecraftAssemblyVisualizer : MonoBehaviour
         if (stepLabel != null) stepLabel.text = "Complete!";
     }
 
+    // ─── Minimize / expand ───────────────────────────────────────────────────
+
+    private void ToggleMinimize()
+    {
+        _isMinimized = !_isMinimized;
+
+        if (_bodyRoot != null)
+            _bodyRoot.SetActive(!_isMinimized);
+
+        if (_panelRect != null)
+        {
+            float h = _isMinimized
+                ? PhaseCUITheme.GetAssemblyTitleBarHeight()
+                : PhaseCUITheme.GetAssemblyPanelHeight();
+            _panelRect.sizeDelta = new Vector2(PhaseCUITheme.GetAssemblyPanelWidth(), h);
+        }
+
+        if (_toggleLabel != null)
+            _toggleLabel.text = _isMinimized ? "+" : "-";
+    }
+
     // ─── HUD construction ────────────────────────────────────────────────────
 
     private void BuildHUD()
@@ -135,6 +162,7 @@ public class SpacecraftAssemblyVisualizer : MonoBehaviour
         float panelW      = PhaseCUITheme.GetAssemblyPanelWidth();
         float panelH      = PhaseCUITheme.GetAssemblyPanelHeight();
         float bottomStart = PhaseCUITheme.GetHintStripHeight() + EdgeMargin;
+        float titleBarH   = PhaseCUITheme.GetAssemblyTitleBarHeight();
 
         GameObject panelGo = new GameObject("SpacecraftPanel");
         panelGo.transform.SetParent(canvasGo.transform, false);
@@ -142,17 +170,26 @@ public class SpacecraftAssemblyVisualizer : MonoBehaviour
         Image panelBg = panelGo.AddComponent<Image>();
         panelBg.color = new Color(0.05f, 0.08f, 0.18f, 0.88f);
 
-        RectTransform panelRect = panelGo.GetComponent<RectTransform>();
-        panelRect.anchorMin        = new Vector2(0f, 0f);
-        panelRect.anchorMax        = new Vector2(0f, 0f);
-        panelRect.pivot            = new Vector2(0f, 0f);
-        panelRect.anchoredPosition = new Vector2(EdgeMargin, bottomStart);
-        panelRect.sizeDelta        = new Vector2(panelW, panelH);
+        _panelRect                 = panelGo.GetComponent<RectTransform>();
+        _panelRect.anchorMin        = new Vector2(0f, 0f);
+        _panelRect.anchorMax        = new Vector2(0f, 0f);
+        _panelRect.pivot            = new Vector2(0f, 0f);
+        _panelRect.anchoredPosition = new Vector2(EdgeMargin, bottomStart);
+        _panelRect.sizeDelta        = new Vector2(panelW, panelH);
 
-        // ── Title ────────────────────────────────────────────────────────────
+        // ── Title row (always visible - contains label + toggle button) ───────
+        GameObject titleRowGo = new GameObject("TitleRow");
+        titleRowGo.transform.SetParent(panelGo.transform, false);
+        RectTransform titleRowRect    = titleRowGo.AddComponent<RectTransform>();
+        titleRowRect.anchorMin        = new Vector2(0f, 1f);
+        titleRowRect.anchorMax        = new Vector2(1f, 1f);
+        titleRowRect.pivot            = new Vector2(0.5f, 1f);
+        titleRowRect.sizeDelta        = new Vector2(0f, titleBarH);
+        titleRowRect.anchoredPosition = new Vector2(0f, -2f);
+
+        // Title label (left portion of title row)
         GameObject titleGo = new GameObject("Title");
-        titleGo.transform.SetParent(panelGo.transform, false);
-
+        titleGo.transform.SetParent(titleRowGo.transform, false);
         Text title        = titleGo.AddComponent<Text>();
         title.text        = "ASSEMBLY";
         title.font        = builtinFont;
@@ -160,30 +197,41 @@ public class SpacecraftAssemblyVisualizer : MonoBehaviour
         title.fontStyle   = FontStyle.Bold;
         title.color       = new Color(0.9f, 0.85f, 0.4f);
         title.alignment   = TextAnchor.MiddleCenter;
-
+        title.raycastTarget = false;
         RectTransform titleRect    = titleGo.GetComponent<RectTransform>();
-        titleRect.anchorMin        = new Vector2(0f, 1f);
-        titleRect.anchorMax        = new Vector2(1f, 1f);
-        titleRect.pivot            = new Vector2(0.5f, 1f);
-        titleRect.anchoredPosition = new Vector2(0f, -5f);
-        titleRect.sizeDelta        = new Vector2(0f, 20f);
+        titleRect.anchorMin        = new Vector2(0f, 0f);
+        titleRect.anchorMax        = new Vector2(0.75f, 1f);
+        titleRect.offsetMin        = new Vector2(4f, 0f);
+        titleRect.offsetMax        = Vector2.zero;
+
+        // Toggle button (right portion of title row)
+        AddToggleButton(titleRowGo.transform, builtinFont);
+
+        // ── Body root (hidden when minimized) ────────────────────────────────
+        _bodyRoot = new GameObject("Body");
+        _bodyRoot.transform.SetParent(panelGo.transform, false);
+        RectTransform bodyRootRect = _bodyRoot.AddComponent<RectTransform>();
+        bodyRootRect.anchorMin = new Vector2(0f, 0f);
+        bodyRootRect.anchorMax = new Vector2(1f, 1f);
+        bodyRootRect.offsetMin = new Vector2(0f, 0f);
+        bodyRootRect.offsetMax = new Vector2(0f, -(titleBarH + 4f));
 
         // ── Spacecraft image ─────────────────────────────────────────────────
         GameObject imgGo = new GameObject("SpacecraftImage");
-        imgGo.transform.SetParent(panelGo.transform, false);
+        imgGo.transform.SetParent(_bodyRoot.transform, false);
 
         spacecraftImage                 = imgGo.AddComponent<Image>();
         spacecraftImage.preserveAspect = true;
 
         RectTransform imgRect  = imgGo.GetComponent<RectTransform>();
         imgRect.anchorMin      = new Vector2(0.05f, 0.18f);
-        imgRect.anchorMax      = new Vector2(0.95f, 0.88f);
+        imgRect.anchorMax      = new Vector2(0.95f, 0.92f);
         imgRect.offsetMin      = Vector2.zero;
         imgRect.offsetMax      = Vector2.zero;
 
         // ── Step label ───────────────────────────────────────────────────────
         GameObject stepGo = new GameObject("StepLabel");
-        stepGo.transform.SetParent(panelGo.transform, false);
+        stepGo.transform.SetParent(_bodyRoot.transform, false);
 
         stepLabel           = stepGo.AddComponent<Text>();
         stepLabel.text      = "Step 1 / 6";
@@ -191,13 +239,53 @@ public class SpacecraftAssemblyVisualizer : MonoBehaviour
         stepLabel.fontSize  = PhaseCUITheme.GetAssemblyStepFont();
         stepLabel.color     = new Color(0.85f, 0.85f, 0.85f, 1f);
         stepLabel.alignment = TextAnchor.MiddleCenter;
+        stepLabel.raycastTarget = false;
 
         RectTransform stepRect    = stepGo.GetComponent<RectTransform>();
         stepRect.anchorMin        = new Vector2(0f, 0f);
         stepRect.anchorMax        = new Vector2(1f, 0f);
         stepRect.pivot            = new Vector2(0.5f, 0f);
         stepRect.anchoredPosition = new Vector2(0f, 5f);
-        stepRect.sizeDelta        = new Vector2(0f, 18f);
+        stepRect.sizeDelta        = new Vector2(0f, 22f);
+    }
+
+    private void AddToggleButton(Transform parent, Font font)
+    {
+        GameObject btnGo = new GameObject("ToggleBtn");
+        btnGo.transform.SetParent(parent, false);
+
+        Image btnBg = btnGo.AddComponent<Image>();
+        btnBg.color = new Color(0.2f, 0.28f, 0.42f, 0.9f);
+
+        Button btn = btnGo.AddComponent<Button>();
+        btn.targetGraphic = btnBg;
+        ColorBlock cb = btn.colors;
+        cb.highlightedColor = new Color(0.35f, 0.5f, 0.7f, 1f);
+        cb.pressedColor = new Color(0.5f, 0.65f, 0.85f, 1f);
+        btn.colors = cb;
+        btn.onClick.AddListener(ToggleMinimize);
+
+        RectTransform btnRect = btnGo.GetComponent<RectTransform>();
+        btnRect.anchorMin = new Vector2(0.75f, 0.1f);
+        btnRect.anchorMax = new Vector2(1f, 0.9f);
+        btnRect.offsetMin = new Vector2(2f, 0f);
+        btnRect.offsetMax = new Vector2(-4f, 0f);
+
+        GameObject labelGo = new GameObject("Label");
+        labelGo.transform.SetParent(btnGo.transform, false);
+        _toggleLabel = labelGo.AddComponent<Text>();
+        _toggleLabel.text = "-";
+        _toggleLabel.font = font;
+        _toggleLabel.fontSize = PhaseCUITheme.GetAssemblyTitleFont();
+        _toggleLabel.fontStyle = FontStyle.Bold;
+        _toggleLabel.color = PhaseCUITheme.AccentCyan;
+        _toggleLabel.alignment = TextAnchor.MiddleCenter;
+        _toggleLabel.raycastTarget = false;
+        RectTransform labelRect = labelGo.GetComponent<RectTransform>();
+        labelRect.anchorMin = Vector2.zero;
+        labelRect.anchorMax = Vector2.one;
+        labelRect.offsetMin = Vector2.zero;
+        labelRect.offsetMax = Vector2.zero;
     }
 
     // ─── Sprite helpers ──────────────────────────────────────────────────────

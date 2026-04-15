@@ -202,8 +202,10 @@ public class PhaseCPersistentHintUI : MonoBehaviour
         stripRect.anchorMin = new Vector2(0f, 0f);
         stripRect.anchorMax = new Vector2(1f, 0f);
         stripRect.pivot = new Vector2(0.5f, 0f);
+        // Shift up by the safe-area bottom inset (home bar on notch-less iPhones).
+        float safeBottom = PhaseCUITheme.GetSafeAreaBottomOffset();
         stripRect.sizeDelta = new Vector2(0f, stripHeight);
-        stripRect.anchoredPosition = Vector2.zero;
+        stripRect.anchoredPosition = new Vector2(0f, safeBottom);
 
         // Top border line
         GameObject topLineGo = new GameObject("TopLine");

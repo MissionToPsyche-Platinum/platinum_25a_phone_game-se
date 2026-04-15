@@ -181,8 +181,8 @@ public class PhaseCOpeningController : MonoBehaviour
         badgeRect.anchorMin = new Vector2(0.05f, 1f);
         badgeRect.anchorMax = new Vector2(0.95f, 1f);
         badgeRect.pivot = new Vector2(0.5f, 1f);
-        badgeRect.anchoredPosition = new Vector2(0f, -20f);
-        badgeRect.sizeDelta = new Vector2(0f, 34f);
+        badgeRect.anchoredPosition = new Vector2(0f, -16f);
+        badgeRect.sizeDelta = new Vector2(0f, PhaseCUITheme.GetOpeningBadgeStripHeight());
 
         // Panel border (frame behind panel)
         GameObject panelBorderObj = new GameObject("PanelBorder");
@@ -190,8 +190,8 @@ public class PhaseCOpeningController : MonoBehaviour
         Image borderBg = panelBorderObj.AddComponent<Image>();
         borderBg.color = new Color(PhaseCUITheme.PanelBorder.r, PhaseCUITheme.PanelBorder.g, PhaseCUITheme.PanelBorder.b, 0.6f);
         RectTransform borderRect = panelBorderObj.GetComponent<RectTransform>();
-        borderRect.anchorMin = new Vector2(0.1f, 0.16f);
-        borderRect.anchorMax = new Vector2(0.9f, 0.8f);
+        borderRect.anchorMin = PhaseCUITheme.GetOpeningBorderAnchorMin();
+        borderRect.anchorMax = PhaseCUITheme.GetOpeningBorderAnchorMax();
         borderRect.offsetMin = new Vector2(-4f, -4f);
         borderRect.offsetMax = new Vector2(4f, 4f);
 
@@ -202,8 +202,8 @@ public class PhaseCOpeningController : MonoBehaviour
         panelImage.color = PhaseCUITheme.PanelBg;
 
         RectTransform panelRect = panelObject.GetComponent<RectTransform>();
-        panelRect.anchorMin = new Vector2(0.12f, 0.18f);
-        panelRect.anchorMax = new Vector2(0.88f, 0.78f);
+        panelRect.anchorMin = PhaseCUITheme.GetOpeningPanelAnchorMin();
+        panelRect.anchorMax = PhaseCUITheme.GetOpeningPanelAnchorMax();
         panelRect.offsetMin = Vector2.zero;
         panelRect.offsetMax = Vector2.zero;
 
@@ -236,7 +236,7 @@ public class PhaseCOpeningController : MonoBehaviour
         titleRect.anchorMax = new Vector2(0.95f, 1f);
         titleRect.pivot = new Vector2(0.5f, 1f);
         titleRect.anchoredPosition = new Vector2(0f, -PhaseCUITheme.PaddingTight);
-        titleRect.sizeDelta = new Vector2(0f, PhaseCUITheme.IsMobileScreen ? 68f : 56f);
+        titleRect.sizeDelta = new Vector2(0f, PhaseCUITheme.GetOpeningTitleStripHeight());
 
         // Body text - fills middle area only, below title and above dots/button, centered
         GameObject bodyObject = new GameObject("OpeningBody");
@@ -296,7 +296,7 @@ public class PhaseCOpeningController : MonoBehaviour
         glowRect.anchorMax = new Vector2(0.5f, 0f);
         glowRect.pivot = new Vector2(0.5f, 0f);
         glowRect.anchoredPosition = new Vector2(0f, 32f);
-        glowRect.sizeDelta = new Vector2(PhaseCUITheme.ButtonWidthMin + 24f, PhaseCUITheme.ButtonHeight + 12f);
+        glowRect.sizeDelta = new Vector2(PhaseCUITheme.GetOpeningButtonWidth() + 24f, PhaseCUITheme.ButtonHeight + 12f);
 
         GameObject buttonObject = new GameObject("OpeningButton");
         buttonObject.transform.SetParent(panelObject.transform, false);
@@ -310,7 +310,7 @@ public class PhaseCOpeningController : MonoBehaviour
         buttonRect.anchorMax = new Vector2(0.5f, 0f);
         buttonRect.pivot = new Vector2(0.5f, 0f);
         buttonRect.anchoredPosition = new Vector2(0f, 36f);
-        buttonRect.sizeDelta = new Vector2(PhaseCUITheme.ButtonWidthMin, PhaseCUITheme.ButtonHeight);
+        buttonRect.sizeDelta = new Vector2(PhaseCUITheme.GetOpeningButtonWidth(), PhaseCUITheme.ButtonHeight);
 
         // Button border accent
         GameObject buttonBorder = new GameObject("ButtonBorder");
