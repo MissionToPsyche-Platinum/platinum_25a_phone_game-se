@@ -7,11 +7,11 @@ public class MusicManager : MonoBehaviour
     [SerializeField] private AudioSource musicSource;
 
     private float currentVolume = 0.2f;
-    private const string PREF_KEY = "MasterVolume";
+    private const string PREF_MUSIC_KEY = "MusicVolume";
 
     void Start()
     {
-        currentVolume = PlayerPrefs.GetFloat(PREF_KEY, currentVolume);
+        currentVolume = PlayerPrefs.GetFloat(PREF_MUSIC_KEY, currentVolume);
     }
 
     void Update()
@@ -21,7 +21,7 @@ public class MusicManager : MonoBehaviour
 
     public void UpdateVolume()
     {
-        currentVolume = PlayerPrefs.GetFloat(PREF_KEY, currentVolume);
+        currentVolume = PlayerPrefs.GetFloat(PREF_MUSIC_KEY, currentVolume);
     }
     public void StopMusic()
     {

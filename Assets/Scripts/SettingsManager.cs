@@ -13,6 +13,8 @@ public class SettingsManager : MonoBehaviour
 
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private TMP_Text volumePercentText;
+    [SerializeField] private Slider musicVolumeSlider;
+    [SerializeField] private TMP_Text musicVolumePercentText;
     [SerializeField] private Toggle tutorialToggle;
     [SerializeField] private Toggle fontToggle;
 
@@ -26,6 +28,7 @@ public class SettingsManager : MonoBehaviour
     [SerializeField] private bool defaultFont = false;
 
     private const string PREF_KEY = "MasterVolume";
+    private const string PREF_MUSIC_KEY = "MusicVolume";
     private const string PREF_TUT_KEY = "TutorialsOn";
     private const string PREF_FONT_KEY = "AccessibleFont";
     private bool isOpen = false;
@@ -46,6 +49,14 @@ public class SettingsManager : MonoBehaviour
             volumeSlider.maxValue = 1f;
             volumeSlider.value = saved;
             volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
+        }
+        float savedMusic = Mathf.Clamp01(PlayerPrefs.GetFloat(PREF_MUSIC_KEY, defaultVolume));
+        if (musicVolumeSlider != null)
+        {
+            musicVolumeSlider.minValue = 0f;
+            musicVolumeSlider.maxValue = 1f;
+            musicVolumeSlider.value = savedMusic;
+            musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
         }
         bool savedTutorial = PlayerPrefs.GetInt(PREF_TUT_KEY, defaultTutorial ? 1 : 0) == 1;
         if (tutorialToggle != null)
@@ -119,6 +130,16 @@ public class SettingsManager : MonoBehaviour
         {
             audioClipManager.UpdateVolume();
         }
+    }
+
+    private void OnMusicVolumeChanged(float value)
+    {
+        value = Mathf.Clamp01(value);
+
+        PlayerPrefs.SetFloat(PREF_MUSIC_KEY, value);
+        PlayerPrefs.Save();
+
+        UpdateMusicPercentText(value);
         if (musicManager != null)
         {
             musicManager.UpdateVolume();
@@ -130,6 +151,14 @@ public class SettingsManager : MonoBehaviour
         if (volumePercentText == null) return;
         int percent = Mathf.RoundToInt(value * 100f);
         volumePercentText.text = $"{percent}%";
+
+    }
+
+    private void UpdateMusicPercentText(float value)
+    {
+        if (musicVolumePercentText == null) return;
+        int percent = Mathf.RoundToInt(value * 100f);
+        musicVolumePercentText.text = $"{percent}%";
 
     }
 
@@ -154,6 +183,5 @@ public class SettingsManager : MonoBehaviour
             }
         }
     }
-
 
 }
