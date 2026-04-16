@@ -1879,6 +1879,7 @@ GameObject:
   - component: {fileID: 846810001}
   - component: {fileID: 846810000}
   - component: {fileID: 846809999}
+  - component: {fileID: 846810002}
   m_Layer: 5
   m_Name: ContinueBtn
   m_TagString: Untagged
@@ -1950,9 +1951,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 209709500}
-        m_TargetAssemblyTypeName: StepController, Assembly-CSharp
-        m_MethodName: ShowPage4
+      - m_Target: {fileID: 846810002}
+        m_TargetAssemblyTypeName: SwitchScene, Assembly-CSharp
+        m_MethodName: ChangeScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2000,6 +2001,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846809997}
   m_CullTransparentMesh: 1
+--- !u!114 &846810002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846809997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50a87d127cd9d1f479def5934dc7a2af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneName: MinigameD-Level2
 --- !u!1 &971597158
 GameObject:
   m_ObjectHideFlags: 0

@@ -461,6 +461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: CentralHub
+  tutorialPart: 1
 --- !u!114 &487050975
 MonoBehaviour:
   m_ObjectHideFlags: 0
