@@ -21,6 +21,8 @@ public class MissionTimer : MonoBehaviour
     [SerializeField] private float startingTimeSeconds = 300f;
     [SerializeField] private float warningThresholdSeconds  = 60f;  // yellow below 1 min
     [SerializeField] private float criticalThresholdSeconds = 30f;  // red + pulse below 30 s
+    [SerializeField] private float warningSoundStartElapsedSeconds = 285f; // 04:45 elapsed
+    [SerializeField] private float warningSoundEndElapsedSeconds = 300f;   // 05:00 elapsed
 
     private float currentTime;
     private bool isRunning;
@@ -96,6 +98,7 @@ public class MissionTimer : MonoBehaviour
 
         currentTime -= Time.deltaTime;
         if (currentTime < 0f) currentTime = 0f;
+        UpdateWarningSoundWindow();
         UpdateTimerDisplay();
 
         // Pulse panel bg red when critical
@@ -112,6 +115,7 @@ public class MissionTimer : MonoBehaviour
         {
             expiredHandled = true;
             isRunning = false;
+            MinigameCAudioManager.StopWarningAlarmLoop();
             OnTimeExpired();
         }
     }
@@ -132,7 +136,7 @@ public class MissionTimer : MonoBehaviour
         TimeExpired?.Invoke();
 
         // 4. Pause and show popup
-        MinigameCAudioManager.PlayTimerAlarm();
+        MinigameCAudioManager.StopWarningAlarmLoop();
         Time.timeScale = 0f;
         ShowTimeUpPopup();
     }
@@ -151,6 +155,7 @@ public class MissionTimer : MonoBehaviour
         expiredHandled = false;
         isRunning      = true;
         Time.timeScale = 1f;
+        MinigameCAudioManager.StopWarningAlarmLoop();
 
         UpdateTimerDisplay();
     }
@@ -214,6 +219,21 @@ public class MissionTimer : MonoBehaviour
         // Restore normal panel bg once outside critical zone
         if (currentTime > criticalThresholdSeconds && timerPanelBg != null)
             timerPanelBg.color = PhaseCUITheme.PanelBg;
+    }
+
+    private void UpdateWarningSoundWindow()
+    {
+        if (startingTimeSeconds <= 0f)
+            return;
+
+        float elapsed = startingTimeSeconds - currentTime;
+        bool inWindow = elapsed >= warningSoundStartElapsedSeconds
+                        && elapsed < warningSoundEndElapsedSeconds;
+
+        if (inWindow)
+            MinigameCAudioManager.StartWarningAlarmLoop();
+        else
+            MinigameCAudioManager.StopWarningAlarmLoop();
     }
 
     // ── Popup ────────────────────────────────────────────────────────────────

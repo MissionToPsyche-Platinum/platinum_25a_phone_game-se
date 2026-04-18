@@ -14,6 +14,7 @@ public class MinigameCAudioManager : MonoBehaviour
 
     private AudioSource _musicSource;
     private AudioSource _sfxSource;
+    private AudioSource _warningLoopSource;
 
     private AudioClip _backgroundMusic;
     private AudioClip _dialogueBoxOpenClose;
@@ -54,6 +55,11 @@ public class MinigameCAudioManager : MonoBehaviour
         _sfxSource = gameObject.AddComponent<AudioSource>();
         _sfxSource.loop = false;
         _sfxSource.volume = 0.8f;
+
+        _warningLoopSource = gameObject.AddComponent<AudioSource>();
+        _warningLoopSource.loop = true;
+        _warningLoopSource.playOnAwake = false;
+        _warningLoopSource.volume = 0.8f;
 
         LoadClips();
         PlayBackgroundMusic();
@@ -113,6 +119,20 @@ public class MinigameCAudioManager : MonoBehaviour
     public static void PlayStepComplete()     => PlaySfx(Instance?._taskStageComplete);
     public static void PlayTimerAlarm()       => PlaySfx(Instance?._timerAlarm);
     public static void PlayHintToggle()       => PlaySfx(Instance?._hintOpenClose);
+    public static void StartWarningAlarmLoop()
+    {
+        if (Instance == null || Instance._warningLoopSource == null || Instance._timerAlarm == null) return;
+        if (Instance._warningLoopSource.isPlaying) return;
+        Instance._warningLoopSource.clip = Instance._timerAlarm;
+        Instance._warningLoopSource.Play();
+    }
+
+    public static void StopWarningAlarmLoop()
+    {
+        if (Instance == null || Instance._warningLoopSource == null) return;
+        if (!Instance._warningLoopSource.isPlaying) return;
+        Instance._warningLoopSource.Stop();
+    }
 
     private static void PlaySfx(AudioClip clip)
     {
