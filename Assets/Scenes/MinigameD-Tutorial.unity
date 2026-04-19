@@ -2936,7 +2936,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 209709500}
         m_TargetAssemblyTypeName: StepController, Assembly-CSharp
-        m_MethodName: ShowPage3
+        m_MethodName: ShowPage2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
