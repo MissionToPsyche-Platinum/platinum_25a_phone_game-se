@@ -20,11 +20,13 @@ public class PhaseCGuideUI : MonoBehaviour
     private int lastStepNumber = -1;
     private Coroutine stepCompleteRoutine;
 
-    // Minimize / expand state
-    private bool          _isGuideMinimized;
     private RectTransform _guidePanelRect;
-    private Text          _guideToggleLabel;
     private GameObject    _guideBodyRoot;
+
+    // Responsive tracking
+    private CanvasScaler  _canvasScaler;
+    private int           _lastScreenWidth;
+    private int           _lastScreenHeight;
 
     private GameObject storyMomentRoot;
     private TMP_Text storyMomentTitle;
@@ -72,6 +74,45 @@ public class PhaseCGuideUI : MonoBehaviour
         EnsureGuide();
         Subscribe();
         UpdateGuide(controller != null ? controller.GetCurrentStepInfo() : PhaseCAssemblyController.StepInfo.Empty);
+    }
+
+    private void Update()
+    {
+        if (Screen.width != _lastScreenWidth || Screen.height != _lastScreenHeight)
+        {
+            _lastScreenWidth  = Screen.width;
+            _lastScreenHeight = Screen.height;
+            ApplyResponsiveLayout();
+        }
+    }
+
+    private void ApplyResponsiveLayout()
+    {
+        if (_canvasScaler != null)
+            _canvasScaler.matchWidthOrHeight = PhaseCUITheme.CanvasMatchWidthOrHeight;
+
+        if (_guidePanelRect != null)
+        {
+            float topOffset = PhaseCUITheme.GetSafeAreaTopOffset() + PhaseCUITheme.GetGuideExtraTopPadding();
+            _guidePanelRect.anchoredPosition = new Vector2(0f, -topOffset);
+        }
+
+        if (stepTitleText != null)
+        {
+            stepTitleText.fontSize = PhaseCUITheme.GetGuideStepTitleFontSize();
+            RectTransform st = stepTitleText.GetComponent<RectTransform>();
+            if (st != null)
+            {
+                st.offsetMin = new Vector2(PhaseCUITheme.PaddingTight, PhaseCUITheme.GetGuideStepTitleBottom());
+                st.offsetMax = new Vector2(-PhaseCUITheme.PaddingTight, PhaseCUITheme.GetGuideStepTitleY());
+            }
+        }
+        if (objectiveText != null)
+        {
+            objectiveText.fontSize = PhaseCUITheme.GetGuideObjectiveFontSize();
+        }
+
+        RefreshGuidePanelLayout();
     }
 
     private void OnDestroy()
@@ -131,12 +172,12 @@ public class PhaseCGuideUI : MonoBehaviour
         GameObject go = new GameObject(GuideCanvasName);
         Canvas c = go.AddComponent<Canvas>();
         c.renderMode = RenderMode.ScreenSpaceOverlay;
-        c.sortingOrder = 10;
+        c.sortingOrder = PhaseCUITheme.SortOrderGuide;
 
-        CanvasScaler scaler = go.AddComponent<CanvasScaler>();
-        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        scaler.referenceResolution = new Vector2(PhaseCUITheme.RefWidth, PhaseCUITheme.RefHeight);
-        scaler.matchWidthOrHeight = PhaseCUITheme.CanvasMatchWidthOrHeight;
+        _canvasScaler = go.AddComponent<CanvasScaler>();
+        _canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        _canvasScaler.referenceResolution = new Vector2(PhaseCUITheme.RefWidth, PhaseCUITheme.RefHeight);
+        _canvasScaler.matchWidthOrHeight = PhaseCUITheme.CanvasMatchWidthOrHeight;
 
         go.AddComponent<GraphicRaycaster>();
         return go;
@@ -153,29 +194,14 @@ public class PhaseCGuideUI : MonoBehaviour
         _guidePanelRect.anchorMin = new Vector2(0f, 1f);
         _guidePanelRect.anchorMax = new Vector2(1f, 1f);
         _guidePanelRect.pivot = new Vector2(0.5f, 1f);
-        // Shift down by the safe-area top inset so content clears the punch-hole camera / notch.
-        _guidePanelRect.anchoredPosition = new Vector2(0f, -PhaseCUITheme.GetSafeAreaTopOffset());
+        // Shift down by safe-area inset + extra buffer to clear Dynamic Island / notch.
+        float topOffset = PhaseCUITheme.GetSafeAreaTopOffset() + PhaseCUITheme.GetGuideExtraTopPadding();
+        _guidePanelRect.anchoredPosition = new Vector2(0f, -topOffset);
         _guidePanelRect.offsetMin = new Vector2(0f, 0f);
         _guidePanelRect.offsetMax = new Vector2(0f, 0f);
         _guidePanelRect.sizeDelta = new Vector2(0f, PhaseCUITheme.GetGuidePanelHeight());
 
-        // Accent bar at top (always visible)
-        GameObject accent = new GameObject("AccentBar");
-        accent.transform.SetParent(panel.transform, false);
-        Image accentImg = accent.AddComponent<Image>();
-        accentImg.color = PhaseCUITheme.AccentGold;
-        accentImg.raycastTarget = false;
-        RectTransform accentRect = accent.GetComponent<RectTransform>();
-        accentRect.anchorMin = new Vector2(0f, 1f);
-        accentRect.anchorMax = new Vector2(1f, 1f);
-        accentRect.pivot = new Vector2(0.5f, 1f);
-        accentRect.anchoredPosition = Vector2.zero;
-        accentRect.sizeDelta = new Vector2(0f, PhaseCUITheme.AccentBarHeight);
-
-        // Toggle button - top-right corner of panel (always visible)
-        AddGuideToggleButton(panel.transform);
-
-        // Body root - contains step title and objective; hidden when minimized
+        // Body root - contains step title and objective.
         _guideBodyRoot = new GameObject("Body");
         _guideBodyRoot.transform.SetParent(panel.transform, false);
         RectTransform bodyRect = _guideBodyRoot.AddComponent<RectTransform>();
@@ -184,93 +210,34 @@ public class PhaseCGuideUI : MonoBehaviour
         bodyRect.offsetMin = Vector2.zero;
         bodyRect.offsetMax = Vector2.zero;
 
-        // Step title (e.g. "Step 1 of 5: Instrument Build")
+        // Step title (e.g. "Step 1 of 5: Instrument Build") - takes full width.
         stepTitleText = CreateLabel(_guideBodyRoot.transform, "StepTitle", PhaseCUITheme.GetGuideStepTitleFontSize(), true);
+        stepTitleText.fontStyle = FontStyles.Bold | FontStyles.UpperCase;
+        stepTitleText.overflowMode  = TextOverflowModes.Ellipsis;
+        stepTitleText.enableWordWrapping = false;
         RectTransform stepTitleRect = stepTitleText.GetComponent<RectTransform>();
         stepTitleRect.anchorMin = new Vector2(0f, 1f);
-        stepTitleRect.anchorMax = new Vector2(0.88f, 1f);
-        stepTitleRect.pivot = new Vector2(0f, 1f);
-        stepTitleRect.anchoredPosition = new Vector2(0f, PhaseCUITheme.GetGuideStepTitleY());
+        stepTitleRect.anchorMax = new Vector2(1f, 1f);
+        stepTitleRect.pivot     = new Vector2(0f, 1f);
         stepTitleRect.offsetMin = new Vector2(PhaseCUITheme.PaddingTight, PhaseCUITheme.GetGuideStepTitleBottom());
         stepTitleRect.offsetMax = new Vector2(-PhaseCUITheme.PaddingTight, PhaseCUITheme.GetGuideStepTitleY());
-        stepTitleText.color = PhaseCUITheme.AccentCyan;
+        stepTitleText.color = PhaseCUITheme.AccentGold;
 
-        // Objective (summary / "Collect: ...") - centered so long lines do not spill off narrow phone widths
+        // Objective (summary / "Collect: ...") - word-wraps inside its rect, never overflows
         objectiveText = CreateLabel(_guideBodyRoot.transform, "Objective", PhaseCUITheme.GetGuideObjectiveFontSize(), false);
-        objectiveText.alignment = TextAlignmentOptions.Top;
+        objectiveText.alignment      = TextAlignmentOptions.TopLeft;
+        objectiveText.overflowMode   = TextOverflowModes.Ellipsis;
+        objectiveText.enableWordWrapping = true;
         RectTransform objectiveRect = objectiveText.GetComponent<RectTransform>();
         objectiveRect.anchorMin = new Vector2(0f, 1f);
         objectiveRect.anchorMax = new Vector2(1f, 1f);
-        objectiveRect.pivot = new Vector2(0.5f, 1f);
-        objectiveRect.anchoredPosition = new Vector2(0f, PhaseCUITheme.GetGuideObjectiveY());
-        float objPad = PhaseCUITheme.IsMobileScreen ? PhaseCUITheme.PaddingTight + 4f : PhaseCUITheme.PaddingTight;
+        objectiveRect.pivot     = new Vector2(0.5f, 1f);
+        float objPad = PhaseCUITheme.PaddingTight;
         objectiveRect.offsetMin = new Vector2(objPad, PhaseCUITheme.GetGuideObjectiveBottom());
         objectiveRect.offsetMax = new Vector2(-objPad, PhaseCUITheme.GetGuideObjectiveY());
         objectiveText.color = PhaseCUITheme.TextPrimary;
-    }
 
-    private void AddGuideToggleButton(Transform parent)
-    {
-        Font font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-
-        GameObject btnGo = new GameObject("GuideToggleBtn");
-        btnGo.transform.SetParent(parent, false);
-
-        Image btnBg = btnGo.AddComponent<Image>();
-        btnBg.color = new Color(0.2f, 0.28f, 0.42f, 0.88f);
-
-        Button btn = btnGo.AddComponent<Button>();
-        btn.targetGraphic = btnBg;
-        ColorBlock cb = btn.colors;
-        cb.highlightedColor = new Color(0.35f, 0.5f, 0.7f, 1f);
-        cb.pressedColor = new Color(0.5f, 0.65f, 0.85f, 1f);
-        btn.colors = cb;
-        btn.onClick.AddListener(ToggleGuide);
-
-        float btnW = PhaseCUITheme.IsMobileScreen ? 52f : 40f;
-        float btnH = PhaseCUITheme.GetGuideTitleBarHeight() - 8f;
-
-        RectTransform btnRect = btnGo.GetComponent<RectTransform>();
-        btnRect.anchorMin = new Vector2(1f, 1f);
-        btnRect.anchorMax = new Vector2(1f, 1f);
-        btnRect.pivot = new Vector2(1f, 1f);
-        btnRect.sizeDelta = new Vector2(btnW, btnH);
-        btnRect.anchoredPosition = new Vector2(-6f, -(PhaseCUITheme.AccentBarHeight + 4f));
-
-        GameObject labelGo = new GameObject("Label");
-        labelGo.transform.SetParent(btnGo.transform, false);
-        _guideToggleLabel = labelGo.AddComponent<Text>();
-        _guideToggleLabel.text = "-";
-        _guideToggleLabel.font = font;
-        _guideToggleLabel.fontSize = PhaseCUITheme.IsMobileScreen ? 24 : 20;
-        _guideToggleLabel.fontStyle = FontStyle.Bold;
-        _guideToggleLabel.color = PhaseCUITheme.AccentCyan;
-        _guideToggleLabel.alignment = TextAnchor.MiddleCenter;
-        _guideToggleLabel.raycastTarget = false;
-        RectTransform labelRect = labelGo.GetComponent<RectTransform>();
-        labelRect.anchorMin = Vector2.zero;
-        labelRect.anchorMax = Vector2.one;
-        labelRect.offsetMin = Vector2.zero;
-        labelRect.offsetMax = Vector2.zero;
-    }
-
-    private void ToggleGuide()
-    {
-        _isGuideMinimized = !_isGuideMinimized;
-
-        if (_guideBodyRoot != null)
-            _guideBodyRoot.SetActive(!_isGuideMinimized);
-
-        if (_guidePanelRect != null)
-        {
-            float h = _isGuideMinimized
-                ? PhaseCUITheme.GetGuideTitleBarHeight()
-                : PhaseCUITheme.GetGuidePanelHeight();
-            _guidePanelRect.sizeDelta = new Vector2(0f, h);
-        }
-
-        if (_guideToggleLabel != null)
-            _guideToggleLabel.text = _isGuideMinimized ? "+" : "-";
+        RefreshGuidePanelLayout();
     }
 
     private void CreateStoryMomentPanel(Transform parent)
@@ -278,6 +245,11 @@ public class PhaseCGuideUI : MonoBehaviour
         storyMomentRoot = new GameObject("StoryMomentOverlay");
         storyMomentRoot.transform.SetParent(parent, false);
         storyMomentRoot.SetActive(false);
+
+        Canvas popupCanvas = storyMomentRoot.AddComponent<Canvas>();
+        popupCanvas.overrideSorting = true;
+        popupCanvas.sortingOrder = PhaseCUITheme.SortOrderStoryMomentPopup;
+        storyMomentRoot.AddComponent<GraphicRaycaster>();
 
         Image bg = storyMomentRoot.AddComponent<Image>();
         bg.color = PhaseCUITheme.OverlayDark;
@@ -445,6 +417,59 @@ public class PhaseCGuideUI : MonoBehaviour
         return t;
     }
 
+    private void RefreshGuidePanelLayout()
+    {
+        if (_guidePanelRect == null || stepTitleText == null || objectiveText == null)
+            return;
+
+        Canvas.ForceUpdateCanvases();
+
+        float panelWidth = _guidePanelRect.rect.width;
+        if (panelWidth < 1f)
+            panelWidth = PhaseCUITheme.RefWidth;
+
+        float sidePad = PhaseCUITheme.PaddingTight;
+        float titleRightPad = sidePad;
+        float topPad = 6f;
+        float between = 14f;
+        float bottomPad = 8f;
+
+        float titleWidth = Mathf.Max(120f, panelWidth - sidePad - titleRightPad);
+        float objectiveWidth = Mathf.Max(120f, panelWidth - (sidePad * 2f));
+
+        float preferredTitleHeight = Mathf.Max(
+            PhaseCUITheme.GetGuideStepTitleFontSize() + 4f,
+            stepTitleText.GetPreferredValues(stepTitleText.text ?? string.Empty, titleWidth, 0f).y);
+        float preferredObjectiveHeight = objectiveText.GetPreferredValues(objectiveText.text ?? string.Empty, objectiveWidth, 0f).y;
+
+        float minHeight = PhaseCUITheme.GetGuideTitleBarHeight() + 8f;
+        float maxHeight = PhaseCUITheme.GetGuidePanelHeight();
+        float desiredHeight = topPad + preferredTitleHeight + between + preferredObjectiveHeight + bottomPad;
+        float panelHeight = Mathf.Clamp(desiredHeight, minHeight, maxHeight);
+
+        float availableObjectiveHeight = Mathf.Max(0f, panelHeight - topPad - preferredTitleHeight - between - bottomPad);
+        float objectiveHeight = Mathf.Min(preferredObjectiveHeight, availableObjectiveHeight);
+        bool objectiveClipped = preferredObjectiveHeight > availableObjectiveHeight + 0.5f;
+        objectiveText.overflowMode = objectiveClipped ? TextOverflowModes.Ellipsis : TextOverflowModes.Overflow;
+
+        _guidePanelRect.sizeDelta = new Vector2(0f, panelHeight);
+
+        RectTransform stepTitleRect = stepTitleText.rectTransform;
+        stepTitleRect.anchorMin = new Vector2(0f, 1f);
+        stepTitleRect.anchorMax = new Vector2(1f, 1f);
+        stepTitleRect.pivot = new Vector2(0f, 1f);
+        stepTitleRect.offsetMin = new Vector2(sidePad, -(topPad + preferredTitleHeight));
+        stepTitleRect.offsetMax = new Vector2(-titleRightPad, -topPad);
+
+        RectTransform objectiveRect = objectiveText.rectTransform;
+        float objectiveTop = topPad + preferredTitleHeight + between;
+        objectiveRect.anchorMin = new Vector2(0f, 1f);
+        objectiveRect.anchorMax = new Vector2(1f, 1f);
+        objectiveRect.pivot = new Vector2(0.5f, 1f);
+        objectiveRect.offsetMin = new Vector2(sidePad, -(objectiveTop + objectiveHeight));
+        objectiveRect.offsetMax = new Vector2(-sidePad, -objectiveTop);
+    }
+
     private void UpdateGuide(PhaseCAssemblyController.StepInfo stepInfo)
     {
         if (stepTitleText == null || objectiveText == null)
@@ -467,10 +492,15 @@ public class PhaseCGuideUI : MonoBehaviour
 
     private IEnumerator ShowStepCompleteThenUpdate(int completedStep, PhaseCAssemblyController.StepInfo nextStepInfo)
     {
+        float normalStepTitleSize = PhaseCUITheme.GetGuideStepTitleFontSize();
         if (stepTitleText != null)
+        {
+            stepTitleText.fontSize = normalStepTitleSize + 6f;
             stepTitleText.text = $"Step {completedStep} complete!";
+        }
         if (objectiveText != null)
             objectiveText.text = "Well done. Moving to the next objective.";
+        RefreshGuidePanelLayout();
 
         yield return new WaitForSeconds(1.8f);
 
@@ -490,6 +520,8 @@ public class PhaseCGuideUI : MonoBehaviour
             }
         }
 
+        if (stepTitleText != null)
+            stepTitleText.fontSize = normalStepTitleSize;
         ApplyStepContent(nextStepInfo);
         lastStepNumber = nextStepInfo.StepNumber;
     }
@@ -500,6 +532,7 @@ public class PhaseCGuideUI : MonoBehaviour
         {
             stepTitleText.text = "Phase C guide loading...";
             objectiveText.text = "";
+            RefreshGuidePanelLayout();
             return;
         }
 
@@ -507,10 +540,12 @@ public class PhaseCGuideUI : MonoBehaviour
         {
             stepTitleText.text = stepInfo.Title;
             objectiveText.text = stepInfo.Summary;
+            RefreshGuidePanelLayout();
             return;
         }
 
         stepTitleText.text = $"Step {stepInfo.StepNumber} of {stepInfo.StepCount}: {stepInfo.Title}";
         objectiveText.text = !string.IsNullOrEmpty(stepInfo.CollectObjective) ? stepInfo.CollectObjective : stepInfo.Summary;
+        RefreshGuidePanelLayout();
     }
 }

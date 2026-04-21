@@ -149,7 +149,7 @@ public class PhaseCInventoryUI : MonoBehaviour
         canvasObject = canvasGo;
         canvas = canvasGo.AddComponent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = 15;
+        canvas.sortingOrder = PhaseCUITheme.SortOrderInventory;
 
         CanvasScaler scaler = canvasGo.AddComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;

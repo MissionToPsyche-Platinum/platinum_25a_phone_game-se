@@ -38,6 +38,12 @@ public class SpacecraftAssemblyVisualizer : MonoBehaviour
     private RectTransform _panelRect;
     private GameObject    _bodyRoot;
     private Text          _toggleLabel;
+    private Text          _titleText;
+    private CanvasScaler  _canvasScaler;
+
+    // Track the last screen size so we only re-flow on actual resizes.
+    private int _lastScreenWidth;
+    private int _lastScreenHeight;
 
     // ─── Bootstrap ───────────────────────────────────────────────────────────
 
@@ -68,6 +74,16 @@ public class SpacecraftAssemblyVisualizer : MonoBehaviour
         BuildHUD();
         SetImageImmediate(0);
         StartCoroutine(WaitAndSubscribe());
+    }
+
+    private void Update()
+    {
+        if (Screen.width == _lastScreenWidth && Screen.height == _lastScreenHeight)
+            return;
+
+        _lastScreenWidth  = Screen.width;
+        _lastScreenHeight = Screen.height;
+        ApplyResponsiveLayout();
     }
 
     private IEnumerator WaitAndSubscribe()
@@ -133,8 +149,11 @@ public class SpacecraftAssemblyVisualizer : MonoBehaviour
         {
             float h = _isMinimized
                 ? PhaseCUITheme.GetAssemblyTitleBarHeight()
-                : PhaseCUITheme.GetAssemblyPanelHeight();
-            _panelRect.sizeDelta = new Vector2(PhaseCUITheme.GetAssemblyPanelWidth(), h);
+                : PhaseCUITheme.GetBottomPanelHeight();
+            _panelRect.anchorMin = new Vector2(0f, 0f);
+            _panelRect.anchorMax = new Vector2(PhaseCUITheme.GetLeftBottomPanelAnchorMaxX(), 0f);
+            _panelRect.offsetMin = new Vector2(EdgeMargin, EdgeMargin);
+            _panelRect.offsetMax = new Vector2(-6f, h + EdgeMargin);
         }
 
         if (_toggleLabel != null)
@@ -152,30 +171,42 @@ public class SpacecraftAssemblyVisualizer : MonoBehaviour
         Canvas canvas = canvasGo.AddComponent<Canvas>();
         canvas.renderMode  = RenderMode.ScreenSpaceOverlay;
         canvas.sortingOrder = 100;
-        CanvasScaler scaler = canvasGo.AddComponent<CanvasScaler>();
-        scaler.uiScaleMode         = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        scaler.referenceResolution = new Vector2(1920f, 1080f);
-        scaler.matchWidthOrHeight  = PhaseCUITheme.CanvasMatchWidthOrHeight;
+        _canvasScaler = canvasGo.AddComponent<CanvasScaler>();
+        _canvasScaler.uiScaleMode         = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        _canvasScaler.referenceResolution = new Vector2(1920f, 1080f);
+        _canvasScaler.matchWidthOrHeight  = PhaseCUITheme.CanvasMatchWidthOrHeight;
         canvasGo.AddComponent<GraphicRaycaster>();
 
-        // ── Background panel (bottom-left, above hint strip) ─────────────────
-        float panelW      = PhaseCUITheme.GetAssemblyPanelWidth();
-        float panelH      = PhaseCUITheme.GetAssemblyPanelHeight();
-        float bottomStart = PhaseCUITheme.GetHintStripHeight() + EdgeMargin;
-        float titleBarH   = PhaseCUITheme.GetAssemblyTitleBarHeight();
+        // ── Background panel (bottom 0–40% of screen width) ──────────────────
+        float panelH    = PhaseCUITheme.GetBottomPanelHeight();
+        float titleBarH = PhaseCUITheme.GetAssemblyTitleBarHeight();
 
         GameObject panelGo = new GameObject("SpacecraftPanel");
         panelGo.transform.SetParent(canvasGo.transform, false);
 
         Image panelBg = panelGo.AddComponent<Image>();
-        panelBg.color = new Color(0.05f, 0.08f, 0.18f, 0.88f);
+        panelBg.color = new Color(0.07f, 0.09f, 0.16f, 0.88f);
+        panelBg.raycastTarget = false;
 
-        _panelRect                 = panelGo.GetComponent<RectTransform>();
-        _panelRect.anchorMin        = new Vector2(0f, 0f);
-        _panelRect.anchorMax        = new Vector2(0f, 0f);
-        _panelRect.pivot            = new Vector2(0f, 0f);
-        _panelRect.anchoredPosition = new Vector2(EdgeMargin, bottomStart);
-        _panelRect.sizeDelta        = new Vector2(panelW, panelH);
+        _panelRect           = panelGo.GetComponent<RectTransform>();
+        _panelRect.anchorMin = new Vector2(0f, 0f);
+        _panelRect.anchorMax = new Vector2(PhaseCUITheme.GetLeftBottomPanelAnchorMaxX(), 0f);
+        _panelRect.pivot     = new Vector2(0f, 0f);
+        _panelRect.offsetMin = new Vector2(EdgeMargin, EdgeMargin);
+        _panelRect.offsetMax = new Vector2(-6f, panelH + EdgeMargin);
+
+        // Border to match Required Items panel styling
+        GameObject borderGo = new GameObject("Border");
+        borderGo.transform.SetParent(panelGo.transform, false);
+        Image borderImg = borderGo.AddComponent<Image>();
+        borderImg.color = PhaseCUITheme.PanelBorder;
+        borderImg.raycastTarget = false;
+        RectTransform borderRect = borderGo.GetComponent<RectTransform>();
+        borderRect.anchorMin = Vector2.zero;
+        borderRect.anchorMax = Vector2.one;
+        borderRect.offsetMin = new Vector2(-1f, -1f);
+        borderRect.offsetMax = new Vector2(1f, 1f);
+        borderGo.transform.SetAsFirstSibling();
 
         // ── Title row (always visible - contains label + toggle button) ───────
         GameObject titleRowGo = new GameObject("TitleRow");
@@ -190,17 +221,18 @@ public class SpacecraftAssemblyVisualizer : MonoBehaviour
         // Title label (left portion of title row)
         GameObject titleGo = new GameObject("Title");
         titleGo.transform.SetParent(titleRowGo.transform, false);
-        Text title        = titleGo.AddComponent<Text>();
-        title.text        = "ASSEMBLY";
-        title.font        = builtinFont;
-        title.fontSize    = PhaseCUITheme.GetAssemblyTitleFont();
-        title.fontStyle   = FontStyle.Bold;
-        title.color       = new Color(0.9f, 0.85f, 0.4f);
-        title.alignment   = TextAnchor.MiddleCenter;
+        _titleText          = titleGo.AddComponent<Text>();
+        Text title          = _titleText;
+        title.text          = "BUILD STATUS: ASSEMBLY";
+        title.font          = builtinFont;
+        title.fontSize      = Mathf.Max(16, PhaseCUITheme.GetAssemblyTitleFont() - 2);
+        title.fontStyle     = FontStyle.Bold;
+        title.color         = new Color(0.9f, 0.85f, 0.4f);
+        title.alignment     = TextAnchor.MiddleCenter;
         title.raycastTarget = false;
         RectTransform titleRect    = titleGo.GetComponent<RectTransform>();
         titleRect.anchorMin        = new Vector2(0f, 0f);
-        titleRect.anchorMax        = new Vector2(0.75f, 1f);
+        titleRect.anchorMax        = new Vector2(0.8f, 1f);
         titleRect.offsetMin        = new Vector2(4f, 0f);
         titleRect.offsetMax        = Vector2.zero;
 
@@ -249,6 +281,50 @@ public class SpacecraftAssemblyVisualizer : MonoBehaviour
         stepRect.sizeDelta        = new Vector2(0f, 22f);
     }
 
+    /// <summary>
+    /// Refresh the panel dimensions, fonts and canvas match setting so the
+    /// HUD reshapes itself when the screen is resized or the device rotates.
+    /// </summary>
+    private void ApplyResponsiveLayout()
+    {
+        if (_canvasScaler != null)
+            _canvasScaler.matchWidthOrHeight = PhaseCUITheme.CanvasMatchWidthOrHeight;
+
+        float panelH    = PhaseCUITheme.GetBottomPanelHeight();
+        float titleBarH = PhaseCUITheme.GetAssemblyTitleBarHeight();
+        float displayH  = _isMinimized ? titleBarH : panelH;
+
+        if (_panelRect != null)
+        {
+            _panelRect.anchorMin = new Vector2(0f, 0f);
+            _panelRect.anchorMax = new Vector2(PhaseCUITheme.GetLeftBottomPanelAnchorMaxX(), 0f);
+            _panelRect.offsetMin = new Vector2(EdgeMargin, EdgeMargin);
+            _panelRect.offsetMax = new Vector2(-6f, displayH + EdgeMargin);
+        }
+
+        if (_bodyRoot != null)
+        {
+            RectTransform bodyRect = _bodyRoot.GetComponent<RectTransform>();
+            if (bodyRect != null)
+                bodyRect.offsetMax = new Vector2(0f, -(titleBarH + 4f));
+        }
+
+        if (_panelRect != null)
+        {
+            Transform titleRow = _panelRect.Find("TitleRow");
+            if (titleRow != null)
+            {
+                RectTransform titleRowRect = titleRow as RectTransform;
+                if (titleRowRect != null)
+                    titleRowRect.sizeDelta = new Vector2(0f, titleBarH);
+            }
+        }
+
+        if (_titleText   != null) _titleText.fontSize   = PhaseCUITheme.GetAssemblyTitleFont();
+        if (_toggleLabel != null) _toggleLabel.fontSize = PhaseCUITheme.GetAssemblyTitleFont();
+        if (stepLabel    != null) stepLabel.fontSize    = PhaseCUITheme.GetAssemblyStepFont();
+    }
+
     private void AddToggleButton(Transform parent, Font font)
     {
         GameObject btnGo = new GameObject("ToggleBtn");
@@ -266,7 +342,7 @@ public class SpacecraftAssemblyVisualizer : MonoBehaviour
         btn.onClick.AddListener(ToggleMinimize);
 
         RectTransform btnRect = btnGo.GetComponent<RectTransform>();
-        btnRect.anchorMin = new Vector2(0.75f, 0.1f);
+        btnRect.anchorMin = new Vector2(0.8f, 0.1f);
         btnRect.anchorMax = new Vector2(1f, 0.9f);
         btnRect.offsetMin = new Vector2(2f, 0f);
         btnRect.offsetMax = new Vector2(-4f, 0f);

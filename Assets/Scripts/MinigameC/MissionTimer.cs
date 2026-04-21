@@ -16,6 +16,8 @@ public class MissionTimer : MonoBehaviour
     public static MissionTimer Instance { get; private set; }
 
     private const string TargetSceneName = "MinigameC";
+    private const float TopUiSeamOverlap = 0f;
+    private const float HubWidgetVerticalGap = 0f;
 
     [Header("Timer")]
     [SerializeField] private float startingTimeSeconds = 300f;
@@ -30,10 +32,21 @@ public class MissionTimer : MonoBehaviour
 
     // Timer widget
     private Canvas timerCanvas;
+    private CanvasScaler timerScaler;
     private Image timerPanelBg;
     private TMP_Text timerLabel;       // "MISSION TIME"
     private TMP_Text timerText;        // "05:00"
     private Image progressBarFill;
+    private RectTransform _timerWidgetRect;
+    private RectTransform _hubBtnRect;
+    private RectTransform _hintStripRect;
+    private int _lastScreenWidth;
+    private int _lastScreenHeight;
+    private bool _isTipsPanelVisible;
+    private float _lastTopUiBottom = -1f;
+
+    // Hub confirmation dialog
+    private GameObject _hubConfirmRoot;
 
     // Mission alert (startup banner)
     private GameObject missionAlertRoot;
@@ -94,6 +107,19 @@ public class MissionTimer : MonoBehaviour
 
     private void Update()
     {
+        float currentTopUiBottom = GetTopUiBottomRuntime();
+        if (Screen.width != _lastScreenWidth || Screen.height != _lastScreenHeight)
+        {
+            _lastScreenWidth  = Screen.width;
+            _lastScreenHeight = Screen.height;
+            ApplyResponsiveLayout();
+        }
+        else if (Mathf.Abs(currentTopUiBottom - _lastTopUiBottom) > 0.25f)
+        {
+            // Keep widgets locked directly below live hint/tips layout changes.
+            ApplyResponsiveLayout();
+        }
+
         if (!isRunning) return;
 
         currentTime -= Time.deltaTime;
@@ -244,6 +270,56 @@ public class MissionTimer : MonoBehaviour
             timeUpRoot.SetActive(true);
     }
 
+    // ── Responsive ───────────────────────────────────────────────────────────
+
+    private void ApplyResponsiveLayout()
+    {
+        if (timerScaler != null)
+            timerScaler.matchWidthOrHeight = PhaseCUITheme.CanvasMatchWidthOrHeight;
+
+        float topUiBottom = GetTopUiBottomRuntime();
+        _lastTopUiBottom = topUiBottom;
+
+        float yOffset = -(topUiBottom - TopUiSeamOverlap);
+        float timerW = GetTimerWidth();
+        float hubW   = GetHubBtnWidth();
+        float h      = GetWidgetHeight();
+
+        if (_timerWidgetRect != null)
+        {
+            _timerWidgetRect.sizeDelta        = new Vector2(timerW, h);
+            _timerWidgetRect.anchoredPosition = new Vector2(0f, yOffset);
+        }
+        if (_hubBtnRect != null)
+        {
+            _hubBtnRect.sizeDelta        = new Vector2(hubW, h);
+            _hubBtnRect.anchoredPosition = new Vector2(0f, yOffset - h - HubWidgetVerticalGap);
+        }
+    }
+
+    private static float GetTimerWidth()   => PhaseCUITheme.GetTimerWidgetWidth();
+    private static float GetHubBtnWidth()  => PhaseCUITheme.GetHubWidgetWidth();
+    private static float GetWidgetHeight() => PhaseCUITheme.GetTimerWidgetHeight();
+
+    private float GetTopUiBottomRuntime()
+    {
+        float topUiBottom = GetInfoStripBottomYRuntime();
+        if (_isTipsPanelVisible)
+        {
+            var hintUI = FindFirstObjectByType<PhaseCPersistentHintUI>();
+            float tipsBottomY = hintUI != null ? hintUI.GetTipsPanelBottomY() : 0f;
+            topUiBottom = Mathf.Max(topUiBottom, tipsBottomY);
+        }
+        return topUiBottom;
+    }
+
+    /// <summary>Called by PhaseCPersistentHintUI when Tips panel is toggled.</summary>
+    public void OnTipsPanelToggled(bool isVisible)
+    {
+        _isTipsPanelVisible = isVisible;
+        ApplyResponsiveLayout();
+    }
+
     // ── UI construction ──────────────────────────────────────────────────────
 
     private void BuildUI()
@@ -251,14 +327,16 @@ public class MissionTimer : MonoBehaviour
         GameObject canvasGo = new GameObject("MissionTimerCanvas");
         timerCanvas = canvasGo.AddComponent<Canvas>();
         timerCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        timerCanvas.sortingOrder = 12;
-        var scaler = canvasGo.AddComponent<CanvasScaler>();
-        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        scaler.referenceResolution = new Vector2(PhaseCUITheme.RefWidth, PhaseCUITheme.RefHeight);
-        scaler.matchWidthOrHeight = PhaseCUITheme.CanvasMatchWidthOrHeight;
+        timerCanvas.sortingOrder = PhaseCUITheme.SortOrderTimer;
+        timerScaler = canvasGo.AddComponent<CanvasScaler>();
+        timerScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        timerScaler.referenceResolution = new Vector2(PhaseCUITheme.RefWidth, PhaseCUITheme.RefHeight);
+        timerScaler.matchWidthOrHeight = PhaseCUITheme.CanvasMatchWidthOrHeight;
         canvasGo.AddComponent<GraphicRaycaster>();
 
         BuildTimerWidget(canvasGo.transform);
+        BuildHubButton(canvasGo.transform);
+        BuildHubConfirmDialog(canvasGo.transform);
         BuildMissionAlert(canvasGo.transform);
         BuildTimeUpPopup(canvasGo.transform);
     }
@@ -266,96 +344,221 @@ public class MissionTimer : MonoBehaviour
     /// <summary>Styled timer panel: label + MM:SS digits + draining progress bar.</summary>
     private void BuildTimerWidget(Transform parent)
     {
+        float infoStripBottom = GetInfoStripBottomYRuntime();
+        float timerW = GetTimerWidth();
+        float h      = GetWidgetHeight();
+
         var panelGo = new GameObject("TimerWidget");
         panelGo.transform.SetParent(parent, false);
         timerPanelBg = panelGo.AddComponent<Image>();
         timerPanelBg.color = PhaseCUITheme.PanelBg;
-        var pr = panelGo.GetComponent<RectTransform>();
+        _timerWidgetRect = panelGo.GetComponent<RectTransform>();
+        var pr = _timerWidgetRect;
         pr.anchorMin = new Vector2(1f, 1f);
         pr.anchorMax = new Vector2(1f, 1f);
         pr.pivot = new Vector2(1f, 1f);
-        pr.anchoredPosition = new Vector2(-PhaseCUITheme.PaddingTight, -(PhaseCUITheme.GetGuidePanelHeight() + 8f));
-        pr.sizeDelta = new Vector2(220f, 90f);
-
-        // Gold left accent bar
-        var accentGo = new GameObject("AccentBar");
-        accentGo.transform.SetParent(panelGo.transform, false);
-        accentGo.AddComponent<Image>().color = PhaseCUITheme.AccentGold;
-        var aRect = accentGo.GetComponent<RectTransform>();
-        aRect.anchorMin = new Vector2(0f, 0f);
-        aRect.anchorMax = new Vector2(0f, 1f);
-        aRect.pivot = new Vector2(0f, 0.5f);
-        aRect.anchoredPosition = Vector2.zero;
-        aRect.sizeDelta = new Vector2(4f, 0f);
+        pr.anchoredPosition = new Vector2(0f, -(infoStripBottom - TopUiSeamOverlap));
+        pr.sizeDelta = new Vector2(timerW, h);
 
         // "MISSION TIME" caption
         var labelGo = new GameObject("MissionTimeLabel");
         labelGo.transform.SetParent(panelGo.transform, false);
         timerLabel = labelGo.AddComponent<TextMeshProUGUI>();
-        timerLabel.text = "MISSION TIME";
-        timerLabel.fontSize = PhaseCUITheme.FontSizeCaption;
+        timerLabel.text = "MISSION\nTIME";
+        timerLabel.fontSize = PhaseCUITheme.GetTimerCaptionFontSize();
         timerLabel.fontStyle = FontStyles.Bold;
-        timerLabel.color = new Color(PhaseCUITheme.TextTitle.r, PhaseCUITheme.TextTitle.g, PhaseCUITheme.TextTitle.b, 0.6f);
-        timerLabel.alignment = TextAlignmentOptions.Right;
+        timerLabel.color = new Color(PhaseCUITheme.TextTitle.r, PhaseCUITheme.TextTitle.g, PhaseCUITheme.TextTitle.b, 0.75f);
+        timerLabel.alignment = TextAlignmentOptions.Left;
+        timerLabel.enableWordWrapping = false;
         var lRect = labelGo.GetComponent<RectTransform>();
-        lRect.anchorMin = new Vector2(0f, 1f);
-        lRect.anchorMax = new Vector2(1f, 1f);
-        lRect.pivot = new Vector2(0.5f, 1f);
-        lRect.anchoredPosition = new Vector2(0f, -8f);
-        lRect.offsetMin = new Vector2(14f, -30f);
-        lRect.offsetMax = new Vector2(-10f, -8f);
+        lRect.anchorMin = new Vector2(0f, 0f);
+        lRect.anchorMax = new Vector2(0.55f, 1f);
+        lRect.pivot = new Vector2(0f, 0.5f);
+        lRect.offsetMin = new Vector2(8f, 4f);
+        lRect.offsetMax = new Vector2(-4f, -4f);
 
         // MM:SS digits
         var textGo = new GameObject("TimerDigits");
         textGo.transform.SetParent(panelGo.transform, false);
         timerText = textGo.AddComponent<TextMeshProUGUI>();
-        timerText.fontSize = 40f;
+        timerText.fontSize = PhaseCUITheme.GetTimerDigitsFontSize();
         timerText.fontStyle = FontStyles.Bold;
         timerText.color = PhaseCUITheme.TextTitle;
         timerText.alignment = TextAlignmentOptions.Right;
         var tRect = textGo.GetComponent<RectTransform>();
-        tRect.anchorMin = new Vector2(0f, 1f);
+        tRect.anchorMin = new Vector2(0.55f, 0f);
         tRect.anchorMax = new Vector2(1f, 1f);
-        tRect.pivot = new Vector2(0.5f, 1f);
-        tRect.anchoredPosition = new Vector2(0f, -28f);
-        tRect.offsetMin = new Vector2(14f, -76f);
-        tRect.offsetMax = new Vector2(-10f, -28f);
+        tRect.pivot = new Vector2(1f, 0.5f);
+        tRect.offsetMin = new Vector2(2f, 4f);
+        tRect.offsetMax = new Vector2(-8f, -4f);
 
-        // Progress bar track
-        var trackGo = new GameObject("ProgressTrack");
-        trackGo.transform.SetParent(panelGo.transform, false);
-        trackGo.AddComponent<Image>().color = new Color(0.08f, 0.10f, 0.18f, 0.85f);
-        var trackRect = trackGo.GetComponent<RectTransform>();
-        trackRect.anchorMin = new Vector2(0f, 0f);
-        trackRect.anchorMax = new Vector2(1f, 0f);
-        trackRect.pivot = new Vector2(0.5f, 0f);
-        trackRect.anchoredPosition = Vector2.zero;
-        trackRect.offsetMin = new Vector2(4f, 0f);
-        trackRect.offsetMax = new Vector2(0f, 0f);
-        trackRect.sizeDelta = new Vector2(-4f, 6f);
-
-        // Filled progress bar
-        var fillGo = new GameObject("ProgressFill");
-        fillGo.transform.SetParent(trackGo.transform, false);
-        progressBarFill = fillGo.AddComponent<Image>();
-        progressBarFill.color = new Color(0.32f, 0.76f, 0.45f, 1f);
-        progressBarFill.type = Image.Type.Filled;
-        progressBarFill.fillMethod = Image.FillMethod.Horizontal;
-        progressBarFill.fillOrigin = 0;
-        progressBarFill.fillAmount = 1f;
-        var fillRect = fillGo.GetComponent<RectTransform>();
-        fillRect.anchorMin = Vector2.zero;
-        fillRect.anchorMax = Vector2.one;
-        fillRect.offsetMin = Vector2.zero;
-        fillRect.offsetMax = Vector2.zero;
+        progressBarFill = null;
     }
 
-    /// <summary>Bottom-centre startup banner: tells player about the 5-min limit.</summary>
+    /// <summary>Compact "Go to Central Hub" icon button placed to the left of the timer widget.</summary>
+    private void BuildHubButton(Transform parent)
+    {
+        float infoStripBottom = GetInfoStripBottomYRuntime();
+        float timerW = GetTimerWidth();
+        float hubW   = GetHubBtnWidth();
+        float h      = GetWidgetHeight();
+
+        var btnGo = new GameObject("HubButton");
+        btnGo.transform.SetParent(parent, false);
+
+        // Background panel (same look as the timer)
+        var bg = btnGo.AddComponent<Image>();
+        bg.color = PhaseCUITheme.PanelBg;
+
+        _hubBtnRect = btnGo.GetComponent<RectTransform>();
+        _hubBtnRect.anchorMin = new Vector2(1f, 1f);
+        _hubBtnRect.anchorMax = new Vector2(1f, 1f);
+        _hubBtnRect.pivot     = new Vector2(1f, 1f);
+        _hubBtnRect.sizeDelta        = new Vector2(hubW, h);
+        _hubBtnRect.anchoredPosition = new Vector2(0f, -(infoStripBottom - TopUiSeamOverlap) - h - HubWidgetVerticalGap);
+
+        // Left label: two-line title.
+        var iconGo = new GameObject("HubIcon");
+        iconGo.transform.SetParent(btnGo.transform, false);
+        var iconTmp = iconGo.AddComponent<TextMeshProUGUI>();
+        iconTmp.text      = "CENTRAL\nHUB";
+        iconTmp.fontSize  = PhaseCUITheme.GetHubLabelFontSize();
+        iconTmp.fontStyle = FontStyles.Bold;
+        iconTmp.color     = new Color(PhaseCUITheme.TextTitle.r, PhaseCUITheme.TextTitle.g, PhaseCUITheme.TextTitle.b, 0.75f);
+        iconTmp.alignment = TextAlignmentOptions.Left;
+        iconTmp.enableWordWrapping = false;
+        iconTmp.raycastTarget = false;
+        var iRect = iconGo.GetComponent<RectTransform>();
+        iRect.anchorMin = new Vector2(0f, 0f);
+        iRect.anchorMax = new Vector2(0.55f, 1f);
+        iRect.pivot = new Vector2(0f, 0.5f);
+        iRect.offsetMin = new Vector2(8f, 4f);
+        iRect.offsetMax = new Vector2(-4f, -4f);
+
+        // Right value: hub icon.
+        var lblGo = new GameObject("HubLabel");
+        lblGo.transform.SetParent(btnGo.transform, false);
+        var lblTmp = lblGo.AddComponent<TextMeshProUGUI>();
+        lblTmp.text      = "⌂";
+        lblTmp.fontSize  = PhaseCUITheme.GetHubIconFontSize();
+        lblTmp.fontStyle = FontStyles.Bold;
+        lblTmp.color     = PhaseCUITheme.AccentCyan;
+        lblTmp.alignment = TextAlignmentOptions.Right;
+        lblTmp.raycastTarget = false;
+        var lRect = lblGo.GetComponent<RectTransform>();
+        lRect.anchorMin = new Vector2(0.55f, 0f);
+        lRect.anchorMax = new Vector2(1f, 1f);
+        lRect.pivot = new Vector2(1f, 0.5f);
+        lRect.offsetMin = new Vector2(2f, 4f);
+        lRect.offsetMax = new Vector2(-8f, -4f);
+
+        // Clickable button component on top
+        var btn = btnGo.AddComponent<Button>();
+        btn.targetGraphic = bg;
+        var cb = btn.colors;
+        cb.highlightedColor = new Color(0.25f, 0.45f, 0.65f, 1f);
+        cb.pressedColor     = new Color(0.40f, 0.60f, 0.80f, 1f);
+        btn.colors = cb;
+        btn.onClick.AddListener(ShowHubConfirmDialog);
+    }
+
+    /// <summary>Modal confirmation dialog that appears when the player taps the Hub button.</summary>
+    private void BuildHubConfirmDialog(Transform parent)
+    {
+        _hubConfirmRoot = new GameObject("HubConfirmDialog");
+        _hubConfirmRoot.transform.SetParent(parent, false);
+        _hubConfirmRoot.SetActive(false);
+
+        Canvas hubPopupCanvas = _hubConfirmRoot.AddComponent<Canvas>();
+        hubPopupCanvas.overrideSorting = true;
+        hubPopupCanvas.sortingOrder = PhaseCUITheme.SortOrderHubConfirmPopup;
+        _hubConfirmRoot.AddComponent<GraphicRaycaster>();
+
+        // Full-screen dim that blocks interaction with the world behind it
+        var dimImg = _hubConfirmRoot.AddComponent<Image>();
+        dimImg.color = new Color(0f, 0f, 0f, 0.60f);
+        dimImg.raycastTarget = true;
+        var dimRect = _hubConfirmRoot.GetComponent<RectTransform>();
+        dimRect.anchorMin = Vector2.zero;
+        dimRect.anchorMax = Vector2.one;
+        dimRect.offsetMin = dimRect.offsetMax = Vector2.zero;
+
+        // Popup panel - centred
+        var panelGo = new GameObject("ConfirmPanel");
+        panelGo.transform.SetParent(_hubConfirmRoot.transform, false);
+        panelGo.AddComponent<Image>().color = PhaseCUITheme.PanelBg;
+        var pr = panelGo.GetComponent<RectTransform>();
+        pr.anchorMin = pr.anchorMax = new Vector2(0.5f, 0.5f);
+        pr.pivot = new Vector2(0.5f, 0.5f);
+        pr.anchoredPosition = Vector2.zero;
+        pr.sizeDelta = new Vector2(560f, 260f);
+
+        AddAccentBar(panelGo.transform);
+
+        // Border
+        var borderGo = new GameObject("Border");
+        borderGo.transform.SetParent(panelGo.transform, false);
+        borderGo.AddComponent<Image>().color = PhaseCUITheme.PanelBorder;
+        var bRect = borderGo.GetComponent<RectTransform>();
+        bRect.anchorMin = Vector2.zero;
+        bRect.anchorMax = Vector2.one;
+        bRect.offsetMin = new Vector2(-1f, -1f);
+        bRect.offsetMax = new Vector2(1f, 1f);
+        borderGo.transform.SetAsFirstSibling();
+
+        MakeText(panelGo.transform, "Title", "Return to Central Hub?",
+            PhaseCUITheme.FontSizeTitle, PhaseCUITheme.TextTitle, TextAlignmentOptions.Center, true,
+            new Vector2(0f, -36f), new Vector2(490f, 52f));
+
+        MakeText(panelGo.transform, "Subtitle", "Your progress is saved automatically.",
+            PhaseCUITheme.FontSizeBody, PhaseCUITheme.TextSecondary, TextAlignmentOptions.Center, false,
+            new Vector2(0f, -102f), new Vector2(490f, 44f));
+
+        // "Return" button (left)
+        var returnBtn = MakeButton(panelGo.transform, "ReturnBtn", "Return", new Vector2(-90f, -182f));
+        returnBtn.GetComponent<RectTransform>().sizeDelta = new Vector2(200f, PhaseCUITheme.ButtonHeight);
+        returnBtn.onClick.AddListener(OnHubConfirm);
+
+        // "Cancel" button (right)
+        var cancelBtn = MakeButton(panelGo.transform, "CancelBtn", "Cancel", new Vector2(90f, -182f));
+        cancelBtn.GetComponent<RectTransform>().sizeDelta = new Vector2(200f, PhaseCUITheme.ButtonHeight);
+        cancelBtn.GetComponent<Image>().color = new Color(0.22f, 0.22f, 0.28f, 1f);
+        cancelBtn.onClick.AddListener(OnHubCancel);
+    }
+
+    private void ShowHubConfirmDialog()
+    {
+        if (_hubConfirmRoot != null)
+            _hubConfirmRoot.SetActive(true);
+    }
+
+    private void OnHubConfirm()
+    {
+        if (_hubConfirmRoot != null)
+            _hubConfirmRoot.SetActive(false);
+        Time.timeScale = 1f;
+        UnityEngine.SceneManagement.SceneManager.LoadScene("CentralHub");
+    }
+
+    private void OnHubCancel()
+    {
+        if (_hubConfirmRoot != null)
+            _hubConfirmRoot.SetActive(false);
+    }
+
+    /// <summary>Centered startup banner: tells player about the 5-min limit.</summary>
     private void BuildMissionAlert(Transform parent)
     {
         missionAlertRoot = new GameObject("MissionAlert");
         missionAlertRoot.transform.SetParent(parent, false);
         missionAlertRoot.SetActive(false);
+
+        Canvas missionAlertCanvas = missionAlertRoot.AddComponent<Canvas>();
+        missionAlertCanvas.overrideSorting = true;
+        // Keep this briefing above all regular HUD/cutscene canvases so it is never hidden.
+        missionAlertCanvas.sortingOrder = Mathf.Max(
+            PhaseCUITheme.SortOrderMissionAlertPopup,
+            PhaseCUITheme.SortOrderTipsPopup + 1);
 
         var rootImg = missionAlertRoot.AddComponent<Image>();
         rootImg.color = Color.clear;
@@ -372,17 +575,25 @@ public class MissionTimer : MonoBehaviour
         alertPanel.transform.SetParent(missionAlertRoot.transform, false);
         alertPanel.AddComponent<Image>().color = new Color(0.06f, 0.08f, 0.18f, 0.93f);
         var panelRect = alertPanel.GetComponent<RectTransform>();
-        panelRect.anchorMin = new Vector2(0.5f, 0f);
-        panelRect.anchorMax = new Vector2(0.5f, 0f);
-        panelRect.pivot = new Vector2(0.5f, 0f);
-        panelRect.anchoredPosition = new Vector2(0f, 24f);
-        panelRect.sizeDelta = new Vector2(720f, 120f);
+        // Keep the panel centered, but scale width to 80% of screen.
+        panelRect.anchorMin = new Vector2(0.1f, 0.5f);
+        panelRect.anchorMax = new Vector2(0.9f, 0.5f);
+        panelRect.pivot = new Vector2(0.5f, 0.5f);
+        panelRect.anchoredPosition = Vector2.zero;
+        panelRect.sizeDelta = new Vector2(0f, 160f);
 
         AddAccentBar(alertPanel.transform);
 
-        MakeText(alertPanel.transform, "AlertHeader", "MISSION BRIEFING",
+        var headerText = MakeText(alertPanel.transform, "AlertHeader", "MISSION BRIEFING",
             PhaseCUITheme.FontSizeCaption, PhaseCUITheme.AccentGold, TextAlignmentOptions.Center, true,
             new Vector2(0f, -10f), new Vector2(0f, 26f));
+        var headerRect = headerText.GetComponent<RectTransform>();
+        headerRect.anchorMin = new Vector2(0f, 1f);
+        headerRect.anchorMax = new Vector2(1f, 1f);
+        headerRect.pivot = new Vector2(0.5f, 1f);
+        headerRect.anchoredPosition = new Vector2(0f, -12f);
+        headerRect.offsetMin = new Vector2(PhaseCUITheme.PaddingPanel, -38f);
+        headerRect.offsetMax = new Vector2(-PhaseCUITheme.PaddingPanel, -12f);
 
         var bodyGo = new GameObject("AlertBody");
         bodyGo.transform.SetParent(alertPanel.transform, false);
@@ -397,9 +608,9 @@ public class MissionTimer : MonoBehaviour
         bodyRect.anchorMin = new Vector2(0f, 1f);
         bodyRect.anchorMax = new Vector2(1f, 1f);
         bodyRect.pivot = new Vector2(0.5f, 1f);
-        bodyRect.anchoredPosition = new Vector2(0f, -40f);
-        bodyRect.offsetMin = new Vector2(PhaseCUITheme.PaddingPanel, -100f);
-        bodyRect.offsetMax = new Vector2(-PhaseCUITheme.PaddingPanel, -40f);
+        bodyRect.anchoredPosition = new Vector2(0f, -52f);
+        bodyRect.offsetMin = new Vector2(PhaseCUITheme.PaddingPanel, -148f);
+        bodyRect.offsetMax = new Vector2(-PhaseCUITheme.PaddingPanel, -52f);
     }
 
     /// <summary>Small centred popup shown when timer expires. Game is paused while it's visible.</summary>
@@ -409,6 +620,11 @@ public class MissionTimer : MonoBehaviour
         timeUpRoot = new GameObject("TimeUpPopup");
         timeUpRoot.transform.SetParent(parent, false);
         timeUpRoot.SetActive(false);
+
+        Canvas timeUpCanvas = timeUpRoot.AddComponent<Canvas>();
+        timeUpCanvas.overrideSorting = true;
+        timeUpCanvas.sortingOrder = PhaseCUITheme.SortOrderTimeUpPopup;
+        timeUpRoot.AddComponent<GraphicRaycaster>();
 
         var dimImg = timeUpRoot.AddComponent<Image>();
         dimImg.color = new Color(0f, 0f, 0f, 0.55f);
@@ -508,6 +724,21 @@ public class MissionTimer : MonoBehaviour
         lblRect.anchorMax = Vector2.one;
         lblRect.offsetMin = lblRect.offsetMax = Vector2.zero;
         return btn;
+    }
+
+    private float GetInfoStripBottomYRuntime()
+    {
+        if (_hintStripRect == null)
+        {
+            GameObject hintStrip = GameObject.Find("HintStrip");
+            if (hintStrip != null)
+                _hintStripRect = hintStrip.GetComponent<RectTransform>();
+        }
+
+        if (_hintStripRect != null)
+            return -_hintStripRect.anchoredPosition.y + _hintStripRect.rect.height;
+
+        return PhaseCUITheme.GetInfoStripBottomY();
     }
 
     // ── Public API ───────────────────────────────────────────────────────────

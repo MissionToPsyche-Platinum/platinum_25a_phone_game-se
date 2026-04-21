@@ -22,12 +22,16 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
     private Text npcText;
     private Text toggleLabel;
     private RectTransform panelRect;
+    private CanvasScaler canvasScaler;
     private ItemDictionary itemDictionary;
     private InventoryController inventoryController;
     private PhaseCAssemblyController controller;
     private bool initialized;
     private bool isPanelMinimized = false;
     private float lastExpandedHeight = 200f;
+
+    private int lastScreenWidth;
+    private int lastScreenHeight;
 
     private List<int> lastRequiredIds = new List<int>();
     private List<GameObject> itemRows = new List<GameObject>();
@@ -69,7 +73,45 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
         if (controller == null)
             controller = PhaseCAssemblyController.Instance;
 
+        if (Screen.width != lastScreenWidth || Screen.height != lastScreenHeight)
+        {
+            lastScreenWidth  = Screen.width;
+            lastScreenHeight = Screen.height;
+            ApplyResponsiveCanvas();
+            RefreshTexts();
+        }
+
         RefreshDisplay();
+    }
+
+    /// <summary>
+    /// Keep the CanvasScaler match-setting in sync with the current screen
+    /// category so the Required Items panel scales the same way as the other
+    /// Phase C HUDs after a screen resize or device rotation.
+    /// </summary>
+    private void ApplyResponsiveCanvas()
+    {
+        if (canvasScaler != null)
+            canvasScaler.matchWidthOrHeight = PhaseCUITheme.CanvasMatchWidthOrHeight;
+
+        if (panelRect != null && !isPanelMinimized)
+        {
+            float margin = 16f;
+            float h = PhaseCUITheme.GetBottomPanelHeight();
+            panelRect.anchorMin = new Vector2(PhaseCUITheme.GetRightBottomPanelAnchorMinX(), 0f);
+            panelRect.anchorMax = new Vector2(1f,    0f);
+            panelRect.offsetMin = new Vector2(8f,      margin);
+            panelRect.offsetMax = new Vector2(-margin, h + margin);
+            lastExpandedHeight  = h;
+        }
+    }
+
+    /// <summary>Re-apply the currently-known font sizes after a screen change.</summary>
+    private void RefreshTexts()
+    {
+        if (titleText   != null) titleText.fontSize   = PhaseCUITheme.GetRequiredTitleFontSize();
+        if (npcText     != null) npcText.fontSize     = PhaseCUITheme.GetRequiredSubtitleFontSize();
+        if (toggleLabel != null) toggleLabel.fontSize = PhaseCUITheme.GetRequiredTitleFontSize();
     }
 
     // --- Minimize / expand ---
@@ -83,8 +125,10 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
 
         if (panelRect != null)
         {
-            float height = isPanelMinimized ? TitleBarHeight : lastExpandedHeight;
-            panelRect.sizeDelta = new Vector2(PhaseCUITheme.GetRequiredPanelWidthExpanded(), height);
+            float margin = 16f;
+            float h = isPanelMinimized ? TitleBarHeight : lastExpandedHeight;
+            panelRect.offsetMin = new Vector2(8f,      margin);
+            panelRect.offsetMax = new Vector2(-margin, h + margin);
         }
 
         if (toggleLabel != null)
@@ -100,16 +144,16 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
         canvasObject = canvasGo;
         Canvas canvas = canvasGo.AddComponent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = 8;
+        canvas.sortingOrder = PhaseCUITheme.SortOrderRequiredItems;
 
-        CanvasScaler scaler = canvasGo.AddComponent<CanvasScaler>();
-        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        scaler.referenceResolution = new Vector2(PhaseCUITheme.RefWidth, PhaseCUITheme.RefHeight);
-        scaler.matchWidthOrHeight = PhaseCUITheme.CanvasMatchWidthOrHeight;
+        canvasScaler = canvasGo.AddComponent<CanvasScaler>();
+        canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        canvasScaler.referenceResolution = new Vector2(PhaseCUITheme.RefWidth, PhaseCUITheme.RefHeight);
+        canvasScaler.matchWidthOrHeight = PhaseCUITheme.CanvasMatchWidthOrHeight;
 
         canvasGo.AddComponent<GraphicRaycaster>();
 
-        // Panel anchored to the right-center of screen
+        // Panel spans the bottom-right 40% of the screen (60%–100%)
         panelObject = new GameObject("RequiredItemsPanel");
         panelObject.transform.SetParent(canvasGo.transform, false);
 
@@ -117,14 +161,14 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
         panelBg.color = new Color(0.07f, 0.09f, 0.16f, 0.88f);
         panelBg.raycastTarget = false;
 
+        float margin = 16f;
+        float panelH = PhaseCUITheme.GetBottomPanelHeight();
         panelRect = panelObject.GetComponent<RectTransform>();
-        panelRect.anchorMin = new Vector2(1f, 0f);
-        panelRect.anchorMax = new Vector2(1f, 0f);
-        panelRect.pivot = new Vector2(1f, 0f);
-        float panelWidth = PhaseCUITheme.GetRequiredPanelWidthExpanded();
-        panelRect.sizeDelta = new Vector2(panelWidth, PhaseCUITheme.GetSidePanelHeight());
-        float bottomOffset = PhaseCUITheme.GetHintStripHeight() + 8f;
-        panelRect.anchoredPosition = new Vector2(-16f, bottomOffset);
+        panelRect.anchorMin = new Vector2(PhaseCUITheme.GetRightBottomPanelAnchorMinX(), 0f);
+        panelRect.anchorMax = new Vector2(1f,    0f);
+        panelRect.pivot     = new Vector2(0f,    0f);
+        panelRect.offsetMin = new Vector2(8f,      margin);
+        panelRect.offsetMax = new Vector2(-margin, panelH + margin);
 
         // Border
         GameObject borderGo = new GameObject("Border");
@@ -158,9 +202,9 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
         GameObject titleGo = new GameObject("Title");
         titleGo.transform.SetParent(titleRowGo.transform, false);
         titleText = titleGo.AddComponent<Text>();
-        titleText.text = "REQUIRED ITEMS";
+        titleText.text = "CURRENT TASK";
         titleText.font = font;
-        titleText.fontSize = titleFontSize;
+        titleText.fontSize = Mathf.Max(16, titleFontSize - 2);
         titleText.fontStyle = FontStyle.Bold;
         titleText.color = PhaseCUITheme.AccentGold;
         titleText.alignment = TextAnchor.MiddleCenter;
@@ -286,10 +330,13 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
                     : $"See: {stepInfo.CompletionNpc}";
             foreach (GameObject row in itemRows) { if (row != null) Destroy(row); }
             itemRows.Clear();
-            lastExpandedHeight = PhaseCUITheme.GetSidePanelHeight();
+            lastExpandedHeight = PhaseCUITheme.GetBottomPanelHeight();
             if (!isPanelMinimized && panelRect != null)
-                panelRect.sizeDelta = new Vector2(PhaseCUITheme.GetRequiredPanelWidthExpanded(),
-                                                  PhaseCUITheme.GetSidePanelHeight());
+            {
+                float margin = 16f;
+                panelRect.offsetMin = new Vector2(8f,      margin);
+                panelRect.offsetMax = new Vector2(-margin, lastExpandedHeight + margin);
+            }
             return;
         }
 
@@ -329,12 +376,15 @@ public class PhaseCRequiredItemsUI : MonoBehaviour
             rowIndex++;
         }
 
-        // Always use the shared side-panel height so it matches the Assembly panel
-        lastExpandedHeight = PhaseCUITheme.GetSidePanelHeight();
+        lastExpandedHeight = PhaseCUITheme.GetBottomPanelHeight();
 
         if (!isPanelMinimized && panelRect != null)
-            panelRect.sizeDelta = new Vector2(PhaseCUITheme.GetRequiredPanelWidthExpanded(),
-                                              PhaseCUITheme.GetSidePanelHeight());
+        {
+            float margin = 16f;
+            float h = lastExpandedHeight;
+            panelRect.offsetMin = new Vector2(8f,      margin);
+            panelRect.offsetMax = new Vector2(-margin, h + margin);
+        }
     }
 
     private GameObject CreateItemRow(int itemId, int needed, int have, bool collected, float yOffset)

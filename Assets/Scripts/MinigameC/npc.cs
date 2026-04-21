@@ -17,14 +17,26 @@ public class npc : MonoBehaviour, IInteractable
     [Tooltip("Optional: show when this NPC is the current step objective (e.g. icon or '!').")]
     public GameObject objectiveIndicator;
 
-    private static readonly Vector2 DialoguePanelSize = new Vector2(720f, 240f);
-
     private int dialogueIndex;
     private bool isTyping;
     private string[] activeDialogueLines;
     private bool playerInRange = false;
-    private float dialogueCooldown = 0.5f; // Cooldown period after dialogue ends
+    private float dialogueCooldown = 10f; // After dialogue closes, require 10 s before it can auto-start again
     private float lastDialogueEndTime = -1f;
+    // True when the player closed dialogue via the button while still inside the trigger zone.
+    // Prevents auto-restart until the player exits and re-enters the collider.
+    private bool _dismissedWhileInRange = false;
+
+    // Track the screen size that was used to build the current dialogue layout.
+    // When the window is resized (editor) or the device is rotated the panel is
+    // re-flowed so every piece of content stays readable and inside the screen.
+    private int lastScreenWidth;
+    private int lastScreenHeight;
+    private GameObject dialogueFocusOverlay;
+    private GameObject dialogueHintPanel;
+    private TMP_Text dialogueHintText;
+
+    private const string DialogueHintMessage = "Move away from npc to close the dialogue or press Space to speed up.";
 
     // Static reference to track which NPC currently has active dialogue
     // This prevents state conflicts when multiple NPCs share the same dialogue panel
@@ -51,6 +63,16 @@ public class npc : MonoBehaviour, IInteractable
                 TryStartDialogue();
             }
         }
+
+        // Re-flow the dialogue layout if the screen size changed while this
+        // NPC's dialogue is on-screen (e.g. window resize, device rotation).
+        if (currentActiveNPC == this && dialoguePanel != null && dialoguePanel.activeInHierarchy)
+        {
+            if (Screen.width != lastScreenWidth || Screen.height != lastScreenHeight)
+            {
+                ApplyDialoguePanelStyle();
+            }
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -70,6 +92,9 @@ public class npc : MonoBehaviour, IInteractable
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
+            // If the player dismissed dialogue while in range, don't auto-restart.
+            // They must exit and re-enter the trigger to trigger dialogue again.
+            if (_dismissedWhileInRange) return;
             // Allow retrigger if no dialogue is active and cooldown passed
             if (currentActiveNPC == null && dialogueData != null)
             {
@@ -88,6 +113,7 @@ public class npc : MonoBehaviour, IInteractable
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
+            _dismissedWhileInRange = false; // Reset so next entry triggers normally
 
             // Auto-close dialogue when player moves away from this NPC
             if (currentActiveNPC == this)
@@ -149,6 +175,8 @@ public class npc : MonoBehaviour, IInteractable
         portraitImage.sprite = dialogueData.npcPortrait;
         ApplyDialoguePanelStyle();
         dialoguePanel.SetActive(true);
+        ShowDialogueFocusOverlay();
+        ShowDialogueHintPanel();
         PhaseCAnimationManager.TriggerDialogueStart();
         MinigameCAudioManager.PlayDialogueOpen();
         // Don't pause the game so player can move and dialogue auto-closes when they walk away
@@ -208,6 +236,9 @@ public class npc : MonoBehaviour, IInteractable
         // If there's an active NPC dialogue, end it
         if (currentActiveNPC != null)
         {
+            // Mark as dismissed so the trigger stay doesn't immediately restart dialogue
+            if (currentActiveNPC.playerInRange)
+                currentActiveNPC._dismissedWhileInRange = true;
             currentActiveNPC.EndDialogueInternal();
         }
     }
@@ -221,6 +252,8 @@ public class npc : MonoBehaviour, IInteractable
         PhaseCAnimationManager.TriggerDialogueEnd();
         MinigameCAudioManager.PlayDialogueClose();
         dialoguePanel.SetActive(false);
+        HideDialogueFocusOverlay();
+        HideDialogueHintPanel();
         lastDialogueEndTime = Time.time;
 
         // Clear the static reference
@@ -279,40 +312,322 @@ public class npc : MonoBehaviour, IInteractable
     {
         if (dialoguePanel == null) return;
 
-        // Panel root: ensure it has a visible size (scene may have 0.8x0.8 = invisible)
+        lastScreenWidth  = Screen.width;
+        lastScreenHeight = Screen.height;
+
+        // Make sure the parent Canvas scales height-aware on portrait phones so
+        // the dialogue doesn't collapse to a sliver on narrow screens.
+        EnsureParentCanvasResponsive();
+
+        Vector2 panelSize    = PhaseCUITheme.GetDialoguePanelSize();
+        float   padding      = PhaseCUITheme.GetDialoguePadding();
+        float   portraitSize = PhaseCUITheme.GetDialoguePortraitSize();
+        float   nameRowH     = PhaseCUITheme.GetDialogueNameRowHeight();
+        int     nameFont     = PhaseCUITheme.GetDialogueNameFontSize();
+        int     bodyFont     = PhaseCUITheme.GetDialogueBodyFontSize();
+
+        // ── Panel root: centred horizontally, above vertical centre ───────
         RectTransform panelRect = dialoguePanel.GetComponent<RectTransform>();
         if (panelRect != null)
         {
-            Vector2 size = panelRect.sizeDelta;
-            if (size.x < 100f || size.y < 100f)
-                panelRect.sizeDelta = DialoguePanelSize;
+            panelRect.anchorMin        = new Vector2(0.5f, 0.5f);
+            panelRect.anchorMax        = new Vector2(0.5f, 0.5f);
+            panelRect.pivot            = new Vector2(0.5f, 0.5f);
+            panelRect.sizeDelta        = panelSize;
+            panelRect.anchoredPosition = new Vector2(0f, PhaseCUITheme.GetDialogueYOffsetAboveCenter());
         }
 
-        // Ensure there is an Image on the panel for the background (create if missing)
+        // ── Background image ──────────────────────────────────────────────
         Image panelImage = dialoguePanel.GetComponent<Image>();
         if (panelImage == null)
             panelImage = dialoguePanel.AddComponent<Image>();
-        panelImage.color = PhaseCUITheme.PanelBg;
-        panelImage.enabled = true;
+        panelImage.color        = PhaseCUITheme.PanelBg;
+        panelImage.enabled      = true;
         panelImage.raycastTarget = true;
-        // Unity UI Image with no sprite still draws solid color; use a white sprite for reliability
         if (panelImage.sprite == null)
             panelImage.sprite = CreateSolidSprite();
 
-        // Optional override: use assigned background instead
         if (dialogueBackground != null)
         {
-            dialogueBackground.color = PhaseCUITheme.PanelBg;
-            dialogueBackground.enabled = true;
+            dialogueBackground.color         = PhaseCUITheme.PanelBg;
+            dialogueBackground.enabled       = true;
             dialogueBackground.raycastTarget = true;
             if (dialogueBackground.sprite == null)
                 dialogueBackground.sprite = CreateSolidSprite();
         }
 
-        if (dialogueText != null)
-            dialogueText.color = PhaseCUITheme.TextBody;
+        // ── Portrait (left side, vertically centred) ──────────────────────
+        if (portraitImage != null)
+        {
+            RectTransform portraitRect = portraitImage.GetComponent<RectTransform>();
+            if (portraitRect != null)
+            {
+                portraitRect.anchorMin        = new Vector2(0f, 0.5f);
+                portraitRect.anchorMax        = new Vector2(0f, 0.5f);
+                portraitRect.pivot            = new Vector2(0f, 0.5f);
+                portraitRect.sizeDelta        = new Vector2(portraitSize, portraitSize);
+                portraitRect.anchoredPosition = new Vector2(padding, 0f);
+            }
+
+            // Keep the full portrait visible inside its square slot.
+            portraitImage.preserveAspect = true;
+            portraitImage.type = Image.Type.Simple;
+        }
+
+        // ── Name text (top of body area) ──────────────────────────────────
         if (nameText != null)
-            nameText.color = PhaseCUITheme.AccentCyan;
+        {
+            RectTransform nameRect = nameText.GetComponent<RectTransform>();
+            if (nameRect != null)
+            {
+                nameRect.anchorMin = new Vector2(0f, 1f);
+                nameRect.anchorMax = new Vector2(1f, 1f);
+                nameRect.pivot     = new Vector2(0.5f, 1f);
+                nameRect.offsetMin = new Vector2(portraitSize + padding * 2f, -(padding * 0.5f + nameRowH));
+                nameRect.offsetMax = new Vector2(-padding, -padding * 0.5f);
+            }
+
+            nameText.fontSize  = nameFont;
+            nameText.fontStyle = FontStyles.Bold | FontStyles.UpperCase;
+            nameText.alignment = TextAlignmentOptions.Center;
+            nameText.color     = PhaseCUITheme.AccentCyan;
+            nameText.enableWordWrapping = false;
+        }
+
+        // ── Dialogue body (fills remaining space) ─────────────────────────
+        if (dialogueText != null)
+        {
+            RectTransform bodyRect = dialogueText.GetComponent<RectTransform>();
+            if (bodyRect != null)
+            {
+                bodyRect.anchorMin = new Vector2(0f, 0f);
+                bodyRect.anchorMax = new Vector2(1f, 1f);
+                bodyRect.offsetMin = new Vector2(portraitSize + padding * 2f, padding);
+                bodyRect.offsetMax = new Vector2(-padding, -(padding * 0.5f + nameRowH + 6f));
+            }
+
+            dialogueText.fontSize  = bodyFont;
+            dialogueText.alignment = TextAlignmentOptions.Center;
+            dialogueText.color     = PhaseCUITheme.TextBody;
+            dialogueText.enableWordWrapping = true;
+            dialogueText.overflowMode = TextOverflowModes.Truncate;
+        }
+
+        // ── Instruction panel shown below the dialogue popup ───────────────
+        LayoutDialogueHintPanel(panelRect, bodyFont);
+
+        // ── Remove close button (X) from dialogue panel ───────────────────
+        HideCloseButton();
+
+        // Keep the backdrop covering the whole screen after resize/orientation changes.
+        LayoutDialogueFocusOverlay();
+    }
+
+    /// <summary>
+    /// Patch the parent Canvas's CanvasScaler so it scales the same way as
+    /// all the other Phase C HUD canvases. The scene ships with match=0 (width
+    /// only), which makes the dialogue panel shrink to near-invisible on
+    /// narrow portrait phones; matching height-aware fixes that.
+    /// </summary>
+    private void EnsureParentCanvasResponsive()
+    {
+        if (dialoguePanel == null) return;
+
+        Canvas parentCanvas = dialoguePanel.GetComponentInParent<Canvas>(true);
+        if (parentCanvas == null) return;
+
+        CanvasScaler scaler = parentCanvas.GetComponent<CanvasScaler>();
+        if (scaler == null) return;
+
+        scaler.uiScaleMode         = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        scaler.referenceResolution = new Vector2(PhaseCUITheme.RefWidth, PhaseCUITheme.RefHeight);
+        scaler.matchWidthOrHeight  = PhaseCUITheme.CanvasMatchWidthOrHeight;
+
+        // Dialogue is modal: keep this canvas above the generated HUD canvases
+        // so the backdrop hides the other panels while an NPC is speaking.
+        parentCanvas.overrideSorting = true;
+        parentCanvas.sortingOrder    = 300;
+    }
+
+    private void ShowDialogueFocusOverlay()
+    {
+        if (dialoguePanel == null) return;
+
+        EnsureDialogueFocusOverlay();
+        LayoutDialogueFocusOverlay();
+
+        if (dialogueFocusOverlay != null)
+        {
+            dialogueFocusOverlay.SetActive(true);
+            dialogueFocusOverlay.transform.SetAsLastSibling();
+        }
+
+        // Dialogue must render above the dark backdrop.
+        dialoguePanel.transform.SetAsLastSibling();
+        if (dialogueHintPanel != null)
+            dialogueHintPanel.transform.SetAsLastSibling();
+    }
+
+    private void HideDialogueFocusOverlay()
+    {
+        if (dialogueFocusOverlay == null)
+            EnsureDialogueFocusOverlay();
+
+        if (dialogueFocusOverlay != null)
+            dialogueFocusOverlay.SetActive(false);
+    }
+
+    private void EnsureDialogueFocusOverlay()
+    {
+        if (dialoguePanel == null || dialogueFocusOverlay != null) return;
+
+        Transform parent = dialoguePanel.transform.parent;
+        if (parent == null) return;
+
+        Transform existing = parent.Find("DialogueFocusOverlay");
+        if (existing != null)
+        {
+            dialogueFocusOverlay = existing.gameObject;
+            return;
+        }
+
+        dialogueFocusOverlay = new GameObject("DialogueFocusOverlay");
+        dialogueFocusOverlay.transform.SetParent(parent, false);
+
+        Image overlayImage = dialogueFocusOverlay.AddComponent<Image>();
+        overlayImage.sprite        = CreateSolidSprite();
+        overlayImage.color         = PhaseCUITheme.GetDialogueBackdropColor();
+        overlayImage.raycastTarget = true;
+
+        dialogueFocusOverlay.SetActive(false);
+    }
+
+    private void LayoutDialogueFocusOverlay()
+    {
+        if (dialogueFocusOverlay == null)
+            EnsureDialogueFocusOverlay();
+        if (dialogueFocusOverlay == null) return;
+
+        Image overlayImage = dialogueFocusOverlay.GetComponent<Image>();
+        if (overlayImage != null)
+        {
+            overlayImage.color         = PhaseCUITheme.GetDialogueBackdropColor();
+            overlayImage.raycastTarget = true;
+            if (overlayImage.sprite == null)
+                overlayImage.sprite = CreateSolidSprite();
+        }
+
+        RectTransform overlayRect = dialogueFocusOverlay.GetComponent<RectTransform>();
+        if (overlayRect == null)
+            overlayRect = dialogueFocusOverlay.AddComponent<RectTransform>();
+
+        overlayRect.anchorMin        = Vector2.zero;
+        overlayRect.anchorMax        = Vector2.one;
+        overlayRect.pivot            = new Vector2(0.5f, 0.5f);
+        overlayRect.anchoredPosition = Vector2.zero;
+        overlayRect.offsetMin        = Vector2.zero;
+        overlayRect.offsetMax        = Vector2.zero;
+    }
+
+    private void HideCloseButton()
+    {
+        if (dialoguePanel == null) return;
+
+        Transform closeTransform = dialoguePanel.transform.Find("CloseButton");
+        if (closeTransform == null) return;
+        closeTransform.gameObject.SetActive(false);
+    }
+
+    private void EnsureDialogueHintPanel()
+    {
+        if (dialoguePanel == null) return;
+        if (dialogueHintPanel != null && dialogueHintText != null) return;
+
+        Transform parent = dialoguePanel.transform.parent;
+        if (parent == null) return;
+
+        Transform existing = parent.Find("DialogueHintPanel");
+        if (existing != null)
+        {
+            dialogueHintPanel = existing.gameObject;
+            dialogueHintText = dialogueHintPanel.GetComponentInChildren<TMP_Text>(true);
+            return;
+        }
+
+        dialogueHintPanel = new GameObject("DialogueHintPanel");
+        dialogueHintPanel.transform.SetParent(parent, false);
+
+        Image panelBg = dialogueHintPanel.AddComponent<Image>();
+        panelBg.sprite = CreateSolidSprite();
+        panelBg.color = new Color(0.09f, 0.14f, 0.24f, 0.95f);
+        panelBg.raycastTarget = false;
+
+        GameObject borderGo = new GameObject("Border");
+        borderGo.transform.SetParent(dialogueHintPanel.transform, false);
+        Image borderImg = borderGo.AddComponent<Image>();
+        borderImg.color = new Color(0.42f, 0.62f, 0.82f, 0.55f);
+        borderImg.raycastTarget = false;
+        RectTransform borderRect = borderGo.GetComponent<RectTransform>();
+        borderRect.anchorMin = Vector2.zero;
+        borderRect.anchorMax = Vector2.one;
+        borderRect.offsetMin = new Vector2(-1f, -1f);
+        borderRect.offsetMax = new Vector2(1f, 1f);
+        borderGo.transform.SetAsFirstSibling();
+
+        GameObject hintGo = new GameObject("DialogueHintText");
+        hintGo.transform.SetParent(dialogueHintPanel.transform, false);
+        dialogueHintText = hintGo.AddComponent<TextMeshProUGUI>();
+    }
+
+    private void LayoutDialogueHintPanel(RectTransform panelRect, int bodyFont)
+    {
+        EnsureDialogueHintPanel();
+        if (dialogueHintPanel == null || dialogueHintText == null || panelRect == null) return;
+
+        RectTransform hintPanelRect = dialogueHintPanel.GetComponent<RectTransform>();
+        if (hintPanelRect == null)
+            hintPanelRect = dialogueHintPanel.AddComponent<RectTransform>();
+
+        float panelWidth = panelRect.sizeDelta.x;
+        float panelHeight = Mathf.Clamp(bodyFont * 1.8f + 16f, 42f, 70f);
+        float y = panelRect.anchoredPosition.y - (panelRect.sizeDelta.y * 0.5f) - 10f;
+
+        hintPanelRect.anchorMin = new Vector2(0.5f, 0.5f);
+        hintPanelRect.anchorMax = new Vector2(0.5f, 0.5f);
+        hintPanelRect.pivot = new Vector2(0.5f, 1f);
+        hintPanelRect.sizeDelta = new Vector2(panelWidth, panelHeight);
+        hintPanelRect.anchoredPosition = new Vector2(0f, y);
+
+        RectTransform hintRect = dialogueHintText.GetComponent<RectTransform>();
+        hintRect.anchorMin = Vector2.zero;
+        hintRect.anchorMax = Vector2.one;
+        hintRect.offsetMin = new Vector2(16f, 6f);
+        hintRect.offsetMax = new Vector2(-16f, -6f);
+
+        dialogueHintText.text = DialogueHintMessage;
+        dialogueHintText.fontSize = Mathf.Max(14, bodyFont - 4);
+        dialogueHintText.color = PhaseCUITheme.TextSecondary;
+        dialogueHintText.alignment = TextAlignmentOptions.Center;
+        dialogueHintText.enableWordWrapping = true;
+        dialogueHintText.raycastTarget = false;
+    }
+
+    private void ShowDialogueHintPanel()
+    {
+        if (dialoguePanel == null) return;
+        RectTransform panelRect = dialoguePanel.GetComponent<RectTransform>();
+        LayoutDialogueHintPanel(panelRect, PhaseCUITheme.GetDialogueBodyFontSize());
+        if (dialogueHintPanel != null)
+        {
+            dialogueHintPanel.SetActive(true);
+            dialogueHintPanel.transform.SetAsLastSibling();
+        }
+    }
+
+    private void HideDialogueHintPanel()
+    {
+        if (dialogueHintPanel != null)
+            dialogueHintPanel.SetActive(false);
     }
 
     private static Texture2D _solidWhiteTexture;

@@ -153,26 +153,24 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
         RectTransform rt = _deliveryPanel.GetComponent<RectTransform>();
         rt.localScale = Vector3.one;
 
-        float deliveryTopOffset = PhaseCUITheme.GetDeliveryTopOffset();
-        // Start fully off-screen above the top edge
-        float fromY = 0f;
+        float targetY = PhaseCUITheme.GetPopupBottomOffset() + NotifHeight + 10f;
+        float fromY = targetY - DeliverySlideIn;
         const float InDuration = 0.3f;
 
         for (float t = 0f; t < InDuration; t += Time.deltaTime)
         {
             float p = t / InDuration;
             float eased = EaseOutCubic(p);
-            // Scale bounce: 0.85 -> 1.08 in first 60%, then 1.08 -> 1.0 in last 40%
             float scale = p < 0.6f
                 ? Mathf.Lerp(0.85f, 1.08f, p / 0.6f)
                 : Mathf.Lerp(1.08f, 1.0f, (p - 0.6f) / 0.4f);
             _deliveryCG.alpha = Mathf.Min(1f, p / 0.4f);
-            rt.anchoredPosition = new Vector2(0f, Mathf.Lerp(fromY, deliveryTopOffset, eased));
+            rt.anchoredPosition = new Vector2(0f, Mathf.Lerp(fromY, targetY, eased));
             rt.localScale = new Vector3(scale, scale, 1f);
             yield return null;
         }
         _deliveryCG.alpha = 1f;
-        rt.anchoredPosition = new Vector2(0f, deliveryTopOffset);
+        rt.anchoredPosition = new Vector2(0f, targetY);
         rt.localScale = Vector3.one;
 
         // Launch sparkles after panel lands
@@ -198,8 +196,8 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
     private IEnumerator AnimateDeliverySparkles(RectTransform panelRect)
     {
         const int Count = 6;
-        float panelW = panelRect.sizeDelta.x;
-        float panelH = panelRect.sizeDelta.y;
+        float panelW = panelRect.rect.width;
+        float panelH = panelRect.rect.height;
 
         // Reuse or create sparkle GameObjects
         while (_deliverySparkles.Count < Count)
@@ -291,17 +289,17 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
         _notifPanel.SetActive(true);
         RectTransform rt = _notifPanel.GetComponent<RectTransform>();
 
-        // Fade in + slide up from hint strip
-        float fromY = BottomOffset - SlideDistance;
+        float targetY = PhaseCUITheme.GetPopupBottomOffset();
+        float fromY = targetY - SlideDistance;
         for (float t = 0f; t < AnimInDuration; t += Time.deltaTime)
         {
             float p = t / AnimInDuration;
             _canvasGroup.alpha = p;
-            rt.anchoredPosition = new Vector2(0f, Mathf.Lerp(fromY, BottomOffset, p));
+            rt.anchoredPosition = new Vector2(0f, Mathf.Lerp(fromY, targetY, p));
             yield return null;
         }
         _canvasGroup.alpha = 1f;
-        rt.anchoredPosition = new Vector2(0f, BottomOffset);
+        rt.anchoredPosition = new Vector2(0f, targetY);
 
         yield return new WaitForSeconds(HoldDuration);
 
@@ -325,7 +323,7 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
         GameObject canvasGo = new GameObject(CanvasName);
         Canvas canvas = canvasGo.AddComponent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = 10;
+        canvas.sortingOrder = PhaseCUITheme.SortOrderFeedbackPopup;
 
         CanvasScaler scaler = canvasGo.AddComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
@@ -348,11 +346,11 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
         bgImg.raycastTarget = false;
 
         RectTransform panelRect = _notifPanel.GetComponent<RectTransform>();
-        panelRect.anchorMin = new Vector2(0.5f, 0f);
-        panelRect.anchorMax = new Vector2(0.5f, 0f);
+        panelRect.anchorMin = new Vector2(0.1f, 0f);
+        panelRect.anchorMax = new Vector2(0.9f, 0f);
         panelRect.pivot = new Vector2(0.5f, 0f);
-        panelRect.sizeDelta = new Vector2(PhaseCUITheme.GetNotifWidth(), NotifHeight);
-        panelRect.anchoredPosition = new Vector2(0f, BottomOffset);
+        panelRect.sizeDelta = new Vector2(0f, NotifHeight);
+        panelRect.anchoredPosition = new Vector2(0f, PhaseCUITheme.GetPopupBottomOffset());
 
         // Outer border
         GameObject borderGo = new GameObject("Border");
@@ -403,7 +401,7 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
         _notifText.fontSize = (int)PhaseCUITheme.GuideCaptionSize;
         _notifText.fontStyle = FontStyle.Bold;
         _notifText.color = PhaseCUITheme.TextPrimary;
-        _notifText.alignment = TextAnchor.MiddleLeft;
+        _notifText.alignment = TextAnchor.MiddleCenter;
         _notifText.raycastTarget = false;
         RectTransform textRect = textGo.GetComponent<RectTransform>();
         textRect.anchorMin = Vector2.zero;
@@ -431,11 +429,11 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
         bg.raycastTarget = false;
 
         RectTransform rt = _deliveryPanel.GetComponent<RectTransform>();
-        rt.anchorMin = new Vector2(0.5f, 1f);
-        rt.anchorMax = new Vector2(0.5f, 1f);
-        rt.pivot = new Vector2(0.5f, 1f);
-        rt.sizeDelta = new Vector2(PhaseCUITheme.GetDeliveryWidth(), DeliveryHeight);
-        rt.anchoredPosition = new Vector2(0f, PhaseCUITheme.GetDeliveryTopOffset());
+        rt.anchorMin = new Vector2(0.1f, 0f);
+        rt.anchorMax = new Vector2(0.9f, 0f);
+        rt.pivot = new Vector2(0.5f, 0f);
+        rt.sizeDelta = new Vector2(0f, DeliveryHeight);
+        rt.anchoredPosition = new Vector2(0f, PhaseCUITheme.GetPopupBottomOffset() + NotifHeight + 10f);
 
         // Border (subtle blue, matches other panels)
         GameObject borderGo = new GameObject("Border");
@@ -474,13 +472,13 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
         _deliveryTitle.fontSize = 20;
         _deliveryTitle.fontStyle = FontStyle.Bold;
         _deliveryTitle.color = PhaseCUITheme.TextPrimary;
-        _deliveryTitle.alignment = TextAnchor.MiddleLeft;
+        _deliveryTitle.alignment = TextAnchor.MiddleCenter;
         _deliveryTitle.raycastTarget = false;
         RectTransform titleRect = titleGo.GetComponent<RectTransform>();
         titleRect.anchorMin = new Vector2(0f, 0.5f);
         titleRect.anchorMax = new Vector2(1f, 1f);
-        titleRect.offsetMin = new Vector2(20f, 0f);
-        titleRect.offsetMax = new Vector2(-12f, 0f);
+        titleRect.offsetMin = new Vector2(8f, 0f);
+        titleRect.offsetMax = new Vector2(-8f, 0f);
 
         // "Delivered to: NPC" subtitle
         GameObject subGo = new GameObject("DeliverySub");
@@ -490,13 +488,13 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
         _deliverySub.font = font;
         _deliverySub.fontSize = 15;
         _deliverySub.color = PhaseCUITheme.AccentCyan;
-        _deliverySub.alignment = TextAnchor.MiddleLeft;
+        _deliverySub.alignment = TextAnchor.MiddleCenter;
         _deliverySub.raycastTarget = false;
         RectTransform subRect = subGo.GetComponent<RectTransform>();
         subRect.anchorMin = new Vector2(0f, 0f);
         subRect.anchorMax = new Vector2(1f, 0.5f);
-        subRect.offsetMin = new Vector2(20f, 0f);
-        subRect.offsetMax = new Vector2(-12f, 0f);
+        subRect.offsetMin = new Vector2(8f, 0f);
+        subRect.offsetMax = new Vector2(-8f, 0f);
 
         _deliveryPanel.SetActive(false);
     }

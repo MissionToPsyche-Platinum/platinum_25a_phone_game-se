@@ -69,6 +69,25 @@ public static class PhaseCUITheme
     public const float GuideDotSize    = 14f;
     public const float GuideDotSpacing = 36f;
 
+    // ---- Canvas sorting orders ----
+    // Base HUD layers
+    public const int SortOrderHintStrip = 6;
+    public const int SortOrderRequiredItems = 8;
+    public const int SortOrderGuide = 10;
+    public const int SortOrderTimer = 12;
+    public const int SortOrderInventory = 15;
+
+    // Popup / modal layers (always above base HUD)
+    public const int SortOrderFeedbackPopup = 205;
+    public const int SortOrderMissionAlertPopup = 206;
+    public const int SortOrderStoryMomentPopup = 210;
+    public const int SortOrderHubConfirmPopup = 212;
+    public const int SortOrderTimeUpPopup = 214;
+    public const int SortOrderSavePopup = 215;
+    // Tips panel must be above all HUD elements including timer (12) and hub button
+    public const int SortOrderTipsBackdrop = 300;
+    public const int SortOrderTipsPopup = 301;
+
     // ---- Typography constants (opening screen & story moments) ----
     public const float FontSizeBadge        = 15f;
     public const float FontSizeTitle        = 36f;
@@ -82,6 +101,10 @@ public static class PhaseCUITheme
     public const float GuideCaptionSize     = 18f;
     public const float StoryMomentTitleSize = 32f;
     public const float StoryMomentBodySize  = 24f;
+
+    // Tips panel typography
+    public const float TipsTitleSize   = 32f;
+    public const float TipsContentSize = 22f;
 
     /// <summary>Space reserved at top of story popup (accent + padding + wrapped title).</summary>
     public static float GetStoryMomentTitleBlockHeight() =>
@@ -250,6 +273,13 @@ public static class PhaseCUITheme
         Mathf.Min(Tier(190f, 440f, 310f, 290f), Screen.width * 0.50f);
 
     // =========================================================================
+    // ---- Bottom panel anchors (left assembly + right required items) ----
+    // =========================================================================
+
+    public static float GetLeftBottomPanelAnchorMaxX()  => Tier(0.48f, 0.50f, 0.46f, 0.45f);
+    public static float GetRightBottomPanelAnchorMinX() => Tier(0.52f, 0.50f, 0.54f, 0.55f);
+
+    // =========================================================================
     // ---- Inventory ----
     // =========================================================================
 
@@ -266,24 +296,33 @@ public static class PhaseCUITheme
     // ---- Bottom hint strip ----
     // =========================================================================
 
-    public static float GetHintStripHeight()          => Tier( 88f,  68f, 80f, 72f);
-    public static float GetHintStripMinimizedHeight() => Tier( 36f,  28f, 30f, 30f);
-    public static int   GetHintFontSize()             => Tier(  28,   24,  22,  22);
-    public static float GetHintMiddleSectionEnd()     => Tier(0.52f, 0.54f, 0.54f, 0.55f);
+    public static float GetHintStripHeight()          => Tier( 44f,  36f, 42f, 40f);
+    public static float GetHintStripMinimizedHeight() => Tier( 16f,  12f, 14f, 14f);
+    public static int   GetHintFontSize()             => Tier(  24,   22,  22,  22);
+    public static float GetHintMiddleSectionEnd()     => Tier(0.60f, 0.60f, 0.60f, 0.60f);
+
+    /// <summary>Height of the contextual-hints strip that sits between the guide panel and the timer widgets.</summary>
+    public static float GetInfoStripHeight() => GetHintStripHeight();
+
+    /// <summary>Bottom edge Y (canvas units from screen top) of the info/hints strip: use as the Y anchor for the timer and hub button.</summary>
+    public static float GetInfoStripBottomY() => GetGuideBarBottomY() + GetInfoStripHeight();
 
     // =========================================================================
     // ---- Shared side-panel height (Assembly + Required Items) ----
     // =========================================================================
-
-    public static float GetSidePanelHeight() => Tier(260f, 195f, 275f, 250f);
+    //
+    // Enlarged so both side-panels reveal more of their contents by default
+    // and remain readable across all screen categories.
+    public static float GetSidePanelHeight() => Tier(330f, 240f, 360f, 340f);
 
     // =========================================================================
     // ---- Required items panel ----
     //
+    //  Panel is enlarged so required-item rows stay readable at every size.
     //  Portrait phone effective canvas width ≈ 499 units (iPhone 13).
-    //  Assembly right-edge: 14 + 120 = 134 units.
-    //  Required Items left-edge must be > 134 to avoid overlap.
-    //  With width 185: left = 499 - 16 - 185 = 298 → gap = 164 units. ✓
+    //  Assembly right-edge (width 160): 14 + 160 = 174 units.
+    //  Required Items left-edge must be > 174 to avoid overlap.
+    //  With width 205: left = 499 - 16 - 205 = 278 → gap ≈ 104 units. ✓
     // =========================================================================
 
     public static float GetRequiredPanelWidthExpanded()
@@ -292,38 +331,52 @@ public static class PhaseCUITheme
         {
             case ScreenCategory.Phone:
                 float canvasW = Screen.width * RefHeight / Screen.height;
-                return Mathf.Min(185f, canvasW * 0.37f);
+                return Mathf.Min(205f, canvasW * 0.40f);
             case ScreenCategory.PhoneLandscape:
-                return 420f;
+                return 500f;
             case ScreenCategory.Tablet:
-                return 310f;
+                return 380f;
             default:
-                return 290f;
+                return 360f;
         }
     }
 
-    public static float GetRequiredTitleBarHeight() => Tier( 52f,  56f,  52f,  50f);
-    public static float GetRequiredItemRowHeight()  => Tier( 50f,  54f,  48f,  48f);
-    public static float GetRequiredIconSize()       => Tier( 42f,  46f,  40f,  40f);
-    public static float GetRequiredNpcTextHeight()  => Tier( 32f,  34f,  28f,  28f);
+    public static float GetRequiredTitleBarHeight() => Tier( 58f,  58f,  60f,  56f);
+    public static float GetRequiredItemRowHeight()  => Tier( 58f,  56f,  60f,  56f);
+    public static float GetRequiredIconSize()       => Tier( 48f,  48f,  52f,  48f);
+    public static float GetRequiredNpcTextHeight()  => Tier( 36f,  36f,  32f,  32f);
 
-    public static int GetRequiredTitleFontSize()    => Tier(20, 28, 20, 20);
-    public static int GetRequiredItemFontSize()     => Tier(18, 24, 18, 18);
-    public static int GetRequiredSubtitleFontSize() => Tier(16, 22, 16, 16);
+    public static int GetRequiredTitleFontSize()    => Tier(22, 22, 22, 22);
+    public static int GetRequiredItemFontSize()     => Tier(20, 20, 20, 20);
+    public static int GetRequiredSubtitleFontSize() => Tier(20, 20, 20, 20);
 
     // =========================================================================
     // ---- Assembly visualizer (bottom-left spacecraft panel) ----
+    //
+    // Wider and taller than before so the spacecraft sprite and step label
+    // stay visible and legible on every screen category.
     // =========================================================================
 
-    public static float GetAssemblyPanelWidth()      => Tier(132f, 352f, 206f, 200f);
+    public static float GetAssemblyPanelWidth()      => Tier(170f, 420f, 280f, 260f);
     public static float GetAssemblyPanelHeight()     => GetSidePanelHeight();
-    public static float GetAssemblyTitleBarHeight()  => Tier( 44f,  50f,  44f,  42f);
-    public static int   GetAssemblyTitleFont()       => Tier(  16,   22,   17,   18);
+    public static float GetAssemblyTitleBarHeight()  => Tier( 52f,  56f,  52f,  50f);
+    public static int   GetAssemblyTitleFont()       => Tier(  22,   22,   22,   22);
 
-    // Step font: visible and large enough to read at all scales.
-    // Phone portrait scale ≈ 2.35: font 18 → 42 px on screen.
-    // Phone landscape scale ≈ 1.27: font 22 → 28 px on screen.
-    public static int   GetAssemblyStepFont()        => Tier(  18,   22,   16,   16);
+    // Step font: matches body text size for consistency across all panels.
+    public static int   GetAssemblyStepFont()        => Tier(  20,   20,   20,   20);
+
+    // =========================================================================
+    // ---- Timer / hub widgets (top-right) ----
+    // =========================================================================
+
+    public static float GetTimerWidgetWidth()   => Tier(176f, 186f, 188f, 192f);
+    // Match timer widget width so "Central Hub" and "MISSION TIME" panels are visually uniform.
+    public static float GetHubWidgetWidth()     => GetTimerWidgetWidth();
+    public static float GetTimerWidgetHeight()  => Tier( 52f,  56f,  58f,  60f);
+    public static float GetTimerDigitsFontSize()=> Tier( 24f,  26f,  28f,  30f);
+    public static float GetTimerCaptionFontSize()=> Tier(13f, 13f, 14f, 14f);
+    public static float GetHubIconFontSize()    => Tier( 22f,  24f,  26f,  28f);
+    public static float GetHubLabelFontSize()   => GetTimerCaptionFontSize();
 
     // =========================================================================
     // ---- Return-to-hub button ----
@@ -339,23 +392,35 @@ public static class PhaseCUITheme
     //  "Talk to: [NPC]" and "E/Space: talk | ..." rows have been removed from
     //  the guide panel. Heights are sized for title + objective only.
     //
-    //  Phone portrait  (158 px): smaller fonts + centered objective; room for wrapped lines.
-    //  Phone landscape (100 px): same intent in short vertical space.
+    //  Phone portrait  (180 px): larger fonts + centered objective; room for wrapped lines.
+    //  Phone landscape (108 px): same intent in short vertical space.
     // =========================================================================
 
-    public static float GetGuidePanelHeight()       => Tier(158f, 100f, 140f, 125f);
-    public static float GetGuideTitleBarHeight()    => Tier( 48f,  38f,  44f,  42f);
-    public static float GetGuideStepTitleFontSize() => Tier( 26f,  24f,  26f,  26f);
-    public static float GetGuideObjectiveFontSize() => Tier( 20f,  18f,  22f,  22f);
-    public static float GetGuideCaptionFontSize()   => Tier( 20f,  18f,  18f,  18f);
+    public static float GetGuidePanelHeight()       => Tier(125f,  78f, 105f, 100f);
+    public static float GetGuideTitleBarHeight()    => Tier( 36f,  30f,  34f,  34f);
+    public static float GetGuideStepTitleFontSize() => Tier( 22f,  20f,  22f,  22f);
+    public static float GetGuideObjectiveFontSize() => Tier( 24f,  22f,  22f,  22f);
+    public static float GetGuideCaptionFontSize()   => Tier( 16f,  14f,  16f,  16f);
+
+    /// <summary>Extra buffer below the safe-area top inset so the guide panel always clears Dynamic Island / notch in the simulator.</summary>
+    public static float GetGuideExtraTopPadding() => Tier(8f, 4f, 0f, 0f);
+
+    /// <summary>Bottom edge of the guide panel in canvas units from the screen top: use as the Y anchor for widgets that sit just below the guide strip.</summary>
+    public static float GetGuideBarBottomY() => GetSafeAreaTopOffset() + GetGuideExtraTopPadding() + GetGuidePanelHeight();
+
+    /// <summary>Height for the full-width bottom HUD panels (Assembly + Required Items) that span 0–45 % and 55–100 % of the screen width.</summary>
+    public static float GetBottomPanelHeight() => Tier(260f, 200f, 300f, 280f);
+
+    /// <summary>Bottom Y (canvas units from screen bottom) for feedback popups: sits above the bottom HUD panels.</summary>
+    public static float GetPopupBottomOffset() => GetBottomPanelHeight() + 30f;
 
     // ---- Guide Y offsets (top-anchored, negative = downward) ----
     // Step title zone + objective zone only (talkTo / controls rows removed).
 
     public static float GetGuideStepTitleY()      => -6f;
-    public static float GetGuideStepTitleBottom() => Tier(-46f, -34f, -42f, -38f);
-    public static float GetGuideObjectiveY()      => Tier(-50f, -38f, -48f, -44f);
-    public static float GetGuideObjectiveBottom() => Tier(-150f, -96f, -130f, -116f);
+    public static float GetGuideStepTitleBottom() => Tier(-32f, -24f, -30f, -28f);
+    public static float GetGuideObjectiveY()      => Tier(-36f, -28f, -34f, -32f);
+    public static float GetGuideObjectiveBottom() => Tier(-102f, -58f, -88f, -82f);
 
     // Kept for backward compatibility (no longer rendered in guide panel).
     public static float GetGuideTalkToY()         => Tier(-148f,  -98f, -136f, -122f);
@@ -367,6 +432,57 @@ public static class PhaseCUITheme
     public static float GetGuideDotSize()          => Tier( 20f,  16f,  16f,  16f);
     public static float GetGuideDotSpacing()       => Tier( 46f,  38f,  40f,  38f);
     public static float GetGuideDotLabelFontSize() => Tier( 13f,  11f,  11f,  11f);
+
+    // =========================================================================
+    // ---- NPC dialogue panel (conversation overlay) ----
+    //
+    //  Sits centred horizontally and slightly above the vertical centre of
+    //  the screen. Sized so it covers the name, portrait and wrapped body
+    //  text on every tier. Widths are clamped against the effective canvas
+    //  width on narrow screens so the panel never overflows.
+    // =========================================================================
+
+    public static Vector2 GetDialoguePanelSize()
+    {
+        switch (GetScreenCategory())
+        {
+            case ScreenCategory.Phone:
+            {
+                // Portrait phones: compute effective canvas width using height-match
+                // scaling and let the panel take up ~94 % of that width.
+                float canvasW = Screen.width * RefHeight / Mathf.Max(Screen.height, 1);
+                float w = Mathf.Min(820f, Mathf.Max(500f, canvasW * 0.94f));
+                return new Vector2(w, 340f);
+            }
+            case ScreenCategory.PhoneLandscape:
+                return new Vector2(1300f, 320f);
+            case ScreenCategory.Tablet:
+                return new Vector2(1140f, 400f);
+            default: // Desktop
+                return new Vector2(1200f, 420f);
+        }
+    }
+
+    public static float GetDialoguePortraitSize() => Tier(120f, 150f, 170f, 190f);
+    public static int   GetDialogueNameFontSize() => Tier(   22,   22,   22,   22);
+    public static int   GetDialogueBodyFontSize() => Tier(   22,   22,   22,   22);
+    public static float GetDialoguePadding()      => Tier( 26f,  24f,  30f,  32f);
+
+    /// <summary>Name-row reserved height above the wrapped body text.</summary>
+    public static float GetDialogueNameRowHeight() => GetDialogueNameFontSize() * 1.5f;
+
+    /// <summary>Close-button square side and its label font size.</summary>
+    public static float GetDialogueCloseSize()     => Tier( 52f,  48f,  56f,  58f);
+    public static int   GetDialogueCloseFontSize() => Tier(   26,   24,   28,   28);
+
+    /// <summary>
+    /// Positive Y offset (canvas units) so the panel centre lands above the
+    /// vertical centre of the screen. Kept modest so the dialogue feels more
+    /// centered while still clearing the player/HUD area.
+    /// </summary>
+    public static float GetDialogueYOffsetAboveCenter() => 0f;
+
+    public static Color GetDialogueBackdropColor() => new Color(0f, 0f, 0f, 0.86f);
 
     // =========================================================================
     // ---- Opening / welcome screen ----
@@ -395,4 +511,17 @@ public static class PhaseCUITheme
     public static float GetOpeningTitleStripHeight() => Tier(56f, 48f, 56f, 56f);
 
     public static float GetOpeningBadgeStripHeight() => Tier(28f, 26f, 34f, 34f);
+
+    // =========================================================================
+    // ---- Tips overlay panel ----
+    // =========================================================================
+
+    public static float GetTipsTitleFontSize()   => Tier(26f, 24f, 30f, 32f);
+    public static float GetTipsContentFontSize() => Tier(15f, 14f, 19f, 20f);
+    public static float GetTipsCloseButtonSize() => Tier(36f, 34f, 40f, 44f);
+    public static float GetTipsLineSpacing()      => Tier(1.28f, 1.22f, 1.30f, 1.32f);
+
+    public static float GetTipsHorizontalInset()  => Tier(0.02f, 0.03f, 0.08f, 0.12f);
+    public static float GetTipsBottomPadding()    => Tier(12f, 10f, 16f, 20f);
+    public static float GetTipsTopGap()           => Tier(4f, 4f, 6f, 8f);
 }
