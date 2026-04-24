@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 670a184fb11be5348bfddfe5921747b2
+guid: f84a0813cf0a81444b09a6339d58578f
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -125,10 +125,10 @@ TextureImporter:
       name: exit-btn_0
       rect:
         serializedVersion: 2
-        x: 28
-        y: 28
-        width: 84
-        height: 84
+        x: 11
+        y: 11
+        width: 278
+        height: 278
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -152,8 +152,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      exit-btn_0: 4492802538642234955
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
