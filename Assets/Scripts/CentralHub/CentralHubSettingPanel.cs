@@ -13,6 +13,8 @@ public class CentralHubSettingPanel : MonoBehaviour
 
     [SerializeField] private Slider volumeSlider;
     [SerializeField] private TMP_Text volumePercentText;
+    [SerializeField] private Slider musicVolumeSlider;
+    [SerializeField] private TMP_Text musicVolumePercentText;
     [SerializeField] private Toggle tutorialToggle;
     [SerializeField] private Toggle fontToggle;
     [SerializeField] private Toggle popupsToggle;
@@ -28,6 +30,7 @@ public class CentralHubSettingPanel : MonoBehaviour
     [SerializeField] private bool defaultPopups = true;
 
     private const string PREF_KEY= "MasterVolume";
+    private const string PREF_MUSIC_KEY = "MusicVolume";
     private const string PREF_TUT_KEY= "TutorialsOn";
     private const string PREF_FONT_KEY= "AccessibleFont";
     private const string PREF_POP_UP_KEY = "Pop-ups";
@@ -50,6 +53,14 @@ public class CentralHubSettingPanel : MonoBehaviour
             volumeSlider.value = saved;
             volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
         }
+        float music = Mathf.Clamp01(PlayerPrefs.GetFloat(PREF_MUSIC_KEY, defaultVolume));
+        if (musicVolumeSlider != null)
+        {
+            musicVolumeSlider.minValue = 0f;
+            musicVolumeSlider.maxValue = 1f;
+            musicVolumeSlider.value = saved;
+            musicVolumeSlider.onValueChanged.AddListener(OnMusicVolumeChanged);
+        }
         defaultTutorial = PlayerPrefs.GetInt(PREF_TUT_KEY, defaultTutorial ? 1 : 0) == 1;
         if (tutorialToggle != null)
         {
@@ -68,6 +79,9 @@ public class CentralHubSettingPanel : MonoBehaviour
 
         ApplyVolume(saved);
         UpdatePercentText(saved);
+
+        ApplyMusicVolume(music);
+        UpdateMusicPercentText(music);
     }
 
     private void OnDestroy()
@@ -133,6 +147,16 @@ public class CentralHubSettingPanel : MonoBehaviour
         ApplyVolume(value);
         UpdatePercentText(value);
     }
+    private void OnMusicVolumeChanged(float value)
+    {
+        value = Mathf.Clamp01(value);
+
+        PlayerPrefs.SetFloat(PREF_MUSIC_KEY, value);
+        PlayerPrefs.Save();
+
+        ApplyMusicVolume(value);
+        UpdateMusicPercentText(value);
+    }
 
     private void ApplyVolume(float volume)
     {
@@ -150,7 +174,23 @@ public class CentralHubSettingPanel : MonoBehaviour
 
     }
 
-    
+    private void ApplyMusicVolume(float volume)
+    {
+        if (audioManager != null)
+        {
+            audioManager.SetBackgroundVolume(volume);
+        }
+    }
+
+    private void UpdateMusicPercentText(float value)
+    {
+        if (musicVolumePercentText == null) return;
+        int percent = Mathf.RoundToInt(value * 100f);
+        musicVolumePercentText.text = $"{percent}%";
+
+    }
+
+
     private void Update()
     {
         if (!isOpen) return;
