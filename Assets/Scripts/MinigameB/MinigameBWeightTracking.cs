@@ -6,6 +6,7 @@ using UnityEngine;
 public class MinigameBWeightTracking : MonoBehaviour
 {
     [SerializeField] private AudioClipManager audioClipManager;
+    [SerializeField] private MusicManager musicManager;
 
     [SerializeField] private TextMeshProUGUI goalWeight;
     [SerializeField] private MinigameBScaleWeightTracker scaleArea;
@@ -18,10 +19,12 @@ public class MinigameBWeightTracking : MonoBehaviour
     [SerializeField] GameObject orangeCoin;
 
     private bool won = false;
+    private bool congratsPlayed = false;
 
     [SerializeField] private GameObject tutorialPanel;
     [SerializeField] private GameObject winPanel;
     [SerializeField] private GameObject backButton;
+    [SerializeField] private GameObject settingsButton;
 
     private const string PREF_TUT_KEY = "TutorialsOn";
 
@@ -60,7 +63,13 @@ public class MinigameBWeightTracking : MonoBehaviour
             winPanel.SetActive(true);
             winPanel.transform.SetAsLastSibling();
             backButton.transform.SetAsLastSibling();
-            audioClipManager.PlayCongrats();
+            settingsButton.transform.SetAsLastSibling();
+            if (!congratsPlayed)
+            {
+                musicManager.StopMusic();
+                audioClipManager.PlayCongrats();
+                congratsPlayed = true;
+            }
             won = true;
         }
     }

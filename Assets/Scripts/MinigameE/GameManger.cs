@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
@@ -9,6 +8,7 @@ public class GameManger : MonoBehaviour
     [Header("UI References")]
     [SerializeField] private PopupUI popupUI;
     [SerializeField] private TMP_Text messageText;
+    [SerializeField] private ModalManager modalManager;
    
 
     [Header("Controls")]
@@ -16,17 +16,15 @@ public class GameManger : MonoBehaviour
 
     [Header("Intro Overlay")]
     [SerializeField] private GameObject introOverlayPanel;
-    [SerializeField] private float introDuration = 3f;
+    [SerializeField] private float introDuration = 5f;
 
-    [Header ("Confirm Exit Modal")]
-    [SerializeField] private GameObject confirmExitPanel;
-    [SerializeField] private UnityEngine.UI.Button confirmExitYesButton;
-    [SerializeField] private UnityEngine.UI.Button confirmExitNoButton;
+    [Header("Eduational Popup")]
+    [SerializeField] private EducationalPopupController educationalPopupController;
 
-    [Header ("Info Panel")]
-    [SerializeField] private GameObject developerInfoPanel;
+    [Header("Orientation Overlay")]
+    [SerializeField] private GameObject orientationOverlayPanel;
 
-    //Static flag: lets us skip intro after reset reloads the scene
+    private bool waitingForOrientationStart = false;
     private static bool skipIntroNextLoad = false;
 
     private bool gameEnded = false;
@@ -44,32 +42,6 @@ public class GameManger : MonoBehaviour
     [SerializeField] private float fuelWeight = 0.3f;
     [SerializeField] private float maxOrbitError = 5f; // Maximum error distance for scoring
     [SerializeField] private float maxLaunchPower = 10f; // max drag power used for normalization  
-
-    // --------------------------------
-    // Game Event Handlers
-    // --------------------------------
-
-    // --------------------------------
-    // OLD EVENt (no score)
-    // --------------------------------
-    public void OrbitSuccess()
-    {
-        if (gameEnded) return;
-        gameEnded = true;
-
-        // Force stop any ongoing drag/thrust sounds
-        if(dragLaunch != null)
-        {
-            AudioManager.Instance.StopAllGameplaySounds();
-        }
-        // stop background sound if needed
-        AudioManager.Instance.StopBackground();
-        // audio
-        AudioManager.Instance.PlaySuccess();
-
-        ShowMessage("Orbit Achieved!");
-        DisableControl();
-    }
 
     // --------------------------------
     // Main Success Event with Scoring
@@ -230,17 +202,17 @@ public class GameManger : MonoBehaviour
     public void ShowConfirmExit()
     {
         AudioManager.Instance.PlayButtonClick();
-        if (confirmExitPanel != null)
+        if (modalManager != null)
         {
-            confirmExitPanel.SetActive(true);
-        }
+            modalManager.ShowConfirmExit(); 
+         }
     }
 
     public void HideConfirmExit()
     {
-        if (confirmExitPanel != null)
+        if (modalManager != null)
         {
-            confirmExitPanel.SetActive(false);
+            modalManager.HideConfirmExit();
         }
     }
 
@@ -262,18 +234,30 @@ public class GameManger : MonoBehaviour
     public void ShowDeveloperInfo()
     {
         AudioManager.Instance.PlayButtonClick();
-        if (developerInfoPanel != null)
+        if (modalManager != null)
         {
-            developerInfoPanel.SetActive(true);
+            modalManager.ShowDeveloperInfo();
         }
     }
 
     public void HideDeveloperInfo()
     {
         AudioManager.Instance.PlayButtonClick();
-        if (developerInfoPanel != null)
+        if (modalManager != null)
         {
-            developerInfoPanel.SetActive(false);
+            modalManager.HideDeveloperInfo();
+        }
+    }
+
+    // --------------------------------
+    // Educational Popup Handling
+    // --------------------------------
+    private void ShowEduationalPopup()
+    {
+        if (educationalPopupController != null)
+        {
+            educationalPopupController.ShowEducationalPopup();
+           
         }
     }
 
@@ -286,14 +270,55 @@ public class GameManger : MonoBehaviour
         if (skipIntroNextLoad)
         {
             skipIntroNextLoad = false;
-            if(introOverlayPanel != null)
-                introOverlayPanel.SetActive(false);
-            EnableControl();
+            if (modalManager != null)
+                modalManager.HideIntro();
+            
+            ShowEduationalPopup(); // show educational popup 
+            return;
+        }
+
+        if (Screen.height > Screen.width)
+        {
+            ShowOrientationOverlay();
             return;
         }
         // Normal entry from hub -> show intro
         StartCoroutine(IntroRountine());
       
+    }
+
+    // --------------------------------
+    // Orientation Overlay Handling
+    // --------------------------------
+
+    private void ShowOrientationOverlay()
+    {
+        if (orientationOverlayPanel != null)
+        {
+            orientationOverlayPanel.SetActive(true);
+        }
+
+        waitingForOrientationStart = true;
+        DisableControl();
+    }
+
+    // --------------------------------
+    // Called by "Start" button on orientation overlay
+    // --------------------------------
+    public void StartGameFromOrientation()
+    {
+        AudioManager.Instance.PlayButtonClick();
+        if (orientationOverlayPanel != null)
+        {
+            orientationOverlayPanel.SetActive(false);
+        }
+        waitingForOrientationStart = false;
+        Screen.orientation = ScreenOrientation.AutoRotation;
+        Screen.autorotateToLandscapeLeft = true;
+        Screen.autorotateToLandscapeRight = true;
+        Screen.autorotateToPortrait = false;
+        Screen.autorotateToPortraitUpsideDown = false;
+        StartCoroutine(IntroRountine());
     }
 
     // --------------------------------
@@ -322,22 +347,12 @@ public class GameManger : MonoBehaviour
         HideIntro();
     }
 
-    // --------------------------------
-    // Intro overlay handling
-    // --------------------------------
-    private void EnableControl()
-    {
-        if (dragLaunch != null)
-        {
-            dragLaunch.enabled = true;
-        }
-    }
 
     private void ShowIntro() 
     {
-        if (introOverlayPanel != null)
+        if (modalManager != null)
         {
-            introOverlayPanel.SetActive(true);
+            modalManager.ShowIntro();
         }
         DisableControl();
         
@@ -345,17 +360,12 @@ public class GameManger : MonoBehaviour
 
     private void HideIntro() 
     {
-        if (introOverlayPanel != null)
+        if (modalManager != null)
         {
-            introOverlayPanel.SetActive(false);
+            modalManager.HideIntro();
         }
-        StartCoroutine(EnableControlNextFrame());
+        ShowEduationalPopup(); // show educational popup after intro
+      
     }
 
-
-    private System.Collections.IEnumerator EnableControlNextFrame()
-    {
-        yield return null; // wait one frame
-        EnableControl();
-    }
 }
