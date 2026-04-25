@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Satellite-minigame-E_0: -3932322446736361460
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

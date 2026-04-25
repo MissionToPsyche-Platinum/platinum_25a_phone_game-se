@@ -140,7 +140,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      satellite game E_0: 751439714467398196
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
