@@ -19,6 +19,9 @@ public class ScriptController : MonoBehaviour
             p.SetActive(false);
 
         int targetPage = PlayerPrefs.GetInt("MinigameD-TargetPage", 0);
+
+        PlayerPrefs.DeleteKey("MinigameD-TargetPage");
+
         if (targetPage >= 0 && targetPage < pages.Length)
         {
             ActivatePage(targetPage);
