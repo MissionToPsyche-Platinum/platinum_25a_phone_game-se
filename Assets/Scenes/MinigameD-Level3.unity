@@ -261,10 +261,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1069697570}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270}
-  m_AnchorMin: {x: 0.5, y: 0.8}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.9}
+  m_AnchorMax: {x: 0.5, y: 0.9}
   m_AnchoredPosition: {x: -240, y: 0}
-  m_SizeDelta: {x: 70, y: 0}
+  m_SizeDelta: {x: 70, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &336377488
 CanvasRenderer:
@@ -1466,6 +1466,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 860359540}
+  - {fileID: 1805206739}
   - {fileID: 1459980875}
   - {fileID: 1552766459}
   - {fileID: 336377487}
@@ -1588,10 +1589,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1069697570}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.8}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.9}
+  m_AnchorMax: {x: 0.5, y: 0.9}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 0}
+  m_SizeDelta: {x: 600, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1459980876
 MonoBehaviour:
@@ -1608,7 +1609,7 @@ MonoBehaviour:
   fillImage: {fileID: 1459980877}
   miniRocket: {fileID: 336377487}
   rocket: {fileID: 2119888224}
-  maxHeight: 1545
+  maxHeight: 1550
 --- !u!114 &1459980877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1681,10 +1682,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1069697570}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.8}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.9}
+  m_AnchorMax: {x: 0.5, y: 0.9}
   m_AnchoredPosition: {x: -450, y: 0}
-  m_SizeDelta: {x: 88, y: 0}
+  m_SizeDelta: {x: 88, y: 88}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &1503842309
 CanvasRenderer:
@@ -1706,7 +1707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a87d127cd9d1f479def5934dc7a2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: CentralHub
+  sceneName: MinigameD-Start-Menu
 --- !u!114 &1503842311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1825,10 +1826,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1069697570}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.8}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.9}
+  m_AnchorMax: {x: 0.5, y: 0.9}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 0}
+  m_SizeDelta: {x: 600, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1552766460
 MonoBehaviour:
@@ -1867,6 +1868,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1552766458}
+  m_CullTransparentMesh: 1
+--- !u!1 &1805206738
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1805206739}
+  - component: {fileID: 1805206741}
+  - component: {fileID: 1805206740}
+  m_Layer: 0
+  m_Name: shield
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1805206739
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805206738}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1069697570}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.8}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 420.00012, y: 0}
+  m_SizeDelta: {x: 100, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1805206740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805206738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 9f16791a74e987845915dcc3f87e9e9f, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1805206741
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1805206738}
   m_CullTransparentMesh: 1
 --- !u!1 &1887739957
 GameObject:
@@ -2060,8 +2136,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 1988241033}
   moveSpeed: 7.5
-  maxDragDistance: 200
-  smoothingSpeed: 10
+  maxDragDistance: 250
+  smoothingSpeed: 20
 --- !u!61 &2119888221
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2216,6 +2292,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialVelocity: 20
   initialGravity: -3
+  shieldObject: {fileID: 1805206738}
+  rocket: {fileID: 2119888223}
+  miniRocket: {fileID: 336377489}
 --- !u!114 &2119888226
 MonoBehaviour:
   m_ObjectHideFlags: 0

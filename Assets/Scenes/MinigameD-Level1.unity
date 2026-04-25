@@ -214,10 +214,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 228155004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.8}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.9}
+  m_AnchorMax: {x: 0.5, y: 0.9}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 0}
+  m_SizeDelta: {x: 600, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &126207034
 MonoBehaviour:
@@ -444,10 +444,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 228155004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.8}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.9}
+  m_AnchorMax: {x: 0.5, y: 0.9}
   m_AnchoredPosition: {x: -450, y: 0}
-  m_SizeDelta: {x: 88, y: 0}
+  m_SizeDelta: {x: 88, y: 88}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &487050974
 MonoBehaviour:
@@ -461,7 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a87d127cd9d1f479def5934dc7a2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: CentralHub
+  sceneName: MinigameD-Start-Menu
 --- !u!114 &487050975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,7 +706,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 1
+  m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -760,10 +760,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 228155004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.8}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.9}
+  m_AnchorMax: {x: 0.5, y: 0.9}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 600, y: 0}
+  m_SizeDelta: {x: 600, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &766001045
 MonoBehaviour:
@@ -1859,7 +1859,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1988241031}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 18.15625}
+  m_LocalPosition: {x: 0, y: 0, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1910,10 +1910,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 228155004}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270}
-  m_AnchorMin: {x: 0.5, y: 0.8}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.9}
+  m_AnchorMax: {x: 0.5, y: 0.9}
   m_AnchoredPosition: {x: -240, y: 0}
-  m_SizeDelta: {x: 70, y: 0}
+  m_SizeDelta: {x: 70, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2075981820
 CanvasRenderer:
@@ -1989,8 +1989,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 1988241033}
   moveSpeed: 7.5
-  maxDragDistance: 200
-  smoothingSpeed: 10
+  maxDragDistance: 250
+  smoothingSpeed: 20
 --- !u!61 &2119888221
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2145,6 +2145,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialVelocity: 15
   initialGravity: -2.5
+  shieldObject: {fileID: 0}
+  rocket: {fileID: 0}
+  miniRocket: {fileID: 0}
 --- !u!114 &2119888226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2226,7 +2229,7 @@ RectTransform:
   m_GameObject: {fileID: 2137218739}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 0}
+  m_LocalScale: {x: 3.168317, y: 3.168317, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 228155004}
