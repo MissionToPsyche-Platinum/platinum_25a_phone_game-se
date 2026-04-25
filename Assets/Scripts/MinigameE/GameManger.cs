@@ -368,4 +368,35 @@ public class GameManger : MonoBehaviour
       
     }
 
+    // --------------------------------
+    // Reset Game Confirmation Screen
+    // --------------------------------
+
+    public void ShowResetConfirm()
+    {
+        AudioManager.Instance.PlayButtonClick();
+        if (modalManager != null)
+        {
+            modalManager.ShowConfirmReset(); 
+         }
+    }
+
+    public void ConfirmResetYes()
+    {
+        if (modalManager != null)
+        {
+            modalManager.HideConfirmReset();
+        }
+        ResetGame();
+    }
+
+    public void ConfirmResetNo()
+    {
+        AudioManager.Instance.PlayButtonClick();
+        if (modalManager != null)
+        {
+            modalManager.HideConfirmReset();
+        }
+    }
+
 }
