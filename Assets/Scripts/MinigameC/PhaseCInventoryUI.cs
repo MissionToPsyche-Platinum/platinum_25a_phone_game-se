@@ -104,27 +104,27 @@ public class PhaseCInventoryUI : MonoBehaviour
         }
 
         // Press 1-4 while inventory is open to drop the item in that slot
-        if (canvasObject.activeSelf && legacyController != null)
+        if (canvasObject.activeSelf)
         {
             for (int i = 0; i < SlotCount; i++)
             {
-                if (Input.GetKeyDown(DropKeys[i]) && slotItemIds[i] != 0)
-                {
-                    int droppedId = slotItemIds[i];
-                    bool dropped = legacyController.DropItem(droppedId);
-                    if (dropped)
-                    {
-                        string dropName = itemDictionary != null
-                            ? itemDictionary.GetDisplayName(droppedId)
-                            : $"Item {droppedId}";
-                        Color dropColor = itemDictionary != null
-                            ? itemDictionary.GetItemColor(droppedId)
-                            : PhaseCUITheme.AccentGold;
-                        PhaseCItemFeedbackUI.ShowDrop(dropName, dropColor);
-                        MinigameCAudioManager.PlayItemDrop();
-                    }
-                }
+                if (Input.GetKeyDown(DropKeys[i]))
+                    TryDropSlot(i);
             }
+        }
+    }
+
+    private void TryDropSlot(int i)
+    {
+        if (!canvasObject.activeSelf || legacyController == null || slotItemIds[i] == 0) return;
+        int droppedId = slotItemIds[i];
+        bool dropped = legacyController.DropItem(droppedId);
+        if (dropped)
+        {
+            string dropName = itemDictionary != null ? itemDictionary.GetDisplayName(droppedId) : $"Item {droppedId}";
+            Color dropColor = itemDictionary != null ? itemDictionary.GetItemColor(droppedId) : PhaseCUITheme.AccentGold;
+            PhaseCItemFeedbackUI.ShowDrop(dropName, dropColor);
+            MinigameCAudioManager.PlayItemDrop();
         }
     }
 
@@ -268,7 +268,7 @@ public class PhaseCInventoryUI : MonoBehaviour
         Text hintText = hintGo.AddComponent<Text>();
         hintText.text = PhaseCUITheme.IsMobileScreen
             ? "Tap X to close  |  Tap slot to drop"
-            : "Press I to close  |  Press 1-4 to drop item";
+            : "Press I to close  |  Press 1, 2, 3, 4 to drop item";
         hintText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         hintText.fontSize = PhaseCUITheme.GetInventoryHintFontSize();
         hintText.color = PhaseCUITheme.TextSecondary;
@@ -335,6 +335,12 @@ public class PhaseCInventoryUI : MonoBehaviour
         slotBg.color = new Color(0.12f, 0.14f, 0.22f, 0.9f);
         slotBg.raycastTarget = true;
 
+        // Tap or click-to-drop: works on both mobile and desktop
+        int capturedIndex = index;
+        UnityEngine.UI.Button slotBtn = slotGo.AddComponent<UnityEngine.UI.Button>();
+        slotBtn.targetGraphic = slotBg;
+        slotBtn.onClick.AddListener(() => TryDropSlot(capturedIndex));
+
         RectTransform slotRect = slotGo.GetComponent<RectTransform>();
         int row = index / SlotsPerRow;
         int col = index % SlotsPerRow;
@@ -368,8 +374,9 @@ public class PhaseCInventoryUI : MonoBehaviour
         Text numText = numGo.AddComponent<Text>();
         numText.text = (index + 1).ToString();
         numText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        numText.fontSize = 12;
-        numText.color = new Color(0.4f, 0.45f, 0.55f, 0.5f);
+        numText.fontSize = 16;
+        numText.fontStyle = FontStyle.Bold;
+        numText.color = new Color(0.55f, 0.62f, 0.72f, 0.85f);
         numText.alignment = TextAnchor.LowerRight;
         numText.raycastTarget = false;
         RectTransform numRect = numGo.GetComponent<RectTransform>();
@@ -506,10 +513,10 @@ public class PhaseCInventoryUI : MonoBehaviour
         itemIcon.raycastTarget = false;
         itemIcon.preserveAspect = true;
         RectTransform iconRect = iconGo.GetComponent<RectTransform>();
-        iconRect.anchorMin = new Vector2(0f, 0.25f);
-        iconRect.anchorMax = new Vector2(1f, 1f);
-        iconRect.offsetMin = new Vector2(6f, 0f);
-        iconRect.offsetMax = new Vector2(-6f, -6f);
+        iconRect.anchorMin = new Vector2(0.05f, 0.40f);
+        iconRect.anchorMax = new Vector2(0.95f, 0.95f);
+        iconRect.offsetMin = Vector2.zero;
+        iconRect.offsetMax = Vector2.zero;
 
         Sprite itemSprite = GetItemSprite(item);
         if (itemSprite != null)
@@ -519,7 +526,8 @@ public class PhaseCInventoryUI : MonoBehaviour
         }
         else
         {
-            itemIcon.color = GetItemColor(item.ID);
+            Color iconColor = itemDictionary != null ? itemDictionary.GetItemColor(item.ID) : GetItemColor(item.ID);
+            itemIcon.color = new Color(iconColor.r, iconColor.g, iconColor.b, 0.85f);
         }
 
         // Quantity badge (top-right corner, shown if count > 1)
@@ -568,22 +576,24 @@ public class PhaseCInventoryUI : MonoBehaviour
             badgeTextRect.offsetMax = Vector2.zero;
         }
 
-        // Item name label (bottom portion of slot)
+        // Item name label (bottom portion of slot): full name, word-wrapped
         GameObject labelGo = new GameObject("Label");
         labelGo.transform.SetParent(containerGo.transform, false);
         Text labelText = labelGo.AddComponent<Text>();
-        labelText.text = GetShortItemName(item);
+        labelText.text = !string.IsNullOrEmpty(item.displayName) ? item.displayName : $"Item {item.ID}";
         labelText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        labelText.fontSize = (int)PhaseCUITheme.FontSizeBadge;
+        labelText.fontSize = 14;
+        labelText.fontStyle = FontStyle.Bold;
         labelText.color = PhaseCUITheme.TextPrimary;
         labelText.alignment = TextAnchor.MiddleCenter;
         labelText.raycastTarget = false;
-        labelText.horizontalOverflow = HorizontalWrapMode.Overflow;
+        labelText.horizontalOverflow = HorizontalWrapMode.Wrap;
+        labelText.verticalOverflow = VerticalWrapMode.Overflow;
         RectTransform labelRect = labelGo.GetComponent<RectTransform>();
         labelRect.anchorMin = new Vector2(0f, 0f);
-        labelRect.anchorMax = new Vector2(1f, 0.25f);
-        labelRect.offsetMin = Vector2.zero;
-        labelRect.offsetMax = Vector2.zero;
+        labelRect.anchorMax = new Vector2(1f, 0.40f);
+        labelRect.offsetMin = new Vector2(4f, 2f);
+        labelRect.offsetMax = new Vector2(-4f, 0f);
 
         slotItemObjects[slotIndex] = containerGo;
 
@@ -598,60 +608,23 @@ public class PhaseCInventoryUI : MonoBehaviour
     {
         if (item == null) return null;
 
-        Image img = item.GetComponent<Image>();
-        if (img != null && img.sprite != null) return img.sprite;
-
+        // SpriteRenderer is always set to real art or the generated colored disc; never
+        // Unity's default white square; check it before the Image component.
         SpriteRenderer sr = item.GetComponent<SpriteRenderer>();
         if (sr != null && sr.sprite != null) return sr.sprite;
 
+        // Fall back to prefab lookup via ItemDictionary
         if (itemDictionary != null)
         {
-            // Try to get sprite from ItemDictionary's prefab
             GameObject prefab = itemDictionary.GetItemPrefab(item.ID);
             if (prefab != null)
             {
-                Image prefabImg = prefab.GetComponent<Image>();
-                if (prefabImg != null && prefabImg.sprite != null) return prefabImg.sprite;
-
                 SpriteRenderer prefabSr = prefab.GetComponent<SpriteRenderer>();
                 if (prefabSr != null && prefabSr.sprite != null) return prefabSr.sprite;
-            }
-
-            // Fallback: Load sprite directly from Resources using naming convention
-            string[] possibleNames = new string[]
-            {
-                $"MinigameC/Items/item_{item.displayName.ToLower().Replace(" ", "_")}_0",
-                $"MinigameC/Items/item_{item.displayName.ToLower().Replace(" ", "_")}"
-            };
-            
-            foreach (string spritePath in possibleNames)
-            {
-                Sprite loadedSprite = Resources.Load<Sprite>(spritePath);
-                if (loadedSprite != null) return loadedSprite;
             }
         }
 
         return null;
-    }
-
-    private string GetShortItemName(Item item)
-    {
-        if (!string.IsNullOrEmpty(item.displayName))
-        {
-            string name = item.displayName;
-            if (name.Length > 10)
-            {
-                if (name.Contains(" "))
-                {
-                    string[] parts = name.Split(' ');
-                    if (parts.Length >= 2)
-                        return parts[0].Substring(0, Mathf.Min(4, parts[0].Length)) + ".";
-                }
-                return name.Substring(0, 8) + "..";
-            }
-            return name;
-        }
-        return $"#{item.ID}";
     }
 
     private Color GetItemColor(int itemId)

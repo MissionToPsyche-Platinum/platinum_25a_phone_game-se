@@ -42,6 +42,14 @@ public class npc : MonoBehaviour, IInteractable
     // This prevents state conflicts when multiple NPCs share the same dialogue panel
     private static npc currentActiveNPC = null;
 
+    private GameObject _nameLabel;
+    private const float NameLabelYOffset = -0.8f;
+
+    void Start()
+    {
+        BuildNameLabel();
+    }
+
     public bool CanInteract()
     {
         return currentActiveNPC == null;
@@ -63,6 +71,10 @@ public class npc : MonoBehaviour, IInteractable
                 TryStartDialogue();
             }
         }
+
+        // Keep world-space name label upright regardless of NPC transform rotation.
+        if (_nameLabel != null)
+            _nameLabel.transform.rotation = Quaternion.identity;
 
         // Re-flow the dialogue layout if the screen size changed while this
         // NPC's dialogue is on-screen (e.g. window resize, device rotation).
@@ -630,6 +642,59 @@ public class npc : MonoBehaviour, IInteractable
             dialogueHintPanel.SetActive(false);
     }
 
+    private void BuildNameLabel()
+    {
+        if (dialogueData == null || string.IsNullOrEmpty(dialogueData.npcName)) return;
+
+        // Match the NPC sprite's sorting layer so the label isn't hidden by background tiles
+        SpriteRenderer npcSr = GetComponentInChildren<SpriteRenderer>();
+        int layerID    = npcSr != null ? npcSr.sortingLayerID : 0;
+        int layerOrder = npcSr != null ? npcSr.sortingOrder    : 0;
+
+        _nameLabel = new GameObject("NPCNameLabel");
+        _nameLabel.transform.SetParent(transform, false);
+        _nameLabel.transform.localPosition = new Vector3(0f, NameLabelYOffset, 0f);
+
+        // Split "Dr. Sarah Chen" → "Dr. Sarah" on line 1, "Chen" on line 2
+        string[] words = dialogueData.npcName.Split(' ');
+        string firstLine  = words.Length > 1 ? string.Join(" ", words, 0, words.Length - 1) : dialogueData.npcName;
+        string secondLine = words.Length > 1 ? words[words.Length - 1] : "";
+        string displayText = words.Length > 1 ? firstLine + "\n" + secondLine : firstLine;
+
+        TextMesh tm = _nameLabel.AddComponent<TextMesh>();
+        tm.text          = displayText;
+        tm.fontSize      = 32;
+        tm.characterSize = 0.06f;
+        tm.lineSpacing   = 1f;
+        tm.anchor        = TextAnchor.MiddleCenter;
+        tm.alignment     = TextAlignment.Center;
+        tm.color         = new Color(PhaseCUITheme.AccentCyan.r, PhaseCUITheme.AccentCyan.g, PhaseCUITheme.AccentCyan.b, 1f);
+        tm.font          = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+
+        MeshRenderer mr = _nameLabel.GetComponent<MeshRenderer>();
+        if (mr != null)
+        {
+            mr.sortingLayerID = layerID;
+            mr.sortingOrder   = layerOrder + 2;
+        }
+
+        // Dark background pill sized for two lines at half font
+        GameObject bg = new GameObject("NPCNameLabelBg");
+        bg.transform.SetParent(_nameLabel.transform, false);
+        bg.transform.localPosition = new Vector3(0f, 0f, 0.01f);
+
+        SpriteRenderer bgSr = bg.AddComponent<SpriteRenderer>();
+        bgSr.sprite           = CreateSolidSprite();
+        bgSr.color            = new Color(0.05f, 0.08f, 0.18f, 0.80f);
+        bgSr.sortingLayerID   = layerID;
+        bgSr.sortingOrder     = layerOrder + 1;
+
+        int longestLen = Mathf.Max(firstLine.Length, secondLine.Length);
+        float bgWidth  = longestLen * 0.048f + 0.3f;
+        float bgHeight = words.Length > 1 ? 0.46f : 0.26f;
+        bg.transform.localScale = new Vector3(bgWidth, bgHeight, 1f);
+    }
+
     private static Texture2D _solidWhiteTexture;
     private static Sprite _solidWhiteSprite;
 
@@ -653,4 +718,3 @@ public class npc : MonoBehaviour, IInteractable
         return dialogueData.autoProgressLines.Length > index && dialogueData.autoProgressLines[index];
     }
 }
-
