@@ -17,8 +17,11 @@ public class RingGenerator : MonoBehaviour
     private float tileWidth;
     private float tileHeight;
 
+    private new Camera camera;
     void Start()
     {
+        camera = Camera.main;
+
         SpriteRenderer sr = tilePrefab.GetComponent<SpriteRenderer>();
         if (sr != null)
         {
@@ -93,8 +96,12 @@ public class RingGenerator : MonoBehaviour
     private void spawnRing(Vector3 tilePosition, GameObject prefab)
     {
         // random x position
-        float minX = tilePosition.x - tileWidth / 2f;
-        float maxX = tilePosition.x + tileWidth / 2f;
+        float cameraWidth = camera.orthographicSize * 2 * camera.aspect;
+        float cameraMinX = camera.transform.position.x - cameraWidth / 2f;
+        float cameraMaxX = camera.transform.position.x + cameraWidth / 2f;
+
+        float minX = Mathf.Max(tilePosition.x - tileWidth / 2f, cameraMinX);
+        float maxX = Mathf.Min(tilePosition.x + tileWidth / 2f, cameraMaxX);
         float randX = Random.Range(minX, maxX);
 
         // random y position
