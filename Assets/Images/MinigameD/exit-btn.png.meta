@@ -125,10 +125,10 @@ TextureImporter:
       name: exit-btn_0
       rect:
         serializedVersion: 2
-        x: 11
-        y: 11
-        width: 278
-        height: 278
+        x: 0
+        y: 0
+        width: 88
+        height: 88
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
