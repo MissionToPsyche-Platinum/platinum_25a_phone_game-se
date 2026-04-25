@@ -52,6 +52,8 @@ public class PhaseCOpeningController : MonoBehaviour
 
     private void Awake()
     {
+        ForcePortraitOrientation();
+
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -94,11 +96,20 @@ public class PhaseCOpeningController : MonoBehaviour
     private void BuildPanelContent()
     {
         panels.Clear();
-        panels.Add(("Welcome", "You're joining the Psyche mission team.\n\nThis experience follows Phase C (May 2019 to January 2021): the period when the spacecraft was designed and built to journey to Psyche, a metal-rich asteroid in the main belt between Mars and Jupiter."));
+        panels.Add(("Welcome", "You're joining the Psyche mission team.\n\nFor the best experience, use portrait mode.\n\nThis experience follows Phase C (May 2019 to January 2021): the period when the spacecraft was designed and built to journey to Psyche."));
         panels.Add(("The Mission", "We're building a spacecraft to explore Psyche.\n\nYour role: work with the team through the instrument suite, spacecraft bus completion, Critical Design Review (CDR), Systems Integration Review (SIR), and Phase C approval (KDP-D)."));
         panels.Add(("How to Play", "Move with WASD or arrow keys. Talk to team members by pressing E or Space when near them.\n\nFollow the guide at the top. Complete each step by speaking to the right team member. Use your inventory (Tab) to gather and use materials."));
         panels.Add(("Your Team", "Dr. Sarah Chen - Instrument Lead\nDr. Marcus Rodriguez - Bus Lead\nDr. Priya Patel - Review Lead\nDr. James Thompson - Integration Lead"));
         panels.Add(("Welcome Aboard", "Let's build something remarkable."));
+    }
+
+    private static void ForcePortraitOrientation()
+    {
+        Screen.autorotateToPortrait = true;
+        Screen.autorotateToPortraitUpsideDown = false;
+        Screen.autorotateToLandscapeLeft = false;
+        Screen.autorotateToLandscapeRight = false;
+        Screen.orientation = ScreenOrientation.Portrait;
     }
 
     private void CachePlayerMovement()
