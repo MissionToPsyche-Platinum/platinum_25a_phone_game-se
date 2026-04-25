@@ -654,7 +654,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a87d127cd9d1f479def5934dc7a2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: MinigameD-Level1
+  sceneName: MinigameD-Tutorial
 --- !u!114 &1766013789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1161,7 +1161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a87d127cd9d1f479def5934dc7a2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: CentralHub
+  sceneName: MinigameD-Start-Menu
 --- !u!114 &2093793812
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2208,6 +2208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonSound: {fileID: 2127419089}
+  rocketSound: {fileID: 0}
   boostRingSound: {fileID: 2127419088}
   penaltyRingSound: {fileID: 2127419087}
   jumpRingSound: {fileID: 2127419086}
