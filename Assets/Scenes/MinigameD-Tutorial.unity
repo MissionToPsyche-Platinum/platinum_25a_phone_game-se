@@ -1805,6 +1805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonSound: {fileID: 723494811}
+  rocketSound: {fileID: 0}
   boostRingSound: {fileID: 723494810}
   penaltyRingSound: {fileID: 723494809}
   jumpRingSound: {fileID: 723494808}
@@ -2833,7 +2834,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -7491113600065772389, guid: 6fc7df4aef1ca3646afdb9016ee08192, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6fc7df4aef1ca3646afdb9016ee08192, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -3992,7 +3993,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -4614751512600573645, guid: 888d118a0d7f7004aab0ba0a39e73323, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b8067e6393177c54e98557e985d56c1d, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

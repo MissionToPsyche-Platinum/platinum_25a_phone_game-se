@@ -18,8 +18,7 @@ public class SwitchScene : MonoBehaviour
         tutorial = PlayerPrefs.GetInt(PREF_TUT_KEY, tutorial ? 1 : 0) == 1;
         story = PlayerPrefs.GetInt(PREF_STORY_KEY, story ? 1 : 0) == 1;
 
-        if ((sceneName == "MinigameD-Tutorial" && !tutorial) // transitioning from the Main Menu with tutorial disabled
-            || sceneName == "MinigameD-Level1") // transitioning from the tutorial
+        if (sceneName == "MinigameD-Tutorial" && !tutorial)
         {
             if (story)
             {
@@ -29,6 +28,17 @@ public class SwitchScene : MonoBehaviour
                 SceneManager.LoadScene("MinigameD-Level1");
             }
         } 
+        else if (sceneName == "MinigameD-Level1")
+        {
+            if (story)
+            {
+                SceneManager.LoadScene("MinigameD-Writing");
+            }
+            else
+            {
+                SceneManager.LoadScene("MinigameD-Level1");
+            }
+        }
         else
         {
             SceneManager.LoadScene(sceneName);
