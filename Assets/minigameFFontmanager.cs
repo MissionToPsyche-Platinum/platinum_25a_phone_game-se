@@ -24,11 +24,15 @@ public class minigameFFontmanager : MonoBehaviour
             tutorialToggle.isOn = savedTutorial;
         }
         bool savedFont = PlayerPrefs.GetInt(PREF_FONT_KEY, defaultFont ? 1 : 0) == 1;
+
+        
+
         if (fontToggle != null)
         {
             fontToggle.isOn = savedFont;
         }
-    }
+    }    
+
     // Start is called before the first frame update
     public void toggleTutorials()
     {
@@ -39,6 +43,7 @@ public class minigameFFontmanager : MonoBehaviour
 
     public void toggleFont()
     {
+        Debug.Log(defaultFont);
         defaultFont = !defaultFont;
         PlayerPrefs.SetInt(PREF_FONT_KEY, defaultFont ? 1 : 0);
         PlayerPrefs.Save();
