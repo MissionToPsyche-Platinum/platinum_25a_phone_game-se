@@ -19,7 +19,7 @@ public class MinigameFAudioManager : MonoBehaviour
     private void Update()
     {
         currentVolume = PlayerPrefs.GetFloat(PREF_KEY, currentVolume);
-        Debug.Log(currentVolume);
+        
     }
 
     void OnEnable()

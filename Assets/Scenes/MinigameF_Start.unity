@@ -4677,7 +4677,7 @@ GameObject:
   - component: {fileID: 781643203}
   - component: {fileID: 781643202}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: PscyheText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4724,8 +4724,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Psyche Orbiter
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dab4b3b2860315e42b995d3d9fbb0b8b, type: 2}
+  m_sharedMaterial: {fileID: -8986810068392043786, guid: dab4b3b2860315e42b995d3d9fbb0b8b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4969,17 +4969,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 806599684}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1274693784}
+  m_Father: {fileID: 1713752168}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &806599686
 MonoBehaviour:
@@ -6923,8 +6923,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: -0.0032001694}
   m_LocalScale: {x: 1.6148788, y: 1.06582, z: 1.06582}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 806599685}
+  m_Children: []
   m_Father: {fileID: 1713752168}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -9215,6 +9214,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1274693784}
+  - {fileID: 806599685}
   - {fileID: 855548493}
   m_Father: {fileID: 1501696121}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11983,6 +11983,8 @@ GameObject:
   - component: {fileID: 2103663271}
   - component: {fileID: 2103663275}
   - component: {fileID: 2103663274}
+  - component: {fileID: 2103663277}
+  - component: {fileID: 2103663278}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -12121,6 +12123,39 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &2103663277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103663270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9965b9fa389c9a0448ed9b4883da195a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialToggle: {fileID: 1389617907}
+  fontToggle: {fileID: 513408834}
+  defaultTutorial: 1
+  defaultFont: 0
+--- !u!114 &2103663278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103663270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28bc3ff8bb0b16f489ea66053953717d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultFont: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  accessibleFont: {fileID: 11400000, guid: 4e96204ea12462b449d0069ecc387f92, type: 2}
+  textElements:
+  - {fileID: 781643202}
+  fontSizeDifference: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
