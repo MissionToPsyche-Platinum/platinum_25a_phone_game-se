@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 7ab9aeb844d6bff4b814c9d902acc40c
+<<<<<<<< HEAD:Assets/Images/MiniGame E Arts/Satellite-minigame-E.png.meta
+guid: 7144d43dc6448434ab40acd0e02579a7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3832499418286107810
-    second: MinigameD-tutorial-background_0
+      213: -3932322446736361460
+    second: Satellite-minigame-E_0
+========
+guid: 9f16791a74e987845915dcc3f87e9e9f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2389193319765324094
+    second: shield_0
+>>>>>>>> dev:Assets/Images/MinigameD/shield.png.meta
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -37,7 +46,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -46,7 +55,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -75,7 +84,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -106,29 +115,26 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MinigameD-tutorial-background_0
+<<<<<<<< HEAD:Assets/Images/MiniGame E Arts/Satellite-minigame-E.png.meta
+      name: Satellite-minigame-E_0
+========
+      name: shield_0
+>>>>>>>> dev:Assets/Images/MinigameD/shield.png.meta
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 360
-        height: 640
+<<<<<<<< HEAD:Assets/Images/MiniGame E Arts/Satellite-minigame-E.png.meta
+        width: 1527
+        height: 1024
+========
+        width: 88
+        height: 108
+>>>>>>>> dev:Assets/Images/MinigameD/shield.png.meta
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -136,8 +142,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2aca5dc5ae5cf2530800000000000000
-      internalID: 3832499418286107810
+<<<<<<<< HEAD:Assets/Images/MiniGame E Arts/Satellite-minigame-E.png.meta
+      spriteID: c08fbfba1959d69c0800000000000000
+      internalID: -3932322446736361460
+========
+      spriteID: e3139547aae182120800000000000000
+      internalID: 2389193319765324094
+>>>>>>>> dev:Assets/Images/MinigameD/shield.png.meta
       vertices: []
       indices: 
       edges: []
@@ -153,7 +164,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      MinigameD-tutorial-background_0: 3832499418286107810
+<<<<<<<< HEAD:Assets/Images/MiniGame E Arts/Satellite-minigame-E.png.meta
+      Satellite-minigame-E_0: -3932322446736361460
+========
+      shield_0: 2389193319765324094
+>>>>>>>> dev:Assets/Images/MinigameD/shield.png.meta
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

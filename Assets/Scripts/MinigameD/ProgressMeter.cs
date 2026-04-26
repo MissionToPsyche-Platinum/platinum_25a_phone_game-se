@@ -24,8 +24,8 @@ public class ProgressMeter : MonoBehaviour
         Vector3 localStart = parentTransform.InverseTransformPoint(corners[0]);
         Vector3 localEnd = parentTransform.InverseTransformPoint(corners[2]);
 
-        startX = localStart.x + 50; // add 50 to account for grid padding
-        endX = localEnd.x + 25; // add 25 to smooth animation
+        startX = localStart.x + 60; // account for padding
+        endX = localEnd.x + 30; // smooth animation 
     }
 
     void Update()

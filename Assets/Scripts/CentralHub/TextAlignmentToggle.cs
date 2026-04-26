@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 public class TextAlignmentToggle : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     public TextMeshProUGUI text;
+    public float currentPos = 40f;
+    public float targetPos = 35f;
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -23,13 +25,13 @@ public class TextAlignmentToggle : MonoBehaviour, IPointerDownHandler, IPointerU
             RectTransform rectTransform = text.GetComponent<RectTransform>();
             float currentY = rectTransform.localPosition.y;
 
-            if (Mathf.Approximately(currentY, 40f))
+            if (Mathf.Approximately(currentY, currentPos))
             {
-                rectTransform.localPosition = new Vector3(rectTransform.localPosition.x, 35f, rectTransform.localPosition.z);
+                rectTransform.localPosition = new Vector3(rectTransform.localPosition.x, targetPos, rectTransform.localPosition.z);
             }
             else
             {
-                rectTransform.localPosition = new Vector3(rectTransform.localPosition.x, 40f, rectTransform.localPosition.z);
+                rectTransform.localPosition = new Vector3(rectTransform.localPosition.x, currentPos, rectTransform.localPosition.z);
             }
         }
     }
