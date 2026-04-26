@@ -6,6 +6,7 @@ using UnityEngine;
 public class MinigameBPowerBalance : MonoBehaviour
 {
     [SerializeField] private AudioClipManager audioClipManager;
+    [SerializeField] private MusicManager musicManager;
 
     [SerializeField] private TextMeshProUGUI LeftSourceNumber;
     [SerializeField] private TextMeshProUGUI MiddleSourceNumber;
@@ -44,6 +45,8 @@ public class MinigameBPowerBalance : MonoBehaviour
     private float RightSinkCurrentValue = 0;
 
     private const string PREF_TUT_KEY = "TutorialsOn";
+
+    private bool congratsPlayed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -225,7 +228,12 @@ public class MinigameBPowerBalance : MonoBehaviour
         if (LeftSinkCurrentValue == LeftSinkFinalValue && MiddleSinkCurrentValue == MiddleSinkFinalValue && RightSinkCurrentValue == RightSinkFinalValue)
         {
             WinScreen.SetActive(true);
-            audioClipManager.PlayCongrats();
+            if (!congratsPlayed)
+            {
+                musicManager.StopMusic();
+                audioClipManager.PlayCongrats();
+                congratsPlayed = true;
+            }
         }
     }
 

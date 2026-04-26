@@ -50,7 +50,7 @@ public class MinigameAMarkGrid : MonoBehaviour
                 }
             }
             mark.SetActive(true);
-            //later, add points to player score
+            isMarked = true;
 
             if (currentTutorial != null)
             {
