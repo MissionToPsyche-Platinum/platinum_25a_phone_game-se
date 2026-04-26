@@ -17,13 +17,13 @@ public class OrbitInfo : MonoBehaviour
        
 
 
-        eduInfo[0] = "The Orbit Phase of the Psyche Mission consists of 4 phases.";
-        eduInfo[1] = "Phase A will orbit the asteroid for 56 days or approximately 41 orbits. During this phase the satellite will gather preliminary information about the asteroid to use in the later phases";
-        eduInfo[2] = "Phase B will be split into two separate phases B1 and B2 both will study the topogrophy of the asteroid.";
-        eduInfo[3] = "Phase B1 will orbit the asteroid for 92 days or approximately 190 orbits.";
-        eduInfo[4] = "Phase B2 will orbit the asteroid for 100 days or approximately 206 orbits.";
-        eduInfo[5] = "Phase C will orbit the asteroid for 100 days or approximately 333 orbits and will study the gravity of the asteroid.";
-        eduInfo[6] = "Phase D will be the closest orbit of the asteroid and will last 100 days or 666 orbits around the asteroid. This Phase will study the elemental mapping of the asteroid.";
+        eduInfo[0] = "The Orbit of the Psyche Mission consists of 4 phases.";
+        eduInfo[1] = "Orbit A will orbit the asteroid for 56 days or approximately 41 orbits. During this phase the satellite will gather preliminary information about the asteroid to use in the later phases";
+        eduInfo[2] = "Orbit B will be split into two separate phases B1 and B2 both will study the topogrophy of the asteroid.";
+        eduInfo[3] = "Orbit B1 will orbit the asteroid for 92 days or approximately 190 orbits.";
+        eduInfo[4] = "Orbit B2 will orbit the asteroid for 100 days or approximately 206 orbits.";
+        eduInfo[5] = "Orbit C will orbit the asteroid for 100 days or approximately 333 orbits and will study the gravity of the asteroid.";
+        eduInfo[6] = "ORbit D will be the closest orbit of the asteroid and will last 100 days or 666 orbits around the asteroid. This Phase will study the elemental mapping of the asteroid.";
 
 
         
