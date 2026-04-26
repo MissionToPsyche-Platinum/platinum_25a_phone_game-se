@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
   m_Name: AtkinsonHyperlegibleNext-VariableFont_wght
   m_EditorClassIdentifier: 
-  hashCode: 0
+  hashCode: 1760206653
   material: {fileID: 1491611499444488381}
-  materialHashCode: 0
+  materialHashCode: -6176771
   m_Version: 1.1.0
   m_SourceFontFileGUID: 9e9c5d1b9deab574ea29d3be73c33aae
   m_SourceFontFile_EditorRef: {fileID: 12800000, guid: 9e9c5d1b9deab574ea29d3be73c33aae, type: 3}
@@ -184,7 +184,8 @@ MonoBehaviour:
   m_FontFeatureTable:
     m_GlyphPairAdjustmentRecords: []
   fallbackFontAssets: []
-  m_FallbackFontAssetTable: []
+  m_FallbackFontAssetTable:
+  - {fileID: 11400000, guid: 81c76e24281eb3f4f8e1ac41383d0691, type: 2}
   m_CreationSettings:
     sourceFontFileName: 
     sourceFontFileGUID: 9e9c5d1b9deab574ea29d3be73c33aae
