@@ -30,6 +30,12 @@ EditorBuildSettings:
     path: Assets/Scenes/MinigameD-Game-Lost.unity
     guid: 4843230532822474c8eaf71a52034e61
   - enabled: 1
+    path: Assets/Scenes/MinigameD-Writing.unity
+    guid: ddef5a2a1c773dd4b9854f70b0fa51d3
+  - enabled: 1
+    path: Assets/Scenes/MinigameD-Start-Menu.unity
+    guid: 98af0b24cd312ef49946aae4a0c03c69
+  - enabled: 1
     path: Assets/Scenes/GravityAssist.unity
     guid: 9d2e520ea27108b42b6f28f71ad7c408
   - enabled: 1
@@ -45,22 +51,13 @@ EditorBuildSettings:
     path: Assets/Scenes/MinigameBWireColorLink.unity
     guid: e96a84da2571fa5458f00da5f6ec2a34
   - enabled: 1
-    path: Assets/Scenes/MinigameF_Start.unity
-    guid: 4795f971b34282b4b9f5114599daacff
-  - enabled: 1
-    path: Assets/Scenes/MiniGameF.unity
-    guid: 9e762bbba7432d141b5624509509135b
-  - enabled: 1
     path: Assets/Scenes/MinigameC.unity
     guid: 4a736554761473c4dbcc90491e05eb97
   - enabled: 1
     path: Assets/Scenes/MinigameF_Start.unity
     guid: 4795f971b34282b4b9f5114599daacff
   - enabled: 1
-    path: Assets/Scenes/MinigameD-Start-Menu.unity
-    guid: 35932b216c30ff44e93109c978bf5579
-  - enabled: 1
-    path: Assets/Scenes/MinigameD-Writing.unity
-    guid: ddef5a2a1c773dd4b9854f70b0fa51d3
+    path: Assets/Scenes/MiniGameF.unity
+    guid: 9e762bbba7432d141b5624509509135b
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
