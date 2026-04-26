@@ -1,11 +1,12 @@
-using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MinigameD_AudioManager : MonoBehaviour
 {
     public static MinigameD_AudioManager Instance { get; private set; }
+    private Dictionary<string, AudioSource> audioSources = new Dictionary<string, AudioSource>();
 
     [SerializeField] private AudioSource buttonSound;
     [SerializeField] private AudioSource rocketSound;
@@ -26,6 +27,17 @@ public class MinigameD_AudioManager : MonoBehaviour
     private void Update()
     {
         currentVolume = PlayerPrefs.GetFloat(PREF_KEY, currentVolume);
+        foreach (var source in audioSources.Values)
+        {
+            source.volume = currentVolume;
+        }
+    }
+    private void RegisterAudioSource(string name, AudioSource source)
+    {
+        if (!audioSources.ContainsKey(name))
+        {
+            audioSources.Add(name, source);
+        }
     }
 
     void OnEnable()
@@ -40,6 +52,16 @@ public class MinigameD_AudioManager : MonoBehaviour
 
     void Awake()
     {
+        RegisterAudioSource("buttonSound", buttonSound);
+        RegisterAudioSource("rocketSound", rocketSound);
+        RegisterAudioSource("boostRingSound", boostRingSound);
+        RegisterAudioSource("penaltyRingSound", penaltyRingSound);
+        RegisterAudioSource("jumpRingSound", jumpRingSound);
+        RegisterAudioSource("shieldRingSound", shieldRingSound);
+        RegisterAudioSource("gameLostSound", gameLostSound);
+        RegisterAudioSource("gameWonSound", gameWonSound);
+        RegisterAudioSource("backgroundMusic", backgroundMusic);
+
         if (Instance == null)
         {
             Instance = this;
