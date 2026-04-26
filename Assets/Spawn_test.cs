@@ -7,8 +7,8 @@ public class Spawn_test : MonoBehaviour
 {
     [SerializeField] MeshRenderer pointMR;
     [SerializeField] ParticleSystem clickParticles;
-    [SerializeField] AudioSource succaudio;
-    [SerializeField] AudioSource failaudio;
+    
+    
     [SerializeField] Material red;    
 
     [SerializeField] SpriteRenderer circle;
@@ -67,10 +67,11 @@ public class Spawn_test : MonoBehaviour
             clickParticles.Play();
             if(circle.enabled == true)
             {
-                succaudio.Play();
+                MinigameFAudioManager.Instance.playSucc();
             }else if(pointMR.enabled == true)
             {
-                failaudio.Play();
+                MinigameFAudioManager.Instance.playFail();
+
             }                
                 score.addScore(points);
             circle.enabled = false;
