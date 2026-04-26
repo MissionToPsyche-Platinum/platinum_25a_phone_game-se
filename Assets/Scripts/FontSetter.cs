@@ -30,6 +30,8 @@ public class FontSetter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        
         if (PlayerPrefs.GetInt(PREF_FONT_KEY, 0) == 1 && !useAccessibleFont)
         {
             useAccessibleFont = true;
@@ -40,6 +42,8 @@ public class FontSetter : MonoBehaviour
             useAccessibleFont = false;
             fontChanged = true;
         }
+                
+
         if (fontChanged)
         {
             foreach (TextMeshProUGUI text in textElements)
