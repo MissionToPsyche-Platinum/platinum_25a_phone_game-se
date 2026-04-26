@@ -8,6 +8,7 @@ public class MinigameD_AudioManager : MonoBehaviour
     public static MinigameD_AudioManager Instance { get; private set; }
 
     [SerializeField] private AudioSource buttonSound;
+    [SerializeField] private AudioSource rocketSound;
 
     [SerializeField] private AudioSource boostRingSound;
     [SerializeField] private AudioSource penaltyRingSound;
@@ -52,9 +53,9 @@ public class MinigameD_AudioManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // play background music on levels 1-3 & educational content
+        // play background music for all scenes except game over scenes
         if (scene.name == "MinigameD-Level1" || scene.name == "MinigameD-Level2" || scene.name == "MinigameD-Level3" 
-            || scene.name == "MinigameD-Writing")
+            || scene.name == "MinigameD-Writing" || scene.name == "MinigameD-Start-Menu" || scene.name == "MinigameD-Tutorial")
         {
             playBackground();
         }
@@ -110,6 +111,19 @@ public class MinigameD_AudioManager : MonoBehaviour
         {
             Instance.buttonClick();
         }
+    }
+
+    public static void playRocketSound()
+    {
+        if (Instance != null)
+        {
+            Instance.rocketInteract();
+        }
+    }
+    public void rocketInteract()
+    {
+        rocketSound.volume = 1f * currentVolume;
+        if (rocketSound != null) rocketSound.Play();
     }
 
     public void buttonClick()

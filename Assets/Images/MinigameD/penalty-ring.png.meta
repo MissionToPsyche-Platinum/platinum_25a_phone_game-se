@@ -3,17 +3,17 @@ guid: 5dbeffb454a0bc44ba1d50301143ccbb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 161042285908890983
-    second: penalty-v1_0
+      213: 1523158467230851864
+    second: penalty-ring_0
   - first:
-      213: 2631316990040361465
-    second: penalty-v1_1
+      213: 8538089987311705116
+    second: penalty-ring_1
   - first:
-      213: 6511189074616797822
-    second: penalty-v1_2
+      213: 5202539855131202287
+    second: penalty-ring_2
   - first:
-      213: 8783893740348152369
-    second: penalty-v1_3
+      213: -1441621009489663913
+    second: penalty-ring_3
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -84,7 +84,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -131,13 +131,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: penalty-v1_0
+      name: penalty-ring_0
       rect:
         serializedVersion: 2
-        x: 11
-        y: 199
-        width: 118
-        height: 166
+        x: 5
+        y: 99
+        width: 60
+        height: 84
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,20 +145,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7659a651b132c3200800000000000000
-      internalID: 161042285908890983
+      spriteID: 8136cef4e88532510800000000000000
+      internalID: 1523158467230851864
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: penalty-v1_1
+      name: penalty-ring_1
       rect:
         serializedVersion: 2
-        x: 51
-        y: 363
-        width: 446
-        height: 138
+        x: 25
+        y: 181
+        width: 224
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9f94ec27cd0548420800000000000000
-      internalID: 2631316990040361465
+      spriteID: c1c98025b936d7670800000000000000
+      internalID: 8538089987311705116
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: penalty-v1_2
+      name: penalty-ring_2
       rect:
         serializedVersion: 2
-        x: 15
-        y: 11
-        width: 446
-        height: 138
+        x: 7
+        y: 5
+        width: 224
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,20 +187,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e7a40f137f36c5a50800000000000000
-      internalID: 6511189074616797822
+      spriteID: fe258ea1f62233840800000000000000
+      internalID: 5202539855131202287
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: penalty-v1_3
+      name: penalty-ring_3
       rect:
         serializedVersion: 2
-        x: 383
-        y: 147
-        width: 118
-        height: 166
+        x: 191
+        y: 73
+        width: 60
+        height: 84
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,8 +208,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 13a9a3a51d8a6e970800000000000000
-      internalID: 8783893740348152369
+      spriteID: 758e0a474555efbe0800000000000000
+      internalID: -1441621009489663913
       vertices: []
       indices: 
       edges: []
@@ -225,10 +225,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      penalty-v1_0: 161042285908890983
-      penalty-v1_1: 2631316990040361465
-      penalty-v1_2: 6511189074616797822
-      penalty-v1_3: 8783893740348152369
+      penalty-ring_0: 1523158467230851864
+      penalty-ring_1: 8538089987311705116
+      penalty-ring_2: 5202539855131202287
+      penalty-ring_3: -1441621009489663913
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

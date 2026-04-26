@@ -12,6 +12,7 @@ public class EducationalPopupController : MonoBehaviour
 
     private string[] facts;
 
+    private const string PREF_DISABLE_EDU = "MinigameE_DisableEducationalPopups";
     private void Awake()
     {
         // initialize facts
@@ -36,11 +37,20 @@ public class EducationalPopupController : MonoBehaviour
     public void ShowEducationalPopup()
     {
 
+        bool isDisabled = PlayerPrefs.GetInt(PREF_DISABLE_EDU, 0) == 1;
+
+        if (isDisabled)
+        {
+            if(dragLaunch != null)
+                dragLaunch.enabled = true; 
+            
+            return;
+        }
+
         if (dragLaunch != null)
-            dragLaunch.enabled = false;
+            dragLaunch.enabled = false; 
 
         string fact = facts[Random.Range(0, facts.Length)];
-
         if (modalManager != null)
         {
             modalManager.ShowEducation(fact);

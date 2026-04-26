@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
@@ -17,11 +16,15 @@ public class GameManger : MonoBehaviour
 
     [Header("Intro Overlay")]
     [SerializeField] private GameObject introOverlayPanel;
-    [SerializeField] private float introDuration = 3f;
+    [SerializeField] private float introDuration = 5f;
 
     [Header("Eduational Popup")]
     [SerializeField] private EducationalPopupController educationalPopupController;
 
+    [Header("Orientation Overlay")]
+    [SerializeField] private GameObject orientationOverlayPanel;
+
+    private bool waitingForOrientationStart = false;
     private static bool skipIntroNextLoad = false;
 
     private bool gameEnded = false;
@@ -273,9 +276,49 @@ public class GameManger : MonoBehaviour
             ShowEduationalPopup(); // show educational popup 
             return;
         }
+
+        if (Screen.height > Screen.width)
+        {
+            ShowOrientationOverlay();
+            return;
+        }
         // Normal entry from hub -> show intro
         StartCoroutine(IntroRountine());
       
+    }
+
+    // --------------------------------
+    // Orientation Overlay Handling
+    // --------------------------------
+
+    private void ShowOrientationOverlay()
+    {
+        if (orientationOverlayPanel != null)
+        {
+            orientationOverlayPanel.SetActive(true);
+        }
+
+        waitingForOrientationStart = true;
+        DisableControl();
+    }
+
+    // --------------------------------
+    // Called by "Start" button on orientation overlay
+    // --------------------------------
+    public void StartGameFromOrientation()
+    {
+        AudioManager.Instance.PlayButtonClick();
+        if (orientationOverlayPanel != null)
+        {
+            orientationOverlayPanel.SetActive(false);
+        }
+        waitingForOrientationStart = false;
+        Screen.orientation = ScreenOrientation.AutoRotation;
+        Screen.autorotateToLandscapeLeft = true;
+        Screen.autorotateToLandscapeRight = true;
+        Screen.autorotateToPortrait = false;
+        Screen.autorotateToPortraitUpsideDown = false;
+        StartCoroutine(IntroRountine());
     }
 
     // --------------------------------
@@ -323,6 +366,37 @@ public class GameManger : MonoBehaviour
         }
         ShowEduationalPopup(); // show educational popup after intro
       
+    }
+
+    // --------------------------------
+    // Reset Game Confirmation Screen
+    // --------------------------------
+
+    public void ShowResetConfirm()
+    {
+        AudioManager.Instance.PlayButtonClick();
+        if (modalManager != null)
+        {
+            modalManager.ShowConfirmReset(); 
+         }
+    }
+
+    public void ConfirmResetYes()
+    {
+        if (modalManager != null)
+        {
+            modalManager.HideConfirmReset();
+        }
+        ResetGame();
+    }
+
+    public void ConfirmResetNo()
+    {
+        AudioManager.Instance.PlayButtonClick();
+        if (modalManager != null)
+        {
+            modalManager.HideConfirmReset();
+        }
     }
 
 }
