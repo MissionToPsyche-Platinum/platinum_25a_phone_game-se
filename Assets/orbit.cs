@@ -16,6 +16,6 @@ public class orbit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        obj.Rotate(0, 0, 0.10f);
+        obj.Rotate(0, 0.01f, 0);
     }
 }

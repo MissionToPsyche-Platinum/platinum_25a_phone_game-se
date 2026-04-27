@@ -547,9 +547,14 @@ public class PhaseCAssemblyController : MonoBehaviour
         if (currentStepIndex < steps.Count - 1)
         {
             currentStepIndex++;
-            UpdateNpcDialogue();
-            NotifyStepChanged();
         }
+        else
+        {
+            currentStepIndex = steps.Count;
+        }
+
+        UpdateNpcDialogue();
+        NotifyStepChanged();
     }
 
     /// <summary>

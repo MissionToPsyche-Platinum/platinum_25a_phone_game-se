@@ -41,7 +41,7 @@ public class MenuSceneSchange : MonoBehaviour
     public void SwitchToSceneMinigameD()
     {
         Debug.Log("Switching to Minigame D");
-        StartCoroutine(LoadSceneWithDelay("MinigameD-Tutorial"));
+        StartCoroutine(LoadSceneWithDelay("MinigameD-Start-Menu"));
     }
 
     public void SwitchToSceneMinigameE()

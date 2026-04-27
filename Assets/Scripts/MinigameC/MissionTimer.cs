@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
-/// Mission timer for Minigame C. Counts down from 5 minutes (60 s for testing).
+/// Mission timer for Minigame C. Counts down from 10 minutes.
 /// On expiry: inventory is cleared, all step progress resets to Step 1, and a small
 /// "Time's Up" popup is shown. The player dismisses it and continues - no scene reload,
 /// no game-over screen.
@@ -20,11 +20,11 @@ public class MissionTimer : MonoBehaviour
     private const float HubWidgetVerticalGap = 0f;
 
     [Header("Timer")]
-    [SerializeField] private float startingTimeSeconds = 300f;
+    [SerializeField] private float startingTimeSeconds = 600f;
     [SerializeField] private float warningThresholdSeconds  = 60f;  // yellow below 1 min
     [SerializeField] private float criticalThresholdSeconds = 30f;  // red + pulse below 30 s
-    [SerializeField] private float warningSoundStartElapsedSeconds = 285f; // 04:45 elapsed
-    [SerializeField] private float warningSoundEndElapsedSeconds = 300f;   // 05:00 elapsed
+    [SerializeField] private float warningSoundStartElapsedSeconds = 585f; // 09:45 elapsed
+    [SerializeField] private float warningSoundEndElapsedSeconds = 600f;   // 10:00 elapsed
 
     private float currentTime;
     private bool isRunning;
@@ -35,7 +35,7 @@ public class MissionTimer : MonoBehaviour
     private CanvasScaler timerScaler;
     private Image timerPanelBg;
     private TMP_Text timerLabel;       // "MISSION TIME"
-    private TMP_Text timerText;        // "05:00"
+    private TMP_Text timerText;        // "10:00"
     private Image progressBarFill;
     private RectTransform _timerWidgetRect;
     private RectTransform _hubBtnRect;
@@ -598,7 +598,7 @@ public class MissionTimer : MonoBehaviour
         var bodyGo = new GameObject("AlertBody");
         bodyGo.transform.SetParent(alertPanel.transform, false);
         var bodyText = bodyGo.AddComponent<TextMeshProUGUI>();
-        bodyText.text = "Complete this mission within  <color=#E3C050><b>5 minutes</b></color>  or all inventory and progress will be reset!";
+        bodyText.text = "Complete this mission within  <color=#E3C050><b>10 minutes</b></color>  or all inventory and progress will be reset!";
         bodyText.richText = true;
         bodyText.fontSize = PhaseCUITheme.FontSizeBody;
         bodyText.color = PhaseCUITheme.TextTitle;

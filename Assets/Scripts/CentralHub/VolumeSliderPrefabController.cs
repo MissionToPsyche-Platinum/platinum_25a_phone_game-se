@@ -40,7 +40,7 @@ public class VolumeSliderPrefabController : MonoBehaviour
         UpdatePercent(v);
     }
 
-    private void OnDestory()
+    private void OnDestroy()
     {
         if (slider != null)
         {

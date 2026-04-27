@@ -43,6 +43,7 @@ public class AssemblyCutsceneController : MonoBehaviour
     private TMP_Text skipPromptText;
     private readonly List<Image> partImages = new List<Image>();
     private readonly List<Image> sparklePool = new List<Image>();
+    private readonly List<Coroutine> activeSparkleCoroutines = new List<Coroutine>();
 
     private Coroutine activeCutscene;
     private bool cutsceneActive;
@@ -408,6 +409,7 @@ public class AssemblyCutsceneController : MonoBehaviour
 
     private void DestroyCutsceneUI()
     {
+        StopActiveSparkles();
         partImages.Clear();
         sparklePool.Clear();
         if (cutsceneRoot != null) Destroy(cutsceneRoot);
@@ -585,14 +587,22 @@ public class AssemblyCutsceneController : MonoBehaviour
     {
         int sparkleIndex = 0;
         float timer = 0f;
-        while (true)
+        while (cutsceneActive)
         {
+            if (sparklePool.Count == 0)
+            {
+                yield return null;
+                continue;
+            }
+
             timer += Time.unscaledDeltaTime;
             if (timer >= SparkleSpawnInterval)
             {
                 timer -= SparkleSpawnInterval;
-                StartCoroutine(AnimateSingleSparkle(sparklePool[sparkleIndex]));
-                sparkleIndex = (sparkleIndex + 1) % SparklePoolSize;
+                Image sparkle = sparklePool[sparkleIndex];
+                if (sparkle != null)
+                    StartTrackedSparkle(sparkle);
+                sparkleIndex = (sparkleIndex + 1) % sparklePool.Count;
             }
             yield return null;
         }
@@ -600,12 +610,16 @@ public class AssemblyCutsceneController : MonoBehaviour
 
     private IEnumerator AnimateSingleSparkle(Image sparkle)
     {
+        if (sparkle == null) yield break;
+
         sparkle.gameObject.SetActive(true);
 
         // Random position around spacecraft center (spacecraft sits at y=-60)
         float angle = Random.Range(0f, 360f) * Mathf.Deg2Rad;
         float dist = Random.Range(80f, SparkleRadius);
         RectTransform rt = sparkle.rectTransform;
+        if (rt == null) yield break;
+
         rt.anchoredPosition = new Vector2(Mathf.Cos(angle) * dist, Mathf.Sin(angle) * dist - 60f);
         rt.localRotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
 
@@ -616,10 +630,13 @@ public class AssemblyCutsceneController : MonoBehaviour
         float elapsed = 0f;
         while (elapsed < SparkleCycleDuration)
         {
+            if (!cutsceneActive || sparkle == null || rt == null)
+                yield break;
+
             elapsed += Time.unscaledDeltaTime;
             float t = Mathf.Clamp01(elapsed / SparkleCycleDuration);
 
-            // Scale: 0 → 1 → 0
+            // Scale: 0 to 1 to 0
             float scale = t < 0.5f
                 ? Mathf.Lerp(0f, 1f, t * 2f)
                 : Mathf.Lerp(1f, 0f, (t - 0.5f) * 2f);
@@ -634,9 +651,51 @@ public class AssemblyCutsceneController : MonoBehaviour
             yield return null;
         }
 
-        rt.localScale = Vector3.zero;
-        sparkle.color = SetAlpha(baseColor, 0f);
-        sparkle.gameObject.SetActive(false);
+        if (sparkle != null && rt != null)
+        {
+            rt.localScale = Vector3.zero;
+            sparkle.color = SetAlpha(baseColor, 0f);
+            sparkle.gameObject.SetActive(false);
+        }
+    }
+
+    private void StartTrackedSparkle(Image sparkle)
+    {
+        Coroutine sparkleCoroutine = null;
+        sparkleCoroutine = StartCoroutine(TrackSparkleCoroutine(sparkle, () =>
+        {
+            if (sparkleCoroutine != null)
+                activeSparkleCoroutines.Remove(sparkleCoroutine);
+        }));
+        activeSparkleCoroutines.Add(sparkleCoroutine);
+    }
+
+    private IEnumerator TrackSparkleCoroutine(Image sparkle, System.Action onComplete)
+    {
+        yield return AnimateSingleSparkle(sparkle);
+        onComplete?.Invoke();
+    }
+
+    private void StopActiveSparkles()
+    {
+        foreach (Coroutine sparkleCoroutine in activeSparkleCoroutines)
+        {
+            if (sparkleCoroutine != null)
+                StopCoroutine(sparkleCoroutine);
+        }
+        activeSparkleCoroutines.Clear();
+
+        foreach (Image sparkle in sparklePool)
+        {
+            if (sparkle == null) continue;
+
+            RectTransform rt = sparkle.rectTransform;
+            if (rt != null)
+                rt.localScale = Vector3.zero;
+
+            sparkle.color = SetAlpha(sparkle.color, 0f);
+            sparkle.gameObject.SetActive(false);
+        }
     }
 
     private IEnumerator PulsePrompt()
