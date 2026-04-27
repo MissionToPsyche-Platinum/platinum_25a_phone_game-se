@@ -5,8 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Displays brief toast notifications when items are picked up or dropped.
-/// Auto-created at scene load. Call ShowPickup / ShowDrop from other scripts.
+/// Displays brief toast notifications when items are picked up or dropped,
+/// and a prominent delivery confirmation panel when items are assembled and handed to an NPC.
+/// Auto-created at scene load. Call ShowPickup / ShowDrop / ShowDelivery from other scripts.
 /// Notifications are queued so rapid events do not overlap.
 /// </summary>
 public class PhaseCItemFeedbackUI : MonoBehaviour
@@ -20,19 +21,34 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
     private Queue<NotifData> _queue = new Queue<NotifData>();
     private bool _showing;
 
+    // Pickup/drop toast
     private GameObject _notifPanel;
     private CanvasGroup _canvasGroup;
     private Image _accentBar;
     private Image _dotImage;
     private Text _notifText;
 
-    private const float NotifWidth = 310f;
+    // Delivery confirmation panel
+    private GameObject _deliveryPanel;
+    private CanvasGroup _deliveryCG;
+    private Text _deliveryTitle;
+    private Text _deliverySub;
+    private Coroutine _deliveryRoutine;
+    private List<GameObject> _deliverySparkles = new List<GameObject>();
+    private Coroutine _sparkleRoutine;
+
     private const float NotifHeight = 50f;
     private const float BottomOffset = 52f;
     private const float SlideDistance = 10f;
     private const float AnimInDuration = 0.12f;
     private const float HoldDuration = 1.1f;
     private const float AnimOutDuration = 0.22f;
+
+    private const float DeliveryHeight = 86f;
+    private const float DeliverySlideIn = 12f;
+    private const float DeliveryInDuration = 0.2f;
+    private const float DeliveryHoldDuration = 2.4f;
+    private const float DeliveryOutDuration = 0.3f;
 
     private struct NotifData
     {
@@ -101,6 +117,15 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
         });
     }
 
+    /// <summary>Shows a prominent delivery confirmation panel when a component is assembled and delivered to an NPC.</summary>
+    public static void ShowDelivery(string componentName, string npcName)
+    {
+        if (_instance == null || !_instance._initialized) return;
+        if (_instance._deliveryRoutine != null)
+            _instance.StopCoroutine(_instance._deliveryRoutine);
+        _instance._deliveryRoutine = _instance.StartCoroutine(_instance.AnimateDelivery(componentName, npcName));
+    }
+
     // Queue handling
 
     private void Enqueue(NotifData data)
@@ -117,6 +142,141 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
         _showing = false;
     }
 
+    private IEnumerator AnimateDelivery(string componentName, string npcName)
+    {
+        if (_deliveryPanel == null) yield break;
+
+        _deliveryTitle.text = componentName + " assembled";
+        _deliverySub.text = "Delivered to: " + npcName;
+
+        _deliveryPanel.SetActive(true);
+        RectTransform rt = _deliveryPanel.GetComponent<RectTransform>();
+        rt.localScale = Vector3.one;
+
+        float targetY = PhaseCUITheme.GetPopupBottomOffset() + NotifHeight + 10f;
+        float fromY = targetY - DeliverySlideIn;
+        const float InDuration = 0.3f;
+
+        for (float t = 0f; t < InDuration; t += Time.deltaTime)
+        {
+            float p = t / InDuration;
+            float eased = EaseOutCubic(p);
+            float scale = p < 0.6f
+                ? Mathf.Lerp(0.85f, 1.08f, p / 0.6f)
+                : Mathf.Lerp(1.08f, 1.0f, (p - 0.6f) / 0.4f);
+            _deliveryCG.alpha = Mathf.Min(1f, p / 0.4f);
+            rt.anchoredPosition = new Vector2(0f, Mathf.Lerp(fromY, targetY, eased));
+            rt.localScale = new Vector3(scale, scale, 1f);
+            yield return null;
+        }
+        _deliveryCG.alpha = 1f;
+        rt.anchoredPosition = new Vector2(0f, targetY);
+        rt.localScale = Vector3.one;
+
+        // Launch sparkles after panel lands
+        if (_sparkleRoutine != null) StopCoroutine(_sparkleRoutine);
+        _sparkleRoutine = StartCoroutine(AnimateDeliverySparkles(rt));
+
+        yield return new WaitForSeconds(DeliveryHoldDuration);
+
+        // Kill sparkles before fading out
+        StopAndClearSparkles();
+
+        for (float t = 0f; t < DeliveryOutDuration; t += Time.deltaTime)
+        {
+            _deliveryCG.alpha = 1f - (t / DeliveryOutDuration);
+            yield return null;
+        }
+        _deliveryCG.alpha = 0f;
+        rt.localScale = Vector3.one;
+        _deliveryPanel.SetActive(false);
+        _deliveryRoutine = null;
+    }
+
+    private IEnumerator AnimateDeliverySparkles(RectTransform panelRect)
+    {
+        const int Count = 6;
+        float panelW = panelRect.rect.width;
+        float panelH = panelRect.rect.height;
+
+        // Reuse or create sparkle GameObjects
+        while (_deliverySparkles.Count < Count)
+        {
+            GameObject s = new GameObject("DeliverySparkle");
+            s.transform.SetParent(_deliveryPanel.transform, false);
+            Image img = s.AddComponent<Image>();
+            img.sprite = MakeDiscSprite();
+            img.raycastTarget = false;
+            RectTransform srt = s.GetComponent<RectTransform>();
+            srt.sizeDelta = new Vector2(8f, 8f);
+            srt.pivot = new Vector2(0.5f, 0.5f);
+            _deliverySparkles.Add(s);
+        }
+
+        Color[] sparkleColors = { PhaseCUITheme.AccentGold, PhaseCUITheme.AccentCyan, Color.white };
+        float[] lifetimes = new float[Count];
+        float[] velX = new float[Count];
+        float[] velY = new float[Count];
+        Vector2[] startPos = new Vector2[Count];
+
+        for (int i = 0; i < Count; i++)
+        {
+            float spawnX = Random.Range(-panelW * 0.4f, panelW * 0.4f);
+            float spawnY = Random.Range(-panelH * 0.3f, panelH * 0.3f);
+            startPos[i] = new Vector2(spawnX, spawnY);
+            lifetimes[i] = Random.Range(1.2f, 2.0f);
+            velX[i] = Random.Range(-30f, 30f);
+            velY[i] = Random.Range(40f, 90f);
+
+            RectTransform srt = _deliverySparkles[i].GetComponent<RectTransform>();
+            srt.anchorMin = new Vector2(0.5f, 0.5f);
+            srt.anchorMax = new Vector2(0.5f, 0.5f);
+            srt.anchoredPosition = startPos[i];
+
+            Image img = _deliverySparkles[i].GetComponent<Image>();
+            img.color = sparkleColors[i % sparkleColors.Length];
+            _deliverySparkles[i].SetActive(true);
+        }
+
+        float[] elapsed = new float[Count];
+        bool anyAlive = true;
+        while (anyAlive)
+        {
+            anyAlive = false;
+            for (int i = 0; i < Count; i++)
+            {
+                if (elapsed[i] >= lifetimes[i]) continue;
+                elapsed[i] += Time.deltaTime;
+                float p = elapsed[i] / lifetimes[i];
+                RectTransform srt = _deliverySparkles[i].GetComponent<RectTransform>();
+                srt.anchoredPosition = new Vector2(
+                    startPos[i].x + velX[i] * elapsed[i],
+                    startPos[i].y + velY[i] * elapsed[i]);
+                Image img = _deliverySparkles[i].GetComponent<Image>();
+                Color c = img.color;
+                img.color = new Color(c.r, c.g, c.b, 1f - p);
+                if (elapsed[i] < lifetimes[i]) anyAlive = true;
+            }
+            yield return null;
+        }
+
+        foreach (var s in _deliverySparkles) if (s != null) s.SetActive(false);
+        _sparkleRoutine = null;
+    }
+
+    private void StopAndClearSparkles()
+    {
+        if (_sparkleRoutine != null)
+        {
+            StopCoroutine(_sparkleRoutine);
+            _sparkleRoutine = null;
+        }
+        foreach (var s in _deliverySparkles)
+            if (s != null) s.SetActive(false);
+    }
+
+    private static float EaseOutCubic(float p) => 1f - (1f - p) * (1f - p) * (1f - p);
+
     private IEnumerator Animate(NotifData data)
     {
         if (_notifPanel == null) yield break;
@@ -129,17 +289,17 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
         _notifPanel.SetActive(true);
         RectTransform rt = _notifPanel.GetComponent<RectTransform>();
 
-        // Fade in + slide up from hint strip
-        float fromY = BottomOffset - SlideDistance;
+        float targetY = PhaseCUITheme.GetPopupBottomOffset();
+        float fromY = targetY - SlideDistance;
         for (float t = 0f; t < AnimInDuration; t += Time.deltaTime)
         {
             float p = t / AnimInDuration;
             _canvasGroup.alpha = p;
-            rt.anchoredPosition = new Vector2(0f, Mathf.Lerp(fromY, BottomOffset, p));
+            rt.anchoredPosition = new Vector2(0f, Mathf.Lerp(fromY, targetY, p));
             yield return null;
         }
         _canvasGroup.alpha = 1f;
-        rt.anchoredPosition = new Vector2(0f, BottomOffset);
+        rt.anchoredPosition = new Vector2(0f, targetY);
 
         yield return new WaitForSeconds(HoldDuration);
 
@@ -163,12 +323,12 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
         GameObject canvasGo = new GameObject(CanvasName);
         Canvas canvas = canvasGo.AddComponent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = 10;
+        canvas.sortingOrder = PhaseCUITheme.SortOrderFeedbackPopup;
 
         CanvasScaler scaler = canvasGo.AddComponent<CanvasScaler>();
         scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         scaler.referenceResolution = new Vector2(PhaseCUITheme.RefWidth, PhaseCUITheme.RefHeight);
-        scaler.matchWidthOrHeight = 0.5f;
+        scaler.matchWidthOrHeight = PhaseCUITheme.CanvasMatchWidthOrHeight;
 
         canvasGo.AddComponent<GraphicRaycaster>();
 
@@ -186,11 +346,11 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
         bgImg.raycastTarget = false;
 
         RectTransform panelRect = _notifPanel.GetComponent<RectTransform>();
-        panelRect.anchorMin = new Vector2(0.5f, 0f);
-        panelRect.anchorMax = new Vector2(0.5f, 0f);
+        panelRect.anchorMin = new Vector2(0.1f, 0f);
+        panelRect.anchorMax = new Vector2(0.9f, 0f);
         panelRect.pivot = new Vector2(0.5f, 0f);
-        panelRect.sizeDelta = new Vector2(NotifWidth, NotifHeight);
-        panelRect.anchoredPosition = new Vector2(0f, BottomOffset);
+        panelRect.sizeDelta = new Vector2(0f, NotifHeight);
+        panelRect.anchoredPosition = new Vector2(0f, PhaseCUITheme.GetPopupBottomOffset());
 
         // Outer border
         GameObject borderGo = new GameObject("Border");
@@ -241,7 +401,7 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
         _notifText.fontSize = (int)PhaseCUITheme.GuideCaptionSize;
         _notifText.fontStyle = FontStyle.Bold;
         _notifText.color = PhaseCUITheme.TextPrimary;
-        _notifText.alignment = TextAnchor.MiddleLeft;
+        _notifText.alignment = TextAnchor.MiddleCenter;
         _notifText.raycastTarget = false;
         RectTransform textRect = textGo.GetComponent<RectTransform>();
         textRect.anchorMin = Vector2.zero;
@@ -250,6 +410,93 @@ public class PhaseCItemFeedbackUI : MonoBehaviour
         textRect.offsetMax = new Vector2(-10f, 0f);
 
         _notifPanel.SetActive(false);
+
+        BuildDeliveryPanel(canvasGo.transform);
+    }
+
+    private void BuildDeliveryPanel(Transform canvasParent)
+    {
+        _deliveryPanel = new GameObject("DeliveryPanel");
+        _deliveryPanel.transform.SetParent(canvasParent, false);
+
+        _deliveryCG = _deliveryPanel.AddComponent<CanvasGroup>();
+        _deliveryCG.alpha = 0f;
+        _deliveryCG.interactable = false;
+        _deliveryCG.blocksRaycasts = false;
+
+        Image bg = _deliveryPanel.AddComponent<Image>();
+        bg.color = new Color(0.05f, 0.07f, 0.13f, 0.96f);
+        bg.raycastTarget = false;
+
+        RectTransform rt = _deliveryPanel.GetComponent<RectTransform>();
+        rt.anchorMin = new Vector2(0.1f, 0f);
+        rt.anchorMax = new Vector2(0.9f, 0f);
+        rt.pivot = new Vector2(0.5f, 0f);
+        rt.sizeDelta = new Vector2(0f, DeliveryHeight);
+        rt.anchoredPosition = new Vector2(0f, PhaseCUITheme.GetPopupBottomOffset() + NotifHeight + 10f);
+
+        // Border (subtle blue, matches other panels)
+        GameObject borderGo = new GameObject("Border");
+        borderGo.transform.SetParent(_deliveryPanel.transform, false);
+        Image borderImg = borderGo.AddComponent<Image>();
+        borderImg.color = new Color(PhaseCUITheme.PanelBorder.r, PhaseCUITheme.PanelBorder.g, PhaseCUITheme.PanelBorder.b, 0.6f);
+        borderImg.raycastTarget = false;
+        RectTransform borderRect = borderGo.GetComponent<RectTransform>();
+        borderRect.anchorMin = Vector2.zero;
+        borderRect.anchorMax = Vector2.one;
+        borderRect.offsetMin = new Vector2(-1f, -1f);
+        borderRect.offsetMax = new Vector2(1f, 1f);
+        borderGo.transform.SetAsFirstSibling();
+
+        // Left gold accent bar
+        GameObject barGo = new GameObject("AccentBar");
+        barGo.transform.SetParent(_deliveryPanel.transform, false);
+        Image barImg = barGo.AddComponent<Image>();
+        barImg.color = PhaseCUITheme.AccentGold;
+        barImg.raycastTarget = false;
+        RectTransform barRect = barGo.GetComponent<RectTransform>();
+        barRect.anchorMin = new Vector2(0f, 0f);
+        barRect.anchorMax = new Vector2(0f, 1f);
+        barRect.pivot = new Vector2(0f, 0.5f);
+        barRect.sizeDelta = new Vector2(6f, 0f);
+        barRect.anchoredPosition = Vector2.zero;
+
+        Font font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+
+        // Component name (title line)
+        GameObject titleGo = new GameObject("DeliveryTitle");
+        titleGo.transform.SetParent(_deliveryPanel.transform, false);
+        _deliveryTitle = titleGo.AddComponent<Text>();
+        _deliveryTitle.text = "";
+        _deliveryTitle.font = font;
+        _deliveryTitle.fontSize = 20;
+        _deliveryTitle.fontStyle = FontStyle.Bold;
+        _deliveryTitle.color = PhaseCUITheme.TextPrimary;
+        _deliveryTitle.alignment = TextAnchor.MiddleCenter;
+        _deliveryTitle.raycastTarget = false;
+        RectTransform titleRect = titleGo.GetComponent<RectTransform>();
+        titleRect.anchorMin = new Vector2(0f, 0.5f);
+        titleRect.anchorMax = new Vector2(1f, 1f);
+        titleRect.offsetMin = new Vector2(8f, 0f);
+        titleRect.offsetMax = new Vector2(-8f, 0f);
+
+        // "Delivered to: NPC" subtitle
+        GameObject subGo = new GameObject("DeliverySub");
+        subGo.transform.SetParent(_deliveryPanel.transform, false);
+        _deliverySub = subGo.AddComponent<Text>();
+        _deliverySub.text = "";
+        _deliverySub.font = font;
+        _deliverySub.fontSize = 15;
+        _deliverySub.color = PhaseCUITheme.AccentCyan;
+        _deliverySub.alignment = TextAnchor.MiddleCenter;
+        _deliverySub.raycastTarget = false;
+        RectTransform subRect = subGo.GetComponent<RectTransform>();
+        subRect.anchorMin = new Vector2(0f, 0f);
+        subRect.anchorMax = new Vector2(1f, 0.5f);
+        subRect.offsetMin = new Vector2(8f, 0f);
+        subRect.offsetMax = new Vector2(-8f, 0f);
+
+        _deliveryPanel.SetActive(false);
     }
 
     // Generates a soft white disc sprite that can be tinted via Image.color
