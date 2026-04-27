@@ -13,12 +13,20 @@ public class ScriptController : MonoBehaviour
     private int currentObjectIndex = 0;
 
     private Coroutine currentFadeCoroutine;
+
+    private const string PREF_TUT_KEY = "TutorialsOn";
+    private const string PREF_TUT_PART_KEY = "MinigameD-Tutorial-Part";
+    private bool tutorial = true; // assume tutorial is enabled
+
     void Start()
     {
         foreach (var p in pages)
             p.SetActive(false);
 
         int targetPage = PlayerPrefs.GetInt("MinigameD-TargetPage", 0);
+
+        PlayerPrefs.DeleteKey("MinigameD-TargetPage");
+
         if (targetPage >= 0 && targetPage < pages.Length)
         {
             ActivatePage(targetPage);
@@ -85,6 +93,8 @@ public class ScriptController : MonoBehaviour
             yield return currentFadeCoroutine = StartCoroutine(FadeOut(currentObjects[currentObjectIndex], duration));
         }
 
+        tutorial = PlayerPrefs.GetInt(PREF_TUT_KEY, tutorial ? 1 : 0) == 1;
+
         currentObjectIndex++;
         if (currentObjectIndex >= currentObjects.Length)
         {
@@ -96,7 +106,16 @@ public class ScriptController : MonoBehaviour
             }
             else if (currentPageIndex == 1)
             {
-                SceneManager.LoadScene("MinigameD-Level2");
+                if (tutorial)
+                {
+                    PlayerPrefs.SetInt(PREF_TUT_PART_KEY, 2);
+                    PlayerPrefs.Save();
+                    SceneManager.LoadScene("MinigameD-Tutorial");
+                }
+                else
+                {
+                    SceneManager.LoadScene("MinigameD-Level2");
+                }
             }
             else if (currentPageIndex == 2)
             {

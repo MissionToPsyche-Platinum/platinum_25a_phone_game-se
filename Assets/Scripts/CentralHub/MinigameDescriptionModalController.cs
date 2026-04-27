@@ -120,6 +120,8 @@ public class MinigameDescriptionModalController : MonoBehaviour
             return;
         }
 
+        
+
         // Special case for MinigameB
         if(selectedSceneName == "MinigameB")
         {
@@ -130,6 +132,20 @@ public class MinigameDescriptionModalController : MonoBehaviour
             else
             {
                 Debug.LogError("MenuSceneSchange reference is missing. Cannot switch to Minigame B.");
+            }
+            return;
+        }
+
+        // Open minigameF start screen
+        if(selectedSceneName == "MinigameF")
+        {
+            if (menuSceneSchange != null)
+            {
+                menuSceneSchange.SwitchToSceneMinigameF_Start();
+            }
+            else
+            {
+                Debug.LogError("MenuSceneSchange reference is missing. Cannot switch to Minigame F.");
             }
             return;
         }
