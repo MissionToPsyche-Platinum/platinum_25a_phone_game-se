@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using Cinemachine;
 
 public class SaveController : MonoBehaviour
 {
@@ -29,12 +28,6 @@ public class SaveController : MonoBehaviour
             saveData.playerPosition = player.transform.position;
         }
 
-        CinemachineConfiner confiner = FindAnyObjectByType<CinemachineConfiner>();
-        if (confiner != null && confiner.m_BoundingShape2D != null)
-        {
-            saveData.mapBoundary = confiner.m_BoundingShape2D.gameObject.name;
-        }
-
         if (inventoryController != null)
         {
             saveData.inventorySaveData = inventoryController.GetInventoryItems();
@@ -57,16 +50,6 @@ public class SaveController : MonoBehaviour
             if (player != null)
             {
                 player.transform.position = saveData.playerPosition;
-            }
-
-            CinemachineConfiner confiner = FindAnyObjectByType<CinemachineConfiner>();
-            if (confiner != null && !string.IsNullOrEmpty(saveData.mapBoundary))
-            {
-                GameObject boundary = GameObject.Find(saveData.mapBoundary);
-                if (boundary != null)
-                {
-                    confiner.m_BoundingShape2D = boundary.GetComponent<PolygonCollider2D>();
-                }
             }
 
             if (inventoryController != null)

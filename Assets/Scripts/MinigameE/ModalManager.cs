@@ -8,6 +8,7 @@ public class ModalManager : MonoBehaviour
     [SerializeField] private GameObject introOverlayPanel;
     [SerializeField] private GameObject educationPopupPanel;
     [SerializeField] private GameObject confirmExitPanel;
+    [SerializeField] private GameObject confirmResetPanel;
     [SerializeField] private GameObject developerInfoPanel;
     [SerializeField] private GameObject settingsOverlay;
 
@@ -26,6 +27,7 @@ public class ModalManager : MonoBehaviour
         HideIntro();
         HideEducation();
         HideConfirmExit();
+        HideConfirmReset();
         HideDeveloperInfo();
         HideSettings();
     }
@@ -141,6 +143,25 @@ public class ModalManager : MonoBehaviour
         if (settingsOverlay != null)
         {
             settingsOverlay.SetActive(false);
+        }
+    }
+
+    // ----------------------
+    // Confirm Reset
+    // ----------------------
+    public void ShowConfirmReset()
+    {
+        if (confirmResetPanel != null)
+        {
+            confirmResetPanel.SetActive(true);
+        }
+    }
+
+    public void HideConfirmReset()
+    {
+        if (confirmResetPanel != null)
+        {
+            confirmResetPanel.SetActive(false);
         }
     }
 

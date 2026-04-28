@@ -15,6 +15,7 @@ public class InventoryItemDropHandler : MonoBehaviour, IPointerClickHandler
         if (eventData.button == PointerEventData.InputButton.Right && controller != null)
         {
             controller.DropItem(itemId);
+            MinigameCAudioManager.PlayItemDrop();
         }
     }
 }

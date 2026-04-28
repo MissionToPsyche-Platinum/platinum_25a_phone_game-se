@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/MinigameD-Start-Menu.unity.meta
+guid: a73d2b592d7370f47a226a292d14713b
+========
 guid: f1a752273698c6f4ba135b2e8b6fdd28
 folderAsset: yes
+>>>>>>>> dev:Assets/Art.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

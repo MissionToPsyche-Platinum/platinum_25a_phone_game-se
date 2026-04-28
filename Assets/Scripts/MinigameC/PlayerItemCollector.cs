@@ -64,11 +64,14 @@ public class PlayerItemCollector : MonoBehaviour
                     Debug.Log($"PlayerItemCollector: Item {item.ID} successfully added to inventory!");
                     Color itemColor = itemDictionary.GetItemColor(item.ID);
                     PhaseCItemFeedbackUI.ShowPickup(item.displayName, itemColor);
+                    PhaseCAnimationManager.TriggerItemPickup(transform.position, itemColor);
+                    MinigameCAudioManager.PlayItemPickup();
                     Destroy(collision.gameObject);
                 }
                 else
                 {
                     Debug.LogWarning("PlayerItemCollector: Failed to add item - inventory might be full");
+                    MinigameCAudioManager.PlayItemFull();
                 }
             }
             else
